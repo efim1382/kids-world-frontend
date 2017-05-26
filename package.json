@@ -1,15 +1,12 @@
 {
-  "name": "brandbot",
+  "name": "KidsWorld",
   "version": "0.0.1",
-  "description": "brandbot frontend",
+  "description": "Board kids clothes",
   "scripts": {
     "start": "better-npm-run start",
     "compile": "better-npm-run compile",
-    "start-remote-dll": "better-npm-run start-remote-dll",
-    "start-remote": "better-npm-run start-remote",
     "lint": "eslint src --ext .jsx --ext .js",
-    "lint:fix": "npm run lint -- --fix",
-    "dev-dll": "babel-node ./node_modules/webpack/bin/webpack --colors --progress --config bin/dll.config.js"
+    "lint:fix": "npm run lint -- --fix"
   },
   "betterScripts": {
     "start": {
@@ -47,11 +44,6 @@
       }
     }
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://shelimov@bitbucket.org/ridgebox/brandbot-frontend.git"
-  },
-  "homepage": "https://bitbucket.org/ridgebox/brandbot-frontend#readme",
   "devDependencies": {
     "add-asset-html-webpack-plugin": "^1.0.2",
     "babel-cli": "^6.24.0",
