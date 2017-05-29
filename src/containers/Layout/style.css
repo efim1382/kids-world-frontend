@@ -4,14 +4,12 @@
 
 :root {
   font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: var(--font-weight-regular);
   color: var(--text-color);
   background: var(--background-color);
-  overflow: hidden;
+  user-select: none;
 }
 
-html * {
+* {
   font-family: 'Open Sans', sans-serif;
   font-weight: var(--font-weight-regular);
 }
@@ -26,8 +24,18 @@ a:focus {
 
 input:focus,
 textarea:focus,
+button:focus,
 select:focus {
   outline: none;
+}
+
+/* Костыль */
+h1,
+h2,
+h3,
+h4,
+p {
+  margin: 0;
 }
 
 *,
@@ -47,6 +55,14 @@ select:focus {
 }
 
 .content {
+  --padding-top: var(--layout-horizontal-padding);
+  --padding-bottom: calc(var(--layout-horizontal-padding) + var(--footer-height));
   position: relative;
+  min-height: 0;
+  flex-grow: 1;
+  overflow-x: hidden;
+  overflow-y: auto;
   margin-top: var(--header-height);
+  padding-top: var(--padding-top);
+  padding-bottom: var(--padding-bottom);
 }

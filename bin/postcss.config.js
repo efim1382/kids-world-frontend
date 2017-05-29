@@ -1,5 +1,4 @@
 const cssnano = require('cssnano');
-const nesting = require('postcss-nesting');
 
 /**
  * postcss plugins

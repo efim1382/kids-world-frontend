@@ -1,8 +1,8 @@
 .header {
   --header-text-color: #fff;
-  position: absolute;
+  z-index: 2;
+  position: fixed;
   display: flex;
-  top: 0;
   left: 0;
   width: 100%;
   height: var(--header-height);
@@ -28,4 +28,9 @@
 .links > button {
   --button-height: var(--header-height);
   --color: #fff;
+}
+
+.links > button[icon] {
+  width: var(--header-height);
+  --icon-color: #fff;
 }

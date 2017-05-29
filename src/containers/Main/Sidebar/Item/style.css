@@ -1,0 +1,35 @@
+.item {
+	--border-radius: 4px;
+	--height-adv: 220px;
+	--item-padding: 16px;
+	position: relative;
+	padding-bottom: var(--item-padding);
+	padding-left: var(--item-padding);
+	padding-right: var(--item-padding);
+	border-radius: var(--border-radius);
+	box-shadow: 0 0 0 1px var(--divider-color) inset;
+}
+
+.item:nth-of-type(n+2) {
+	margin-top: var(--layout-horizontal-padding);
+}
+
+.title {
+	--height: 52px;
+	height: var(--height);
+	line-height: var(--height);
+	border-bottom: 1px solid var(--divider-color);
+	font-size: 16px;
+}
+
+.section {
+	margin-top: 16px;
+}
+
+.card {
+	padding: 8px 0;
+}
+
+.card > .section > .title {
+	max-width: 212px;
+}

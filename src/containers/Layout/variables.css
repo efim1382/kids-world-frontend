@@ -1,11 +1,16 @@
 :root {
   --text-color: #444;
-  --background-color: #f2f2f2;
+  --background-color: #fcfcfc;
 
-  --accent-color: #2184dc;
+  --accent-color: #1E88E5;
+  --passive-color: #1b1d1f;
+
+  --divider-color: #ebebeb;
 
   --header-height: 48px;
   --footer-height: 40px;
+
+  --block-padding: 24px;
   --layout-horizontal-padding: 30px;
 
   --font-weight-light: 300;

@@ -1,5 +1,5 @@
 .button {
-  --button-height: 36px;
+  --button-height: 32px;
   --button-padding: 16px;
   --button-radius: 2px;
   position: relative;
@@ -29,12 +29,18 @@
   transition-property: opacity;
 }
 
+.button .caption {
+  z-index: 1;
+  font-size: 14px;
+  color: var(--color);
+}
+
 .button:hover::before {
   opacity: 0.15;
 }
 
 .button[type='primary'] {
-  --background-color: red;
+  --background-color: var(--accent-color);
   --color: #fff;
 }
 
@@ -42,8 +48,3 @@
   --background-color: transparent;
 }
 
-.caption {
-  z-index: 1;
-  font-size: 14px;
-  color: var(--color);
-}

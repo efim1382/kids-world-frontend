@@ -12,6 +12,11 @@ const Header = () => (
         caption="Подать объявление"
         type="transparent"
       />
+
+      <Button
+        type="transparent"
+        icon="person"
+      />
     </div>
   </div>
 );
