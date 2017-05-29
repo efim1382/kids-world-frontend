@@ -1,8 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router';
+import Button from 'components/Button';
 import styles from './style.css';
 
 const Header = () => (
-  <div className={styles.header}>Header</div>
+  <div className={styles.header}>
+    <Link className={styles.logo} to="/">Kids World</Link>
+
+    <div className={styles.links}>
+      <Button
+        caption="Подать объявление"
+        type="transparent"
+      />
+    </div>
+  </div>
 );
 
 export default Header;

@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
-import styles from './style.css';
+import './style.css';
 
 const Layout = ({ children }) => (
-  <div className={styles.page}>{ children }</div>
+  <div>{ children }</div>
 );
 
 Layout.propTypes = {
@@ -10,3 +10,4 @@ Layout.propTypes = {
 };
 
 export default Layout;
+export styles from './style.css';

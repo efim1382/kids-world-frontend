@@ -1,21 +1,52 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=cyrillic');
 @import 'normalize.css';
 @import './variables.css';
 
 :root {
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
-  font-weight: 400;
-  color: var(--color-text);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-color);
   background: var(--background-color);
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
+}
+
+html * {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: var(--font-weight-regular);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:focus {
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  transition-property: none;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
 
 .page {
-	display: block;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .content {
-	margin: 0 auto;
+  position: relative;
+  margin-top: var(--header-height);
 }

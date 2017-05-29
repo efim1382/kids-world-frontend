@@ -16,27 +16,6 @@
         "DEBUG": "app:*"
       }
     },
-    "start-remote": {
-      "command": "node bin/dev-server",
-      "env": {
-        "API_PATH": "https://brandbot.ridgebox.com/api/v1",
-        "FACEBOOK_APP_ID": "1375252285855065",
-        "AVIARY_API_KEY": "1cc3043ce2e049b097bdb63c7d4a6fab",
-        "IS_DEMO": false,
-        "DEBUG": "app:*"
-      }
-    },
-    "start-remote-dll": {
-      "command": "node bin/dev-server",
-      "env": {
-        "API_PATH": "https://brandbot.ridgebox.com/api/v1",
-        "FACEBOOK_APP_ID": "1375252285855065",
-        "AVIARY_API_KEY": "1cc3043ce2e049b097bdb63c7d4a6fab",
-        "DEBUG": "app:*",
-        "IS_DEMO": false,
-        "DLL": "true"
-      }
-    },
     "compile": {
       "command": "node bin/compile",
       "env": {
