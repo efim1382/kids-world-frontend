@@ -3,7 +3,12 @@ import classNames from 'classnames';
 import Icon from 'components/Icon';
 import styles from './style.css';
 
-const Button = ({ type, caption, icon, className }) => <button
+const Button = ({
+  type,
+  caption,
+  icon,
+  className,
+}) => <button
   className={classNames(styles.button, className)}
   type={type}
   {...icon ? { icon: '' } : {}}

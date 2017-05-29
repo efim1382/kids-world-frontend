@@ -11,11 +11,13 @@ const Header = () => (
       <Button
         caption="Подать объявление"
         type="transparent"
+        className={styles.addAdv}
       />
 
       <Button
         type="transparent"
         icon="person"
+        className={styles.person}
       />
     </div>
   </div>

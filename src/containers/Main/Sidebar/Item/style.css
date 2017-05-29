@@ -29,7 +29,3 @@
 .card {
 	padding: 8px 0;
 }
-
-.card > .section > .title {
-	max-width: 212px;
-}

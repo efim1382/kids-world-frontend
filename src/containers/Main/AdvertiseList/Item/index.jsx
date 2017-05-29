@@ -30,6 +30,7 @@ const Advertise = ({
     <Button
       type="primary"
       caption="Подробнее"
+      className={styles.detailButton}
     />
 
     <span className={styles.price}>{ price } р.</span>

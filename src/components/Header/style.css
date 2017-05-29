@@ -25,12 +25,17 @@
   justify-content: flex-end;
 }
 
-.links > button {
-  --button-height: var(--header-height);
-  --color: #fff;
+.add-adv {
+
 }
 
-.links > button[icon] {
+.person {
   width: var(--header-height);
   --icon-color: #fff;
+}
+
+.add-adv,
+.person {
+  --button-height: var(--header-height);
+  --color: #fff;
 }
