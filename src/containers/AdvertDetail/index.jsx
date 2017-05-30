@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -13,7 +13,7 @@ const AdvertDetail = () => (
   <div className={baseStyles.page}>
     <Header />
 
-    <div className={classnames(baseStyles.content, styles.advertDetail)}>
+    <div className={classNames(baseStyles.content, styles.advertDetail)}>
       <div className={styles.advert}>
         <div className={styles.top}>
           <h2 className={styles.title}>Детские тапки для мальчика, красные</h2>

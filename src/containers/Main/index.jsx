@@ -1,5 +1,5 @@
 import React from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -56,7 +56,7 @@ const Main = () => {
     <div className={baseStyles.page}>
       <Header />
 
-      <div className={classnames(baseStyles.content, styles.main)}>
+      <div className={classNames(baseStyles.content, styles.main)}>
         <AdvertList className={styles.list} items={items} />
         <Sidebar className={styles.sidebar} />
       </div>
