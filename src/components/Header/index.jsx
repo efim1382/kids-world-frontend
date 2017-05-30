@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import ClickOutside from 'helpers/click-outside-popup';
+
 import Button from 'components/Button';
 import UserLinks from './UserLinks';
+
 import styles from './style.css';
 
 class Header extends Component {
@@ -9,11 +12,7 @@ class Header extends Component {
     showed: false,
   };
 
-  onPersonClick = () => {
-    this.togglePopup();
-  }
-
-  togglePopup() {
+  togglePopup = () => {
     this.setState({
       showed: !this.state.showed,
     });
@@ -35,7 +34,7 @@ class Header extends Component {
             type="transparent"
             icon="person"
             className={styles.person}
-            onClick={this.onPersonClick}
+            onClick={this.togglePopup}
             isActive={this.state.showed}
           />
         </div>
@@ -46,4 +45,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default ClickOutside(Header);
