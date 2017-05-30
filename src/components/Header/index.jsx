@@ -27,7 +27,7 @@ class Header extends Component {
   render() {
     return (
       <div className={styles.header}>
-        <Link className={styles.logo} to="/">Kids World</Link>
+        <Link className={styles.logo} to="/">Детский мир</Link>
 
         <div className={styles.links}>
           <Button
