@@ -8,10 +8,14 @@ const Button = ({
   caption,
   icon,
   className,
+  onClick,
+  isActive,
 }) => <button
   className={classNames(styles.button, className)}
   type={type}
+  {...onClick ? { onClick } : {}}
   {...icon ? { icon: '' } : {}}
+  {...isActive ? { 'data-active': '' } : {}}
 >
   {icon && <Icon icon={icon} />}
   {caption && <span className={styles.caption}>{ caption }</span>}
@@ -22,6 +26,8 @@ Button.propTypes = {
   caption: PropTypes.string,
   icon: PropTypes.string,
   className: PropTypes.string,
+  onClick: PropTypes.func,
+  isActive: PropTypes.bool,
 };
 
 export default Button;

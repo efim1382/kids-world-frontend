@@ -1,11 +1,10 @@
 .item {
 	--border-radius: 4px;
 	--height-adv: 220px;
-	--item-padding: 16px;
 	position: relative;
-	padding-bottom: var(--item-padding);
-	padding-left: var(--item-padding);
-	padding-right: var(--item-padding);
+	padding-bottom: var(--block-padding);
+	padding-left: var(--block-padding);
+	padding-right: var(--block-padding);
 	border-radius: var(--border-radius);
 	box-shadow: 0 0 0 1px var(--divider-color) inset;
 }
@@ -15,11 +14,12 @@
 }
 
 .title {
-	--height: 52px;
+	--height: 56px;
 	height: var(--height);
 	line-height: var(--height);
 	border-bottom: 1px solid var(--divider-color);
-	font-size: 16px;
+	font-size: 14px;
+	text-transform: uppercase;
 }
 
 .section {

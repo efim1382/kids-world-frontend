@@ -35,6 +35,7 @@
   color: var(--color);
 }
 
+.button[data-active]::before,
 .button:hover::before {
   opacity: 0.15;
 }
@@ -48,3 +49,6 @@
   --background-color: transparent;
 }
 
+.button[icon] .caption {
+  margin-left: var(--button-padding);
+}
