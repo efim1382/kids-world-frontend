@@ -9,7 +9,7 @@ const UserLinks = ({ show }) => <Popup
   className={styles.popup}
 >
   <div className={styles.userLinks}>
-    <Link to="/">
+    <Link>
       <Button
         type="transparent"
         caption="Войти"
@@ -18,7 +18,7 @@ const UserLinks = ({ show }) => <Popup
       />
     </Link>
 
-    <Link to="/">
+    <Link>
       <Button
         type="transparent"
         caption="Зарегистрироваться"
