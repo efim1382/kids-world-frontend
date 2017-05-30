@@ -1,14 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router';
 import Button from 'components/Button';
 import UserLinks from './UserLinks';
 import styles from './style.css';
 
 class Header extends Component {
-  static propTypes = {
-    isPopupOpen: PropTypes.bool,
-  };
-
   state = {
     showed: false,
   };

@@ -3,7 +3,10 @@ import Popup from 'components/Popup';
 import Button from 'components/Button';
 import styles from './style.css';
 
-const UserLinks = ({ show }) => <Popup show={show} className={styles.popup}>
+const UserLinks = ({ show }) => <Popup
+  show={show}
+  className={styles.popup}
+>
   <div className={styles.userLinks}>
     <Button
       type="transparent"

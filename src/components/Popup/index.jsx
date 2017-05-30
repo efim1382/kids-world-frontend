@@ -16,7 +16,7 @@ const Popup = ({
 Popup.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  show: PropTypes.bool,
+  show: PropTypes.bool.isRequired,
 };
 
 export default Popup;
