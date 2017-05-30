@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-// eslint много ругается на этот код. Не забыть узнать что тут не так
+// Плохой способ для закрытия попапа. Придумать лучше
 export default ComposedComponent => class ClickOutside extends Component {
   constructor(props) {
     super(props);
-
     this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
@@ -18,10 +17,8 @@ export default ComposedComponent => class ClickOutside extends Component {
   }
 
   handleClickOutside(event) {
-    /* eslint-disable */
-    const domNode = ReactDOM.findDOMNode(this);
-    const { composedComponent } = this.refs;
-    /* eslint-enable */
+    const domNode = ReactDOM.findDOMNode(this); // eslint-disable-line react/no-find-dom-node
+    const { composedComponent } = this.refs; // eslint-disable-line react/no-string-refs
 
     if (composedComponent.state.showed && (!domNode || !domNode.contains(event.target))) {
       composedComponent.closePopup();
@@ -31,9 +28,7 @@ export default ComposedComponent => class ClickOutside extends Component {
   render() {
     return (
       <ComposedComponent
-        /* eslint-disable */
-        ref="composedComponent"
-        /* eslint-enable */
+        ref="composedComponent" // eslint-disable-line react/no-string-refs
         {...this.props}
       />
     );
