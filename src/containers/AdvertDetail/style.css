@@ -14,16 +14,20 @@
 }
 
 .top {
-	--text-height: 20px;
+	--text-height: 24px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 }
 
 .title {
+	flex-grow: 1;
 	height: var(--text-height);
 	line-height: var(--text-height);
 	font-size: 24px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .subcaption {
@@ -33,9 +37,12 @@
 }
 
 .price {
+	flex-shrink: 0;
 	height: var(--text-height);
 	line-height: var(--text-height);
 	font-size: 18px;
+	white-space: nowrap;
+	margin-left: 30px;
 }
 
 .main-image {
@@ -80,8 +87,7 @@
 }
 
 .description {
-	line-height: 1.5;
-	padding: 12px 0;
+	margin-top: 12px;
 }
 
 .sidebar {
