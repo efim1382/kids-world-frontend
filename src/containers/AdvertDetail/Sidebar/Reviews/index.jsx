@@ -43,7 +43,7 @@ const Reviews = ({ className }) => (
       />
 
       <Link
-        to='/user/1/reviews'
+        to="/user/1/reviews"
         className={styles.button}
       >
         <Button

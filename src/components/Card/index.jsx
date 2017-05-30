@@ -28,16 +28,17 @@ const Card = ({
     > { title }</Link>}
 
     {!link && <h4 className={styles.title}>{ title }</h4>}
+    <span className={styles.caption}>{ caption }</span>
 
-    {emotion && emotion == 'like' && <Icon
+    {emotion && emotion === 'like' && <Icon
       icon="thumb_up"
       className={styles.like}
     />}
-    {emotion && emotion == 'dislike' && <Icon
+
+    {emotion && emotion === 'dislike' && <Icon
       icon="thumb_down"
       className={styles.dislike}
     />}
-    <span className={styles.caption}>{ caption }</span>
   </div>
 </div>;
 
