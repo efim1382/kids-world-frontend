@@ -49,7 +49,7 @@ Card.propTypes = {
   link: PropTypes.string,
   className: PropTypes.string,
   size: PropTypes.string,
-  emotion: PropTypes.bool,
+  emotion: PropTypes.string,
 };
 
 export default Card;
