@@ -13,7 +13,7 @@ const AdvertDetail = ({ className }) => (
       image="/images/user-image.jpg"
       title="Василий Петров"
       caption="vasya@mail.ru"
-      link="/"
+      link="/user/1"
     />
 
     <div className={styles.showPhone}>Показать телефон</div>

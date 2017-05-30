@@ -22,7 +22,7 @@ const Advert = ({
       image={userImage}
       title={userName}
       caption={date}
-      link="/"
+      link="/user/1"
     />
 
     <h3 className={styles.title}>{ title }</h3>

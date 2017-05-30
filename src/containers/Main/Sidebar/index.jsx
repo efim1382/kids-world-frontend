@@ -11,19 +11,19 @@ const Sidebar = ({
     image: '/images/user-image.jpg',
     title: 'Валентина Петровна',
     caption: '45 положительных отзывов',
-    link: '/',
+    link: '/user/1',
   }, {
     id: '2',
     image: '/images/user-image.jpg',
     title: 'Валентина Петровна',
     caption: '45 положительных отзывов',
-    link: '/',
+    link: '/user/2',
   }, {
     id: '3',
     image: '/images/user-image.jpg',
     title: 'Валентина Петровна',
     caption: '45 положительных отзывов',
-    link: '/',
+    link: '/user/3',
   }];
 
   const bestAds = [{
@@ -31,19 +31,19 @@ const Sidebar = ({
     image: '/images/ad-image.jpg',
     title: 'Обувь для мальчика',
     caption: '145 просмотров',
-    link: '/',
+    link: '/advert/1',
   }, {
     id: '2',
     image: '/images/ad-image.jpg',
     title: 'Обувь для мальчика',
     caption: '145 просмотров',
-    link: '/',
+    link: '/advert/2',
   }, {
     id: '3',
     image: '/images/ad-image.jpg',
     title: 'Обувь для мальчика',
     caption: '145 просмотров',
-    link: '/',
+    link: '/advert/3',
   }];
 
   return (

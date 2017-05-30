@@ -15,7 +15,7 @@ const Reviews = ({ className }) => (
         title="Василий Петров"
         caption="Хороший продавец, не обманывает, все отлично, мне понравилось"
         size="big"
-        link="/"
+        link="/user/1"
         className={styles.card}
       />
 
@@ -24,7 +24,7 @@ const Reviews = ({ className }) => (
         title="Василий Петров"
         caption="Хороший продавец, не обманывает, все отлично, мне понравилось"
         size="big"
-        link="/"
+        link="/user/2"
         className={styles.card}
       />
 
@@ -33,7 +33,7 @@ const Reviews = ({ className }) => (
         title="Василий Петров"
         caption="Хороший продавец, не обманывает, все отлично, мне понравилось"
         size="big"
-        link="/"
+        link="/user/3"
         className={styles.card}
       />
     </div>
