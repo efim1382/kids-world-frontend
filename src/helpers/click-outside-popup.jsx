@@ -23,8 +23,8 @@ export default ComposedComponent => class ClickOutside extends Component {
     const { composedComponent } = this.refs;
     /* eslint-enable */
 
-    if (!domNode || !domNode.contains(event.target)) {
-      composedComponent.togglePopup();
+    if (composedComponent.state.showed && (!domNode || !domNode.contains(event.target))) {
+      composedComponent.closePopup();
     }
   }
 

@@ -18,6 +18,12 @@ class Header extends Component {
     });
   }
 
+  closePopup = () => {
+    this.setState({
+      showed: false,
+    });
+  }
+
   render() {
     return (
       <div className={styles.header}>
