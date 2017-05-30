@@ -1,5 +1,6 @@
 .sidebar {
 	--sidebar-width: 300px;
+	flex-shrink: 0;
 	width: var(--sidebar-width);
 	height: calc(100vh - (var(--header-height) + var(--footer-height)));
 	background-color: #fff;
