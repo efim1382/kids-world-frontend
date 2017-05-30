@@ -30,7 +30,7 @@ class Header extends Component {
         <Link className={styles.logo} to="/">Детский мир</Link>
 
         <div className={styles.links}>
-          <Link to="/">
+          <Link>
             <Button
               caption="Подать объявление"
               type="transparent"
