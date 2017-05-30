@@ -15,18 +15,21 @@ const ReviewsList = ({
     title: 'Василий Петров',
     caption: 'Хороший продавец, не обманывает',
     link: '/user/1',
+    emotion: 'like',
   }, {
     id: '2',
     image: '/images/user-image.jpg',
     title: 'Василий Петров',
     caption: 'Хороший продавец, не обманывает, все отлично, мне понравилось',
     link: '/user/1',
+    emotion: 'dislike',
   }, {
     id: '3',
     image: '/images/user-image.jpg',
     title: 'Василий Петров',
     caption: 'Хороший продавец, не обманывает, все отлично',
     link: '/user/1',
+    emotion: 'like',
   }];
 
   return (
@@ -46,6 +49,7 @@ const ReviewsList = ({
             caption={review.caption}
             size="big"
             link={review.link}
+            emotion={review.emotion}
             className={styles.card}
           />
         ))}
