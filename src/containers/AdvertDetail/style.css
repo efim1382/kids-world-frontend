@@ -1,4 +1,6 @@
 .advert-detail {
+  --padding-top: var(--layout-horizontal-padding);
+  --padding-bottom: calc(var(--layout-horizontal-padding) + var(--footer-height));
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;

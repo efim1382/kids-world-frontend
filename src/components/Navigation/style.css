@@ -1,0 +1,46 @@
+.navigation {
+	--height: 68px;
+	display: flex;
+	align-items: flex-end;
+	height: var(--height);
+	padding-left: var(--block-padding);
+	padding-right: var(--block-padding);
+	background-color: #fff;
+	box-shadow: 0 -1px var(--divider-color) inset;
+}
+
+.link {
+	--height: 52px;
+	position: relative;
+	height: var(--height);
+	padding: 0 8px;
+	line-height: var(--height);
+	font-size: 15px;
+	color: var(--text-color);
+	transition-property: color;
+}
+
+.link:nth-of-type(n+2) {
+	margin-left: 12px;
+}
+
+.link::before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	opacity: 0;
+	background-color: var(--accent-color);
+	transition-property: opacity;
+}
+
+.link:hover,
+.link[data-active] {
+	color: var(--accent-color);
+}
+
+.link[data-active]::before {
+	opacity: 1;
+}
