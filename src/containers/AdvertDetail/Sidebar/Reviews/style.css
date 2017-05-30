@@ -7,9 +7,9 @@
 	--height: 40px;
 	height: var(--height);
 	line-height: var(--height);
-	font-size: 14px;
-	text-transform: uppercase;
 	border-bottom: 1px solid var(--divider-color);
+	font-size: 14px;
+	font-weight: var(--font-weight-bold);
 }
 
 .section {
