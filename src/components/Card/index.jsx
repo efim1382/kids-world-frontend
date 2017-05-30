@@ -9,7 +9,11 @@ const Card = ({
   caption,
   link,
   className,
-}) => <div className={classNames(styles.card, className)}>
+  size,
+}) => <div
+  className={classNames(styles.card, className)}
+  {...size ? { 'data-size': size } : {}}
+>
   <div className={styles.image} style={{ backgroundImage: `url(${image}` }} />
 
   <div className={styles.section}>
@@ -25,6 +29,7 @@ Card.propTypes = {
   caption: PropTypes.string,
   link: PropTypes.string,
   className: PropTypes.string,
+  size: PropTypes.string,
 };
 
 export default Card;

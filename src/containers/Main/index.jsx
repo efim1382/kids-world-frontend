@@ -3,7 +3,7 @@ import classnames from 'classnames';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
-import AdvertiseList from './AdvertiseList';
+import AdvertList from './AdvertList';
 import Sidebar from './Sidebar';
 
 import styles from './style.css';
@@ -57,7 +57,7 @@ const Main = () => {
       <Header />
 
       <div className={classnames(baseStyles.content, styles.main)}>
-        <AdvertiseList className={styles.list} items={items} />
+        <AdvertList className={styles.list} items={items} />
         <Sidebar className={styles.sidebar} />
       </div>
 

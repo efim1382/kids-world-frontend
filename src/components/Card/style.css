@@ -5,6 +5,15 @@
 	align-items: center;
 }
 
+.card[data-size='big'] {
+	align-items: flex-start;
+}
+
+.card[data-size='big'] .caption {
+	--height: auto;
+	line-height: 1.5;
+}
+
 .image {
 	flex-shrink: 0;
 	width: var(--image-size);

@@ -10,12 +10,14 @@ import {
 
 import Layout from './containers/Layout';
 import Main from './containers/Main';
+import AdvertDetail from './containers/AdvertDetail';
 
 render(
   <Provider>
     <Router history={browserHistory} >
       <Route path="/" component={Layout}>
         <IndexRoute component={Main} />
+        <Route path="/advert/:id" component={AdvertDetail} />
       </Route>
     </Router>
   </Provider>,

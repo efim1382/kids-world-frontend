@@ -1,0 +1,21 @@
+.reviews {
+	margin-top: 12px;
+	width: 100%;
+}
+
+.title {
+	--height: 40px;
+	height: var(--height);
+	line-height: var(--height);
+	font-size: 14px;
+	text-transform: uppercase;
+	border-bottom: 1px solid var(--divider-color);
+}
+
+.section {
+	margin-top: 8px;
+}
+
+.card {
+	padding: 8px 0;
+}

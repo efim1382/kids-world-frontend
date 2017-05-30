@@ -1,4 +1,4 @@
-.advertise {
+.advert {
 	--border-radius: 4px;
 	--height-adv: 220px;
 	position: relative;
@@ -8,7 +8,7 @@
 	box-shadow: 0 0 0 1px var(--divider-color) inset;
 }
 
-.advertise:nth-of-type(n+2) {
+.advert:nth-of-type(n+2) {
 	margin-top: var(--layout-horizontal-padding);
 }
 

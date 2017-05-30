@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react';
+import { Link } from 'react-router';
 import Card from 'components/Card';
 import Button from 'components/Button';
 import styles from './style.css';
 
-const Advertise = ({
+const Advert = ({
+  id,
   title,
   image,
   userImage,
@@ -12,7 +14,7 @@ const Advertise = ({
   price,
   category,
   adress,
-}) => <div className={styles.advertise}>
+}) => <div className={styles.advert}>
   <div className={styles.image} style={{ backgroundImage: `url(${image}` }} />
 
   <div className={styles.section}>
@@ -27,18 +29,23 @@ const Advertise = ({
     <p className={styles.text}>{ category }</p>
     <p className={styles.text}>{ adress }</p>
 
-    <Button
-      type="primary"
-      caption="Подробнее"
+    <Link
+      to={`/advert/${id}`}
       className={styles.detailButton}
-    />
+    >
+      <Button
+        type="primary"
+        caption="Подробнее"
+      />
+    </Link>
 
     <span className={styles.price}>{ price } р.</span>
   </div>
 
 </div>;
 
-Advertise.propTypes = {
+Advert.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   userImage: PropTypes.string.isRequired,
@@ -49,4 +56,4 @@ Advertise.propTypes = {
   adress: PropTypes.string.isRequired,
 };
 
-export default Advertise;
+export default Advert;

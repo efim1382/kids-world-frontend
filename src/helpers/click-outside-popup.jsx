@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-// eslint много ругается на этот код. Ее забыть узнать что тут не так
+// eslint много ругается на этот код. Не забыть узнать что тут не так
 export default ComposedComponent => class ClickOutside extends Component {
   constructor(props) {
     super(props);

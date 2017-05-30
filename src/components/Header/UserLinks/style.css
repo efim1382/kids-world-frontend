@@ -29,4 +29,5 @@
 .button {
   --button-height: 40px;
   justify-content: flex-start;
+  width: 100%;
 }

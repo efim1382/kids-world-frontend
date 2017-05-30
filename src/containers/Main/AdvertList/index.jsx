@@ -1,14 +1,15 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-import Advertise from './Item';
+import Advert from './Item';
 import styles from './style.css';
 
-const AdvertiseList = ({
+const AdvertList = ({
   items,
   className,
-}) => <div className={classNames(styles.advertiseList, className)}>
-  {items.map(item => <Advertise
+}) => <div className={classNames(styles.advertList, className)}>
+  {items.map(item => <Advert
     key={item.id}
+    id={item.id}
     title={item.title}
     image={item.image}
     userImage={item.userImage}
@@ -20,9 +21,9 @@ const AdvertiseList = ({
   />)}
 </div>;
 
-AdvertiseList.propTypes = {
+AdvertList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired,
   className: PropTypes.string,
 };
 
-export default AdvertiseList;
+export default AdvertList;

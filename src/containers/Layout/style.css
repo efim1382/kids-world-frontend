@@ -38,6 +38,10 @@ p {
   margin: 0;
 }
 
+p:nth-of-type(n+2) {
+  margin-top: 8px;
+}
+
 *,
 *:before,
 *:after {
