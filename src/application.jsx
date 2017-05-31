@@ -13,6 +13,7 @@ import Main from './containers/Main';
 import AdvertDetail from './containers/AdvertDetail';
 import UserProfile from './containers/UserProfile';
 import UserProfileReviews from './containers/UserProfile/Reviews';
+import Auth from './containers/Auth';
 
 render(
   <Provider>
@@ -22,6 +23,7 @@ render(
         <Route path="/advert/:id" component={AdvertDetail} />
         <Route path="/user/:id" component={UserProfile} />
         <Route path="/user/:id/reviews" component={UserProfileReviews} />
+        <Route path="/auth" component={Auth} />
       </Route>
     </Router>
   </Provider>,

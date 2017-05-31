@@ -30,6 +30,7 @@
 }
 
 .button .caption {
+  position: relative;
   z-index: 1;
   font-size: 14px;
   color: var(--color);
@@ -40,12 +41,12 @@
   opacity: 0.15;
 }
 
-.button[type='primary'] {
+.button[data-type='primary'] {
   --background-color: var(--accent-color);
   --color: #fff;
 }
 
-.button[type='transparent'] {
+.button[data-type='transparent'] {
   --background-color: transparent;
 }
 

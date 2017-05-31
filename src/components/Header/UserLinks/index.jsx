@@ -9,7 +9,7 @@ const UserLinks = ({ show }) => <Popup
   className={styles.popup}
 >
   <div className={styles.userLinks}>
-    <Link>
+    <Link to="/auth">
       <Button
         type="transparent"
         caption="Войти"
