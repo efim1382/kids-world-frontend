@@ -1,4 +1,4 @@
-.sidebar {
+.profile-sidebar {
 	--sidebar-width: 300px;
 	flex-shrink: 0;
 	width: var(--sidebar-width);

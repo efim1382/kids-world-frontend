@@ -1,11 +1,7 @@
-import React, { PropTypes } from 'react';
-import classnames from 'classnames';
-
+import React from 'react';
 import styles from './style.css';
 
-const Sidebar = ({
-  className,
-}) => <div className={classnames(styles.sidebar, className)}>
+const ProfileSidebar = () => <div className={styles.profileSidebar}>
   <header className={styles.header}>
     <div
       className={styles.image}
@@ -35,8 +31,4 @@ const Sidebar = ({
   </div>
 </div>;
 
-Sidebar.propTypes = {
-  className: PropTypes.string,
-};
-
-export default Sidebar;
+export default ProfileSidebar;

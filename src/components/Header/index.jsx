@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ClickOutside from 'helpers/click-outside-popup';
-
 import Button from 'components/Button';
 import UserLinks from './UserLinks';
-
 import styles from './style.css';
 
 class Header extends Component {
@@ -26,7 +24,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div className={styles.header}>
+      <header className={styles.header}>
         <Link className={styles.logo} to="/">Детский мир</Link>
 
         <div className={styles.links}>
@@ -48,7 +46,7 @@ class Header extends Component {
         </div>
 
         <UserLinks show={this.state.showed} />
-      </div>
+      </header>
     );
   }
 }

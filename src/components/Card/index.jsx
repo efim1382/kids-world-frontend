@@ -1,9 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-
 import Icon from 'components/Icon';
-
 import styles from './style.css';
 
 const Card = ({

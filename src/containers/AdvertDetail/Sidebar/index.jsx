@@ -1,10 +1,7 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames';
-
 import Card from 'components/Card';
-
 import Reviews from './Reviews';
-
 import styles from './style.css';
 
 const AdvertDetail = ({ className }) => (

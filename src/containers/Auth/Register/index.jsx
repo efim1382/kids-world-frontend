@@ -1,9 +1,7 @@
 import React from 'react';
-
 import Form from 'components/Form';
 import Field from 'components/Form/Field';
 import Button from 'components/Button';
-
 import authStyles from 'containers/Auth/style.css';
 
 const Register = () => <div>

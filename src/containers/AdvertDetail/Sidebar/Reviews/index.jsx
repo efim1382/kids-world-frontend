@@ -1,10 +1,8 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-
 import Card from 'components/Card';
 import Button from 'components/Button';
-
 import styles from './style.css';
 
 const Reviews = ({ className }) => (
