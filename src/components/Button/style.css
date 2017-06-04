@@ -36,18 +36,24 @@
   color: var(--color);
 }
 
-.button[data-active]::before,
-.button:hover::before {
+.button:not([disabled])[data-active]::before,
+.button:not([disabled]):hover::before {
   opacity: 0.15;
 }
 
-.button[data-type='primary'] {
+.button:not([disabled])[data-type='primary'] {
   --background-color: var(--accent-color);
   --color: #fff;
 }
 
-.button[data-type='transparent'] {
+.button:not([disabled])[data-type='transparent'] {
   --background-color: transparent;
+}
+
+.button[disabled] {
+  --background-color: #f2f2f2;
+  --color: #fff;
+  cursor: auto;
 }
 
 .button[icon] .caption {

@@ -9,6 +9,7 @@ const Button = ({
   icon,
   onClick,
   isActive,
+  disabled,
   className,
 }) => <button
   className={classNames(styles.button, className)}
@@ -16,6 +17,7 @@ const Button = ({
   {...onClick ? { onClick } : {}}
   {...icon ? { icon: '' } : {}}
   {...isActive ? { 'data-active': '' } : {}}
+  {...disabled ? { disabled: true } : {}}
 >
   {icon && <Icon icon={icon} />}
   {caption && <span className={styles.caption}>{ caption }</span>}
@@ -27,6 +29,7 @@ Button.propTypes = {
   icon: PropTypes.string,
   onClick: PropTypes.func,
   isActive: PropTypes.bool,
+  disabled: PropTypes.bool,
   className: PropTypes.string,
 };
 

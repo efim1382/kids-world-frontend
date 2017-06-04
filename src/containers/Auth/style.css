@@ -23,6 +23,8 @@
 }
 
 .button {
+	--button-height: 36px;
+	min-width: 95px;
 	display: block;
 	margin-top: 16px;
 }

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from 'components/Form/style.css';
 
-const Field = ({
+const Textarea = ({
   type = 'text',
   placeholder,
 }) => <div className={styles.fieldWrapper}>
@@ -12,9 +12,9 @@ const Field = ({
   />
 </div>;
 
-Field.propTypes = {
+Textarea.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
 };
 
-export default Field;
+export default Textarea;

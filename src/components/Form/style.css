@@ -1,3 +1,73 @@
 .form {
 
 }
+
+.field-wrapper {
+	--field-width: 100%;
+	--field-height: 36px;
+	position: relative;
+	display: block;
+	width: var(--field-width);
+	min-height: var(--field-height);
+}
+
+.field-wrapper:nth-of-type(n+2) {
+	margin-top: 16px;
+}
+
+.field {
+	--horizontal-padding: 16px;
+	width: 100%;
+	height: var(--field-height);
+	padding-left: var(--horizontal-padding);
+	padding-right: var(--horizontal-padding);
+	border: 1px solid var(--divider-color);
+	border-radius: 2px;
+	font-size: 15px;
+}
+textarea.field {
+	--field-height: 300px;
+}
+
+.checkboxWrapper {
+	--size: 20px;
+	display: flex;
+}
+
+.checkbox-input {
+	display: none;
+}
+
+.checkbox {
+	--color: transparent;
+	--background-color: transparent;
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: var(--size);
+	height: var(--size);
+	margin-right: 12px;
+	background-color: var(--background-color);
+	border-radius: 2px;
+	cursor: pointer;
+	box-shadow: 0 0 0 2px var(--accent-color) inset;
+	transition-property: background-color;
+}
+
+.checkbox[data-checked] {
+	--color: #fff;
+	--background-color: var(--accent-color);
+}
+
+.checkbox-icon {
+	--icon-size: 18px;
+	--icon-color: var(--color);
+}
+
+.caption {
+	flex-grow: 1;
+	line-height: var(--size);
+	font-size: 15px;
+	color: var(--text-color);
+}

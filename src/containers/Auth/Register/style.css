@@ -1,0 +1,20 @@
+.link {
+	--opacity: 0;
+	position: relative;
+	color: var(--accent-color);
+}
+
+.link:before {
+	content: '';
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+	width: 100%;
+	border-bottom: 1px dashed;
+	opacity: var(--opacity);
+	transition-property: opacity;
+}
+
+.link:hover {
+	--opacity: 1;
+}
