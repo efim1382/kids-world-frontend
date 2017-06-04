@@ -46,6 +46,11 @@
   --color: #fff;
 }
 
+.button:not([disabled])[data-type='danger'] {
+  --background-color: var(--danger-color);
+  --color: #fff;
+}
+
 .button:not([disabled])[data-type='transparent'] {
   --background-color: transparent;
 }

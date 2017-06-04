@@ -44,7 +44,7 @@ class Checkbox extends Component {
           />
         </div>
 
-        {children && <label className={styles.caption}>{ children }</label>}
+        {children && <label className={styles.checkboxCaption}>{ children }</label>}
       </div>
     );
   }

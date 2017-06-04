@@ -2,7 +2,11 @@ import React from 'react';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import UserProfile from 'components/UserProfile';
+import Form from 'components/Form';
+import Field from 'components/Form/Field';
+import Button from 'components/Button';
 import baseStyles from 'containers/Layout/style.css';
+import styles from './style.css';
 
 const ProfileSettings = () => {
   const navItems = [{
@@ -18,7 +22,86 @@ const ProfileSettings = () => {
     <div className={baseStyles.page}>
       <Header />
 
-      <UserProfile navigationItems={navItems} />
+      <UserProfile navigationItems={navItems}>
+        <div className={styles.section}>
+          <h3 className={styles.title}>Контактные данные</h3>
+
+          <Form className={styles.form}>
+            <Field
+              type="email"
+              caption="Почта"
+            />
+
+            <Button
+              type="primary"
+              caption="Изменить"
+              className={styles.button}
+            />
+          </Form>
+
+          <div className={styles.divider} />
+
+          <Form className={styles.form}>
+            <Field
+              type="text"
+              caption="Телефон"
+            />
+
+            <Button
+              type="primary"
+              caption="Изменить"
+              className={styles.button}
+            />
+          </Form>
+
+          <div className={styles.divider} />
+
+          <Form className={styles.form}>
+            <Field
+              type="text"
+              caption="Адрес"
+            />
+
+            <Button
+              type="primary"
+              caption="Изменить"
+              className={styles.button}
+            />
+          </Form>
+        </div>
+
+        <div className={styles.section}>
+          <h3 className={styles.title}>Безопасность</h3>
+
+          <Form className={styles.form}>
+            <Field
+              type="password"
+              caption="Старый пароль"
+            />
+
+            <Field
+              type="password"
+              caption="Новый пароль"
+            />
+
+            <Button
+              type="primary"
+              caption="Изменить"
+              className={styles.button}
+            />
+          </Form>
+        </div>
+
+        <div className={styles.section}>
+          <h3 className={styles.title}>Удаление аккаунта</h3>
+
+          <Button
+            type="danger"
+            caption="Удалить"
+            className={styles.button}
+          />
+        </div>
+      </UserProfile>
 
       <Footer />
     </div>

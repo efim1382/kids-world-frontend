@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
+import baseStyles from 'containers/Layout/style.css';
 import Sidebar from './Sidebar';
 import styles from './style.css';
-import baseStyles from '../Layout/style.css';
 
 const AdvertDetail = () => (
   <div className={baseStyles.page}>

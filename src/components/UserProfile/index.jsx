@@ -14,7 +14,7 @@ const UserProfile = ({
   <ProfileSidebar />
 
   <div className={styles.profileWrapper}>
-    <Navigation items={navigationItems} />
+    {navigationItems && <Navigation items={navigationItems} />}
 
     <div className={styles.profileContent}>
       { children }
@@ -28,7 +28,7 @@ UserProfile.propTypes = {
     name: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
     isActive: PropTypes.boold,
-  })).isRequired,
+  })),
 };
 
 export default UserProfile;

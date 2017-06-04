@@ -19,17 +19,17 @@ const Profile = () => {
     id: '1',
     image: '/images/ad-image.jpg',
     title: 'Детские тапки, красные',
-    link: '/advert/1',
+    link: '/profile/edit-advert/1',
   }, {
     id: '2',
     image: '/images/ad-image.jpg',
     title: 'Детские тапки, красные',
-    link: '/advert/2',
+    link: '/profile/edit-advert/2',
   }, {
     id: '3',
     image: '/images/ad-image.jpg',
     title: 'Детские тапки, красные',
-    link: '/advert/3',
+    link: '/profile/edit-advert/3',
   }];
 
   return (

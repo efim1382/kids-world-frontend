@@ -17,16 +17,33 @@
 
 .field {
 	--horizontal-padding: 16px;
+	--vertical-padding: 0;
 	width: 100%;
 	height: var(--field-height);
-	padding-left: var(--horizontal-padding);
-	padding-right: var(--horizontal-padding);
+	padding: var(--vertical-padding) var(--horizontal-padding);
 	border: 1px solid var(--divider-color);
 	border-radius: 2px;
 	font-size: 15px;
 }
-textarea.field {
-	--field-height: 300px;
+
+.field.textarea {
+	--field-height: 250px;
+	--vertical-padding: 16px;
+	resize: none;
+}
+
+.field.select {
+	--horizontal-padding: 12px;
+}
+
+.field-caption {
+	--height: 16px;
+	display: block;
+	height: var(--height);
+	margin-bottom: 8px;
+	line-height: var(--height);
+	font-size: 15px;
+	color: var(--text-color);
 }
 
 .checkboxWrapper {
@@ -65,7 +82,7 @@ textarea.field {
 	--icon-color: var(--color);
 }
 
-.caption {
+.checkbox-caption {
 	flex-grow: 1;
 	line-height: var(--size);
 	font-size: 15px;

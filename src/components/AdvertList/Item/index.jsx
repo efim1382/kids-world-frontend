@@ -19,7 +19,7 @@ const Item = ({
     <Link className={styles.button} to={`${link}`}>
       <Button
         type="primary"
-        caption={ caption }
+        caption={caption}
       />
     </Link>
   </div>

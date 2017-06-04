@@ -28,7 +28,7 @@ class Header extends Component {
         <Link className={styles.logo} to="/">Детский мир</Link>
 
         <div className={styles.links}>
-          <Link>
+          <Link to="/profile/add-advert">
             <Button
               caption="Подать объявление"
               type="transparent"

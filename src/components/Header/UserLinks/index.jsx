@@ -26,6 +26,14 @@ const UserLinks = ({ show }) => <Popup
         className={styles.button}
       />
     </Link>
+
+    <Link to="/profile">
+      <Button
+        type="transparent"
+        caption="Профиль"
+        className={styles.button}
+      />
+    </Link>
   </div>
 </Popup>;
 
