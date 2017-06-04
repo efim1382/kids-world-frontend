@@ -88,3 +88,33 @@
 	font-size: 15px;
 	color: var(--text-color);
 }
+
+.field-wrapper.files {
+	--field-height: auto;
+}
+
+.file-input {
+	display: none;
+}
+
+.add-files-label {
+	display: inline-block;
+	cursor: pointer;
+}
+
+.add-files-label:hover .add-files-button:before {
+  opacity: 0.15;
+}
+
+.add-files-button {
+	pointer-events: none;
+}
+
+.store-image {
+	width: 100px;
+	height: 100px;
+	margin-top: 12px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}

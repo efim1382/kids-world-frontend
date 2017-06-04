@@ -14,3 +14,10 @@
 .button {
 	margin-top: 16px;
 }
+
+.divider {
+	width: 400px;
+	height: 1px;
+	background-color: var(--divider-color);
+	margin: 16px 0;
+}

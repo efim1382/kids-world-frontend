@@ -5,6 +5,7 @@ import UserProfile from 'components/UserProfile';
 import Form from 'components/Form';
 import Field from 'components/Form/Field';
 import Select from 'components/Form/Select';
+import Files from 'components/Form/Files';
 import Button from 'components/Button';
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
@@ -40,6 +41,12 @@ const AddAdvert = () => <div className={baseStyles.page}>
         type="textarea"
         caption="Описание"
       />
+
+      <Files
+        caption="Изображения"
+      />
+
+      <div className={styles.divider} />
 
       <Button
         type="primary"
