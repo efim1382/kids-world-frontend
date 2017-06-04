@@ -8,6 +8,7 @@ const Item = ({
   image,
   title,
   link,
+  caption,
   className,
 }) => <div className={classNames(styles.item, className)}>
   <div className={styles.image} style={{ backgroundImage: `url(${image})` }} />
@@ -18,16 +19,17 @@ const Item = ({
     <Link className={styles.button} to={`${link}`}>
       <Button
         type="primary"
-        caption="Подробнее"
+        caption={ caption }
       />
     </Link>
   </div>
 </div>;
 
 Item.propTypes = {
-  image: PropTypes.string,
-  title: PropTypes.string,
-  link: PropTypes.string,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  link: PropTypes.string.isRequired,
+  caption: PropTypes.string.isRequired,
   className: PropTypes.string,
 };
 

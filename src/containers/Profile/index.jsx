@@ -37,7 +37,7 @@ const Profile = () => {
       <Header />
 
       <UserProfile navigationItems={navItems}>
-        <AdvertList items={adverts} />
+        <AdvertList items={adverts} caption="Редактировать" />
       </UserProfile>
 
       <Footer />

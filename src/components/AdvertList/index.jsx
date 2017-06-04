@@ -4,6 +4,7 @@ import styles from './style.css';
 
 const AdvertList = ({
   items,
+  caption,
 }) => (
   <div className={styles.advertListPage}>
     <h3 className={styles.title}>3 активных объявления</h3>
@@ -15,6 +16,7 @@ const AdvertList = ({
           image={advert.image}
           title={advert.title}
           link={advert.link}
+          caption={caption}
           className={styles.advert}
         />
         ))}
@@ -29,6 +31,7 @@ AdvertList.propTypes = {
     title: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
   })).isRequired,
+  caption: PropTypes.string.isRequired,
 };
 
 export default AdvertList;
