@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Navigation from 'components/Navigation';
 import baseStyles from 'containers/Layout/style.css';
