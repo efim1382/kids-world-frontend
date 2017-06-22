@@ -1,10 +1,7 @@
 .header {
-  --header-text-color: #fff;
   z-index: 2;
-  position: fixed;
+  flex-shrink: 0;
   display: flex;
-  left: 0;
-  width: 100%;
   height: var(--header-height);
   padding: 0 var(--layout-horizontal-padding);
   background-color: var(--accent-color);
@@ -15,7 +12,7 @@
   height: var(--header-height);
   line-height: var(--header-height);
   font-size: 20px;
-  color: var(--header-text-color);
+  color: #fff;
   font-weight: var(--font-weight-light);
 }
 

@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react';
+import classNames from 'classnames';
 import { Link } from 'react-router';
 
 import styles from './style.css';
 
 const Navigation = ({
   items,
-}) => <div className={styles.navigation}>
+  className,
+}) => <div className={classNames(styles.navigation, className)}>
   {items.map(item => (
     <Link
       key={item.link}
@@ -24,6 +26,7 @@ Navigation.propTypes = {
     link: PropTypes.string.isRequired,
     isActive: PropTypes.bool,
   })).isRequired,
+  className: PropTypes.string,
 };
 
 export default Navigation;

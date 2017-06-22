@@ -14,7 +14,7 @@ const UserProfile = ({
   <ProfileSidebar />
 
   <div className={styles.profileWrapper}>
-    {navigationItems && <Navigation items={navigationItems} />}
+    {navigationItems && <Navigation className={styles.navigation} items={navigationItems} />}
 
     <div className={styles.profileContent}>
       { children }

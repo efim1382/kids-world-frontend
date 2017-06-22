@@ -8,7 +8,14 @@
 	flex-direction: column;
 }
 
+.navigation {
+	flex-shrink: 0;
+}
+
 .profile-content {
 	flex-grow: 1;
+	overflow-x: hidden;
+	overflow-y: auto;
 	padding: var(--block-padding);
 }
+

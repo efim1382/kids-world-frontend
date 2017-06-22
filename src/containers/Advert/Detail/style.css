@@ -1,9 +1,9 @@
 .advert-detail {
-  --padding-top: var(--layout-horizontal-padding);
-  --padding-bottom: calc(var(--layout-horizontal-padding) + var(--footer-height));
 	display: flex;
 	justify-content: center;
 	align-items: flex-start;
+  padding-top: var(--layout-horizontal-padding);
+  padding-bottom: var(--layout-horizontal-padding);
 }
 
 .advert {
@@ -13,6 +13,11 @@
 	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 0 1px var(--divider-color) inset;
+}
+
+.sidebar {
+  width: 300px;
+  margin-left: 30px;
 }
 
 .top {
@@ -91,9 +96,4 @@
 .description {
 	margin-top: 12px;
 	font-size: 15px;
-}
-
-.sidebar {
-	width: 300px;
-	margin-left: 30px;
 }

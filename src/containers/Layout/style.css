@@ -56,16 +56,13 @@ p:nth-of-type(n+2) {
   position: relative;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .content {
-  --padding-top: 0;
-  --padding-bottom: var(--footer-height);
   position: relative;
-  min-height: 0;
   flex-grow: 1;
-  margin-top: var(--header-height);
-  padding-top: var(--padding-top);
-  padding-bottom: var(--padding-bottom);
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
