@@ -27,7 +27,7 @@ const Advert = ({
         className={styles.card}
         link="/user/1"
       />
-      
+
       <span className={styles.price}>{ price } р.</span>
     </div>
 
