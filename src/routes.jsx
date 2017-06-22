@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import {
   Router,
   Route,
   IndexRoute,
   browserHistory,
 } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import Layout from './containers/Layout';
 import Main from './containers/Main';
@@ -19,7 +20,7 @@ import ProfileSettings from './containers/Profile/Settings';
 import AddAdvert from './containers/Advert/Add';
 import EditAdvert from './containers/Advert/Edit';
 
-const Routes = () => <Router history={browserHistory} >
+const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHistory, store)}>
   <Route path="/" component={Layout}>
     <IndexRoute component={Main} />
     <Route path="advert/:id" component={AdvertDetail} />
@@ -38,5 +39,9 @@ const Routes = () => <Router history={browserHistory} >
     <Route path="profile/edit-advert/:id" component={EditAdvert} />
   </Route>
 </Router>;
+
+Routes.propTypes = {
+  store: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+};
 
 export default Routes;
