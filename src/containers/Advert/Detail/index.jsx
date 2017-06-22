@@ -47,6 +47,6 @@ const AdvertDetail = () => (
 
     <Footer />
   </div>
-  );
+);
 
 export default AdvertDetail;
