@@ -42,7 +42,6 @@ const Advert = ({
 
     <span className={styles.price}>{ price } р.</span>
   </div>
-
 </div>;
 
 Advert.propTypes = {

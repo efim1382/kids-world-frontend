@@ -23,7 +23,7 @@ const AdvertList = ({
         ))}
     </div>
   </div>
-  );
+);
 
 AdvertList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
