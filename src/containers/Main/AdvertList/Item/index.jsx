@@ -19,12 +19,17 @@ const Advert = ({
   <div className={styles.image} style={{ backgroundImage: `url(${image}` }} />
 
   <div className={styles.section}>
-    <Card
-      image={userImage}
-      title={userName}
-      caption={date}
-      link="/user/1"
-    />
+    <div className={styles.header}>
+      <Card
+        image={userImage}
+        title={userName}
+        caption={date}
+        className={styles.card}
+        link="/user/1"
+      />
+      
+      <span className={styles.price}>{ price } р.</span>
+    </div>
 
     <h3 className={styles.title}>{ title }</h3>
     <p className={styles.text}>{ category }</p>
@@ -39,8 +44,6 @@ const Advert = ({
         caption="Подробнее"
       />
     </Link>
-
-    <span className={styles.price}>{ price } р.</span>
   </div>
 </div>;
 

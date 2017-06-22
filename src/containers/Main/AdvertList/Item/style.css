@@ -33,6 +33,23 @@
 	padding: var(--block-padding);
 }
 
+.header {
+	display: flex;
+	width: 100%;
+}
+
+.card {
+	flex-grow: 1;
+}
+
+.price {
+	--height: 20px;
+	flex-shrink: 0;
+	height: var(--height);
+	line-height: var(--height);
+	font-size: 18px;
+}
+
 .title {
 	font-size: 16px;
 	font-weight: var(--font-weight-bold);
@@ -49,11 +66,4 @@
 
 .detail-button {
 	margin-top: 18px;
-}
-
-.price {
-	position: absolute;
-	top: var(--block-padding);
-	right: var(--block-padding);
-	font-size: 18px;
 }
