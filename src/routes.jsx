@@ -35,7 +35,6 @@ const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHisto
 
     <Route path="profile" component={Profile} />
     <Route path="profile/settings" component={ProfileSettings} />
-
     <Route path="profile/advert/add" component={AddAdvert} />
     <Route path="profile/advert/edit/:id" component={EditAdvert} />
   </Route>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './style.css';
+import styles from '../style.css';
 
 class Form extends Component {
   static propTypes = {

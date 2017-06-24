@@ -7,7 +7,7 @@ import moment from 'moment';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import UserProfile from 'components/UserProfile';
-import Form from 'components/Form';
+import Form from 'components/Form/Form';
 import Field from 'components/Form/Field';
 import Files from 'components/Form/Files';
 import Select from 'components/Form/Select';

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import Form from 'components/Form';
+import Form from 'components/Form/Form';
 import Field from 'components/Form/Field';
 import Checkbox from 'components/Form/Checkbox';
 import Button from 'components/Button';
