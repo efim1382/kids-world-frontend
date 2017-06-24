@@ -8,6 +8,7 @@ import styles from 'components/Form/style.css';
 class Files extends Component {
   static propTypes = {
     caption: PropTypes.string,
+    onChange: PropTypes.func,
   }
 
   state = {
@@ -18,7 +19,8 @@ class Files extends Component {
     this.inputId = UUID.v4();
   }
 
-  onChange = (event) => {
+  handleChange = (event) => {
+    const { onChange } = this.props;
     const files = event.target.files;
     const imagesArray = [];
 
@@ -37,6 +39,8 @@ class Files extends Component {
 
       reader.readAsDataURL(file);
     });
+
+    onChange(event);
   };
 
   render() {
@@ -50,7 +54,7 @@ class Files extends Component {
           id={this.inputId}
           multiple
           type="file"
-          onChange={this.onChange}
+          onChange={this.handleChange}
           className={styles.fileInput}
         />
 

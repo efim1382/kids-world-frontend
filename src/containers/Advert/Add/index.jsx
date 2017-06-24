@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 import moment from 'moment';
 
 import Header from 'components/Header';
@@ -8,6 +9,7 @@ import Footer from 'components/Footer';
 import UserProfile from 'components/UserProfile';
 import Form from 'components/Form';
 import Field from 'components/Form/Field';
+import Files from 'components/Form/Files';
 import Select from 'components/Form/Select';
 import Button from 'components/Button';
 
@@ -43,7 +45,7 @@ class AddAdvert extends Component {
     this.data.category = event.target.value;
   }
 
-  send = () => {
+  send = (event) => {
     const { dispatch } = this.props;
 
     this.data.date = moment().locale('ru').format('DD MMMM, YYYY');
@@ -56,7 +58,11 @@ class AddAdvert extends Component {
         userName: 'Василий Петров',
         adress: 'Ростов-на-Дону, Красноармейская, 231',
       }),
-    })).then(resp => resp);
+    })).then(resp => {
+      dispatch(replace('/advert/594ecac278f4a815841338e0'));
+  
+      return resp;
+    });
   }
 
   render() {
@@ -65,15 +71,12 @@ class AddAdvert extends Component {
         <Header />
 
         <UserProfile>
-          <Button
-            type="primary"
-            caption="Добавить"
-            className={styles.button}
-            onClick={this.send}
-          />
           <h3 className={styles.title}>Добавление объявления</h3>
 
-          <Form className={styles.form}>
+          <Form
+            className={styles.form}
+            onSubmit={this.send}
+          >
             <Field
               type="text"
               caption="Заголовок"
@@ -100,6 +103,10 @@ class AddAdvert extends Component {
                 caption: 'Детские товары',
                 value: 'goods',
               }]}
+            />
+
+            <Files
+              caption="Изображение"
             />
 
             <Field
