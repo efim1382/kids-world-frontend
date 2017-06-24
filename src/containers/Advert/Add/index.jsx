@@ -34,6 +34,10 @@ class AddAdvert extends Component {
     this.data.description = event.target.value;
   }
 
+  priceOnChange = (event) => {
+    this.data.price = event.target.value;
+  }
+
   categoryOnChange = (event) => {
     this.data.category = event.target.value;
   }
@@ -48,7 +52,6 @@ class AddAdvert extends Component {
         userImage: '/images/user-image.jpg',
         userName: 'Василий Петров',
         date: '25 января, 2017',
-        price: 14000,
         adress: 'Ростов-на-Дону, Красноармейская, 231',
       }),
     })).then(resp => resp);
@@ -73,6 +76,12 @@ class AddAdvert extends Component {
               type="text"
               caption="Заголовок"
               onChange={this.titleOnChange}
+            />
+
+            <Field
+              type="number"
+              caption="Цена"
+              onChange={this.priceOnChange}
             />
 
             <Select
