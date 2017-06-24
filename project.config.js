@@ -12,8 +12,6 @@ const config = {
   env: process.env.NODE_ENV || 'development',
   isDemo: process.env.IS_DEMO || false,
   apiPath: process.env.API_PATH || 'http://localhost:8000/api/v1',
-  fbAppId: process.env.FACEBOOK_APP_ID || '284585555286548',
-  aviaryApiKey: process.env.AVIARY_API_KEY || '1cc3043ce2e049b097bdb63c7d4a6fab',
 
   // ----------------------------------
   // Project Structure
@@ -76,8 +74,6 @@ config.globals = {
   'NODE_ENV'     : config.env,
   'API_PATH'     : JSON.stringify(config.apiPath),
   'IS_DEMO'      : JSON.stringify(config.isDemo),
-  'FACEBOOK_APP_ID' : JSON.stringify(config.fbAppId),
-  'AVIARY_API_KEY': JSON.stringify(config.aviaryApiKey),
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',
   '__TEST__'     : config.env === 'test',
