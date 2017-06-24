@@ -12,7 +12,7 @@ class Form extends Component {
 
   submitWrapper = (event) => {
     const { onSubmit } = this.props;
-    
+
     onSubmit();
     event.preventDefault();
   }

@@ -45,7 +45,7 @@ class AddAdvert extends Component {
     this.data.category = event.target.value;
   }
 
-  send = (event) => {
+  send = () => {
     const { dispatch } = this.props;
 
     this.data.date = moment().locale('ru').format('DD MMMM, YYYY');
@@ -58,9 +58,9 @@ class AddAdvert extends Component {
         userName: 'Василий Петров',
         adress: 'Ростов-на-Дону, Красноармейская, 231',
       }),
-    })).then(resp => {
+    })).then((resp) => {
       dispatch(replace('/advert/594ecac278f4a815841338e0'));
-  
+
       return resp;
     });
   }
