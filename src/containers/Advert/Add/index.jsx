@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import Header from 'components/Header';
 import Footer from 'components/Footer';
@@ -45,13 +46,14 @@ class AddAdvert extends Component {
   send = () => {
     const { dispatch } = this.props;
 
+    this.data.date = moment().locale('ru').format('DD MMMM, YYYY');
+
     dispatch(api.actions.addAdvert({}, {
       body: JSON.stringify({
         ...this.data,
         image: '/images/ad-image.jpg',
         userImage: '/images/user-image.jpg',
         userName: 'Василий Петров',
-        date: '25 января, 2017',
         adress: 'Ростов-на-Дону, Красноармейская, 231',
       }),
     })).then(resp => resp);
