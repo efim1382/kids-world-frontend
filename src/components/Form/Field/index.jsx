@@ -7,6 +7,7 @@ const Field = ({
   type = 'text',
   placeholder,
   caption,
+  onChange,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
@@ -14,11 +15,13 @@ const Field = ({
     type={type}
     placeholder={placeholder}
     className={styles.field}
+    onChange={onChange}
   />}
 
   {type === 'textarea' && <textarea
     placeholder={placeholder}
     className={classNames(styles.field, styles.textarea)}
+    onChange={onChange}
   />}
 </div>;
 
@@ -26,6 +29,7 @@ Field.propTypes = {
   type: PropTypes.string,
   placeholder: PropTypes.string,
   caption: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default Field;

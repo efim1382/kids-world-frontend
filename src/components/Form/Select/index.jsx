@@ -6,10 +6,14 @@ import styles from 'components/Form/style.css';
 const Select = ({
   items,
   caption,
+  onChange,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
-  <select className={classNames(styles.field, styles.select)}>
+  <select
+    className={classNames(styles.field, styles.select)}
+    onChange={onChange}
+  >
     {caption && <option>{ caption }</option>}
 
     {items.map(option => (
@@ -27,6 +31,7 @@ Select.propTypes = {
     value: PropTypes.string.isRequired,
   })).isRequired,
   caption: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default Select;
