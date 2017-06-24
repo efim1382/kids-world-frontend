@@ -13,7 +13,17 @@ import styles from './style.css';
 
 class AdvertList extends Component {
   static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    items: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+      userImage: PropTypes.string.isRequired,
+      userName: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      price: PropTypes.number.isRequired,
+      category: PropTypes.string.isRequired,
+      adress: PropTypes.string.isRequired,
+    })).isRequired,
     className: PropTypes.string,
     getAdverts: PropTypes.func.isRequired,
   };
