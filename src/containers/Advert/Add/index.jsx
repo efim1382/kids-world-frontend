@@ -23,11 +23,7 @@ class AddAdvert extends Component {
     dispatch: PropTypes.func.isRequired,
   };
 
-  data = {
-    title: '',
-    description: '',
-    category: '',
-  }
+  data = {}
 
   titleOnChange = (event) => {
     this.data.title = event.target.value;
