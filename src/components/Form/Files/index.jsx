@@ -40,7 +40,9 @@ class Files extends Component {
       reader.readAsDataURL(file);
     });
 
-    onChange(event);
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   render() {
