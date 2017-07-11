@@ -6,6 +6,8 @@ import Footer from 'components/Footer';
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 
+export api from './api';
+
 const Auth = ({
   children,
 }) => <div className={baseStyles.page}>
