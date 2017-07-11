@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose, withHandlers } from 'recompose';
+import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Form from 'components/Form/Form';
 import Field from 'components/Form/Field';
 import Checkbox from 'components/Form/Checkbox';
 import Button from 'components/Button';
+
+import api from 'containers/Auth/api';
+
 import authStyles from 'containers/Auth/style.css';
 import styles from './style.css';
 
+const sendHandler = ({ dispatch }) => data => (
+  dispatch(api.actions.register({}, {
+    body: JSON.stringify(data),
+  }))
+);
+
 class Register extends Component {
   static propTypes = {
-    buttonDisabled: PropTypes.bool,
-    checkboxChecked: PropTypes.bool,
+    send: PropTypes.func.isRequired,
   };
 
   defaultProps = {
@@ -30,33 +40,40 @@ class Register extends Component {
   }
 
   render() {
+    const { send } = this.props;
+
     return (
       <div>
         <h2 className={authStyles.title}>Регистрация</h2>
 
-        <Form className={authStyles.form}>
+        <Form className={authStyles.form} model="register" onSubmit={send}>
           <Field
             type="text"
+            model=".name"
             placeholder="Имя"
           />
 
           <Field
             type="email"
-            placeholder="Email"
+            model=".email"
+            placeholder="Эл. почта"
           />
 
           <Field
             type="text"
+            model=".phone"
             placeholder="Телефон"
           />
 
           <Field
             type="text"
+            model=".address"
             placeholder="Адрес"
           />
 
           <Field
             type="password"
+            model=".password"
             placeholder="Пароль"
           />
 
@@ -79,4 +96,9 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default compose(
+  connect(),
+  withHandlers({
+    send: sendHandler,
+  }),
+)(Register);
