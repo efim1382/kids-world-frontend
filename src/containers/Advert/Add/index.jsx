@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
@@ -17,8 +17,8 @@ import api from 'containers/Advert/api';
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 
-const sendHandler = ({ dispatch }) => data => {
-  let date = moment().locale('ru').format('DD MMMM, YYYY');
+const sendHandler = ({ dispatch }) => (data) => {
+  const date = moment().locale('ru').format('DD MMMM, YYYY');
 
   dispatch(api.actions.addAdvert({}, {
     body: JSON.stringify({
@@ -29,78 +29,70 @@ const sendHandler = ({ dispatch }) => data => {
       userName: 'Василий Петров',
       address: 'Ростов-на-Дону, Красноармейская, 231',
     }),
-  })).then(resp => {
+  })).then((resp) => {
     dispatch(replace('/advert/594ecac278f4a815841338e0'));
 
     return resp;
   });
 };
 
-class AddAdvert extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-  };
+const AddAdvert = ({ send }) => <div className={baseStyles.page}>
+  <Header />
 
-  render() {
-    const { send } = this.props;
+  <UserProfile>
+    <h3 className={styles.title}>Добавление объявления</h3>
 
-    return (
-      <div className={baseStyles.page}>
-        <Header />
+    <Form className={styles.form} model="addAdvert" onSubmit={send}>
+      <Field
+        type="text"
+        model=".title"
+        placeholder="Заголовок"
+      />
 
-        <UserProfile>
-          <h3 className={styles.title}>Добавление объявления</h3>
+      <Field
+        type="number"
+        model=".price"
+        placeholder="Цена"
+      />
 
-          <Form className={styles.form} model="addAdvert" onSubmit={send}>
-            <Field
-              type="text"
-              model=".title"
-              placeholder="Заголовок"
-            />
+      <Field
+        type="select"
+        model=".category"
+        placeholder="Выберите категорию"
+        items={[{
+          caption: 'Одежда',
+          value: 'clothes',
+        }, {
+          caption: 'Обувь',
+          value: 'footwear',
+        }, {
+          caption: 'Детские товары',
+          value: 'goods',
+        }]}
+      />
 
-            <Field
-              type="number"
-              model=".price"
-              placeholder="Цена"
-            />
+      <Field
+        type="textarea"
+        model=".description"
+        placeholder="Описание"
+      />
 
-            <Field
-              type="select"
-              model=".category"
-              placeholder="Выберите категорию"
-              items={[{
-                caption: 'Одежда',
-                value: 'clothes',
-              }, {
-                caption: 'Обувь',
-                value: 'footwear',
-              }, {
-                caption: 'Детские товары',
-                value: 'goods',
-              }]}
-            />
+      <div className={styles.divider} />
 
-            <Field
-              type="textarea"
-              model=".description"
-              placeholder="Описание"
-            />
+      <Button
+        type="primary"
+        caption="Добавить"
+        className={styles.button}
+      />
+    </Form>
+  </UserProfile>
 
-            <div className={styles.divider} />
+  <Footer />
+</div>;
 
-            <Button
-              type="primary"
-              caption="Добавить"
-              className={styles.button}
-            />
-          </Form>
-        </UserProfile>
-
-        <Footer />
-      </div>
-    );
-  }
-}
+AddAdvert.propTypes = {
+  send: PropTypes.func.isRequired,
+};
 
 export default compose(
   connect(),
