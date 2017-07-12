@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import moment from 'moment';
@@ -9,8 +10,6 @@ import Footer from 'components/Footer';
 import UserProfile from 'components/UserProfile';
 import Form from 'components/Form/Form';
 import Field from 'components/Form/Field';
-import Files from 'components/Form/Files';
-import Select from 'components/Form/Select';
 import Button from 'components/Button';
 
 import api from 'containers/Advert/api';
@@ -18,50 +17,33 @@ import api from 'containers/Advert/api';
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 
+const sendHandler = ({ dispatch }) => data => {
+  let date = moment().locale('ru').format('DD MMMM, YYYY');
+
+  dispatch(api.actions.addAdvert({}, {
+    body: JSON.stringify({
+      ...data,
+      date,
+      image: '/images/ad-image.jpg',
+      userImage: '/images/user-image.jpg',
+      userName: 'Василий Петров',
+      address: 'Ростов-на-Дону, Красноармейская, 231',
+    }),
+  })).then(resp => {
+    dispatch(replace('/advert/594ecac278f4a815841338e0'));
+
+    return resp;
+  });
+};
+
 class AddAdvert extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
   };
 
-  data = {}
-
-  titleOnChange = (event) => {
-    this.data.title = event.target.value;
-  }
-
-  descriptionOnChange = (event) => {
-    this.data.description = event.target.value;
-  }
-
-  priceOnChange = (event) => {
-    this.data.price = event.target.value;
-  }
-
-  categoryOnChange = (event) => {
-    this.data.category = event.target.value;
-  }
-
-  send = () => {
-    const { dispatch } = this.props;
-
-    this.data.date = moment().locale('ru').format('DD MMMM, YYYY');
-
-    dispatch(api.actions.addAdvert({}, {
-      body: JSON.stringify({
-        ...this.data,
-        image: '/images/ad-image.jpg',
-        userImage: '/images/user-image.jpg',
-        userName: 'Василий Петров',
-        adress: 'Ростов-на-Дону, Красноармейская, 231',
-      }),
-    })).then((resp) => {
-      dispatch(replace('/advert/594ecac278f4a815841338e0'));
-
-      return resp;
-    });
-  }
-
   render() {
+    const { send } = this.props;
+
     return (
       <div className={baseStyles.page}>
         <Header />
@@ -69,26 +51,23 @@ class AddAdvert extends Component {
         <UserProfile>
           <h3 className={styles.title}>Добавление объявления</h3>
 
-          <Form
-            className={styles.form}
-            onSubmit={this.send}
-          >
+          <Form className={styles.form} model="addAdvert" onSubmit={send}>
             <Field
               type="text"
-              caption="Заголовок"
-              onChange={this.titleOnChange}
+              model=".title"
+              placeholder="Заголовок"
             />
 
             <Field
               type="number"
-              caption="Цена"
-              onChange={this.priceOnChange}
+              model=".price"
+              placeholder="Цена"
             />
 
-            <Select
-              caption="Категория"
-              defaultSelect="Выберите категорию"
-              onChange={this.categoryOnChange}
+            <Field
+              type="select"
+              model=".category"
+              placeholder="Выберите категорию"
               items={[{
                 caption: 'Одежда',
                 value: 'clothes',
@@ -101,14 +80,10 @@ class AddAdvert extends Component {
               }]}
             />
 
-            <Files
-              caption="Изображение"
-            />
-
             <Field
               type="textarea"
-              caption="Описание"
-              onChange={this.descriptionOnChange}
+              model=".description"
+              placeholder="Описание"
             />
 
             <div className={styles.divider} />
@@ -127,4 +102,9 @@ class AddAdvert extends Component {
   }
 }
 
-export default connect()(AddAdvert);
+export default compose(
+  connect(),
+  withHandlers({
+    send: sendHandler,
+  }),
+)(AddAdvert);

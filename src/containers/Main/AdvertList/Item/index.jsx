@@ -14,7 +14,7 @@ const Advert = ({
   date,
   price,
   category,
-  adress,
+  address,
 }) => <div className={styles.advert}>
   <div className={styles.image} style={{ backgroundImage: `url(${image}` }} />
 
@@ -33,7 +33,7 @@ const Advert = ({
 
     <h3 className={styles.title}>{ title }</h3>
     <p className={styles.text}>{ category }</p>
-    <p className={styles.text}>{ adress }</p>
+    <p className={styles.text}>{ address }</p>
 
     <Link
       to={`/advert/${id}`}
@@ -56,7 +56,7 @@ Advert.propTypes = {
   date: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   category: PropTypes.string.isRequired,
-  adress: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default Advert;

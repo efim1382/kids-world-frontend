@@ -10,6 +10,7 @@ const Field = ({
   placeholder,
   caption,
   model,
+  items,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
@@ -20,6 +21,19 @@ const Field = ({
         className={classNames(styles.field, styles.textarea)}
         placeholder={placeholder}
       />
+    </Clause>
+
+    <Clause test={'select'}>
+      <Control.select model={model} className={classNames(styles.field, styles.select)}>
+        {placeholder && <option>{ placeholder }</option>}
+
+        {items && items.map(option => (
+          <option
+            key={option.value}
+            value={option.value}
+          >{ option.caption }</option>
+        ))}
+      </Control.select>
     </Clause>
 
     <Default>
@@ -38,6 +52,10 @@ Field.propTypes = {
   placeholder: PropTypes.string,
   caption: PropTypes.string,
   model: PropTypes.string,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    value: PropTypes.string,
+    caption: PropTypes.string,
+  })),
 };
 
 export default Field;

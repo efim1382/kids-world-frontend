@@ -22,7 +22,7 @@ class AdvertList extends Component {
       date: PropTypes.string.isRequired,
       price: PropTypes.number.isRequired,
       category: PropTypes.string.isRequired,
-      adress: PropTypes.string.isRequired,
+      address: PropTypes.string.isRequired,
     })).isRequired,
     className: PropTypes.string,
     getAdverts: PropTypes.func.isRequired,
