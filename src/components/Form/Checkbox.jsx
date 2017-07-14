@@ -23,7 +23,7 @@ class Checkbox extends Component {
     });
 
     const { onChange } = this.props;
-    
+
     if (onChange) {
       onChange(this.state.checked);
     }

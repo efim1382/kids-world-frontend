@@ -11,7 +11,7 @@ const Select = ({
   model,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
-  
+
   <Control.select model={model} className={classNames(styles.field, styles.select)}>
     {placeholder && <option>{ placeholder }</option>}
 

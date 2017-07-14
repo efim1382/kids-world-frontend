@@ -40,6 +40,7 @@ Field.propTypes = {
   placeholder: PropTypes.string,
   caption: PropTypes.string,
   model: PropTypes.string,
+  value: PropTypes.string,
 };
 
 export default Field;
