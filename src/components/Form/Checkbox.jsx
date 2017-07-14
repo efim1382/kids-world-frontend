@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Control } from 'react-redux-form';
 import Icon from 'components/Icon';
 import styles from 'components/Form/style.css';
 
@@ -9,6 +10,7 @@ class Checkbox extends Component {
     children: PropTypes.node,
     onChange: PropTypes.func,
     checked: PropTypes.bool,
+    model: PropTypes.string,
   };
 
   state = {
@@ -20,18 +22,21 @@ class Checkbox extends Component {
       checked: !this.state.checked,
     });
 
-    this.props.onChange(this.state.checked);
+    const { onChange } = this.props;
+    
+    if (onChange) {
+      onChange(this.state.checked);
+    }
   }
 
   render() {
-    const { children } = this.props;
+    const { model, children } = this.props;
 
     return (
       <div className={classNames(styles.fieldWrapper, styles.checkboxWrapper)}>
-        <input
-          type="checkbox"
+        <Control.checkbox
+          model={model}
           className={styles.checkboxInput}
-          value={this.state.checked}
         />
 
         <div

@@ -18,8 +18,6 @@ const Form = ({
 Form.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  model: PropTypes.string,
-  onSubmit: PropTypes.func,
 };
 
 export default Form;

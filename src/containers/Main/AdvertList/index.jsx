@@ -47,7 +47,7 @@ class AdvertList extends Component {
           date={item.date}
           price={item.price}
           category={item.category}
-          adress={item.adress}
+          address={item.address}
         />)}
       </div>
     );

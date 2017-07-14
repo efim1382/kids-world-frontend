@@ -18,12 +18,19 @@ const EditAdvert = () => <div className={baseStyles.page}>
     <Form className={styles.form}>
       <Field
         type="text"
-        caption="Заголовок"
+        model=".title"
+        placeholder="Заголовок"
+      />
+
+      <Field
+        type="number"
+        model=".price"
+        placeholder="Цена"
       />
 
       <Select
-        caption="Категория"
-        defaultSelect="Выберите категорию"
+        model=".category"
+        placeholder="Выберите категорию"
         items={[{
           caption: 'Одежда',
           value: 'clothes',
@@ -38,7 +45,8 @@ const EditAdvert = () => <div className={baseStyles.page}>
 
       <Field
         type="textarea"
-        caption="Описание"
+        model=".description"
+        placeholder="Описание"
       />
 
       <Button

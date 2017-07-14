@@ -10,6 +10,7 @@ import Footer from 'components/Footer';
 import UserProfile from 'components/UserProfile';
 import Form from 'components/Form/Form';
 import Field from 'components/Form/Field';
+import Select from 'components/Form/Select';
 import Button from 'components/Button';
 
 import api from 'containers/Advert/api';
@@ -55,8 +56,7 @@ const AddAdvert = ({ send }) => <div className={baseStyles.page}>
         placeholder="Цена"
       />
 
-      <Field
-        type="select"
+      <Select
         model=".category"
         placeholder="Выберите категорию"
         items={[{

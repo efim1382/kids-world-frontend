@@ -15,7 +15,10 @@ import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => data => (
   dispatch(api.actions.register({}, {
-    body: JSON.stringify(data),
+    body: JSON.stringify({
+      ...data,
+      photo: '/images/ad-image.jpg',
+    }),
   }))
 );
 
@@ -78,6 +81,7 @@ class Register extends Component {
           />
 
           <Checkbox
+            model=" "
             checked={this.defaultProps.checkboxChecked}
             onChange={this.onChangeCheckbox}
           >

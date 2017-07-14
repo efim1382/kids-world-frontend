@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Control } from 'react-redux-form';
 import styles from 'components/Form/style.css';
 
 const Select = ({
   items,
   caption,
-  onChange,
+  placeholder,
+  model,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
+  
+  <Control.select model={model} className={classNames(styles.field, styles.select)}>
+    {placeholder && <option>{ placeholder }</option>}
 
-  <select
-    className={classNames(styles.field, styles.select)}
-    onChange={onChange}
-  >
-    {caption && <option>{ caption }</option>}
-
-    {items.map(option => (
+    {items && items.map(option => (
       <option
         key={option.value}
         value={option.value}
       >{ option.caption }</option>
     ))}
-  </select>
+  </Control.select>
 </div>;
 
 Select.propTypes = {
@@ -31,7 +30,8 @@ Select.propTypes = {
     value: PropTypes.string.isRequired,
   })).isRequired,
   caption: PropTypes.string,
-  onChange: PropTypes.func,
+  model: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default Select;

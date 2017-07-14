@@ -26,8 +26,10 @@ const ProfileSettings = () => {
         <div className={styles.section}>
           <h3 className={styles.title}>Контактные данные</h3>
 
-          <Form className={styles.form}>
+          <Form className={styles.form} model=" ">
             <Field
+              value=""
+              model=" "
               type="email"
               caption="Почта"
             />
@@ -41,8 +43,10 @@ const ProfileSettings = () => {
 
           <div className={styles.divider} />
 
-          <Form className={styles.form}>
+          <Form className={styles.form} model=" ">
             <Field
+              value=""
+              model=" "
               type="text"
               caption="Телефон"
             />
@@ -56,8 +60,10 @@ const ProfileSettings = () => {
 
           <div className={styles.divider} />
 
-          <Form className={styles.form}>
+          <Form className={styles.form} model=" ">
             <Field
+              value=""
+              model=" "
               type="text"
               caption="Адрес"
             />
@@ -73,13 +79,17 @@ const ProfileSettings = () => {
         <div className={styles.section}>
           <h3 className={styles.title}>Безопасность</h3>
 
-          <Form className={styles.form}>
+          <Form className={styles.form} model=" ">
             <Field
+              value=""
+              model=" "
               type="password"
               caption="Старый пароль"
             />
 
             <Field
+              value=""
+              model=" "
               type="password"
               caption="Новый пароль"
             />
