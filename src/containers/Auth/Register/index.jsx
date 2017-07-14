@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 import { Link } from 'react-router';
 import Form from 'components/Form/Form';
 import Field from 'components/Form/Field';
@@ -19,7 +20,10 @@ const sendHandler = ({ dispatch }) => data => (
       ...data,
       photo: '/images/ad-image.jpg',
     }),
-  }))
+  })).then((resp) => {
+    dispatch(replace('/profile'));
+    return resp;
+  })
 );
 
 class Register extends Component {
