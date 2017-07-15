@@ -7,6 +7,7 @@ import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 
 export api from './api';
+export reducers from './reducers';
 
 const Auth = ({
   children,

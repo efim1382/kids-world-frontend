@@ -2,18 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
 import Form from 'components/Form/Form';
 import Field from 'components/Form/Field';
 import Button from 'components/Button';
 
 import api from 'containers/Auth/api';
+import { setToken } from 'containers/Auth/actions';
 
 import authStyles from 'containers/Auth/style.css';
 
 const sendHandler = ({ dispatch }) => data => (
-  dispatch(api.actions.register({}, {
+  dispatch(api.actions.login({}, {
     body: JSON.stringify(data),
-  }))
+  })).then((resp) => {
+    dispatch(setToken(resp.token));
+    dispatch(replace('/profile'));
+
+    return resp;
+  })
 );
 
 const Login = ({ send }) => <div>
