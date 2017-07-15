@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import Popup from 'components/Popup';
@@ -10,11 +9,7 @@ import { resetToken } from 'containers/Auth/actions';
 
 import styles from './style.css';
 
-const logoutHandler = ({ dispatch }) => () => {
-  dispatch(resetToken());
-};
-
-const UserLinks = ({ show, logout }) => <Popup
+const UserLinks = ({ show, dispatch }) => <Popup
   show={show}
   className={styles.popup}
 >
@@ -41,7 +36,7 @@ const UserLinks = ({ show, logout }) => <Popup
       type="transparent"
       caption="Выйти"
       icon="exit_to_app"
-      onClick={logout}
+      onClick={() => dispatch(resetToken())}
       className={styles.button}
     />
 
@@ -57,12 +52,7 @@ const UserLinks = ({ show, logout }) => <Popup
 
 UserLinks.propTypes = {
   show: PropTypes.bool.isRequired,
-  logout: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default compose(
-  connect(),
-  withHandlers({
-    logout: logoutHandler,
-  }),
-)(UserLinks);
+export default connect()(UserLinks);
