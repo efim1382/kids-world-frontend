@@ -1,7 +1,6 @@
 .card {
 	--image-size: 40px;
 	--gap: 16px;
-	--like-size: 16px;
 	display: flex;
 	align-items: center;
 }
@@ -73,16 +72,16 @@
 
 .like,
 .dislike {
+	--icon-size: 16px !important;
 	position: absolute;
 	top: 0;
 	right: 0;
-	font-size: var(--like-size);
 }
 
 .like {
-	color: var(--accent-color);
+	--icon-color: var(--accent-color);
 }
 
 .dislike {
-	color: #d32f2f;
+	--icon-color: #d32f2f;
 }

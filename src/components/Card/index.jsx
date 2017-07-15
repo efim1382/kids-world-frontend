@@ -24,7 +24,7 @@ const Card = ({
     {link && <Link
       to={link}
       className={classNames(styles.title, styles.link)}
-    > { title }</Link>}
+    >{ title }</Link>}
 
     {!link && <h4 className={styles.title}>{ title }</h4>}
     <span className={styles.caption}>{ caption }</span>
