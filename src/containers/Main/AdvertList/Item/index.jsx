@@ -11,6 +11,7 @@ const Advert = ({
   image,
   userImage,
   userName,
+  userId,
   date,
   price,
   category,
@@ -25,7 +26,7 @@ const Advert = ({
         title={userName}
         caption={date}
         className={styles.card}
-        link="/user/1"
+        link={`/user/${userId}`}
       />
 
       <span className={styles.price}>{ price } р.</span>
@@ -52,6 +53,7 @@ Advert.propTypes = {
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   userImage: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
   userName: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

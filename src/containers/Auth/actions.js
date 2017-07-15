@@ -1,4 +1,5 @@
 import { AUTH_SET_TOKEN, AUTH_RESET_TOKEN } from './constants';
+import api from './api';
 
 export const setToken = token => (dispatch) => {
   const payload = {
@@ -20,3 +21,5 @@ export const resetToken = () => (dispatch) => {
 
   localStorage.removeItem('token');
 };
+
+export const getUsers = () => api.actions.getUsers();

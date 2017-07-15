@@ -14,26 +14,32 @@ import Select from 'components/Form/Select';
 import Button from 'components/Button';
 
 import api from 'containers/Advert/api';
+import { api as authApi } from 'containers/Auth';
 
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {
   const date = moment().locale('ru').format('DD MMMM, YYYY');
+  const token = JSON.parse(localStorage.getItem('token')).key;
 
-  dispatch(api.actions.addAdvert({}, {
+  dispatch(authApi.actions.currentUser({}, {
     body: JSON.stringify({
-      ...data,
-      date,
-      image: '/images/ad-image.jpg',
-      userImage: '/images/user-image.jpg',
-      userName: 'Василий Петров',
-      address: 'Ростов-на-Дону, Красноармейская, 231',
+      token,
     }),
-  })).then((resp) => {
-    dispatch(replace('/advert/594ecac278f4a815841338e0'));
+  })).then((user) => {
+    dispatch(api.actions.addAdvert({}, {
+      body: JSON.stringify({
+        ...data,
+        date,
+        userId: user._id, // eslint-disable-line no-underscore-dangle
+        image: '/images/ad-image.jpg',
+      }),
+    })).then((resp) => {
+      dispatch(replace('/advert/594ecac278f4a815841338e0'));
 
-    return resp;
+      return resp;
+    });
   });
 };
 

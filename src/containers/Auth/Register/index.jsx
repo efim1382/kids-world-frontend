@@ -18,7 +18,7 @@ const sendHandler = ({ dispatch }) => data => (
   dispatch(api.actions.register({}, {
     body: JSON.stringify({
       ...data,
-      photo: '/images/ad-image.jpg',
+      photo: '/images/user-image.jpg',
     }),
   })).then((resp) => {
     dispatch(replace('/profile'));

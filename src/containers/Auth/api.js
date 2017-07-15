@@ -14,4 +14,13 @@ export default createApi({
       method: 'post',
     },
   },
+  getUsers: {
+    url: `${apiPath}/auth/users/`,
+  },
+  currentUser: {
+    url: `${apiPath}/auth/users/me/`,
+    options: {
+      method: 'post',
+    },
+  },
 });
