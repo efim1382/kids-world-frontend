@@ -16,6 +16,7 @@ class AdvertList extends Component {
   static propTypes = {
     className: PropTypes.string,
     users: PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string.isRequired,
       photo: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       address: PropTypes.string.isRequired,
@@ -43,13 +44,16 @@ class AdvertList extends Component {
     items.forEach((item) => {
       // eslint-disable-next-line no-underscore-dangle
       const currentUser = users.filter(user => user._id === item.userId)[0];
-      array.push({
-        ...item,
-        userId: currentUser._id, // eslint-disable-line no-underscore-dangle
-        userName: currentUser.name,
-        address: currentUser.address,
-        userImage: currentUser.photo,
-      });
+
+      if (currentUser) {
+        array.push({
+          ...item,
+          userId: currentUser._id, // eslint-disable-line no-underscore-dangle
+          userName: currentUser.name,
+          address: currentUser.address,
+          userImage: currentUser.photo,
+        });
+      }
     });
 
     return array;

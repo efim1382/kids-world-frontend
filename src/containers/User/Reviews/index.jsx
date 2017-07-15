@@ -1,17 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from 'components/Header';
 import Footer from 'components/Footer';
 import UserProfile from 'components/UserProfile';
 import baseStyles from 'containers/Layout/style.css';
 import ReviewsList from './ReviewsList';
 
-const UserReviews = () => {
+const UserReviews = ({ params }) => {
+  const id = params.id;
+
   const navItems = [{
     name: 'Объявления',
-    link: '/user/1',
+    link: `/user/${id}`,
   }, {
     name: 'Отзывы',
-    link: '/user/1/reviews',
+    link: `/user/${id}/reviews`,
     isActive: true,
   }];
 
@@ -26,6 +29,10 @@ const UserReviews = () => {
       <Footer />
     </div>
   );
+};
+
+UserReviews.propTypes = {
+  params: PropTypes.objectOf(PropTypes.string),
 };
 
 export default UserReviews;
