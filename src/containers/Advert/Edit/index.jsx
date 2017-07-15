@@ -13,55 +13,65 @@ import UserProfile from 'components/UserProfile';
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 
-const EditAdvert = () => <div className={baseStyles.page}>
-  <Header />
+const EditAdvert = () => {
+  const user = {
+    name: 'Роман',
+    phone: '+7 (454) 343-43-43',
+    photo: '/images/user-image.jpg',
+    email: 'email@email.ru',
+    address: 'Макеевка',
+  };
 
-  <UserProfile>
-    <h3 className={styles.title}>Редактирование объявления</h3>
+  return (<div className={baseStyles.page}>
+    <Header />
 
-    <Form className={styles.form}>
-      <Field
-        type="text"
-        model=".title"
-        placeholder="Заголовок"
-      />
+    <UserProfile user={user}>
+      <h3 className={styles.title}>Редактирование объявления</h3>
 
-      <Field
-        type="number"
-        model=".price"
-        placeholder="Цена"
-      />
+      <Form className={styles.form}>
+        <Field
+          type="text"
+          model=".title"
+          placeholder="Заголовок"
+        />
 
-      <Select
-        model=".category"
-        placeholder="Выберите категорию"
-        items={[{
-          caption: 'Одежда',
-          value: 'clothes',
-        }, {
-          caption: 'Обувь',
-          value: 'footwear',
-        }, {
-          caption: 'Детские товары',
-          value: 'goods',
-        }]}
-      />
+        <Field
+          type="number"
+          model=".price"
+          placeholder="Цена"
+        />
 
-      <Field
-        type="textarea"
-        model=".description"
-        placeholder="Описание"
-      />
+        <Select
+          model=".category"
+          placeholder="Выберите категорию"
+          items={[{
+            caption: 'Одежда',
+            value: 'clothes',
+          }, {
+            caption: 'Обувь',
+            value: 'footwear',
+          }, {
+            caption: 'Детские товары',
+            value: 'goods',
+          }]}
+        />
 
-      <Button
-        type="primary"
-        caption="Изменить"
-        className={styles.button}
-      />
-    </Form>
-  </UserProfile>
+        <Field
+          type="textarea"
+          model=".description"
+          placeholder="Описание"
+        />
 
-  <Footer />
-</div>;
+        <Button
+          type="primary"
+          caption="Изменить"
+          className={styles.button}
+        />
+      </Form>
+    </UserProfile>
+
+    <Footer />
+  </div>);
+};
 
 export default EditAdvert;

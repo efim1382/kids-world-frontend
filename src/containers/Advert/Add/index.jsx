@@ -45,58 +45,68 @@ const sendHandler = ({ dispatch }) => (data) => {
   });
 };
 
-const AddAdvert = ({ send }) => <div className={baseStyles.page}>
-  <Header />
+const AddAdvert = ({ send }) => {
+  const user = {
+    name: 'Роман',
+    phone: '+7 (454) 343-43-43',
+    photo: '/images/user-image.jpg',
+    email: 'email@email.ru',
+    address: 'Макеевка',
+  };
 
-  <UserProfile>
-    <h3 className={styles.title}>Добавление объявления</h3>
+  return (<div className={baseStyles.page}>
+    <Header />
 
-    <Form className={styles.form} model="addAdvert" onSubmit={send}>
-      <Field
-        type="text"
-        model=".title"
-        placeholder="Заголовок"
-      />
+    <UserProfile user={user}>
+      <h3 className={styles.title}>Добавление объявления</h3>
 
-      <Field
-        type="number"
-        model=".price"
-        placeholder="Цена"
-      />
+      <Form className={styles.form} model="addAdvert" onSubmit={send}>
+        <Field
+          type="text"
+          model=".title"
+          placeholder="Заголовок"
+        />
 
-      <Select
-        model=".category"
-        placeholder="Выберите категорию"
-        items={[{
-          caption: 'Одежда',
-          value: 'clothes',
-        }, {
-          caption: 'Обувь',
-          value: 'footwear',
-        }, {
-          caption: 'Детские товары',
-          value: 'goods',
-        }]}
-      />
+        <Field
+          type="number"
+          model=".price"
+          placeholder="Цена"
+        />
 
-      <Field
-        type="textarea"
-        model=".description"
-        placeholder="Описание"
-      />
+        <Select
+          model=".category"
+          placeholder="Выберите категорию"
+          items={[{
+            caption: 'Одежда',
+            value: 'clothes',
+          }, {
+            caption: 'Обувь',
+            value: 'footwear',
+          }, {
+            caption: 'Детские товары',
+            value: 'goods',
+          }]}
+        />
 
-      <div className={styles.divider} />
+        <Field
+          type="textarea"
+          model=".description"
+          placeholder="Описание"
+        />
 
-      <Button
-        type="primary"
-        caption="Добавить"
-        className={styles.button}
-      />
-    </Form>
-  </UserProfile>
+        <div className={styles.divider} />
 
-  <Footer />
-</div>;
+        <Button
+          type="primary"
+          caption="Добавить"
+          className={styles.button}
+        />
+      </Form>
+    </UserProfile>
+
+    <Footer />
+  </div>);
+};
 
 AddAdvert.propTypes = {
   send: PropTypes.func.isRequired,
