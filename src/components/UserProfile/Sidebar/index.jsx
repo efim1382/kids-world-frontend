@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './style.css';
 
-const ProfileSidebar = () => <div className={styles.profileSidebar}>
+const ProfileSidebar = ({ user }) => (<div className={styles.profileSidebar}>
   <header className={styles.header}>
     <div
       className={styles.image}
-      style={{ backgroundImage: 'url(/images/user-image.jpg)' }}
+      style={{ backgroundImage: `url(${user.photo})` }}
     />
 
-    <p className={styles.name}>Василий Петров</p>
+    <p className={styles.name}>{ user.name }</p>
   </header>
 
   <h3 className={styles.title}>Контакты</h3>
@@ -16,19 +17,29 @@ const ProfileSidebar = () => <div className={styles.profileSidebar}>
   <div className={styles.properties}>
     <div className={styles.property}>
       <label className={styles.label}>Телефон:</label>
-      <label className={styles.value}>+7 (909) 407-93-12</label>
+      <label className={styles.value}>{ user.phone }</label>
     </div>
 
     <div className={styles.property}>
       <label className={styles.label}>Почта:</label>
-      <label className={styles.value}>vasya@mail.ru</label>
+      <label className={styles.value}>{ user.email }</label>
     </div>
 
     <div className={styles.property}>
       <label className={styles.label}>Адрес:</label>
-      <label className={styles.value}>Ростов-на-Дону, Красноармейская, 213</label>
+      <label className={styles.value}>{ user.address }</label>
     </div>
   </div>
-</div>;
+</div>);
+
+ProfileSidebar.propTypes = {
+  user: PropTypes.shape({
+    photo: PropTypes.string,
+    name: PropTypes.string,
+    phone: PropTypes.string,
+    email: PropTypes.string,
+    address: PropTypes.string,
+  }),
+};
 
 export default ProfileSidebar;

@@ -9,10 +9,11 @@ import styles from './style.css';
 const UserProfile = ({
   children,
   navigationItems,
+  user,
 }) => <div
   className={classNames(baseStyles.content, styles.profile)}
 >
-  <ProfileSidebar />
+  <ProfileSidebar user={user} />
 
   <div className={styles.profileWrapper}>
     {navigationItems && <Navigation className={styles.navigation} items={navigationItems} />}
@@ -25,10 +26,17 @@ const UserProfile = ({
 
 UserProfile.propTypes = {
   children: PropTypes.node,
+  user: PropTypes.shape({
+    photo: PropTypes.string,
+    name: PropTypes.string,
+    phone: PropTypes.string,
+    email: PropTypes.string,
+    address: PropTypes.string,
+  }),
   navigationItems: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    isActive: PropTypes.boold,
+    isActive: PropTypes.bool,
   })),
 };
 

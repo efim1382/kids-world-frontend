@@ -2,14 +2,14 @@ import { apiPath } from 'configuration';
 import { createApi } from 'components/Http';
 
 export default createApi({
-  login: {
-    url: `${apiPath}/auth/login/`,
-    options: {
-      method: 'post',
-    },
+  getUsers: {
+    url: `${apiPath}/users/`,
   },
-  register: {
-    url: `${apiPath}/auth/register/`,
+  getOneUser: {
+    url: `${apiPath}/users/:id/`,
+  },
+  currentUser: {
+    url: `${apiPath}/users/me/`,
     options: {
       method: 'post',
     },

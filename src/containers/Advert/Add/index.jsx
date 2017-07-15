@@ -16,7 +16,7 @@ import {
 import UserProfile from 'components/UserProfile';
 
 import api from 'containers/Advert/api';
-import { api as authApi } from 'containers/Auth';
+import { api as userApi } from 'containers/User';
 
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
@@ -25,7 +25,7 @@ const sendHandler = ({ dispatch }) => (data) => {
   const date = moment().locale('ru').format('DD MMMM, YYYY');
   const token = JSON.parse(localStorage.getItem('token')).key;
 
-  dispatch(authApi.actions.currentUser({}, {
+  dispatch(userApi.actions.currentUser({}, {
     body: JSON.stringify({
       token,
     }),

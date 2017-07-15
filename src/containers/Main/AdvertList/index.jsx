@@ -7,7 +7,7 @@ import { compose, withProps } from 'recompose';
 import classNames from 'classnames';
 
 import { getAdverts } from 'containers/Advert/actions';
-import { getUsers } from 'containers/Auth/actions';
+import { getUsers } from 'containers/User/actions';
 
 import Advert from './Item';
 import styles from './style.css';

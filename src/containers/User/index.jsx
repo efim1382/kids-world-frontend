@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
   Header,
@@ -10,50 +11,74 @@ import AdvertList from 'components/AdvertList';
 
 import baseStyles from 'containers/Layout/style.css';
 
-const User = ({ params }) => {
-  const id = params.id;
+import api from './api';
 
-  const navItems = [{
-    name: 'Объявления',
-    link: `/user/${id}`,
-    isActive: true,
-  }, {
-    name: 'Отзывы',
-    link: `/user/${id}/reviews`,
-  }];
+export api from './api';
+export reducers from './reducers';
 
-  const adverts = [{
-    id: '1',
-    image: '/images/ad-image.jpg',
-    title: 'Детские тапки, красные',
-    link: '/advert/1',
-  }, {
-    id: '2',
-    image: '/images/ad-image.jpg',
-    title: 'Детские тапки, красные',
-    link: '/advert/2',
-  }, {
-    id: '3',
-    image: '/images/ad-image.jpg',
-    title: 'Детские тапки, красные',
-    link: '/advert/3',
-  }];
+class User extends Component {
+  static propTypes = {
+    params: PropTypes.objectOf(PropTypes.string),
+    dispatch: PropTypes.func.isRequired,
+  }
 
-  return (
-    <div className={baseStyles.page}>
-      <Header />
+  state = {
+    user: {},
+  };
 
-      <UserProfile navigationItems={navItems}>
-        <AdvertList items={adverts} caption="Подробнее" />
-      </UserProfile>
+  componentWillMount() {
+    const { dispatch, params: { id } } = this.props;
 
-      <Footer />
-    </div>
-  );
-};
+    if (id) {
+      dispatch(api.actions.getOneUser({ id })).then((resp) => {
+        this.setState({
+          user: resp,
+        });
+      });
+    }
+  }
 
-User.propTypes = {
-  params: PropTypes.objectOf(PropTypes.string),
-};
+  render() {
+    const { params: { id } } = this.props;
 
-export default User;
+    const navItems = [{
+      name: 'Объявления',
+      link: `/user/${id}`,
+      isActive: true,
+    }, {
+      name: 'Отзывы',
+      link: `/user/${id}/reviews`,
+    }];
+
+    const adverts = [{
+      id: '1',
+      image: '/images/ad-image.jpg',
+      title: 'Детские тапки, красные',
+      link: '/advert/1',
+    }, {
+      id: '2',
+      image: '/images/ad-image.jpg',
+      title: 'Детские тапки, красные',
+      link: '/advert/2',
+    }, {
+      id: '3',
+      image: '/images/ad-image.jpg',
+      title: 'Детские тапки, красные',
+      link: '/advert/3',
+    }];
+
+    return (
+      <div className={baseStyles.page}>
+        <Header />
+
+        <UserProfile user={this.state.user} navigationItems={navItems}>
+          <AdvertList items={adverts} caption="Подробнее" />
+        </UserProfile>
+
+        <Footer />
+      </div>
+    );
+  }
+}
+
+export default connect()(User);
