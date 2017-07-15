@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UUID from 'node-uuid';
-import Button from 'components/Button';
+import { Button } from 'components';
 import styles from 'components/Form/style.css';
 
 class Files extends Component {

@@ -1,7 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+
+import {
+  Header,
+  Footer,
+} from 'components';
+
 import baseStyles from 'containers/Layout/style.css';
 import Sidebar from './Sidebar';
 import styles from './style.css';

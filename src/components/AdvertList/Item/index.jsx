@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import classNames from 'classnames';
-import Button from 'components/Button';
+import { Button } from 'components';
 import styles from './style.css';
 
 const Item = ({

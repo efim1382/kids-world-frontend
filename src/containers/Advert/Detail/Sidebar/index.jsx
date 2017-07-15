@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Card from 'components/Card';
+import { Card } from 'components';
 import Reviews from './Reviews';
 import styles from './style.css';
 

@@ -5,13 +5,15 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import moment from 'moment';
 
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+import {
+  Header,
+  Footer,
+  Form,
+  Field,
+  Select,
+  Button,
+} from 'components';
 import UserProfile from 'components/UserProfile';
-import Form from 'components/Form/Form';
-import Field from 'components/Form/Field';
-import Select from 'components/Form/Select';
-import Button from 'components/Button';
 
 import api from 'containers/Advert/api';
 import { api as authApi } from 'containers/Auth';

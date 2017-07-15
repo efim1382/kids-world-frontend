@@ -4,10 +4,13 @@ import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Link } from 'react-router';
-import Form from 'components/Form/Form';
-import Field from 'components/Form/Field';
-import Checkbox from 'components/Form/Checkbox';
-import Button from 'components/Button';
+
+import {
+  Form,
+  Field,
+  Checkbox,
+  Button,
+} from 'components';
 
 import api from 'containers/Auth/api';
 

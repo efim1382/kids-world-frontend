@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Navigation from 'components/Navigation';
+import { Navigation } from 'components';
 import baseStyles from 'containers/Layout/style.css';
 import ProfileSidebar from './Sidebar';
 import styles from './style.css';

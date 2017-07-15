@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Control } from 'react-redux-form';
-import Icon from 'components/Icon';
+import { Icon } from 'components';
 import styles from 'components/Form/style.css';
 
 class Checkbox extends Component {

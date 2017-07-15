@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import Popup from 'components/Popup';
-import Button from 'components/Button';
+
+import {
+  Popup,
+  Button,
+} from 'components';
 
 import { resetToken } from 'containers/Auth/actions';
 

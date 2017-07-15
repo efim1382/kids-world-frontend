@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import ClickOutside from 'helpers/click-outside-popup';
-import Button from 'components/Button';
+import { Button } from 'components';
 import UserLinks from './UserLinks';
 import styles from './style.css';
 

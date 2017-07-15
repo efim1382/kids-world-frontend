@@ -1,10 +1,14 @@
 import React from 'react';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+
+import {
+  Header,
+  Footer,
+  Form,
+  Field,
+  Button,
+} from 'components';
 import UserProfile from 'components/UserProfile';
-import Form from 'components/Form/Form';
-import Field from 'components/Form/Field';
-import Button from 'components/Button';
+
 import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 

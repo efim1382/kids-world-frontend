@@ -1,8 +1,12 @@
 import React from 'react';
-import Header from 'components/Header';
-import Footer from 'components/Footer';
+
+import {
+  Header,
+  Footer,
+} from 'components';
 import UserProfile from 'components/UserProfile';
 import AdvertList from 'components/AdvertList';
+
 import baseStyles from 'containers/Layout/style.css';
 
 const Profile = () => {
