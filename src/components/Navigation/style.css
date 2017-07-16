@@ -37,10 +37,10 @@
 }
 
 .link:hover,
-.link[data-active] {
+.link:global(._selected) {
 	color: var(--accent-color);
 }
 
-.link[data-active]::before {
+.link:global(._selected)::before {
 	opacity: 1;
 }

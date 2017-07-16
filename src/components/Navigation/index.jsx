@@ -14,7 +14,8 @@ const Navigation = ({
       key={item.link}
       to={item.link}
       className={styles.link}
-      {...item.isActive ? { 'data-active': '' } : {}}
+      onlyActiveOnIndex
+      activeClassName="_selected"
     >
       { item.name }
     </Link>
@@ -25,7 +26,6 @@ Navigation.propTypes = {
   items: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     link: PropTypes.string.isRequired,
-    isActive: PropTypes.bool,
   })).isRequired,
   className: PropTypes.string,
 };

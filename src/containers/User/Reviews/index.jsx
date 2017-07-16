@@ -1,64 +1,68 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import classNames from 'classnames';
 
 import {
-  Header,
-  Footer,
+  Card,
+  Button,
 } from 'components';
-import UserProfile from 'components/UserProfile';
 
-import baseStyles from 'containers/Layout/style.css';
+import styles from './style.css';
 
-import api from '../api';
-import ReviewsList from './ReviewsList';
+const Reviews = ({
+  className,
+}) => {
+  const reviews = [{
+    id: '1',
+    image: '/images/user-image.jpg',
+    title: 'Василий Петров',
+    caption: 'Хороший продавец, не обманывает',
+    link: '/user/1',
+    emotion: 'like',
+  }, {
+    id: '2',
+    image: '/images/user-image.jpg',
+    title: 'Василий Петров',
+    caption: 'Хороший продавец, не обманывает, все отлично, мне понравилось',
+    link: '/user/1',
+    emotion: 'dislike',
+  }, {
+    id: '3',
+    image: '/images/user-image.jpg',
+    title: 'Василий Петров',
+    caption: 'Хороший продавец, не обманывает, все отлично',
+    link: '/user/1',
+    emotion: 'like',
+  }];
 
-class UserReviews extends Component {
-  static propTypes = {
-    params: PropTypes.objectOf(PropTypes.string),
-    dispatch: PropTypes.func.isRequired,
-  }
+  return (
+    <div className={classNames(styles.reviewsListPage, className)}>
+      <Button
+        type="primary"
+        caption="Добавить отзыв"
+        className={styles.button}
+      />
 
-  state = {
-    user: {},
-  };
-
-  componentWillMount() {
-    const { dispatch, params: { id } } = this.props;
-
-    if (id) {
-      dispatch(api.actions.getOneUser({ id })).then((resp) => {
-        this.setState({
-          user: resp,
-        });
-      });
-    }
-  }
-
-  render() {
-    const { params: { id } } = this.props;
-
-    const navItems = [{
-      name: 'Объявления',
-      link: `/user/${id}`,
-    }, {
-      name: 'Отзывы',
-      link: `/user/${id}/reviews`,
-      isActive: true,
-    }];
-
-    return (
-      <div className={baseStyles.page}>
-        <Header />
-
-        <UserProfile user={this.state.user} navigationItems={navItems}>
-          <ReviewsList />
-        </UserProfile>
-
-        <Footer />
+      <div className={styles.reviewsList}>
+        {reviews.map(review => (
+          <Card
+            key={review.id}
+            image={review.image}
+            title={review.title}
+            caption={review.caption}
+            size="big"
+            link={review.link}
+            emotion={review.emotion}
+            className={styles.card}
+          />
+        ))}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default connect()(UserReviews);
+Reviews.propTypes = {
+  className: PropTypes.string,
+};
+
+export default Reviews;

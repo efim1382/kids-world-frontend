@@ -11,8 +11,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Layout from './containers/Layout';
 import Main from './containers/Main';
 import AdvertDetail from './containers/Advert/Detail';
-import User from './containers/User';
-import UserReviews from './containers/User/Reviews';
 import Auth from './containers/Auth';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
@@ -21,12 +19,13 @@ import ProfileSettings from './containers/Profile/Settings';
 import AddAdvert from './containers/Advert/Add';
 import EditAdvert from './containers/Advert/Edit';
 
+import { routes as userRoutes } from './containers/User';
+
 const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHistory, store)}>
   <Route path="/" component={Layout}>
     <IndexRoute component={Main} />
     <Route path="advert/:id" component={AdvertDetail} />
-    <Route path="user/:id" component={User} />
-    <Route path="user/:id/reviews" component={UserReviews} />
+    {userRoutes(store)}
 
     <Route path="auth" component={Auth}>
       <Route path="login" component={Login} />
