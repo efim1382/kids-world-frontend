@@ -8,6 +8,7 @@ import moment from 'moment';
 import {
   Form,
   Field,
+  Textarea,
   Select,
   Button,
   Files,
@@ -31,11 +32,12 @@ const sendHandler = ({ dispatch }) => (data) => {
       body: JSON.stringify({
         ...data,
         date,
+        description: data.description.split('\n').join('<br />'),
         userId: user._id, // eslint-disable-line no-underscore-dangle
         image: '/images/ad-image.jpg',
       }),
     })).then((resp) => {
-      dispatch(replace('/advert/594ecac278f4a815841338e0'));
+      dispatch(replace(`/advert/${resp._id}`)); // eslint-disable-line no-underscore-dangle
 
       return resp;
     });
@@ -74,8 +76,7 @@ const AddAdvert = ({ send }) => (
         }]}
       />
 
-      <Field
-        type="textarea"
+      <Textarea
         model=".description"
         placeholder="Описание"
       />

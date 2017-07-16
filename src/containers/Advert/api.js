@@ -4,9 +4,9 @@ import { createApi } from 'components/Http';
 export default createApi({
   getAdverts: {
     url: `${apiPath}/adverts/`,
-    options: {
-      method: 'GET',
-    },
+  },
+  getOneAdvert: {
+    url: `${apiPath}/adverts/:id/`,
   },
   addAdvert: {
     url: `${apiPath}/adverts/add/`,

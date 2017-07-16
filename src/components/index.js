@@ -4,6 +4,7 @@ export Footer from './Footer';
 
 export Form from './Form/Form';
 export Field from './Form/Field';
+export Textarea from './Form/Textarea';
 export Files from './Form/Files';
 export Checkbox from './Form/Checkbox';
 export Select from './Form/Select';

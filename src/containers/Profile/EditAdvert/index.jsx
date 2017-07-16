@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Form,
   Field,
+  Textarea,
   Select,
   Button,
 } from 'components';
@@ -41,8 +42,7 @@ const EditAdvert = () => (
         }]}
       />
 
-      <Field
-        type="textarea"
+      <Textarea
         model=".description"
         placeholder="Описание"
       />
