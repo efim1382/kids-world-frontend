@@ -20,7 +20,7 @@ const Adverts = () => {
     link: '/profile/advert/edit/3',
   }];
 
-  return <AdvertList items={adverts} caption="Подробнее" />;
+  return <AdvertList items={adverts} caption="Редактировать" />;
 };
 
 export default Adverts;

@@ -3,11 +3,16 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import UUID from 'node-uuid';
 import { Button } from 'components';
+
+import { Control } from 'react-redux-form';
+
 import styles from 'components/Form/style.css';
 
 class Files extends Component {
   static propTypes = {
+    multiple: PropTypes.bool,
     caption: PropTypes.string,
+    model: PropTypes.string,
     onChange: PropTypes.func,
   }
 
@@ -46,18 +51,19 @@ class Files extends Component {
   };
 
   render() {
-    const { caption } = this.props;
+    const { model, caption, multiple } = this.props;
 
     return (
       <div className={classNames(styles.fieldWrapper, styles.files)}>
         {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
-        <input
+        <Control.file
+          model={model}
           id={this.inputId}
-          multiple
           type="file"
           onChange={this.handleChange}
           className={styles.fileInput}
+          {...multiple ? { multiple } : {}}
         />
 
         <label htmlFor={this.inputId} className={styles.addFilesLabel}>

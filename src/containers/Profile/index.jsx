@@ -28,17 +28,19 @@ class Profile extends Component {
     const { dispatch } = this.props;
     const token = JSON.parse(localStorage.getItem('token')).key;
 
-    if (token) {
-      dispatch(api.actions.currentUser({}, {
-        body: JSON.stringify({
-          token,
-        }),
-      })).then((resp) => {
-        this.setState({
-          user: resp,
-        });
-      });
+    if (!token) {
+      return;
     }
+
+    dispatch(api.actions.currentUser({}, {
+      body: JSON.stringify({
+        token,
+      }),
+    })).then((resp) => {
+      this.setState({
+        user: resp,
+      });
+    });
   }
 
   render() {
