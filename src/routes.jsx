@@ -14,12 +14,9 @@ import AdvertDetail from './containers/Advert/Detail';
 import Auth from './containers/Auth';
 import Login from './containers/Auth/Login';
 import Register from './containers/Auth/Register';
-import Profile from './containers/Profile';
-import ProfileSettings from './containers/Profile/Settings';
-import AddAdvert from './containers/Advert/Add';
-import EditAdvert from './containers/Advert/Edit';
 
 import { routes as userRoutes } from './containers/User';
+import { routes as profileRoutes } from './containers/Profile';
 
 const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHistory, store)}>
   <Route path="/" component={Layout}>
@@ -32,10 +29,7 @@ const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHisto
       <Route path="register" component={Register} />
     </Route>
 
-    <Route path="profile" component={Profile} />
-    <Route path="profile/settings" component={ProfileSettings} />
-    <Route path="profile/advert/add" component={AddAdvert} />
-    <Route path="profile/advert/edit/:id" component={EditAdvert} />
+    {profileRoutes(store)}
   </Route>
 </Router>;
 

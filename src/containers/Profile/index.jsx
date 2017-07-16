@@ -7,15 +7,17 @@ import {
   Footer,
 } from 'components';
 import UserProfile from 'components/UserProfile';
-import AdvertList from 'components/AdvertList';
 
 import { api } from 'containers/User';
 
 import baseStyles from 'containers/Layout/style.css';
 
+export routes from './routes';
+
 class Profile extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
+    children: PropTypes.node,
   }
 
   state = {
@@ -40,30 +42,14 @@ class Profile extends Component {
   }
 
   render() {
+    const { children } = this.props;
+
     const navItems = [{
-      name: 'Мои объявления',
-      link: '/profile',
-      isActive: true,
+      name: 'Объявления',
+      link: '/profile/adverts',
     }, {
       name: 'Настройки',
       link: '/profile/settings',
-    }];
-
-    const adverts = [{
-      id: '1',
-      image: '/images/ad-image.jpg',
-      title: 'Детские тапки, красные',
-      link: '/profile/advert/edit/1',
-    }, {
-      id: '2',
-      image: '/images/ad-image.jpg',
-      title: 'Детские тапки, красные',
-      link: '/profile/advert/edit/2',
-    }, {
-      id: '3',
-      image: '/images/ad-image.jpg',
-      title: 'Детские тапки, красные',
-      link: '/profile/advert/edit/3',
     }];
 
     return (
@@ -71,7 +57,7 @@ class Profile extends Component {
         <Header />
 
         <UserProfile user={this.state.user} navigationItems={navItems}>
-          <AdvertList items={adverts} caption="Редактировать" />
+          { children }
         </UserProfile>
 
         <Footer />

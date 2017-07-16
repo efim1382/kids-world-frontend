@@ -1,156 +1,102 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React from 'react';
 
 import {
-  Header,
-  Footer,
   Form,
   Field,
   Button,
 } from 'components';
-import UserProfile from 'components/UserProfile';
 
-import { api } from 'containers/User';
-
-import baseStyles from 'containers/Layout/style.css';
 import styles from './style.css';
 
-class ProfileSettings extends Component {
-  static propTypes = {
-    dispatch: PropTypes.func.isRequired,
-  }
+const ProfileSettings = () => <div>
+  <div className={styles.section}>
+    <h3 className={styles.title}>Контактные данные</h3>
 
-  state = {
-    user: {},
-  };
+    <Form className={styles.form} model=" ">
+      <Field
+        value=""
+        model=" "
+        type="email"
+        caption="Почта"
+      />
 
-  componentWillMount() {
-    const { dispatch } = this.props;
-    const token = JSON.parse(localStorage.getItem('token')).key;
+      <Button
+        type="primary"
+        caption="Изменить"
+        className={styles.button}
+      />
+    </Form>
 
-    if (token) {
-      dispatch(api.actions.currentUser({}, {
-        body: JSON.stringify({
-          token,
-        }),
-      })).then((resp) => {
-        this.setState({
-          user: resp,
-        });
-      });
-    }
-  }
+    <div className={styles.divider} />
 
-  render() {
-    const navItems = [{
-      name: 'Мои объявления',
-      link: '/profile',
-    }, {
-      name: 'Настройки',
-      link: '/profile/settings',
-      isActive: true,
-    }];
+    <Form className={styles.form} model=" ">
+      <Field
+        value=""
+        model=" "
+        type="text"
+        caption="Телефон"
+      />
 
-    return (
-      <div className={baseStyles.page}>
-        <Header />
+      <Button
+        type="primary"
+        caption="Изменить"
+        className={styles.button}
+      />
+    </Form>
 
-        <UserProfile user={this.state.user} navigationItems={navItems}>
-          <div className={styles.section}>
-            <h3 className={styles.title}>Контактные данные</h3>
+    <div className={styles.divider} />
 
-            <Form className={styles.form} model=" ">
-              <Field
-                value=""
-                model=" "
-                type="email"
-                caption="Почта"
-              />
+    <Form className={styles.form} model=" ">
+      <Field
+        value=""
+        model=" "
+        type="text"
+        caption="Адрес"
+      />
 
-              <Button
-                type="primary"
-                caption="Изменить"
-                className={styles.button}
-              />
-            </Form>
+      <Button
+        type="primary"
+        caption="Изменить"
+        className={styles.button}
+      />
+    </Form>
+  </div>
 
-            <div className={styles.divider} />
+  <div className={styles.section}>
+    <h3 className={styles.title}>Безопасность</h3>
 
-            <Form className={styles.form} model=" ">
-              <Field
-                value=""
-                model=" "
-                type="text"
-                caption="Телефон"
-              />
+    <Form className={styles.form} model=" ">
+      <Field
+        value=""
+        model=" "
+        type="password"
+        caption="Старый пароль"
+      />
 
-              <Button
-                type="primary"
-                caption="Изменить"
-                className={styles.button}
-              />
-            </Form>
+      <Field
+        value=""
+        model=" "
+        type="password"
+        caption="Новый пароль"
+      />
 
-            <div className={styles.divider} />
+      <Button
+        type="primary"
+        caption="Изменить"
+        className={styles.button}
+      />
+    </Form>
+  </div>
 
-            <Form className={styles.form} model=" ">
-              <Field
-                value=""
-                model=" "
-                type="text"
-                caption="Адрес"
-              />
+  <div className={styles.section}>
+    <h3 className={styles.title}>Удаление аккаунта</h3>
 
-              <Button
-                type="primary"
-                caption="Изменить"
-                className={styles.button}
-              />
-            </Form>
-          </div>
+    <Button
+      type="danger"
+      caption="Удалить"
+      className={styles.button}
+    />
+  </div>
+</div>;
 
-          <div className={styles.section}>
-            <h3 className={styles.title}>Безопасность</h3>
-
-            <Form className={styles.form} model=" ">
-              <Field
-                value=""
-                model=" "
-                type="password"
-                caption="Старый пароль"
-              />
-
-              <Field
-                value=""
-                model=" "
-                type="password"
-                caption="Новый пароль"
-              />
-
-              <Button
-                type="primary"
-                caption="Изменить"
-                className={styles.button}
-              />
-            </Form>
-          </div>
-
-          <div className={styles.section}>
-            <h3 className={styles.title}>Удаление аккаунта</h3>
-
-            <Button
-              type="danger"
-              caption="Удалить"
-              className={styles.button}
-            />
-          </div>
-        </UserProfile>
-
-        <Footer />
-      </div>
-    );
-  }
-}
-
-export default connect()(ProfileSettings);
+export default ProfileSettings;
