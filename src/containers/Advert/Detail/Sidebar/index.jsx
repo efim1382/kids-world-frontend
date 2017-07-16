@@ -5,23 +5,35 @@ import { Card } from 'components';
 import Reviews from './Reviews';
 import styles from './style.css';
 
-const AdvertDetail = ({ className }) => (
+const AdvertDetail = ({
+  user,
+  className,
+}) => (
   <div className={classNames(styles.sidebar, className)}>
     <Card
-      image="/images/user-image.jpg"
-      title="Василий Петров"
-      caption="vasya@mail.ru"
-      link="/user/1"
+      image={user.photo}
+      title={user.name}
+      caption={user.email}
+      link={`/user/${user._id}`} // eslint-disable-line no-underscore-dangle
     />
 
-    <div className={styles.showPhone}>Показать телефон</div>
-    <p className={styles.adress}>Адрес: Ростов-на-Дону, Красноармейская, 213</p>
+    <p className={styles.property}>Телефон: {user.phone}</p>
+    <p className={styles.property}>Адрес: {user.address}</p>
 
-    <Reviews />
+    <Reviews
+      userId={user._id} // eslint-disable-line no-underscore-dangle
+    />
   </div>
 );
 
 AdvertDetail.propTypes = {
+  user: PropTypes.shape({
+    photo: PropTypes.string,
+    name: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    address: PropTypes.string,
+  }),
   className: PropTypes.string,
 };
 

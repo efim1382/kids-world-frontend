@@ -10,7 +10,7 @@ import {
 
 import styles from './style.css';
 
-const Reviews = ({ className }) => (
+const Reviews = ({ className, userId }) => (
   <div className={classNames(styles.reviews, className)}>
     <h3 className={styles.title}>Отзывы о продавце</h3>
 
@@ -46,7 +46,7 @@ const Reviews = ({ className }) => (
       />
 
       <Link
-        to="/user/1/reviews"
+        to={`/user/${userId}/reviews`}
         className={styles.button}
       >
         <Button
@@ -60,6 +60,7 @@ const Reviews = ({ className }) => (
 
 Reviews.propTypes = {
   className: PropTypes.string,
+  userId: PropTypes.string,
 };
 
 export default Reviews;

@@ -42,8 +42,8 @@ const Card = ({
 </div>;
 
 Card.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  image: PropTypes.string,
+  title: PropTypes.string,
   caption: PropTypes.string,
   link: PropTypes.string,
   className: PropTypes.string,

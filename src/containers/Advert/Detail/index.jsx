@@ -11,6 +11,7 @@ import {
 import baseStyles from 'containers/Layout/style.css';
 
 import { api } from 'containers/Advert';
+import { api as userApi } from 'containers/User';
 
 import Sidebar from './Sidebar';
 import styles from './style.css';
@@ -22,6 +23,7 @@ class AdvertDetail extends Component {
   }
 
   state = {
+    user: {},
     advert: {},
   };
 
@@ -29,9 +31,14 @@ class AdvertDetail extends Component {
     const { dispatch, params: { id } } = this.props;
 
     if (id) {
-      dispatch(api.actions.getOneAdvert({ id })).then((resp) => {
-        this.setState({
-          advert: resp,
+      dispatch(api.actions.getOneAdvert({ id })).then((advert) => {
+        const userId = advert.userId;
+
+        dispatch(userApi.actions.getOneUser({ userId })).then((user) => {
+          this.setState({
+            user: user.data[0],
+            advert,
+          });
         });
       });
     }
@@ -58,7 +65,7 @@ class AdvertDetail extends Component {
           />
         </div>
 
-        <Sidebar className={styles.sidebar} />
+        <Sidebar user={this.state.user} className={styles.sidebar} />
       </div>
 
       <Footer />

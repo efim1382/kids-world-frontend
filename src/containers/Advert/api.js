@@ -3,13 +3,13 @@ import { createApi } from 'components/Http';
 
 export default createApi({
   getAdverts: {
-    url: `${apiPath}/adverts/`,
+    url: `${apiPath}/adverts`,
   },
   getOneAdvert: {
-    url: `${apiPath}/adverts/:id/`,
+    url: `${apiPath}/adverts/:id`,
   },
   addAdvert: {
-    url: `${apiPath}/adverts/add/`,
+    url: `${apiPath}/adverts/add`,
     options: {
       method: 'POST',
     },
