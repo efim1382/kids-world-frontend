@@ -30,18 +30,20 @@ class AdvertDetail extends Component {
   componentWillMount() {
     const { dispatch, params: { id } } = this.props;
 
-    if (id) {
-      dispatch(api.actions.getOneAdvert({ id })).then((advert) => {
-        const userId = advert.userId;
+    if (!id) {
+      return;
+    }
 
-        dispatch(userApi.actions.getOneUser({ userId })).then((user) => {
-          this.setState({
-            user: user.data[0],
-            advert,
-          });
+    dispatch(api.actions.getOneAdvert({ id })).then((advert) => {
+      const userId = advert.userId;
+
+      dispatch(userApi.actions.getOneUser({ userId })).then((user) => {
+        this.setState({
+          user: user.data[0],
+          advert,
         });
       });
-    }
+    });
   }
 
   render() {
