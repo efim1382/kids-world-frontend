@@ -42,6 +42,15 @@ class User extends Component {
     this.props.getOneUser({ id });
   }
 
+  componentWillReceiveProps(nextProps) {
+    const prevId = this.props.params.id;
+    const nextId = nextProps.params.id;
+
+    if (prevId !== nextId) {
+      this.props.getOneUser({ id: nextId });
+    }
+  }
+
   render() {
     const { children, user, params: { id } } = this.props;
 
