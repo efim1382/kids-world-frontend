@@ -2,4 +2,5 @@
 	--icon-size: 24px;
 	font-size: var(--icon-size);
 	color: var(--icon-color);
+	transition-property: color;
 }

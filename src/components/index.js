@@ -8,6 +8,7 @@ export Textarea from './Form/Textarea';
 export Files from './Form/Files';
 export Checkbox from './Form/Checkbox';
 export Select from './Form/Select';
+export Radio from './Form/Radio';
 
 export Header from './Header';
 export Http from './Http';

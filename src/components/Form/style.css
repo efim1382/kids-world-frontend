@@ -11,6 +11,10 @@
 	min-height: var(--field-height);
 }
 
+.field-wrapper.field-wrapper-radio {
+	--field-height: auto;
+}
+
 .field-wrapper:nth-of-type(n+2) {
 	margin-top: 16px;
 }

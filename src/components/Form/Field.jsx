@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { Control } from 'react-redux-form';
 import styles from 'components/Form/style.css';
 
@@ -9,7 +10,8 @@ const Field = ({
   caption,
   model,
   value,
-}) => <div className={styles.fieldWrapper}>
+  className,
+}) => <div className={classNames(styles.fieldWrapper, className)}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
   <Control
@@ -27,6 +29,7 @@ Field.propTypes = {
   caption: PropTypes.string,
   model: PropTypes.string,
   value: PropTypes.string,
+  className: PropTypes.string,
 };
 
 export default Field;

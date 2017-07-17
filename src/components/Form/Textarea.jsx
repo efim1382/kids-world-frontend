@@ -8,7 +8,6 @@ const Textarea = ({
   placeholder,
   caption,
   model,
-  value,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
@@ -16,7 +15,6 @@ const Textarea = ({
     model={model}
     className={classNames(styles.field, styles.textarea)}
     placeholder={placeholder}
-    {...value ? { value } : {}}
   />
 </div>;
 
@@ -24,7 +22,6 @@ Textarea.propTypes = {
   placeholder: PropTypes.string,
   caption: PropTypes.string,
   model: PropTypes.string,
-  value: PropTypes.string,
 };
 
 export default Textarea;
