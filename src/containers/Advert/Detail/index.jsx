@@ -32,8 +32,8 @@ class AdvertDetail extends Component {
     }),
     advert: PropTypes.shape({
       title: PropTypes.string,
-      price: PropTypes.string,
-      date: PropTypes.number,
+      price: PropTypes.number,
+      date: PropTypes.string,
       image: PropTypes.string,
       description: PropTypes.string,
     }),
