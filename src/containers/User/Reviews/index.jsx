@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { replace } from 'react-router-redux';
 
 import {
   Card,
@@ -15,11 +14,16 @@ import {
 
 import styles from './style.css';
 
-const sendHandler = ({ dispatch }) => data => {
+const sendHandler = ({ dispatch }) => (data) => {
   console.log(123);
 };
 
 class Reviews extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    send: PropTypes.func,
+  };
+
   state = {
     isReviewFormShow: false,
   };
@@ -109,13 +113,9 @@ class Reviews extends Component {
           ))}
         </div>
       </div>
-    );c
+    );
   }
-};
-
-Reviews.propTypes = {
-  className: PropTypes.string,
-};
+}
 
 export default compose(
   connect(),

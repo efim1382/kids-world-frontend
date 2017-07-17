@@ -16,7 +16,7 @@ class Field extends Component {
   render() {
     const { caption, icon, model, className } = this.props;
 
-    return <div className={classNames(styles.fieldWrapper, styles.fieldWrapperRadio, className)}>
+    return (<div className={classNames(styles.fieldWrapper, styles.fieldWrapperRadio, className)}>
       {caption && <label htmlFor={this.inputId} className={styles.fieldCaption}>{ caption }</label>}
 
       <Control
@@ -29,7 +29,7 @@ class Field extends Component {
       {icon && <label htmlFor={this.inputId} className={styles.iconLabel}>
         <Icon icon={icon} />
       </label>}
-    </div>;
+    </div>);
   }
 }
 
