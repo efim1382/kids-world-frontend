@@ -14,7 +14,7 @@ class Field extends Component {
   }
 
   render() {
-    const { caption, icon, model, className } = this.props;
+    const { caption, icon, model, className, ...props } = this.props;
 
     return (<div className={classNames(styles.fieldWrapper, styles.fieldWrapperRadio, className)}>
       {caption && <label htmlFor={this.inputId} className={styles.fieldCaption}>{ caption }</label>}
@@ -24,6 +24,7 @@ class Field extends Component {
         type="radio"
         model={model}
         className={styles.radioField}
+        {...props}
       />
 
       {icon && <label htmlFor={this.inputId} className={styles.iconLabel}>

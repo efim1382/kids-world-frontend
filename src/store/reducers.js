@@ -7,6 +7,7 @@ import {
   reducers as tokenReducer,
   api as authApi,
 } from 'containers/Auth';
+import { reviewsApi } from './reviews';
 
 export const makeRootReducer = asyncReducers => combineReducers({
   auth: combineReducers({
@@ -15,6 +16,9 @@ export const makeRootReducer = asyncReducers => combineReducers({
   }),
   users: usersReducer,
   adverts: advertsReducer,
+  reviews: combineReducers({
+    ...reviewsApi.reducers,
+  }),
   routing: routerReducer,
   ...asyncReducers,
 });

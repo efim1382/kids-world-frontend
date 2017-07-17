@@ -13,6 +13,7 @@ import {
 } from 'components';
 
 import api from 'containers/Auth/api';
+import { setToken } from 'containers/Auth/actions';
 
 import authStyles from 'containers/Auth/style.css';
 import styles from './style.css';
@@ -23,9 +24,11 @@ const sendHandler = ({ dispatch }) => data => (
       ...data,
       photo: '/images/user-image.jpg',
     }),
-  })).then((resp) => {
+  })).then((user) => {
+    dispatch(setToken(user.token));
     dispatch(replace('/profile'));
-    return resp;
+
+    return user;
   })
 );
 

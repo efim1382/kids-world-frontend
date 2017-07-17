@@ -18,11 +18,11 @@ import authStyles from 'containers/Auth/style.css';
 const sendHandler = ({ dispatch }) => data => (
   dispatch(api.actions.login({}, {
     body: JSON.stringify(data),
-  })).then((resp) => {
-    dispatch(setToken(resp.token));
+  })).then((user) => {
+    dispatch(setToken(user.token));
     dispatch(replace('/profile'));
 
-    return resp;
+    return user;
   })
 );
 
