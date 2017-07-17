@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import {
   Header,
@@ -19,28 +21,29 @@ export routes from './routes';
 class User extends Component {
   static propTypes = {
     params: PropTypes.objectOf(PropTypes.string),
-    dispatch: PropTypes.func.isRequired,
     children: PropTypes.node,
+    user: PropTypes.shape({
+      photo: PropTypes.string,
+      name: PropTypes.string,
+      phone: PropTypes.string,
+      email: PropTypes.string,
+      address: PropTypes.string,
+    }),
+    getOneUser: PropTypes.func,
   }
 
-  state = {
-    user: {},
-  };
-
   componentWillMount() {
-    const { dispatch, params: { id } } = this.props;
+    const { params: { id } } = this.props;
 
-    if (id) {
-      dispatch(api.actions.getOneUser({ id })).then((resp) => {
-        this.setState({
-          user: resp,
-        });
-      });
+    if (!id) {
+      return;
     }
+
+    this.props.getOneUser({ id });
   }
 
   render() {
-    const { children, params: { id } } = this.props;
+    const { children, user, params: { id } } = this.props;
 
     const navItems = [{
       name: 'Объявления',
@@ -54,7 +57,7 @@ class User extends Component {
       <div className={baseStyles.page}>
         <Header />
 
-        <UserProfile user={this.state.user} navigationItems={navItems}>
+        <UserProfile user={user} navigationItems={navItems}>
           { children }
         </UserProfile>
 
@@ -64,4 +67,13 @@ class User extends Component {
   }
 }
 
-export default connect()(User);
+export default compose(
+  connect(
+    state => ({
+      user: get(state, 'users.getOneUser.data', {}),
+    }),
+    {
+      getOneUser: api.actions.getOneUser.sync,
+    },
+  ),
+)(User);

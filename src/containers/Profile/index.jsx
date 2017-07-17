@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { get } from 'lodash';
 import { connect } from 'react-redux';
+import { compose } from 'recompose';
 
 import {
   Header,
@@ -16,35 +18,33 @@ export routes from './routes';
 
 class Profile extends Component {
   static propTypes = {
-    dispatch: PropTypes.func.isRequired,
     children: PropTypes.node,
+    user: PropTypes.shape({
+      photo: PropTypes.string,
+      name: PropTypes.string,
+      phone: PropTypes.string,
+      email: PropTypes.string,
+      address: PropTypes.string,
+    }),
+    currentUser: PropTypes.func,
   }
 
-  state = {
-    user: {},
-  };
-
   componentWillMount() {
-    const { dispatch } = this.props;
     const token = JSON.parse(localStorage.getItem('token')).key;
 
     if (!token) {
       return;
     }
 
-    dispatch(api.actions.currentUser({}, {
+    this.props.currentUser({}, {
       body: JSON.stringify({
         token,
       }),
-    })).then((resp) => {
-      this.setState({
-        user: resp,
-      });
     });
   }
 
   render() {
-    const { children } = this.props;
+    const { children, user } = this.props;
 
     const navItems = [{
       name: 'Объявления',
@@ -58,7 +58,7 @@ class Profile extends Component {
       <div className={baseStyles.page}>
         <Header />
 
-        <UserProfile user={this.state.user} navigationItems={navItems}>
+        <UserProfile user={user} navigationItems={navItems}>
           { children }
         </UserProfile>
 
@@ -68,4 +68,13 @@ class Profile extends Component {
   }
 }
 
-export default connect()(Profile);
+export default compose(
+  connect(
+    state => ({
+      user: get(state, 'users.currentUser.data', {}),
+    }),
+    {
+      currentUser: api.actions.currentUser.sync,
+    },
+  ),
+)(Profile);
