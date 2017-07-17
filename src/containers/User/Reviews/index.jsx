@@ -21,7 +21,8 @@ import api from 'containers/User/api';
 
 import styles from './style.css';
 
-const sendHandler = ({ dispatch }) => (data, idUserTo, $this) => {
+const sendHandler = ({ dispatch }) => (data, $this) => {
+  const { params: { id } } = $this.props;
   const token = JSON.parse(localStorage.getItem('token')).key;
 
   if (!token) {
@@ -37,7 +38,7 @@ const sendHandler = ({ dispatch }) => (data, idUserTo, $this) => {
       body: JSON.stringify({
         ...data,
         idUserFrom: user._id, // eslint-disable-line no-underscore-dangle
-        idUserTo,
+        idUserTo: id,
       }),
     })).then((resp) => {
       $this.setState({
@@ -82,28 +83,32 @@ class Reviews extends Component {
   }
 
   getFullReviews = () => {
-    const { reviews, users } = this.props;
+    const { reviews, users, params: { id } } = this.props;
     const array = [];
 
-    if (!reviews.data) {
+    if (!reviews.data || !users.data) {
       return false;
     }
 
-    reviews.data.forEach((review) => {
-      if (users.data) {
-        // eslint-disable-next-line no-underscore-dangle
-        const author = users.data.filter(user => user._id === review.idUserFrom)[0];
+    const userReviews = reviews.data.filter(user => user.idUserTo === id);
 
-        if (author) {
-          array.push({
-            id: review._id, // eslint-disable-line no-underscore-dangle
-            image: author.photo,
-            title: author.name,
-            caption: review.text,
-            link: `/user/${author._id}`, // eslint-disable-line no-underscore-dangle
-            emotion: review.emotion,
-          });
-        }
+    if (!userReviews) {
+      return [];
+    }
+
+    userReviews.forEach((review) => {
+      // eslint-disable-next-line no-underscore-dangle
+      const author = users.data.filter(user => user._id === review.idUserFrom)[0];
+
+      if (author) {
+        array.push({
+          id: review._id, // eslint-disable-line no-underscore-dangle
+          image: author.photo,
+          title: author.name,
+          caption: review.text,
+          link: `/user/${review.idUserFrom}`,
+          emotion: review.emotion,
+        });
       }
     });
 
@@ -111,7 +116,7 @@ class Reviews extends Component {
   }
 
   render() {
-    const { className, send, params: { id } } = this.props;
+    const { className, send } = this.props;
     const reviews = this.getFullReviews();
 
     return (
@@ -132,7 +137,7 @@ class Reviews extends Component {
             model="addReview"
             className={styles.reviewsForm}
             onSubmit={(data) => {
-              send(data, id, this);
+              send(data, this);
             }}
           >
             <Field
