@@ -8,6 +8,9 @@ export default createApi({
   getOneAdvert: {
     url: `${apiPath}/adverts/:id`,
   },
+  getUserAdverts: {
+    url: `${apiPath}/adverts/user/:id`,
+  },
   addAdvert: {
     url: `${apiPath}/adverts/add`,
     options: {

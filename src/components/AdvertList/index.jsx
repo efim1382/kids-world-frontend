@@ -8,7 +8,7 @@ const AdvertList = ({
   caption,
 }) => (
   <div className={styles.advertListPage}>
-    <h3 className={styles.title}>3 активных объявления</h3>
+    <h3 className={styles.title}>{ items.length } активных объявления</h3>
 
     <div className={styles.advertList}>
       {items.map(advert => (
@@ -20,7 +20,7 @@ const AdvertList = ({
           caption={caption}
           className={styles.advert}
         />
-        ))}
+      ))}
     </div>
   </div>
 );
