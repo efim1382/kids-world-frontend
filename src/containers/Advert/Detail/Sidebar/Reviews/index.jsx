@@ -47,12 +47,19 @@ class Reviews extends Component {
   getFullReviews = () => {
     const { reviews, users } = this.props;
     const array = [];
+    let lastReviews = [];
 
     if (!reviews.data || !users.data) {
       return [];
     }
 
-    reviews.data.forEach((review) => {
+    if (reviews.data.length > 4) {
+      lastReviews = reviews.data.slice(-3);
+    } else {
+      lastReviews = reviews.data;
+    }
+
+    lastReviews.forEach((review) => {
       // eslint-disable-next-line no-underscore-dangle
       const author = users.data.filter(user => user._id === review.idUserFrom)[0];
 

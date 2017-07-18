@@ -16,7 +16,7 @@ import {
 
 import { getUsers } from 'containers/User/actions';
 
-import { reviewsApi, getReviews } from 'store/reviews';
+import { reviewsApi, getUserReviews } from 'store/reviews';
 import api from 'containers/User/api';
 
 import styles from './style.css';
@@ -45,7 +45,7 @@ const sendHandler = ({ dispatch }) => (data, $this) => {
         isReviewFormShow: false,
       });
 
-      $this.props.getReviews();
+      $this.props.getUserReviews(id);
 
       return resp;
     });
@@ -57,7 +57,7 @@ class Reviews extends Component {
     params: PropTypes.objectOf(PropTypes.string),
     className: PropTypes.string,
     send: PropTypes.func,
-    getReviews: PropTypes.func,
+    getUserReviews: PropTypes.func,
     getUsers: PropTypes.func,
     reviews: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
       emotion: PropTypes.string,
@@ -77,26 +77,22 @@ class Reviews extends Component {
   };
 
   componentWillMount() {
-    this.props.getReviews().then(() => {
+    const { params: { id } } = this.props;
+
+    this.props.getUserReviews(id).then(() => {
       this.props.getUsers();
     });
   }
 
   getFullReviews = () => {
-    const { reviews, users, params: { id } } = this.props;
+    const { reviews, users } = this.props;
     const array = [];
 
     if (!reviews.data || !users.data) {
       return false;
     }
 
-    const userReviews = reviews.data.filter(user => user.idUserTo === id);
-
-    if (!userReviews) {
-      return [];
-    }
-
-    userReviews.forEach((review) => {
+    reviews.data.forEach((review) => {
       // eslint-disable-next-line no-underscore-dangle
       const author = users.data.filter(user => user._id === review.idUserFrom)[0];
 
@@ -187,11 +183,11 @@ class Reviews extends Component {
 export default compose(
   connect(
     state => ({
-      reviews: get(state, 'reviews.reviews.data', {}),
+      reviews: get(state, 'reviews.userReviews.data', {}),
       users: get(state, 'users.getUsers.data', {}),
     }),
   ),
-  withProps(({ dispatch }) => bindActionCreators({ getReviews, getUsers }, dispatch)),
+  withProps(({ dispatch }) => bindActionCreators({ getUserReviews, getUsers }, dispatch)),
   withHandlers({
     send: sendHandler,
   }),
