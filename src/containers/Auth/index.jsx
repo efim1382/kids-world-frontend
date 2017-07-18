@@ -12,6 +12,7 @@ import styles from './style.css';
 
 export api from './api';
 export reducers from './reducers';
+export routes from './routes';
 
 const Auth = ({
   children,
