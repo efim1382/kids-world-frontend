@@ -10,7 +10,7 @@ fetchIntercept.register({
   request: (url, configuration) => {
     const { headers = {}, ...rest } = cloneDeep(configuration);
 
-    if (headers['Content-Type'] === undefined) {
+    if (headers['Content-Type'] === undefined && typeof configuration.body === 'string') {
       headers['Content-Type'] = 'application/json';
     }
 

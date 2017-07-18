@@ -53,7 +53,7 @@ class Reviews extends Component {
       return [];
     }
 
-    if (reviews.data.length > 4) {
+    if (reviews.data.length > 3) {
       lastReviews = reviews.data.slice(-3);
     } else {
       lastReviews = reviews.data;

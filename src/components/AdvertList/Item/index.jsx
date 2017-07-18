@@ -5,6 +5,14 @@ import classNames from 'classnames';
 import { Button } from 'components';
 import styles from './style.css';
 
+const filterImage = (image) => {
+  if (image === 'images/ad-image.jpg') {
+    return `/${image}`;
+  }
+
+  return `http://localhost:8000/${image}`;
+};
+
 const Item = ({
   image,
   title,
@@ -12,7 +20,7 @@ const Item = ({
   caption,
   className,
 }) => <div className={classNames(styles.item, className)}>
-  <div className={styles.image} style={{ backgroundImage: `url(${image})` }} />
+  <div className={styles.image} style={{ backgroundImage: `url(${filterImage(image)})` }} />
 
   <div className={styles.content}>
     <h4 className={styles.title}>{ title }</h4>

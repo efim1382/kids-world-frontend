@@ -20,37 +20,41 @@ const Advert = ({
   price,
   category,
   address,
-}) => <div className={styles.advert}>
-  <div className={styles.image} style={{ backgroundImage: `url(${image}` }} />
+}) => {
+  const newImage = (image === 'images/ad-image.jpg') ? `/${image}` : `http://localhost:8000/${image}`;
 
-  <div className={styles.section}>
-    <div className={styles.header}>
-      <Card
-        image={userImage}
-        title={userName}
-        caption={date}
-        className={styles.card}
-        link={`/user/${userId}`}
-      />
+  return (<div className={styles.advert}>
+    <div className={styles.image} style={{ backgroundImage: `url(${newImage})` }} />
 
-      <span className={styles.price}>{ price } р.</span>
+    <div className={styles.section}>
+      <div className={styles.header}>
+        <Card
+          image={userImage}
+          title={userName}
+          caption={date}
+          className={styles.card}
+          link={`/user/${userId}`}
+        />
+
+        <span className={styles.price}>{ price } р.</span>
+      </div>
+
+      <h3 className={styles.title}>{ title }</h3>
+      <p className={styles.text}>{ category }</p>
+      <p className={styles.text}>{ address }</p>
+
+      <Link
+        to={`/advert/${id}`}
+        className={styles.detailButton}
+      >
+        <Button
+          type="primary"
+          caption="Подробнее"
+        />
+      </Link>
     </div>
-
-    <h3 className={styles.title}>{ title }</h3>
-    <p className={styles.text}>{ category }</p>
-    <p className={styles.text}>{ address }</p>
-
-    <Link
-      to={`/advert/${id}`}
-      className={styles.detailButton}
-    >
-      <Button
-        type="primary"
-        caption="Подробнее"
-      />
-    </Link>
-  </div>
-</div>;
+  </div>);
+};
 
 Advert.propTypes = {
   id: PropTypes.string.isRequired,

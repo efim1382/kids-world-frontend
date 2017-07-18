@@ -28,14 +28,17 @@ const sendHandler = ({ dispatch }) => (data) => {
       token,
     }),
   })).then((user) => {
+    const newData = new FormData();
+    newData.append('userId', user._id); // eslint-disable-line no-underscore-dangle
+    newData.append('title', data.title);
+    newData.append('image', data.image[0]);
+    newData.append('date', date);
+    newData.append('price', data.price);
+    newData.append('category', data.category);
+    newData.append('description', data.description.split('\n').join('<br />'));
+
     dispatch(api.actions.addAdvert({}, {
-      body: JSON.stringify({
-        ...data,
-        date,
-        description: data.description.split('\n').join('<br />'),
-        userId: user._id, // eslint-disable-line no-underscore-dangle
-        image: '/images/ad-image.jpg',
-      }),
+      body: newData,
     })).then((resp) => {
       dispatch(replace(`/advert/${resp._id}`)); // eslint-disable-line no-underscore-dangle
 
@@ -82,7 +85,7 @@ const AddAdvert = ({ send }) => (
       />
 
       <Files
-        model=" "
+        model=".image"
         caption="Выберите изображение"
       />
 

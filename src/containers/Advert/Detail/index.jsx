@@ -61,6 +61,14 @@ class AdvertDetail extends Component {
     });
   }
 
+  filterImage = (image) => {
+    if (image === 'images/ad-image.jpg') {
+      return `/${image}`;
+    }
+
+    return `http://localhost:8000/${image}`;
+  };
+
   render() {
     const { user, advert } = this.props;
 
@@ -75,7 +83,10 @@ class AdvertDetail extends Component {
           </div>
 
           <p className={styles.subcaption}>{ advert.date }, 10 просмотров</p>
-          <div className={styles.mainImage} style={{ backgroundImage: `url(${advert.image})` }} />
+          {advert.image !== undefined && <div
+            className={styles.mainImage}
+            style={{ backgroundImage: `url(${this.filterImage(advert.image)})` }}
+          />}
 
           <div
             className={styles.description}

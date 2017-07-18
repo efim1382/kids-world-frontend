@@ -22,7 +22,7 @@ const sendHandler = ({ dispatch }) => data => (
   dispatch(api.actions.register({}, {
     body: JSON.stringify({
       ...data,
-      photo: '/images/user-image.jpg',
+      photo: 'images/user-image.jpg',
     }),
   })).then((user) => {
     dispatch(setToken(user.token));
