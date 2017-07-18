@@ -83,10 +83,10 @@ class Reviews extends Component {
     const reviews = this.getFullReviews();
 
     return (<div className={classNames(styles.reviews, className)}>
-      <h3 className={styles.title}>Отзывы о продавце</h3>
+      {reviews.length > 0 && <h3 className={styles.title}>Отзывы о продавце</h3>}
 
-      {reviews && <div className={styles.section}>
-        {reviews.map(review => <Card
+      <div className={styles.section}>
+        {reviews.length > 0 && reviews.map(review => <Card
           key={review.id}
           size="big"
           className={styles.card}
@@ -99,10 +99,10 @@ class Reviews extends Component {
         >
           <Button
             type="primary"
-            caption="Посмотреть все"
+            caption={reviews.length > 0 ? 'Посмотреть все' : 'Оставить отзыв о продавце'}
           />
         </Link>
-      </div>}
+      </div>
     </div>);
   }
 }
