@@ -39,6 +39,10 @@ class AdvertDetail extends Component {
     }),
   }
 
+  state = {
+    userLoaded: false,
+  };
+
   componentWillMount() {
     const { params: { id } } = this.props;
 
@@ -49,7 +53,11 @@ class AdvertDetail extends Component {
     this.props.getOneAdvert({ id }).then((advert) => {
       const userId = advert.userId;
 
-      this.props.getOneUser({ userId });
+      this.props.getOneUser({ id: userId }).then(() => {
+        this.setState({
+          userLoaded: true,
+        });
+      });
     });
   }
 
@@ -76,7 +84,10 @@ class AdvertDetail extends Component {
           />
         </div>
 
-        {user.data && <Sidebar user={user.data[0]} className={styles.sidebar} />}
+        {Object.keys(user).length > 0 && this.state.userLoaded && <Sidebar
+          user={user}
+          className={styles.sidebar}
+        />}
       </div>
 
       <Footer />

@@ -1,66 +1,111 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import classNames from 'classnames';
+import { get } from 'lodash';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { compose, withProps } from 'recompose';
 
 import {
   Card,
   Button,
 } from 'components';
 
+import { getUsers } from 'containers/User/actions';
+import { getUserReviews } from 'store/reviews';
+
 import styles from './style.css';
 
-const Reviews = ({ className, userId }) => (
-  <div className={classNames(styles.reviews, className)}>
-    <h3 className={styles.title}>Отзывы о продавце</h3>
+class Reviews extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    userId: PropTypes.string.isRequired,
+    getUserReviews: PropTypes.func,
+    getUsers: PropTypes.func,
+    reviews: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+      emotion: PropTypes.string,
+      idUserFrom: PropTypes.string,
+      idUserTo: PropTypes.string,
+      text: PropTypes.string,
+    }))),
+    users: PropTypes.objectOf(PropTypes.arrayOf(PropTypes.shape({
+      _id: PropTypes.string,
+      photo: PropTypes.string,
+      name: PropTypes.string,
+    }))),
+  };
 
-    <div className={styles.section}>
-      <Card
-        image="/images/user-image.jpg"
-        title="Василий Петров"
-        caption="Хороший продавец, не обманывает, все отлично, мне понравилось"
-        size="big"
-        link="/user/1"
-        emotion="like"
-        className={styles.card}
-      />
+  componentWillMount() {
+    const { userId } = this.props;
 
-      <Card
-        image="/images/user-image.jpg"
-        title="Василий Петров"
-        caption="Хороший продавец, не обманывает, все отлично, мне понравилось"
-        size="big"
-        link="/user/2"
-        emotion="dislike"
-        className={styles.card}
-      />
+    this.props.getUserReviews(userId).then(() => {
+      this.props.getUsers();
+    });
+  }
 
-      <Card
-        image="/images/user-image.jpg"
-        title="Василий Петров"
-        caption="Хороший продавец, не обманывает, все отлично, мне понравилось"
-        size="big"
-        link="/user/3"
-        emotion="like"
-        className={styles.card}
-      />
+  getFullReviews = () => {
+    const { reviews, users } = this.props;
+    const array = [];
 
-      <Link
-        to={`/user/${userId}/reviews`}
-        className={styles.button}
-      >
-        <Button
-          type="primary"
-          caption="Посмотреть все"
-        />
-      </Link>
-    </div>
-  </div>
-);
+    if (!reviews.data || !users.data) {
+      return [];
+    }
 
-Reviews.propTypes = {
-  className: PropTypes.string,
-  userId: PropTypes.string,
-};
+    reviews.data.forEach((review) => {
+      // eslint-disable-next-line no-underscore-dangle
+      const author = users.data.filter(user => user._id === review.idUserFrom)[0];
 
-export default Reviews;
+      if (author) {
+        array.push({
+          id: review._id, // eslint-disable-line no-underscore-dangle
+          image: author.photo,
+          title: author.name,
+          caption: review.text,
+          link: `/user/${review.idUserFrom}`,
+          emotion: review.emotion,
+        });
+      }
+    });
+
+    return array;
+  }
+
+  render() {
+    const { className, userId } = this.props;
+    const reviews = this.getFullReviews();
+
+    return (<div className={classNames(styles.reviews, className)}>
+      <h3 className={styles.title}>Отзывы о продавце</h3>
+
+      {reviews && <div className={styles.section}>
+        {reviews.map(review => <Card
+          key={review.id}
+          size="big"
+          className={styles.card}
+          {...review}
+        />)}
+
+        <Link
+          to={`/user/${userId}/reviews`}
+          className={styles.button}
+        >
+          <Button
+            type="primary"
+            caption="Посмотреть все"
+          />
+        </Link>
+      </div>}
+    </div>);
+  }
+}
+
+export default compose(
+  connect(
+    state => ({
+      reviews: get(state, 'reviews.userReviews.data', {}),
+      users: get(state, 'users.getUsers.data', {}),
+    }),
+  ),
+  withProps(({ dispatch }) => bindActionCreators({ getUserReviews, getUsers }, dispatch)),
+)(Reviews);

@@ -174,6 +174,7 @@ class Reviews extends Component {
         <div className={styles.reviewsList}>
           {reviews && reviews.map(review => <Card
             key={review.id}
+            size="big"
             className={styles.card}
             {...review}
           />)}
