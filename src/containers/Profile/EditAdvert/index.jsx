@@ -54,6 +54,6 @@ const EditAdvert = () => (
       />
     </Form>
   </div>
-  );
+);
 
 export default EditAdvert;
