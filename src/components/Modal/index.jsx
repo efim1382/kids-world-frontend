@@ -23,25 +23,29 @@ class Modal extends Component {
     const { show } = nextProps;
 
     this.setState({
-      show: show,
+      show,
     });
   }
 
+  closeModal = () => {
+    const { onClose } = this.props;
+
+    this.setState({
+      show: false,
+    });
+
+    if (onClose) {
+      onClose();
+    }
+  }
+
   render() {
-    const { children, title, className, onClose } = this.props;
+    const { children, title, className } = this.props;
 
     return (<div
       className={styles.wrapModal}
+      onClick={this.closeModal}
       {...this.state.show ? { 'data-show': true } : {}}
-      onClick={() => {
-        this.setState({
-          show: false,
-        });
-
-        if (onClose) {
-          onClose();
-        }
-      }}
     >
       <div
         className={styles.modal}
@@ -56,11 +60,7 @@ class Modal extends Component {
             type="transparent"
             icon="close"
             className={styles.close}
-            onClick={() => {
-              this.setState({
-                show: false,
-              });
-            }}
+            onClick={this.closeModal}
           />
         </header>
 
