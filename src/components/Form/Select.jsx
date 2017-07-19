@@ -9,10 +9,17 @@ const Select = ({
   caption,
   placeholder,
   model,
+  defaultValue,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
-  <Control.select model={model} className={classNames(styles.field, styles.select)}>
+  <Control.select
+    model={model}
+    className={classNames(styles.field, styles.select)}
+    controlProps={{
+      defaultValue,
+    }}
+  >
     {placeholder && <option>{ placeholder }</option>}
 
     {items && items.map(option => (
@@ -31,6 +38,7 @@ Select.propTypes = {
   })).isRequired,
   caption: PropTypes.string,
   model: PropTypes.string,
+  defaultValue: PropTypes.string,
   placeholder: PropTypes.string,
 };
 

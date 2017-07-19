@@ -7,6 +7,7 @@ import styles from 'components/Form/style.css';
 const Textarea = ({
   placeholder,
   caption,
+  defaultValue,
   model,
 }) => <div className={styles.fieldWrapper}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
@@ -15,11 +16,15 @@ const Textarea = ({
     model={model}
     className={classNames(styles.field, styles.textarea)}
     placeholder={placeholder}
+    controlProps={{
+      defaultValue,
+    }}
   />
 </div>;
 
 Textarea.propTypes = {
   placeholder: PropTypes.string,
+  defaultValue: PropTypes.string,
   caption: PropTypes.string,
   model: PropTypes.string,
 };

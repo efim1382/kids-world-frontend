@@ -9,8 +9,8 @@ const Field = ({
   placeholder,
   caption,
   model,
-  value,
   className,
+  defaultValue,
 }) => <div className={classNames(styles.fieldWrapper, className)}>
   {caption && <label className={styles.fieldCaption}>{ caption }</label>}
 
@@ -19,7 +19,9 @@ const Field = ({
     model={model}
     className={styles.field}
     placeholder={placeholder}
-    value={value}
+    controlProps={{
+      defaultValue,
+    }}
   />
 </div>;
 
@@ -28,7 +30,7 @@ Field.propTypes = {
   placeholder: PropTypes.string,
   caption: PropTypes.string,
   model: PropTypes.string,
-  value: PropTypes.string,
+  defaultValue: PropTypes.string,
   className: PropTypes.string,
 };
 

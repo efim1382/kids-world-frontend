@@ -17,4 +17,10 @@ export default createApi({
       method: 'POST',
     },
   },
+  editAdvert: {
+    url: `${apiPath}/adverts/:id/edit`,
+    options: {
+      method: 'POST',
+    },
+  },
 });
