@@ -12,6 +12,7 @@ class Modal extends Component {
     title: PropTypes.string,
     show: PropTypes.bool,
     className: PropTypes.string,
+    onClose: PropTypes.func,
   };
 
   state = {
@@ -22,21 +23,25 @@ class Modal extends Component {
     const { show } = nextProps;
 
     this.setState({
-      show,
+      show: show,
     });
   }
 
   render() {
-    const { children, title, className } = this.props;
+    const { children, title, className, onClose } = this.props;
 
     return (<div
       className={styles.wrapModal}
+      {...this.state.show ? { 'data-show': true } : {}}
       onClick={() => {
         this.setState({
           show: false,
         });
+
+        if (onClose) {
+          onClose();
+        }
       }}
-      {...this.state.show ? { 'data-show': true } : {}}
     >
       <div
         className={styles.modal}

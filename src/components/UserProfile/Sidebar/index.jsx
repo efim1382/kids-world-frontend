@@ -112,6 +112,11 @@ class ProfileSidebar extends Component {
         title="Добавление новой фотографии"
         show={this.state.showModal}
         className={styles.modal}
+        onClose={() => {
+          this.setState({
+            showModal: false,
+          });
+        }}
       >
         <p className={styles.uploadText}>
           Загрузите свою настоящую фотографию

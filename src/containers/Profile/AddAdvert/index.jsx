@@ -51,7 +51,7 @@ const AddAdvert = ({ send }) => (
   <div>
     <h3 className={styles.title}>Добавление объявления</h3>
 
-    <Form className={styles.form} encType="multipart/form-data" model="addAdvert" onSubmit={send}>
+    <Form className={styles.form} model="addAdvert" onSubmit={send}>
       <Field
         type="text"
         model=".title"
