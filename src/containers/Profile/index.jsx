@@ -58,7 +58,11 @@ class Profile extends Component {
       <div className={baseStyles.page}>
         <Header />
 
-        <UserProfile user={user} navigationItems={navItems}>
+        <UserProfile
+          changePhoto
+          user={user}
+          navigationItems={navItems}
+        >
           { children }
         </UserProfile>
 

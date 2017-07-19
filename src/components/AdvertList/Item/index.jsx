@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import classNames from 'classnames';
 import { Button } from 'components';
+import { uploadPath } from 'configuration';
 import styles from './style.css';
 
 const filterImage = (image) => {
@@ -10,7 +11,7 @@ const filterImage = (image) => {
     return `/${image}`;
   }
 
-  return `http://localhost:8000/${image}`;
+  return `${uploadPath}/${image}`;
 };
 
 const Item = ({

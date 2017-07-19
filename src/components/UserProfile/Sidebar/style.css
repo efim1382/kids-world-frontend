@@ -18,12 +18,35 @@
 
 .image {
 	--size: 124px;
+	position: relative;
 	width: var(--size);
 	height: var(--size);
 	border-radius: 50%;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
+}
+
+.image .upload-button {
+	--button-height: 100%;
+	--button-radius: 50%;
+	--icon-color: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.image .upload-button:hover {
+	--opacity: 1;
+}
+.image .upload-button:not(:hover) {
+	--opacity: 0;
+}
+
+.image .upload-button > i {
+	opacity: var(--opacity);
+	transition-property: opacity;
 }
 
 .name {
@@ -66,4 +89,20 @@
 	margin-left: 8px;
 	text-align: right;
 	font-weight: var(--font-weight-bold);
+}
+
+.modal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.modal .upload-text {
+	text-align: center;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+.modal .upload-form {
+	margin-top: 20px;
 }

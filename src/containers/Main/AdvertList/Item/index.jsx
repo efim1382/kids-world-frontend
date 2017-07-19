@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { uploadPath } from 'configuration';
 
 import {
   Card,
@@ -8,6 +9,14 @@ import {
 } from 'components';
 
 import styles from './style.css';
+
+const filterImage = (image) => {
+  if (image === 'images/user-image.jpg') {
+    return `/${image}`;
+  }
+
+  return `${uploadPath}/${image}`;
+};
 
 const Advert = ({
   id,
@@ -21,7 +30,7 @@ const Advert = ({
   category,
   address,
 }) => {
-  const newImage = (image === 'images/ad-image.jpg') ? `/${image}` : `http://localhost:8000/${image}`;
+  const newImage = (image === 'images/ad-image.jpg') ? `/${image}` : `${uploadPath}/${image}`;
 
   return (<div className={styles.advert}>
     <div className={styles.image} style={{ backgroundImage: `url(${newImage})` }} />
@@ -29,7 +38,7 @@ const Advert = ({
     <div className={styles.section}>
       <div className={styles.header}>
         <Card
-          image={userImage}
+          image={filterImage(userImage)}
           title={userName}
           caption={date}
           className={styles.card}

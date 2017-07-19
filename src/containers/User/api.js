@@ -14,4 +14,10 @@ export default createApi({
       method: 'post',
     },
   },
+  updatePhoto: {
+    url: `${apiPath}/users/:id/updatePhoto`,
+    options: {
+      method: 'post',
+    },
+  },
 });

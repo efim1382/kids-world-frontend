@@ -2,8 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Card } from 'components';
+import { uploadPath } from 'configuration';
 import Reviews from './Reviews';
 import styles from './style.css';
+
+const filterImage = (image) => {
+  if (image === 'images/user-image.jpg') {
+    return `/${image}`;
+  }
+
+  return `${uploadPath}/${image}`;
+};
 
 const AdvertDetail = ({
   user,
@@ -11,7 +20,7 @@ const AdvertDetail = ({
 }) => (
   <div className={classNames(styles.sidebar, className)}>
     <Card
-      image={user.photo}
+      image={filterImage(user.photo)}
       title={user.name}
       caption={user.email}
       link={`/user/${user._id}`} // eslint-disable-line no-underscore-dangle

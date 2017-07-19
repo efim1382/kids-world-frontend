@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
+import { uploadPath } from 'configuration';
 
 import {
   Header,
@@ -66,7 +67,7 @@ class AdvertDetail extends Component {
       return `/${image}`;
     }
 
-    return `http://localhost:8000/${image}`;
+    return `${uploadPath}/${image}`;
   };
 
   render() {

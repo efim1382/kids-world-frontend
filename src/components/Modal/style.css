@@ -1,0 +1,80 @@
+.wrap-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 9999;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.3);
+	opacity: var(--opacity);
+	pointer-events: var(--pointer-events);
+	transition-property: opacity;
+}
+.wrap-modal[data-show] {
+	--opacity: 1;
+	--pointer-events: auto;
+	--translate: 0;
+}
+.wrap-modal:not([data-show]) {
+	--opacity: 0;
+	--pointer-events: none;
+	--translate: -16px;
+}
+
+.modal {
+	width: 700px;
+	transform: translateY(var(--translate));
+	transition-property: transform;
+}
+
+.modal .header {
+	--height: 50px;
+	position: relative;
+	height: var(--height);
+	line-height: var(--height);
+	padding-left: var(--height);
+	padding-right: var(--height);
+	background-color: #f7f7f7;
+	box-shadow: 0 -1px var(--divider-color) inset;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}
+
+.modal .header .title {
+	display: block;
+	text-align: center;
+	height: var(--height);
+	line-height: var(--height);
+	font-size: 16px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.modal .header .close {
+	--button-height: var(--height);
+	--icon-color: rgba(0, 0, 0, 0.4);
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: var(--button-height);
+}
+.modal .header .close::before {
+	display: none;
+}
+.modal .header .close:hover {
+	--icon-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal .content {
+	overflow-x: hidden;
+	overflow-y: auto;
+	max-height: 400px;
+	background-color: #fff;
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	padding: var(--block-padding);
+}

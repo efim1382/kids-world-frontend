@@ -27,6 +27,7 @@
   background-color: #000;
   opacity: 0;
   transition-property: opacity;
+  z-index: 0;
 }
 
 .button .caption {
@@ -34,6 +35,10 @@
   z-index: 1;
   font-size: 14px;
   color: var(--color);
+}
+
+.button > i {
+  z-index: 2;
 }
 
 .button:not([disabled])[data-active]::before,

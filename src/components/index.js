@@ -15,4 +15,5 @@ export Http from './Http';
 export Icon from './Icon';
 export Navigation from './Navigation';
 export Popup from './Popup';
+export Modal from './Modal';
 

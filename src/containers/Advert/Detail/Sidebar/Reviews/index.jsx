@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { uploadPath } from 'configuration';
 import { compose, withProps } from 'recompose';
 
 import {
@@ -16,6 +17,14 @@ import { getUsers } from 'containers/User/actions';
 import { getUserReviews } from 'store/reviews';
 
 import styles from './style.css';
+
+const filterImage = (image) => {
+  if (image === 'images/user-image.jpg') {
+    return `/${image}`;
+  }
+
+  return `${uploadPath}/${image}`;
+};
 
 class Reviews extends Component {
   static propTypes = {
@@ -66,7 +75,7 @@ class Reviews extends Component {
       if (author) {
         array.push({
           id: review._id, // eslint-disable-line no-underscore-dangle
-          image: author.photo,
+          image: filterImage(author.photo),
           title: author.name,
           caption: review.text,
           link: `/user/${review.idUserFrom}`,

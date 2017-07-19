@@ -9,8 +9,8 @@ const Form = ({
   className,
   ...props
 }) => <LocalForm
-  {...props}
   className={classNames(styles.form, className)}
+  {...props}
 >
   { children }
 </LocalForm>;

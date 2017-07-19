@@ -5,6 +5,7 @@ import { get } from 'lodash';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, withHandlers, withProps } from 'recompose';
+import { uploadPath } from 'configuration';
 
 import {
   Card,
@@ -20,6 +21,14 @@ import { reviewsApi, getUserReviews } from 'store/reviews';
 import api from 'containers/User/api';
 
 import styles from './style.css';
+
+const filterImage = (image) => {
+  if (image === 'images/user-image.jpg') {
+    return `/${image}`;
+  }
+
+  return `${uploadPath}/${image}`;
+};
 
 const sendHandler = ({ dispatch }) => (data, $this) => {
   const { params: { id } } = $this.props;
@@ -99,7 +108,7 @@ class Reviews extends Component {
       if (author) {
         array.push({
           id: review._id, // eslint-disable-line no-underscore-dangle
-          image: author.photo,
+          image: filterImage(author.photo),
           title: author.name,
           caption: review.text,
           link: `/user/${review.idUserFrom}`,

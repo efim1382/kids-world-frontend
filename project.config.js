@@ -11,6 +11,7 @@ debug('Creating default configuration.')
 const config = {
   env: process.env.NODE_ENV || 'development',
   isDemo: process.env.IS_DEMO || false,
+  uploadPath: process.env.UPLOAD_PATH || 'http://localhost:8000/upload',
   apiPath: process.env.API_PATH || 'http://localhost:8000/api/v1',
 
   // ----------------------------------
@@ -65,6 +66,7 @@ Edit at Your Own Risk
 // Environment
 // ------------------------------------
 debug(`API_PATH "${config.apiPath}"`)
+debug(`UPLOAD_PATH "${config.uploadPath}"`)
 
 // N.B.: globals added here must _also_ be added to .eslintrc
 config.globals = {
@@ -73,6 +75,7 @@ config.globals = {
   },
   'NODE_ENV'     : config.env,
   'API_PATH'     : JSON.stringify(config.apiPath),
+  'UPLOAD_PATH'     : JSON.stringify(config.uploadPath),
   'IS_DEMO'      : JSON.stringify(config.isDemo),
   '__DEV__'      : config.env === 'development',
   '__PROD__'     : config.env === 'production',

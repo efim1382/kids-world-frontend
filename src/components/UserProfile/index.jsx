@@ -10,10 +10,14 @@ const UserProfile = ({
   children,
   navigationItems,
   user,
+  changePhoto,
 }) => <div
   className={classNames(baseStyles.content, styles.profile)}
 >
-  <ProfileSidebar user={user} />
+  <ProfileSidebar
+    user={user}
+    {...changePhoto ? { changePhoto } : {}}
+  />
 
   <div className={styles.profileWrapper}>
     {navigationItems && <Navigation className={styles.navigation} items={navigationItems} />}
@@ -26,6 +30,7 @@ const UserProfile = ({
 
 UserProfile.propTypes = {
   children: PropTypes.node,
+  changePhoto: PropTypes.bool,
   user: PropTypes.shape({
     photo: PropTypes.string,
     name: PropTypes.string,

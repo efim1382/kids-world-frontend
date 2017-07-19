@@ -14,6 +14,7 @@ class Files extends Component {
     caption: PropTypes.string,
     model: PropTypes.string,
     onChange: PropTypes.func,
+    withFilesStore: PropTypes.bool,
   }
 
   state = {
@@ -25,25 +26,28 @@ class Files extends Component {
   }
 
   handleChange = (event) => {
-    const { onChange } = this.props;
-    const files = event.target.files;
-    const imagesArray = [];
+    const { onChange, withFilesStore } = this.props;
 
-    [].forEach.call(files, (file) => {
-      const reader = new FileReader();
+    if (withFilesStore) {
+      const files = event.target.files;
+      const imagesArray = [];
 
-      reader.onloadend = () => {
-        imagesArray.push({
-          src: reader.result,
-        });
+      [].forEach.call(files, (file) => {
+        const reader = new FileReader();
 
-        this.setState({
-          images: imagesArray,
-        });
-      };
+        reader.onloadend = () => {
+          imagesArray.push({
+            src: reader.result,
+          });
 
-      reader.readAsDataURL(file);
-    });
+          this.setState({
+            images: imagesArray,
+          });
+        };
+
+        reader.readAsDataURL(file);
+      });
+    }
 
     if (onChange) {
       onChange(event);
@@ -51,7 +55,7 @@ class Files extends Component {
   };
 
   render() {
-    const { model, caption, multiple } = this.props;
+    const { model, caption, multiple, withFilesStore } = this.props;
 
     return (
       <div className={classNames(styles.fieldWrapper, styles.files)}>
@@ -61,20 +65,20 @@ class Files extends Component {
           model={model}
           id={this.inputId}
           type="file"
-          onChange={this.handleChange}
           className={styles.fileInput}
+          onChange={this.handleChange}
           {...multiple ? { multiple } : {}}
         />
 
         <label htmlFor={this.inputId} className={styles.addFilesLabel}>
           <Button
             type="primary"
-            caption="Выбрать изображения"
+            caption={multiple === undefined ? 'Выбрать файл' : 'Выбрать файлы'}
             className={styles.addFilesButton}
           />
         </label>
 
-        {this.state.images.length > 0 && <div className={styles.fileStore}>
+        {withFilesStore && this.state.images.length > 0 && <div className={styles.fileStore}>
           {this.state.images.map(image => (
             <div
               key={UUID.v4()}

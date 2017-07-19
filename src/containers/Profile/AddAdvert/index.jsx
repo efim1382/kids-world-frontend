@@ -87,6 +87,7 @@ const AddAdvert = ({ send }) => (
       <Files
         model=".image"
         caption="Выберите изображение"
+        withFilesStore
       />
 
       <div className={styles.divider} />

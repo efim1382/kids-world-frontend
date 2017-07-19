@@ -12,6 +12,8 @@ const Button = ({
   isActive,
   disabled,
   className,
+  getRef,
+  ...props
 }) => <button
   className={classNames(styles.button, className)}
   data-type={type}
@@ -19,6 +21,8 @@ const Button = ({
   {...icon ? { icon: '' } : {}}
   {...isActive ? { 'data-active': '' } : {}}
   {...disabled ? { disabled: true } : {}}
+  {...getRef ? { ref: getRef } : {}}
+  {...props}
 >
   {icon && <Icon icon={icon} />}
   {caption && <span className={styles.caption}>{ caption }</span>}
@@ -29,6 +33,7 @@ Button.propTypes = {
   caption: PropTypes.string,
   icon: PropTypes.string,
   onClick: PropTypes.func,
+  getRef: PropTypes.func,
   isActive: PropTypes.bool,
   disabled: PropTypes.bool,
   className: PropTypes.string,
