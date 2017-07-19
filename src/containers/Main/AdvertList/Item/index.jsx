@@ -18,6 +18,19 @@ const filterImage = (image) => {
   return `${uploadPath}/${image}`;
 };
 
+const filterCategory = (category) => {
+  switch (category) {
+    case 'clothes':
+      return 'Одежда';
+    case 'footwear':
+      return 'Обувь';
+    case 'goods':
+      return 'Детские товары';
+    default:
+      return category;
+  }
+};
+
 const Advert = ({
   id,
   title,
@@ -49,7 +62,7 @@ const Advert = ({
       </div>
 
       <h3 className={styles.title}>{ title }</h3>
-      <p className={styles.text}>{ category }</p>
+      <p className={styles.text}>{ filterCategory(category) }</p>
       <p className={styles.text}>{ address }</p>
 
       <Link
