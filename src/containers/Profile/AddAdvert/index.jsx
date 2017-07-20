@@ -99,7 +99,7 @@ const AddAdvert = ({ send }) => (
       />
     </Form>
   </div>
-  );
+);
 
 AddAdvert.propTypes = {
   send: PropTypes.func.isRequired,

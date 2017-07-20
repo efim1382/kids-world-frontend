@@ -20,4 +20,34 @@ export default createApi({
       method: 'post',
     },
   },
+  updateEmail: {
+    url: `${apiPath}/users/:id/updateEmail`,
+    options: {
+      method: 'post',
+    },
+  },
+  updatePhone: {
+    url: `${apiPath}/users/:id/updatePhone`,
+    options: {
+      method: 'post',
+    },
+  },
+  updateAddress: {
+    url: `${apiPath}/users/:id/updateAddress`,
+    options: {
+      method: 'post',
+    },
+  },
+  updatePassword: {
+    url: `${apiPath}/users/:id/updatePassword`,
+    options: {
+      method: 'post',
+    },
+  },
+  deleteProfile: {
+    url: `${apiPath}/deleteProfile`,
+    options: {
+      method: 'post',
+    },
+  },
 });

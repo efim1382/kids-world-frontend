@@ -25,6 +25,7 @@ class Profile extends Component {
       phone: PropTypes.string,
       email: PropTypes.string,
       address: PropTypes.string,
+      password: PropTypes.string,
     }),
     currentUser: PropTypes.func,
   }
@@ -63,7 +64,7 @@ class Profile extends Component {
           user={user}
           navigationItems={navItems}
         >
-          { children }
+          {React.cloneElement(children, { user })}
         </UserProfile>
 
         <Footer />
