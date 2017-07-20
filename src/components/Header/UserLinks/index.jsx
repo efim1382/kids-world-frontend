@@ -76,7 +76,7 @@ class UserLinks extends Component {
           />
         </Link>}
 
-        <div className={styles.divider} />
+        {this.state.token && <div className={styles.divider} />}
 
         {this.state.token && <Button
           type="transparent"
