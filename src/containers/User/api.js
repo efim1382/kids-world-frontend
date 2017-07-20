@@ -8,6 +8,9 @@ export default createApi({
   getOneUser: {
     url: `${apiPath}/users/:id`,
   },
+  bestSalers: {
+    url: `${apiPath}/bestSalers`,
+  },
   currentUser: {
     url: `${apiPath}/users/me`,
     options: {
