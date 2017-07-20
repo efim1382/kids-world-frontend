@@ -67,6 +67,17 @@ class UserLinks extends Component {
           />
         </Link>}
 
+        {this.state.token && <Link to="/profile/settings">
+          <Button
+            type="transparent"
+            caption="Настройки"
+            icon="settings"
+            className={styles.button}
+          />
+        </Link>}
+
+        <div className={styles.divider} />
+
         {this.state.token && <Button
           type="transparent"
           caption="Выйти"
