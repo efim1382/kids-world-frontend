@@ -18,10 +18,8 @@ import { api as userApi } from 'containers/User';
 
 import styles from './style.css';
 
-const sendHandler = ({ dispatch }) => (data, $this) => {
-  const { params: { id } } = $this.props;
+const sendHandler = ({ dispatch }) => (data, id) => {
   const token = JSON.parse(localStorage.getItem('token')).key;
-
 
   dispatch(userApi.actions.currentUser({}, {
     body: JSON.stringify({
@@ -41,7 +39,7 @@ const sendHandler = ({ dispatch }) => (data, $this) => {
       formData.append('description', data.description.split('\n').join('<br />'));
       newData = formData;
     } else {
-      newData = data;
+      newData = JSON.stringify(data);
     }
 
     dispatch(api.actions.editAdvert({ id }, {
@@ -54,10 +52,13 @@ const sendHandler = ({ dispatch }) => (data, $this) => {
   });
 };
 
-const EditAdvert = ({ send }) => (<div>
+const EditAdvert = ({
+  send,
+  params: { id },
+}) => (<div>
   <h3 className={styles.title}>Редактирование объявления</h3>
 
-  <Form model="editAdvert" className={styles.form} onSubmit={data => send(data, this)}>
+  <Form model="editAdvert" className={styles.form} onSubmit={data => send(data, id)}>
     <Field
       type="text"
       model=".title"
@@ -109,6 +110,7 @@ const EditAdvert = ({ send }) => (<div>
 </div>);
 
 EditAdvert.propTypes = {
+  params: PropTypes.objectOf(PropTypes.string),
   send: PropTypes.func,
 };
 
