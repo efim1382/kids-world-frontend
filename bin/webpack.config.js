@@ -89,7 +89,7 @@ const webpackConfig = {
         loader: 'url-loader?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml',
       },
       {
-        test: /\.(png|jpg|gif)$/,
+        test: /\.(png|jpg|gif|ico)$/,
         loader: 'url-loader?limit=8192',
       },
     ],
@@ -99,7 +99,7 @@ const webpackConfig = {
     new HtmlWebpackPlugin({
       template: project.paths.src('index.html'),
       hash: false,
-      favicon: project.paths.public('favicon.png'),
+      favicon: project.paths.public('favicon.ico'),
       filename: 'index.html',
       inject: 'body',
       minify: {

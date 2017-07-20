@@ -26,7 +26,7 @@ class Header extends Component {
     return (
       <header className={styles.header}>
         <Link className={styles.logo} to="/">
-          <img src="/logo-white.png" />
+          <img alt="Logo" src="/logo-white.png" />
           <h1>Kids World</h1>
         </Link>
 
