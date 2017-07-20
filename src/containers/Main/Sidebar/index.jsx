@@ -134,22 +134,3 @@ export default compose(
   })),
   withProps(({ dispatch }) => bindActionCreators({ getUsers, bestSalers }, dispatch)),
 )(Sidebar);
-
-/*
-
-1 ый ыв
-2-4 ых ва
-5-20 ых ов
-
-21 ый ыв
-22-24 ых ва
-25-30 ых ов
-
----
-
-101 ый ыв
-102-104 ых ва
-105-120 ых ов
-
-
-*/
