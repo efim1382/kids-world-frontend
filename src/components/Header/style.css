@@ -9,9 +9,20 @@
 
 .logo {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
   height: var(--header-height);
-  line-height: var(--header-height);
-  font-size: 20px;
+  line-height: var(--header-height);}
+
+.logo > img {
+  --size: 34px;
+  max-width: var(--size);
+  max-height: var(--size);
+}
+
+.logo > h1 {
+  margin-left: 8px;
+  font-size: 18px;
   color: #fff;
   font-weight: var(--font-weight-light);
 }
