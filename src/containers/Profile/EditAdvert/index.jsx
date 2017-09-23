@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { compose, withHandlers, withProps } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
@@ -13,6 +14,7 @@ import {
   Button,
 } from 'components';
 
+import { getOneAdvert } from 'containers/Advert/actions';
 import { api } from 'containers/Advert';
 import { api as userApi } from 'containers/User';
 
@@ -52,71 +54,90 @@ const sendHandler = ({ dispatch }) => (data, id) => {
   });
 };
 
-const EditAdvert = ({
-  send,
-  params: { id },
-}) => (<div>
-  <h3 className={styles.title}>Редактирование объявления</h3>
+class EditAdvert extends Component {
+  static propTypes = {
+    params: PropTypes.objectOf(PropTypes.string),
+    send: PropTypes.func,
+    getOneAdvert: PropTypes.func.isRequired,
+    advert: PropTypes.arrayOf(PropTypes.shape({
+      title: PropTypes.string,
+      price: PropTypes.number,
+      category: PropTypes.string,
+      description: PropTypes.string,
+    })),
+  };
 
-  <Form model="editAdvert" className={styles.form} onSubmit={data => send(data, id)}>
-    <Field
-      type="text"
-      model=".title"
-      placeholder="Заголовок"
-      defaultValue="asd"
-    />
+  componentWillMount() {
+    const { params: { id } } = this.props;
+    this.props.getOneAdvert(id);
+  }
 
-    <Field
-      type="number"
-      model=".price"
-      placeholder="Цена"
-      defaultValue="32432"
-    />
+  render() {
+    const { advert, send, params: { id } } = this.props;
+    const thisAdvert = advert[0];
 
-    <Select
-      model=".category"
-      placeholder="Выберите категорию"
-      items={[{
-        caption: 'Одежда',
-        value: 'clothes',
-      }, {
-        caption: 'Обувь',
-        value: 'footwear',
-      }, {
-        caption: 'Детские товары',
-        value: 'goods',
-      }]}
-      defaultValue="goods"
-    />
+    return (<div>
+      <h3 className={styles.title}>Редактирование объявления</h3>
 
-    <Textarea
-      model=".description"
-      placeholder="Описание"
-      defaultValue="goods"
-    />
+      {thisAdvert && <Form model="editAdvert" className={styles.form} onSubmit={data => send(data, id)}>
+        <Field
+          type="text"
+          model=".title"
+          placeholder="Заголовок"
+          defaultValue={thisAdvert.title}
+        />
 
-    <Files
-      model=".image"
-      caption="Выберите изображение"
-      withFilesStore
-    />
+        <Field
+          type="number"
+          model=".price"
+          placeholder="Цена"
+          defaultValue={thisAdvert.price.toString()}
+        />
 
-    <Button
-      type="primary"
-      caption="Изменить"
-      className={styles.button}
-    />
-  </Form>
-</div>);
+        <Select
+          model=".category"
+          placeholder="Выберите категорию"
+          items={[{
+            caption: 'Одежда',
+            value: 'clothes',
+          }, {
+            caption: 'Обувь',
+            value: 'footwear',
+          }, {
+            caption: 'Детские товары',
+            value: 'goods',
+          }]}
+          defaultValue={thisAdvert.category}
+        />
 
-EditAdvert.propTypes = {
-  params: PropTypes.objectOf(PropTypes.string),
-  send: PropTypes.func,
-};
+        <Textarea
+          model=".description"
+          placeholder="Описание"
+          defaultValue={thisAdvert.description}
+        />
+
+        <Files
+          model=".image"
+          caption="Выберите изображение"
+          withFilesStore
+        />
+
+        <Button
+          type="primary"
+          caption="Изменить"
+          className={styles.button}
+        />
+      </Form>}
+    </div>);
+  }
+}
 
 export default compose(
-  connect(),
+  connect(state => ({
+    advert: state.adverts.list,
+  })),
   withHandlers({
     send: sendHandler,
   }),
+  withProps(({ dispatch }) => bindActionCreators({ getOneAdvert }, dispatch)),
 )(EditAdvert);

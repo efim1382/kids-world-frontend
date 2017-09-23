@@ -5,3 +5,4 @@ export const addAdvert = data => api.actions.addAdvert({}, {
 });
 
 export const getAdverts = () => api.actions.getAdverts();
+export const getOneAdvert = id => api.actions.getAdverts({ id });
