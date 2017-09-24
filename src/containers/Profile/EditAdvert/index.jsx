@@ -14,11 +14,15 @@ import {
   Button,
 } from 'components';
 
-import { getOneAdvert } from 'containers/Advert/actions';
+import { getOneAdvert, deleteAdvert } from 'containers/Advert/actions';
 import { api } from 'containers/Advert';
 import { api as userApi } from 'containers/User';
 
 import styles from './style.css';
+
+const redirectToProfile = ({ dispatch }) => address => {
+  dispatch(replace(address));
+}
 
 const sendHandler = ({ dispatch }) => (data, id) => {
   const token = JSON.parse(localStorage.getItem('token')).key;
@@ -73,7 +77,7 @@ class EditAdvert extends Component {
   }
 
   render() {
-    const { advert, send, params: { id } } = this.props;
+    const { deleteAdvert, redirect, advert, send, params: { id } } = this.props;
     const thisAdvert = advert[0];
 
     return (<div>
@@ -128,6 +132,20 @@ class EditAdvert extends Component {
           className={styles.button}
         />
       </Form>}
+
+      <div className={styles.divider} />
+
+      <Button
+        type="danger"
+        caption="Удалить"
+        onClick={() => {
+          deleteAdvert(id).then(resp => {
+            if (resp.status === 200) {
+              redirect('profile');
+            }
+          });
+        }}
+      />
     </div>);
   }
 }
@@ -138,6 +156,7 @@ export default compose(
   })),
   withHandlers({
     send: sendHandler,
+    redirect: redirectToProfile,
   }),
-  withProps(({ dispatch }) => bindActionCreators({ getOneAdvert }, dispatch)),
+  withProps(({ dispatch }) => bindActionCreators({ deleteAdvert, getOneAdvert }, dispatch)),
 )(EditAdvert);

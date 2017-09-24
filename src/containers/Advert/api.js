@@ -23,4 +23,10 @@ export default createApi({
       method: 'POST',
     },
   },
+  deleteAdvert: {
+    url: `${apiPath}/adverts/:id/delete`,
+    options: {
+      method: 'POST',
+    },
+  },
 });
