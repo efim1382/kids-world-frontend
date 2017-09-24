@@ -65,12 +65,6 @@ class ProfileSidebar extends Component {
     userPhoto: '',
   }
 
-  componentWillUpdate() {
-    // this.setState({
-    //   showModal: true,
-    // });
-  }
-
   render() {
     const { user, changePhoto, send } = this.props;
 

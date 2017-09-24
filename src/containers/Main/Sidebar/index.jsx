@@ -91,37 +91,12 @@ class Sidebar extends Component {
     const { className } = this.props;
     const items = this.filterItems();
 
-    const bestAds = [{
-      id: '1',
-      image: 'images/ad-image.jpg',
-      title: 'Обувь для мальчика',
-      caption: '145 просмотров',
-      link: '/advert/1',
-    }, {
-      id: '2',
-      image: 'images/ad-image.jpg',
-      title: 'Обувь для мальчика',
-      caption: '145 просмотров',
-      link: '/advert/2',
-    }, {
-      id: '3',
-      image: 'images/ad-image.jpg',
-      title: 'Обувь для мальчика',
-      caption: '145 просмотров',
-      link: '/advert/3',
-    }];
-
     return (
       <div className={classNames(styles.sidebar, className)}>
         {items && items.length > 0 && <Item
           title="Лучшие продавцы"
           items={items}
         />}
-
-        <Item
-          title="Самые популярные объявления"
-          items={bestAds}
-        />
       </div>
     );
   }
