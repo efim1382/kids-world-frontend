@@ -20,9 +20,9 @@ import { api as userApi } from 'containers/User';
 
 import styles from './style.css';
 
-const redirectToProfile = ({ dispatch }) => address => {
+const redirectToProfile = ({ dispatch }) => (address) => {
   dispatch(replace(address));
-}
+};
 
 const sendHandler = ({ dispatch }) => (data, id) => {
   const token = JSON.parse(localStorage.getItem('token')).key;
@@ -63,6 +63,8 @@ class EditAdvert extends Component {
     params: PropTypes.objectOf(PropTypes.string),
     send: PropTypes.func,
     getOneAdvert: PropTypes.func.isRequired,
+    deleteAdvert: PropTypes.func,
+    redirect: PropTypes.func,
     advert: PropTypes.arrayOf(PropTypes.shape({
       title: PropTypes.string,
       price: PropTypes.number,
@@ -77,7 +79,7 @@ class EditAdvert extends Component {
   }
 
   render() {
-    const { deleteAdvert, redirect, advert, send, params: { id } } = this.props;
+    const { redirect, advert, send, params: { id } } = this.props;
     const thisAdvert = advert[0];
 
     return (<div>
@@ -139,7 +141,7 @@ class EditAdvert extends Component {
         type="danger"
         caption="Удалить"
         onClick={() => {
-          deleteAdvert(id).then(resp => {
+          this.props.deleteAdvert(id).then((resp) => {
             if (resp.status === 200) {
               redirect('profile');
             }
