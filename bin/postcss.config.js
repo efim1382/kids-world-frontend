@@ -5,20 +5,22 @@ const cssnano = require('cssnano');
  */
 function postcss() {
   return [
+    require('postcss-nesting'),
     cssnano({
-      autoprefixer : {
-        add      : true,
-        remove   : true,
-        browsers : ['last 2 versions']
+      autoprefixer: {
+        add: true,
+        browsers: ['last 2 versions'],
+        remove: true,
       },
-      discardComments : {
-        removeAll : true
+      discardComments: {
+        removeAll: true,
       },
-      discardUnused : false,
-      mergeIdents   : false,
-      reduceIdents  : false,
-      safe          : true,
-      sourcemap     : true
+      discardUnused: false,
+      mergeIdents: false,
+      reduceIdents: false,
+      safe: true,
+      sourcemap: true,
+      postcssNesting: true,
     }),
   ];
 }

@@ -1,20 +1,28 @@
 :root {
-  --text-color: #444;
-  --background-color: #fcfcfc;
+  /* Colors */
+  --color-text: rgba(0, 0, 0, 0.87);
+  --color-background: #fcfcfc;
+  --color-accent: #1e88e5;
+  --color-error: #f44336;
+  --color-divider: #ebebeb;
 
-  --accent-color: #1E88E5;
-  --passive-color: #1b1d1f;
-  --danger-color: #f00;
+  /* Custom */
+  --layout-padding: 30px;
+  --button-initial-padding: 8px;
+  --header-height: 50px;
 
-  --divider-color: #ebebeb;
-
-  --header-height: 48px;
-  --footer-height: 40px;
-
-  --block-padding: 24px;
-  --layout-horizontal-padding: 30px;
-
+  /* Font variables */
   --font-weight-light: 300;
   --font-weight-regular: 400;
-  --font-weight-bold: 600;
+  --font-weight-bold: 700;
 }
+
+@value colorText: var(--color-text);
+@value colorAccent: var(--color-accent);
+
+@value layoutPadding: var(--layout-padding);
+@value headerHeight: var(--header-height);
+
+@value fontWeightLight: var(--font-weight-light);
+@value fontWeightRegular: var(--font-weight-regular);
+@value fontWeightBold: var(--font-weight-bold);

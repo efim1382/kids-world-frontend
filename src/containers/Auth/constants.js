@@ -1,2 +1,0 @@
-export const AUTH_SET_TOKEN = 'AUTH_SET_TOKEN';
-export const AUTH_RESET_TOKEN = 'AUTH_RESET_TOKEN';

@@ -1,57 +1,93 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
-import ClickOutside from 'helpers/click-outside-popup';
-import { Button } from 'components';
-import UserLinks from './UserLinks';
+
+import { Icon } from 'components';
+
+import AppBar from 'material-ui/AppBar';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import Drawer from 'material-ui/Drawer';
+
 import styles from './style.css';
+
+const Popup = () => <IconMenu
+  targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+  anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+  iconButtonElement={
+    <IconButton iconStyle={{ color: 'fff' }}>
+      <Icon name="more_vert" className={styles.popupButton} />
+    </IconButton>
+  }
+>
+  <Link to="/" className={styles.popupItem}>
+    <Icon name="supervisor_account" />
+    <label>Войти</label>
+  </Link>
+
+  <Link to="/auth/register" className={styles.popupItem}>
+    <Icon name="person_add" />
+    <label>Зарегистрироваться</label>
+  </Link>
+</IconMenu>;
 
 class Header extends Component {
   state = {
-    showed: false,
+    sidebarShowed: false,
   };
 
-  togglePopup = () => {
+  handleToggle = () => {
     this.setState({
-      showed: !this.state.showed,
+      sidebarShowed: !this.state.sidebarShowed,
     });
-  }
+  };
 
-  closePopup = () => {
+  handleClose = () => {
     this.setState({
-      showed: false,
+      sidebarShowed: false,
     });
-  }
+  };
 
   render() {
-    return (
-      <header className={styles.header}>
-        <Link className={styles.logo} to="/">
-          <img alt="Logo" src="/logo-white.png" />
-          <h1>Kids World</h1>
-        </Link>
+    const sidebarLinks = [{
+      id: 1,
+      caption: 'Главная',
+      to: '/',
+    }, {
+      id: 2,
+      caption: 'О нас',
+      to: '/about',
+    }];
 
-        <div className={styles.links}>
-          <Link to="/profile/advert/add">
-            <Button
-              caption="Подать объявление"
-              type="transparent"
-              className={styles.addAdv}
-            />
-          </Link>
+    return (<div>
+      <AppBar
+        className={styles.header}
+        title={
+          <h1 className={styles.title}>Kids World</h1>
+        }
+        iconElementRight={
+          <Popup />
+        }
+        onLeftIconButtonTouchTap={this.handleToggle}
+      />
 
-          <Button
-            type="transparent"
-            icon="person"
-            className={styles.person}
-            onClick={this.togglePopup}
-            isActive={this.state.showed}
-          />
-        </div>
+      <Drawer
+        docked={false}
+        open={this.state.sidebarShowed}
+        className={styles.sidebar}
+        onRequestChange={this.handleClose}
+      >
+        <div className={styles.sidebarTitle}>Kids World</div>
 
-        <UserLinks show={this.state.showed} />
-      </header>
-    );
+        {sidebarLinks.map(link => <Link
+          key={link.id}
+          to={link.to}
+          className={styles.sidebarItem}
+          onlyActiveOnIndex
+          activeClassName="_selected"
+        >{ link.caption }</Link>)}
+      </Drawer>
+    </div>);
   }
 }
 
-export default ClickOutside(Header);
+export default Header;

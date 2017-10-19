@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './style.css';
 
+export styles from './style.css';
+
 const Layout = ({ children }) => (
   <div>{ children }</div>
 );
@@ -11,4 +13,3 @@ Layout.propTypes = {
 };
 
 export default Layout;
-export styles from './style.css';

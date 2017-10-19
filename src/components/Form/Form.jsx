@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { LocalForm } from 'react-redux-form';
-import styles from 'components/Form/style.css';
+
+import styles from './style.css';
 
 const Form = ({
   children,

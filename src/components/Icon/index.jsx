@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import styles from './style.css';
+import FontIcon from 'material-ui/FontIcon';
 
 const Icon = ({
-  icon,
+  name,
   className,
-}) => <i className={classNames(styles.icon, className, 'material-icons')}>{ icon }</i>;
+}) => <FontIcon className={classNames('material-icons', className)}>{ name }</FontIcon>;
 
 Icon.propTypes = {
-  icon: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   className: PropTypes.string,
 };
 

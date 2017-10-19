@@ -1,8 +1,9 @@
 import React from 'react';
+
 import styles from './style.css';
 
-const Footer = () => <footer className={styles.footer}>
+const Footer = () => <div className={styles.footer}>
   Kids World - доска объявлений детских товаров
-</footer>;
+</div>;
 
 export default Footer;

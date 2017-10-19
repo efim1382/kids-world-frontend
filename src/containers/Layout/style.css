@@ -1,28 +1,35 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&subset=cyrillic');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&subset=cyrillic-ext');
 @import 'normalize.css';
 @import './variables.css';
 
 :root {
   font-size: 16px;
-  color: var(--text-color);
-  background: var(--background-color);
-  user-select: none;
   line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  user-select: none;
 }
 
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: var(--font-weight-regular);
+
+  &,
+  &:before,
+  &:after {
+    box-sizing: border-box;
+    transition-property: none;
+    transition-duration: 0.2s;
+    transition-timing-function: ease-in-out;
+  }
 }
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
-a:focus {
-  outline: none;
-}
-
+a:focus,
 input:focus,
 textarea:focus,
 button:focus,
@@ -37,26 +44,21 @@ img {
 }
 
 /* Костыль */
-body h1,
-body h2,
-body h3,
-body h4,
-body p,
-body pre {
-  margin: 0;
-}
+body {
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  pre {
+    margin: 0;
+  }
 
-body p:nth-of-type(n+2) {
-  margin-top: 8px;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  transition-property: none;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  p {
+    &:nth-of-type(n+2) {
+      margin-top: 8px;
+    }
+  }
 }
 
 .page {
@@ -69,7 +71,7 @@ body p:nth-of-type(n+2) {
 .content {
   position: relative;
   flex-grow: 1;
-  min-height: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  min-height: 0;
 }

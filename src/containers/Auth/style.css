@@ -1,30 +1,9 @@
 .auth {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-wrapper {
-	width: 350px;
-	padding: 12px var(--block-padding);
-	background-color: #fff;
-	box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-}
-
-.title {
-	--height: 54px;
-	height: var(--height);
-	line-height: var(--height);
-	border-bottom: 1px solid var(--divider-color);
-}
-
-.form {
-	padding: 20px 0;
-}
-
-.button {
-	--button-height: 36px;
-	min-width: 95px;
-	display: block;
-	margin-top: 16px;
+  width: 450px;
 }
