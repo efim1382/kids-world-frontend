@@ -5,12 +5,15 @@ import classNames from 'classnames';
 import { Control } from 'react-redux-form';
 import TextField from 'material-ui/TextField';
 
+import theme from './theme';
 import styles from './style.css';
+
+const InputComponent = ({ ...props }) => <TextField style={theme.textField} {...props} />;
 
 const Input = ({ model, label, type, className, ...props }) => <Control
   model={model}
   className={classNames(styles.input, className)}
-  component={TextField}
+  component={InputComponent}
   {...label ? { floatingLabelText: label } : {}}
   {...type ? { type } : {}}
   {...props}

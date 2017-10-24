@@ -6,11 +6,16 @@ import FontIcon from 'material-ui/FontIcon';
 const Icon = ({
   name,
   className,
-}) => <FontIcon className={classNames('material-icons', className)}>{ name }</FontIcon>;
+  color,
+}) => <FontIcon
+  className={classNames('material-icons', className)}
+  color={color}
+>{ name }</FontIcon>;
 
 Icon.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
+  color: PropTypes.string,
 };
 
 export default Icon;

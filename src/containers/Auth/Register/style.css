@@ -25,7 +25,6 @@
 	justify-content: space-between;
 	& > div {
 		flex-grow: 1;
-		flex-basis: 48%;
 		&:nth-of-type(2) {
 			margin-left: 4%;
 		}

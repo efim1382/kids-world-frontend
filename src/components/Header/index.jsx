@@ -8,14 +8,15 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import Drawer from 'material-ui/Drawer';
 
+import theme from './theme';
 import styles from './style.css';
 
 const Popup = () => <IconMenu
   targetOrigin={{ horizontal: 'right', vertical: 'top' }}
   anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
   iconButtonElement={
-    <IconButton iconStyle={{ color: 'fff' }}>
-      <Icon name="more_vert" className={styles.popupButton} />
+    <IconButton>
+      <Icon name="more_vert" color={theme.icon.color} />
     </IconButton>
   }
 >
