@@ -30,7 +30,7 @@ class Register extends Component {
     password: '',
   };
 
-  sendHandler = (data) => {
+  isFormHasErrors = () => {
     const keys = Object.keys(this.state.errorMessages);
     let isError = false;
 
@@ -40,7 +40,13 @@ class Register extends Component {
       }
     }
 
-    if (isError) {
+    return isError;
+  };
+
+  sendHandler = (data) => {
+    const hasErrors = this.isFormHasErrors();
+
+    if (hasErrors) {
       this.showSnackbar('Заполните все поля');
       return;
     }
