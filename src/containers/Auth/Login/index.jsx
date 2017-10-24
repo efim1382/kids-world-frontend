@@ -9,25 +9,20 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
 import api from '../api';
+import { setToken } from '../actions';
 
 import styles from './style.css';
 
-class Register extends Component {
+class Login extends Component {
   state = {
     snackbar: {
       showed: false,
       message: '',
     },
     errorMessages: {
-      firstName: '',
-      lastName: '',
       email: '',
-      phone: '',
-      address: '',
       password: '',
-      repassword: '',
     },
-    password: '',
   };
 
   isFormHasErrors = () => {
@@ -53,17 +48,15 @@ class Register extends Component {
 
     const { dispatch } = this.props;
 
-    dispatch(api.actions.register({}, {
-      body: JSON.stringify({
-        ...data,
-        photo: 'images/user-image.jpg',
-      }),
+    dispatch(api.actions.login({}, {
+      body: JSON.stringify(data),
     })).then((response) => {
       if (response.status !== 200) {
         this.showSnackbar(response.message);
         return;
       }
 
+      dispatch(setToken(response.token));
       dispatch(replace('/'));
     });
   };
@@ -86,28 +79,6 @@ class Register extends Component {
     });
   };
 
-  handleFirstNameChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        firstName: (value) ? '' : 'Введите имя',
-      },
-    });
-  };
-
-  handleLastNameChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        lastName: (value) ? '' : 'Введите фамилию',
-      },
-    });
-  };
-
   handleEmailChange = (event) => {
     // eslint-disable-next-line no-useless-escape
     const reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -118,28 +89,6 @@ class Register extends Component {
       errorMessages: {
         ...this.state.errorMessages,
         email: (value && isValid) ? '' : 'Введите правильный Email',
-      },
-    });
-  };
-
-  handlePhoneChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        phone: (value) ? '' : 'Введите телефон',
-      },
-    });
-  };
-
-  handleAddressChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        address: (value) ? '' : 'Введите адрес',
       },
     });
   };
@@ -165,69 +114,17 @@ class Register extends Component {
     });
   };
 
-  handleRepasswordChange = (event) => {
-    const value = event.target.value;
-    let message = '';
-
-    if (!value) {
-      message = 'Введите пароль';
-    }
-
-    if (value !== this.state.password) {
-      message = 'Пароли не совпадают';
-    }
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        repassword: message,
-      },
-    });
-  };
-
   render() {
-    return (<div className={styles.register}>
-      <span className={styles.title}>Регистрация</span>
+    return (<div className={styles.login}>
+      <span className={styles.title}>Авторизация</span>
 
-      <Form className={styles.form} model="register" onSubmit={this.sendHandler}>
-        <div className={styles.fieldContainer}>
-          <Input
-            label="Имя"
-            model=".firstName"
-            errorText={this.state.errorMessages.firstName}
-            onChange={this.handleFirstNameChange}
-          />
-
-          <Input
-            label="Фамилия"
-            model=".lastName"
-            errorText={this.state.errorMessages.lastName}
-            onChange={this.handleLastNameChange}
-          />
-        </div>
-
+      <Form className={styles.form} model="login" onSubmit={this.sendHandler}>
         <div className={styles.fieldContainer}>
           <Input
             label="Email"
             model=".email"
             errorText={this.state.errorMessages.email}
             onChange={this.handleEmailChange}
-          />
-
-          <Input
-            label="Телефон"
-            model=".phone"
-            errorText={this.state.errorMessages.phone}
-            onChange={this.handlePhoneChange}
-          />
-        </div>
-
-        <div className={styles.fieldContainer}>
-          <Input
-            label="Адресс"
-            model=".address"
-            errorText={this.state.errorMessages.address}
-            onChange={this.handleAddressChange}
           />
         </div>
 
@@ -239,20 +136,12 @@ class Register extends Component {
             errorText={this.state.errorMessages.password}
             onChange={this.handlePasswordChange}
           />
-
-          <Input
-            label="Повторите пароль"
-            model=".repassword"
-            type="password"
-            errorText={this.state.errorMessages.repassword}
-            onChange={this.handleRepasswordChange}
-          />
         </div>
 
         <RaisedButton
           primary
           type="submit"
-          label="Зарегистрироваться"
+          label="Войти"
           className={styles.buttonSubmit}
         />
       </Form>
@@ -267,10 +156,10 @@ class Register extends Component {
   }
 }
 
-Register.propTypes = {
+Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
 export default compose(
   connect(),
-)(Register);
+)(Login);

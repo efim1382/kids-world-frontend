@@ -16,7 +16,7 @@ const Auth = ({ children }) => <div className={baseStyles.page}>
   <Header />
 
   <div className={classNames(baseStyles.content, styles.auth)}>
-    <Card className={styles.formWrapper}>
+    <Card>
       { children }
     </Card>
   </div>

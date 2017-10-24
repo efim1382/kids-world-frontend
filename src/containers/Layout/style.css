@@ -29,6 +29,11 @@ a {
   color: inherit;
 }
 
+button {
+  border: 0;
+  padding: 0;
+}
+
 a:focus,
 input:focus,
 textarea:focus,

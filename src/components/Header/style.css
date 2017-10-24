@@ -13,13 +13,14 @@
   --height: 44px;
   display: flex;
   align-items: center;
-  flex-basis: 100%;
+  width: 100%;
   height: var(--height);
   line-height: var(--height);
   padding-left: 16px;
   padding-right: 16px;
   background-color: var(--background-color);
   transition-property: background-color;
+  cursor: pointer;
   &:not(:hover) {
     --background-color: transparent;
   }
