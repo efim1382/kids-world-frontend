@@ -35,6 +35,11 @@ const Popup = ({ dispatch, isAuthorize }) => <IconMenu
     <label>Зарегистрироваться</label>
   </Link>}
 
+  <Link to="/profile" className={styles.popupItem}>
+    <Icon name="supervisor_account" />
+    <label>Профиль</label>
+  </Link>
+
   {isAuthorize && <button
     className={styles.popupItem}
     onClick={() => {
@@ -49,7 +54,7 @@ const Popup = ({ dispatch, isAuthorize }) => <IconMenu
 
 Popup.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  isAuthorize: PropTypes.string.isRequired,
+  isAuthorize: PropTypes.bool.isRequired,
 };
 
 class Header extends Component {
@@ -99,7 +104,7 @@ class Header extends Component {
       to: '/about',
     }];
 
-    return (<div>
+    return <div>
       <AppBar
         className={styles.header}
         title={
@@ -130,7 +135,7 @@ class Header extends Component {
           activeClassName="_selected"
         >{ link.caption }</Link>)}
       </Drawer>
-    </div>);
+    </div>;
   }
 }
 

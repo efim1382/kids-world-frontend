@@ -49,20 +49,18 @@ img {
 }
 
 /* Костыль */
-body {
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
-  pre {
-    margin: 0;
-  }
+h1,
+h2,
+h3,
+h4,
+p,
+pre {
+  margin: 0;
+}
 
-  p {
-    &:nth-of-type(n+2) {
-      margin-top: 8px;
-    }
+p {
+  &:nth-of-type(n+2) {
+    margin-top: 8px;
   }
 }
 

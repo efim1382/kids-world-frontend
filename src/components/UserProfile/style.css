@@ -1,0 +1,78 @@
+.profile {
+	display: flex;
+	& > .sidebar {
+		flex-shrink: 0;
+		width: 300px;
+		background-color: #fff;
+		box-shadow: -1px 0 var(--color-divider) inset;
+		& > .header {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 250px;
+			box-shadow: 0 -1px var(--color-divider) inset;
+			& > .user-image {
+				width: 120px;
+				height: 120px;
+				border-radius: 50%;
+				background-repeat: no-repeat;
+				background-size: cover;
+				background-position: center;
+			}
+			& > .user-name {
+				--height: 16px;
+				height: var(--height);
+				margin-top: 16px;
+				line-height: var(--height);
+				font-size: 15px;
+				color: var(--color-text);
+			}
+		}
+		& > .properties {
+			display: flex;
+			flex-direction: column;
+			padding-left: 20px;
+			padding-right: 20px;
+			& > h3 {
+				--height: 58px;
+				flex-shrink: 0;
+				display: block;
+				height: var(--height);
+				line-height: var(--height);
+				font-size: 14px;
+				color: #444;
+				font-weight: var(--font-weight-bold);
+				text-transform: uppercase;
+				box-shadow: 0 -1px var(--color-divider) inset;
+				& + .property {
+					margin-top: 20px;
+				}
+			}
+			& > .property {
+				flex-shrink: 0;
+				display: flex;
+				justify-content: space-between;
+				padding-top: 4px;
+				padding-bottom: 4px;
+				& > .property-name {
+					font-size: 15px;
+					color: #666;
+				}
+				& > .property-value {
+					font-size: 15px;
+					text-align: right;
+					color: var(--color-text);
+				}
+			}
+		}
+	}
+	& > .content {
+		flex-grow: 1;
+		min-width: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+	}
+}

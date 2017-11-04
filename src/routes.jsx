@@ -12,11 +12,13 @@ import Layout from './containers/Layout';
 import Main from './containers/Main';
 
 import { routes as authRoutes } from './containers/Auth';
+import { routes as profileRoutes } from './containers/Profile';
 
 const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHistory, store)}>
   <Route path="/" component={Layout}>
     <IndexRoute component={Main} />
     { authRoutes() }
+    { profileRoutes() }
   </Route>
 </Router>;
 

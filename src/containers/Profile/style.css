@@ -1,0 +1,8 @@
+.profile {
+	display: flex;
+	flex-direction: column;
+	& > div {
+		flex-grow: 1;
+		min-height: 0;
+	}
+}
