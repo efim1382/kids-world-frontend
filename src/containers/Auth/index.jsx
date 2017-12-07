@@ -20,8 +20,6 @@ const Auth = ({ children }) => <div className={baseStyles.page}>
       { children }
     </Card>
   </div>
-
-  <Footer />
 </div>;
 
 Auth.propTypes = {

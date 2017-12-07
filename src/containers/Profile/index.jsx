@@ -36,8 +36,6 @@ const Profile = ({ children }) => <div className={baseStyles.page}>
       { children }
     </UserProfile>
   </div>
-
-  <Footer />
 </div>;
 
 Profile.propTypes = {

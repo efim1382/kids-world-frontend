@@ -9,7 +9,6 @@ import baseStyles from '../Layout/style.css';
 const Main = () => <div className={baseStyles.page}>
   <Header />
   <div className={classNames(baseStyles.content, styles.main)} />
-  <Footer />
 </div>;
 
 export default Main;
