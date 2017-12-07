@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import styles from './style.css';
 
-const UserProfile = () => <div className={styles.profile}>
+const UserProfile = ({ children, className }) => <div className={styles.profile}>
   <div className={styles.sidebar}>
     <header className={styles.header}>
       <div className={styles.userImage} style={{ backgroundImage: 'url(/images/user-image.jpg)' }} />
@@ -28,7 +30,12 @@ const UserProfile = () => <div className={styles.profile}>
     </div>
   </div>
 
-  <div className={styles.content} />
+  <div className={classNames(styles.content, className)}>{ children }</div>
 </div>;
+
+UserProfile.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
 
 export default UserProfile;

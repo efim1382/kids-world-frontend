@@ -1,0 +1,41 @@
+.navigation {
+	--links-height: 50px;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 -1px var(--color-divider) inset;
+	& > a {
+		position: relative;
+		height: var(--links-height);
+		padding-left: 12px;
+		padding-right: 12px;
+		line-height: var(--links-height);
+		font-size: 15px;
+		color: var(--color);
+		transition-property: color;
+		&:not(:global(._selected)) {
+			&:not(:hover) {
+				--color: var(--color-text);
+				--opacity: 0;
+			}
+			&:hover {
+				--color: var(--color-accent);
+				--opacity: 0;
+			}
+		}
+		&:global(._selected) {
+			--color: var(--color-accent);
+			--opacity: 1;
+		}
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 100%;
+			height: 2px;
+			background-color: var(--color-accent);
+			opacity: var(--opacity);
+			transition-property: opacity;
+		}
+	}
+}

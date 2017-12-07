@@ -6,3 +6,10 @@
 		min-height: 0;
 	}
 }
+
+.content {
+	& > nav {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
