@@ -5,5 +5,6 @@ export Navigation from './Navigation';
 export UserProfile from './UserProfile';
 export Form from './Form/Form';
 export Input from './Form/Input';
+export Select from './Form/Select';
 
 export Http from './Http';

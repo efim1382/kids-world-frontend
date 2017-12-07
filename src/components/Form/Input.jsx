@@ -10,12 +10,21 @@ import styles from './style.css';
 
 const InputComponent = ({ ...props }) => <TextField style={theme.textField} {...props} />;
 
-const Input = ({ model, label, type, className, ...props }) => <Control
+const Input = ({
+  model,
+  label,
+  type = 'text',
+  className,
+  defaultValue = '',
+  ...props
+}) => <Control
   model={model}
   className={classNames(styles.input, className)}
   component={InputComponent}
+  controlProps={{ defaultValue }}
+  type={type}
+  {...type === 'textarea' ? { multiLine: true } : {}}
   {...label ? { floatingLabelText: label } : {}}
-  {...type ? { type } : {}}
   {...props}
 />;
 
@@ -23,6 +32,7 @@ Input.propTypes = {
   model: PropTypes.string.isRequired,
   label: PropTypes.string,
   type: PropTypes.string,
+  defaultValue: PropTypes.string,
   className: PropTypes.string,
 };
 

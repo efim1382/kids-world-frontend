@@ -64,6 +64,10 @@ pre {
   margin: 0;
 }
 
+h3 {
+  font-size: 18px;
+}
+
 p {
   &:nth-of-type(n+2) {
     margin-top: 8px;
