@@ -4,8 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import styles from './style.css';
 
-const Adverts = () => <div className={styles.adverts}>
-  <Link to="/">
+const List = () => <div className={styles.adverts}>
+  <Link to="/profile/adverts/add">
     <RaisedButton label="Подать объявление" primary />
   </Link>
 
@@ -16,7 +16,7 @@ const Adverts = () => <div className={styles.adverts}>
       <div className={styles.tooltip}>
         <h4>Детские кроссовки</h4>
 
-        <Link to="/">
+        <Link to="/profile/adverts/1/edit">
           <FlatButton label="Редактировать" />
         </Link>
       </div>
@@ -24,4 +24,4 @@ const Adverts = () => <div className={styles.adverts}>
   </ul>
 </div>;
 
-export default Adverts;
+export default List;

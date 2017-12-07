@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import classNames from 'classnames';
 import styles from './style.css';
 
 const Navigation = ({ items }) => <nav className={styles.navigation}>
@@ -8,9 +9,12 @@ const Navigation = ({ items }) => <nav className={styles.navigation}>
     <Link
       key={item.link}
       to={item.link}
-      className={styles.link}
-      onlyActiveOnIndex
-      activeClassName="_selected"
+
+      className={
+        (window.location.pathname.includes(item.link))
+        ? classNames(styles.link, '_selected')
+        : styles.link
+      }
     >
       { item.name }
     </Link>
