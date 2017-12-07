@@ -4,7 +4,6 @@ import classNames from 'classnames';
 
 import {
   Header,
-  Footer,
   UserProfile,
   Navigation,
 } from 'components';

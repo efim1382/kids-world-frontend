@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { Header, Footer } from 'components';
+import { Header } from 'components';
 
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';

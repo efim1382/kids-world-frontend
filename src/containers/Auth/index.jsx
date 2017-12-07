@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { Header, Footer } from 'components';
+import { Header } from 'components';
 
 import { Card } from 'material-ui/Card';
 
