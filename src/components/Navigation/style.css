@@ -1,14 +1,14 @@
 .navigation {
-	--links-height: 50px;
+	--navigation-height: 50px;
 	display: flex;
 	align-items: center;
 	box-shadow: 0 -1px var(--color-divider) inset;
 	& > a {
 		position: relative;
-		height: var(--links-height);
+		height: var(--navigation-height);
 		padding-left: 12px;
 		padding-right: 12px;
-		line-height: var(--links-height);
+		line-height: var(--navigation-height);
 		font-size: 15px;
 		color: var(--color);
 		transition-property: color;
