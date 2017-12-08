@@ -1,71 +1,66 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 
-import { Control } from 'react-redux-form';
+import { Field, actions } from 'react-redux-form';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 import theme from './theme';
-import styles from './style.css';
 
-class SelectComponent extends Component {
+class Select extends Component {
+  static propTypes = {
+    model: PropTypes.string.isRequired,
+    label: PropTypes.string,
+    defaultValue: PropTypes.string,
+    formModel: PropTypes.string,
+    formDispatch: PropTypes.func,
+
+    items: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
+    })).isRequired,
+  };
+
   state = {
     value: '',
   };
 
+  componentWillMount() {
+    const { defaultValue } = this.props;
+
+    if (defaultValue) {
+      this.setState({ value: defaultValue });
+    }
+  }
+
   handleChange = (event, index, value) => {
+    const { model, formModel, formDispatch } = this.props;
+
     this.setState({ value });
+
+    if (formDispatch) {
+      formDispatch(actions.change(`${formModel}${model}`, value));
+    }
   };
 
   render() {
-    // eslint-disable-next-line react/prop-types
-    const { items, ...props } = this.props;
+    const { model, label, items } = this.props;
 
-    return <SelectField
-      {...props}
-      style={theme.selectField}
-      onChange={this.handleChange}
-      value={this.state.value}
-    >
-      {items && items.map(item => <MenuItem
-        key={item.value}
-        value={item.value}
-        primaryText={item.name}
-      />)}
-    </SelectField>;
+    return <Field model={model}>
+      <SelectField
+        floatingLabelText={label}
+        style={theme.selectField}
+        onChange={this.handleChange}
+        value={this.state.value}
+      >
+        {items && items.map(item => <MenuItem
+          key={item.value}
+          value={item.value}
+          primaryText={item.name}
+        />)}
+      </SelectField>
+    </Field>;
   }
 }
-
-const Select = ({
-  model,
-  label,
-  className,
-  defaultValue = '',
-  items,
-}) => <Control
-  model={model}
-  className={classNames(styles.input, className)}
-  component={SelectComponent}
-
-  controlProps={{
-    defaultValue,
-    floatingLabelText: label,
-  }}
-
-  items={items}
-/>;
-
-Select.propTypes = {
-  model: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  defaultValue: PropTypes.string,
-  className: PropTypes.string,
-
-  items: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-  })).isRequired,
-};
 
 export default Select;

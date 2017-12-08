@@ -1,18 +1,47 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { LocalForm } from 'react-redux-form';
+
+import Select from './Select';
 
 import styles from './style.css';
 
-const Form = ({
-  children,
-  ...props
-}) => <LocalForm className={styles.form} {...props} >
-  { children }
-</LocalForm>;
+class Form extends Component {
+  static propTypes = {
+    children: PropTypes.node,
+    model: PropTypes.string,
+    getDispatch: PropTypes.func,
+  };
 
-Form.propTypes = {
-  children: PropTypes.node.isRequired,
-};
+  state = {
+    formDispatch: null,
+  };
 
-export default Form;
+  buildChildren = children => (
+    React.Children.map(children, (child) => {
+      if (!child || child.type.toString() !== Select.toString()) {
+        return child;
+      }
+
+      return React.cloneElement(child, {
+        formDispatch: this.state.formDispatch,
+        formModel: this.props.model,
+      });
+    })
+  )
+
+  render() {
+    const { children, ...props } = this.props;
+
+    return <LocalForm
+      className={styles.form}
+      getDispatch={formDispatch => this.setState({ formDispatch })}
+      {...props}
+    >
+      { this.buildChildren(children) }
+    </LocalForm>;
+  }
+}
+
+export default connect()(Form);
