@@ -1,18 +1,25 @@
 import React from 'react';
-import { Form, Input, Select } from 'components';
+import PropTypes from 'prop-types';
+import { compose, withHandlers } from 'recompose';
+import { connect } from 'react-redux';
+import { Form, Field, Select } from 'components';
 import RaisedButton from 'material-ui/RaisedButton';
 import styles from './style.css';
 
-const Add = () => <div className={styles.add}>
+const sendHandler = ({ dispatch }) => (data) => {
+  console.log(data);
+};
+
+const Add = ({ send }) => <div className={styles.add}>
   <h3>Добавление объявления</h3>
 
-  <Form model=" " onSubmit={() => {}}>
-    <Input
+  <Form model=" " onSubmit={send}>
+    <Field
       label="Заголовок"
       model=".title"
     />
 
-    <Input
+    <Field
       label="Цена"
       model=".price"
       type="number"
@@ -40,7 +47,7 @@ const Add = () => <div className={styles.add}>
       ]}
     />
 
-    <Input
+    <Field
       label="Описание"
       model=".description"
       type="textarea"
@@ -55,4 +62,14 @@ const Add = () => <div className={styles.add}>
   </Form>
 </div>;
 
-export default Add;
+Add.propTypes = {
+  send: PropTypes.func.isRequired,
+};
+
+export default compose(
+  connect(),
+
+  withHandlers({
+    send: sendHandler,
+  }),
+)(Add);

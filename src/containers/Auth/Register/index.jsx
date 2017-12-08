@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { Form, Input } from 'components';
+import { Form, Field } from 'components';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -191,14 +191,14 @@ class Register extends Component {
 
       <Form className={styles.form} model="register" onSubmit={this.sendHandler}>
         <div className={styles.fieldContainer}>
-          <Input
+          <Field
             label="Имя"
             model=".firstName"
             errorText={this.state.errorMessages.firstName}
             onChange={this.handleFirstNameChange}
           />
 
-          <Input
+          <Field
             label="Фамилия"
             model=".lastName"
             errorText={this.state.errorMessages.lastName}
@@ -207,14 +207,14 @@ class Register extends Component {
         </div>
 
         <div className={styles.fieldContainer}>
-          <Input
+          <Field
             label="Email"
             model=".email"
             errorText={this.state.errorMessages.email}
             onChange={this.handleEmailChange}
           />
 
-          <Input
+          <Field
             label="Телефон"
             model=".phone"
             errorText={this.state.errorMessages.phone}
@@ -223,7 +223,7 @@ class Register extends Component {
         </div>
 
         <div className={styles.fieldContainer}>
-          <Input
+          <Field
             label="Адресс"
             model=".address"
             errorText={this.state.errorMessages.address}
@@ -232,7 +232,7 @@ class Register extends Component {
         </div>
 
         <div className={styles.fieldContainer}>
-          <Input
+          <Field
             label="Пароль"
             model=".password"
             type="password"
@@ -240,7 +240,7 @@ class Register extends Component {
             onChange={this.handlePasswordChange}
           />
 
-          <Input
+          <Field
             label="Повторите пароль"
             model=".repassword"
             type="password"

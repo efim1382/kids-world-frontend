@@ -4,7 +4,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { Form, Input } from 'components';
+import { Form, Field } from 'components';
 import RaisedButton from 'material-ui/RaisedButton';
 import Snackbar from 'material-ui/Snackbar';
 
@@ -120,7 +120,7 @@ class Login extends Component {
 
       <Form className={styles.form} model="login" onSubmit={this.sendHandler}>
         <div className={styles.fieldContainer}>
-          <Input
+          <Field
             label="Email"
             model=".email"
             errorText={this.state.errorMessages.email}
@@ -129,7 +129,7 @@ class Login extends Component {
         </div>
 
         <div className={styles.fieldContainer}>
-          <Input
+          <Field
             label="Пароль"
             model=".password"
             type="password"

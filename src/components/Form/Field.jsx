@@ -10,7 +10,7 @@ import styles from './style.css';
 
 const InputComponent = ({ ...props }) => <TextField style={theme.textField} {...props} />;
 
-const Input = ({
+const Field = ({
   model,
   label,
   type = 'text',
@@ -28,7 +28,7 @@ const Input = ({
   {...props}
 />;
 
-Input.propTypes = {
+Field.propTypes = {
   model: PropTypes.string.isRequired,
   label: PropTypes.string,
   type: PropTypes.string,
@@ -36,4 +36,4 @@ Input.propTypes = {
   className: PropTypes.string,
 };
 
-export default Input;
+export default Field;
