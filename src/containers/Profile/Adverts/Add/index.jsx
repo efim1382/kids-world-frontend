@@ -4,16 +4,31 @@ import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { Form, Field, Select, Files } from 'components';
 import RaisedButton from 'material-ui/RaisedButton';
+
+import api from '../api';
+
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {
-  console.log(data);
+  const newData = new FormData();
+  newData.append('userId', 1);
+  newData.append('title', data.title);
+  newData.append('image', data.image[0]);
+  newData.append('price', data.price);
+  newData.append('category', data.category);
+  newData.append('description', data.description.split('\n').join('<br />'));
+
+  dispatch(api.actions.addAdvert({}, {
+    body: newData,
+  })).then((response) => {
+    console.log(response);
+  });
 };
 
 const Add = ({ send }) => <div className={styles.add}>
   <h3>Добавление объявления</h3>
 
-  <Form model=" " onSubmit={send}>
+  <Form model="addAdvert" onSubmit={send}>
     <Field
       label="Заголовок"
       model=".title"
