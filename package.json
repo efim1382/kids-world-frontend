@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "Board kids clothes",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/efim1382/kids-world-frontend.git"
+    "type": "git",
+    "url": "https://github.com/efim1382/kids-world-frontend.git"
   },
   "scripts": {
     "start": "better-npm-run start",
