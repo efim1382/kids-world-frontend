@@ -6,5 +6,6 @@ export UserProfile from './UserProfile';
 export Form from './Form/Form';
 export Field from './Form/Field';
 export Select from './Form/Select';
+export Files from './Form/Files';
 
 export Http from './Http';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { Form, Field, Select } from 'components';
+import { Form, Field, Select, Files } from 'components';
 import RaisedButton from 'material-ui/RaisedButton';
 import styles from './style.css';
 
@@ -52,6 +52,10 @@ const Add = ({ send }) => <div className={styles.add}>
       model=".description"
       type="textarea"
     />
+
+    <Files model=".image" label="Выберите изображение" className={styles.files} />
+
+    <div className={styles.divider} />
 
     <RaisedButton
       primary

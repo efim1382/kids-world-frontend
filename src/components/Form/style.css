@@ -1,2 +1,45 @@
 .input {
 }
+
+.files {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	& > .caption {
+		--height: 16px;
+		flex-shrink: 0;
+		height: var(--height);
+		line-height: var(--height);
+		font-size: 15px;
+		color: var(--color-text);
+	}
+	& > .check-button {
+		--height: 32px;
+		flex-shrink: 0;
+		height: var(--height);
+		margin-top: 16px;
+		padding-left: 12px;
+		padding-right: 12px;
+		line-height: var(--height);
+		font-size: 14px;
+		background-color: var(--color-accent);
+		color: #fff;
+		border-radius: 2px;
+		cursor: pointer;
+	}
+	& > input {
+		display: none;
+	}
+	& > .container {
+		margin-top: 16px;
+		& > .image {
+			--size: 150px;
+			width: var(--size);
+			height: var(--size);
+			background-image: var(--image);
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+		}
+	}
+}

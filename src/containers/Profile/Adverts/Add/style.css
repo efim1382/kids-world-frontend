@@ -1,8 +1,15 @@
 .add {
 	& > form {
 		max-width: 400px;
-		& > .submit {
-			margin-top: 20px;
+		& > .files {
+			margin-top: 24px;
+		}
+		& > .divider {
+			width: 100%;
+			height: 1px;
+			margin-top: 24px;
+			margin-bottom: 24px;
+			background-color: var(--color-divider);
 		}
 	}
 }
