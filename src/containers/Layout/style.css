@@ -55,12 +55,13 @@ img {
 }
 
 /* Костыль */
-h1,
-h2,
-h3,
-h4,
-p,
-pre {
+body h1,
+body h2,
+body h3,
+body h4,
+body p,
+body pre,
+body {
   margin: 0;
 }
 

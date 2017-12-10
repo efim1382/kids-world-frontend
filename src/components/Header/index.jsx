@@ -1,60 +1,46 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { replace } from 'react-router-redux';
+import { Link } from 'react-router';
+import ClickOutside from 'helpers/click-outside-popup';
 
 import { Icon } from 'components';
-
-import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import IconMenu from 'material-ui/IconMenu';
-import Drawer from 'material-ui/Drawer';
 
 import { resetToken } from 'containers/Auth/actions';
 
-import theme from './theme';
 import styles from './style.css';
 
-const Popup = ({ dispatch, isAuthorize }) => <IconMenu
-  targetOrigin={{ horizontal: 'right', vertical: 'top' }}
-  anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-  iconButtonElement={
-    <IconButton>
-      <Icon name="more_vert" color={theme.icon.color} />
-    </IconButton>
-  }
+const Popup = ({ show, isAuthorize, handleLogoutClick }) => <div
+  className={styles.popup}
+  {...show ? { 'data-show': '' } : {}}
 >
-  {!isAuthorize && <Link to="/auth/login" className={styles.popupItem}>
+  {!isAuthorize && <Link to="/auth/login">
     <Icon name="supervisor_account" />
     <label>Войти</label>
   </Link>}
 
-  {!isAuthorize && <Link to="/auth/register" className={styles.popupItem}>
+  {!isAuthorize && <Link to="/auth/register">
     <Icon name="person_add" />
     <label>Зарегистрироваться</label>
   </Link>}
 
-  <Link to="/profile" className={styles.popupItem}>
+  <Link to="/profile">
     <Icon name="supervisor_account" />
     <label>Профиль</label>
   </Link>
 
-  {isAuthorize && <button
-    className={styles.popupItem}
-    onClick={() => {
-      dispatch(resetToken());
-      dispatch(replace('/'));
-    }}
-  >
+  {isAuthorize && <button onClick={handleLogoutClick}>
     <Icon name="exit_to_app" />
     <label>Выйти</label>
   </button>}
-</IconMenu>;
+</div>;
 
 Popup.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
   isAuthorize: PropTypes.bool.isRequired,
+  handleLogoutClick: PropTypes.func.isRequired,
 };
 
 class Header extends Component {
@@ -63,7 +49,8 @@ class Header extends Component {
   };
 
   state = {
-    sidebarShowed: false,
+    shown: false,
+    location: window.location.pathname,
     isAuthorize: false,
   };
 
@@ -79,64 +66,65 @@ class Header extends Component {
     });
   }
 
-  handleToggle = () => {
+  componentWillReceiveProps() {
+    if (this.state.location !== window.location.pathname) {
+      this.setState({
+        shown: false,
+        location: window.location.pathname,
+      });
+    }
+
+    if (this.state.location === window.location.pathname) {
+      this.setState({
+        shown: false,
+      });
+    }
+  }
+
+  togglePopup = () => {
     this.setState({
-      sidebarShowed: !this.state.sidebarShowed,
+      shown: !this.state.shown,
     });
   };
 
-  handleClose = () => {
+  handleClosePopup = () => {
     this.setState({
-      sidebarShowed: false,
+      shown: false,
+    });
+  };
+
+  handleLogoutClick = () => {
+    const { dispatch } = this.props;
+
+    dispatch(resetToken());
+    dispatch(replace('/'));
+
+    this.handleClosePopup();
+
+    this.setState({
+      isAuthorize: false,
     });
   };
 
   render() {
-    const { dispatch } = this.props;
+    return <header className={styles.header}>
+      <Link to="/" className={styles.logo}>
+        <img src="/logo-white.png" alt="Kids World" />
+        <h1>Kids World</h1>
+      </Link>
 
-    const sidebarLinks = [{
-      id: 1,
-      caption: 'Главная',
-      to: '/',
-    }, {
-      id: 2,
-      caption: 'О нас',
-      to: '/about',
-    }];
 
-    return <div>
-      <AppBar
-        className={styles.header}
-        title={
-          <h1 className={styles.title}>Kids World</h1>
-        }
-        iconElementRight={
-          <Popup
-            dispatch={dispatch}
-            isAuthorize={this.state.isAuthorize}
-          />
-        }
-        onLeftIconButtonTouchTap={this.handleToggle}
+      <IconButton onClick={this.togglePopup}>
+        <Icon name="more_vert" color={'#fff'} />
+      </IconButton>
+
+      <Popup
+        show={this.state.shown}
+        isAuthorize={this.state.isAuthorize}
+        handleLogoutClick={this.handleLogoutClick}
       />
-
-      <Drawer
-        docked={false}
-        open={this.state.sidebarShowed}
-        className={styles.sidebar}
-        onRequestChange={this.handleClose}
-      >
-        <div className={styles.sidebarTitle}>Kids World</div>
-
-        {sidebarLinks.map(link => <Link
-          key={link.id}
-          to={link.to}
-          className={styles.sidebarItem}
-          onlyActiveOnIndex
-          activeClassName="_selected"
-        >{ link.caption }</Link>)}
-      </Drawer>
-    </div>;
+    </header>;
   }
 }
 
-export default connect()(Header);
+export default connect()(ClickOutside(Header));
