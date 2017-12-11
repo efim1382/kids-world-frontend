@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Control } from 'react-redux-form';
+import UUID from 'node-uuid';
 import classNames from 'classnames';
 import styles from './style.css';
 
@@ -8,40 +9,64 @@ class Files extends Component {
   static propTypes = {
     model: PropTypes.string.isRequired,
     label: PropTypes.string,
+    multiple: PropTypes.bool,
     className: PropTypes.string,
   };
 
   state = {
-    image: '',
+    images: [],
   };
 
+  componentWillMount() {
+    this.inputId = UUID.v4();
+  }
+
   handleChange = (event) => {
-    if (!event.target.files || !event.target.files[0]) {
+    const files = event.target.files;
+    const imagesArray = [];
+
+    if (!files || !files[0]) {
       return;
     }
 
-    const reader = new FileReader();
+    [].forEach.call(files, (file) => {
+      const reader = new FileReader();
 
-    reader.onload = (evt) => {
-      this.setState({
-        image: evt.target.result,
-      });
-    };
+      reader.onloadend = () => {
+        imagesArray.push({
+          src: reader.result,
+        });
 
-    reader.readAsDataURL(event.target.files[0]);
+        this.setState({
+          images: imagesArray,
+        });
+      };
+
+      reader.readAsDataURL(file);
+    });
   };
 
   render() {
-    const { model, label, className } = this.props;
+    const { model, label, multiple, className } = this.props;
 
     return <div className={classNames(styles.files, className)}>
       {label && <label className={styles.caption}>{ label }</label>}
-      <label htmlFor="check-file" className={styles.checkButton}>Выбрать файл</label>
-      <Control.file id="check-file" model={model} onChange={this.handleChange} />
+      <label htmlFor={this.inputId} className={styles.checkButton}>Выбрать файл</label>
 
-      <div className={styles.container}>
-        {this.state.image && <div className={styles.image} style={{ '--image': `url(${this.state.image})` }} />}
-      </div>
+      <Control.file
+        model={model}
+        id={this.inputId}
+        onChange={this.handleChange}
+        {...multiple ? { multiple } : {}}
+      />
+
+      {this.state.images.length > 0 && <div className={styles.container}>
+        {this.state.images.map(image => <div
+          key={UUID.v4()}
+          style={{ '--image': `url(${image.src})` }}
+          className={styles.image}
+        />)}
+      </div>}
     </div>;
   }
 }

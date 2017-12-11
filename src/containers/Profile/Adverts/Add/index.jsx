@@ -68,7 +68,7 @@ const Add = ({ send }) => <div className={styles.add}>
       type="textarea"
     />
 
-    <Files model=".image" label="Выберите изображение" className={styles.files} />
+    <Files model=".image" label="Выберите изображение" multiple className={styles.files} />
 
     <div className={styles.divider} />
 

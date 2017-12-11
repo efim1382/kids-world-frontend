@@ -40,6 +40,9 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 			background-position: center;
+			&:nth-of-type(n+2) {
+				margin-top: 16px;
+			}
 		}
 	}
 }
