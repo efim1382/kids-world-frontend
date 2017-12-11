@@ -1,5 +1,5 @@
 .icon {
-	--icon-size: 24px;
-	font-size: var(--icon-size);
+	--icon_size: 24px;
+	font-size: var(--icon_size);
 	color: var(--icon-color);
 }

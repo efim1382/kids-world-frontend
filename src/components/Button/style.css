@@ -1,0 +1,59 @@
+.button {
+	--padding: 12px;
+	--height: var(--minimal-button-size);
+	--icon-size: 20px;
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-width: var(--height);
+	height: var(--height);
+	padding-left: var(--padding);
+	padding-right: var(--padding);
+	border-radius: 2px;
+	cursor: pointer;
+	contain: strict;
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		border-radius: inherit;
+		background-color: var(--background-color);
+		opacity: var(--opacity);
+		transition-property: background-color, opacity;
+		pointer-events: none;
+		z-index: -1;
+	}
+	&[data-appearance="none"] {
+		--background-color: transparent;
+		--color: var(--color-text);
+		--opacity: 1;
+	}
+	&[data-appearance="primary"] {
+		--color: #fff;
+		--background-color: var(--color-accent);
+		&:not(:hover) {
+			--opacity: 1;
+		}
+		&:hover {
+			--opacity: 0.8;
+		}
+	}
+	& > span {
+		--height: 16px;
+		flex-shrink: 0;
+		height: var(--height);
+		line-height: var(--height);
+		font-size: 15px;
+		color: var(--color);
+		transition-property: color;
+	}
+	& > i {
+		--icon_size: var(--icon-size);
+		--icon-color: var(--color);
+		flex-shrink: 0;
+	}
+}

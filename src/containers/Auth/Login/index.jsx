@@ -4,8 +4,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { Form, Field, Notification } from 'components';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Form, Field, Notification, Button } from 'components';
 
 import api from '../api';
 import { setToken } from '../actions';
@@ -137,10 +136,10 @@ class Login extends Component {
           />
         </div>
 
-        <RaisedButton
-          primary
+        <Button
           type="submit"
-          label="Войти"
+          appearance="primary"
+          caption="Войти"
           className={styles.buttonSubmit}
         />
       </Form>

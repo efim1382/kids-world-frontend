@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
-import { Form, Field, Select, Files } from 'components';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Form, Field, Select, Files, Button } from 'components';
 
 import api from '../api';
 
@@ -72,12 +71,7 @@ const Add = ({ send }) => <div className={styles.add}>
 
     <div className={styles.divider} />
 
-    <RaisedButton
-      primary
-      type="submit"
-      label="Добавить"
-      className={styles.submit}
-    />
+    <Button appearance="primary" caption="Добавить" className={styles.submit} />
   </Form>
 </div>;
 

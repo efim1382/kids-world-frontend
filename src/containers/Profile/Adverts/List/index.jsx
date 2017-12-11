@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+
+import { Button } from 'components';
+
 import styles from './style.css';
 
 const List = () => <div className={styles.adverts}>
   <Link to="/profile/adverts/add">
-    <RaisedButton label="Подать объявление" primary />
+    <Button appearance="primary" caption="Подать объявление" />
   </Link>
 
   <ul className={styles.list}>
@@ -17,7 +18,7 @@ const List = () => <div className={styles.adverts}>
         <h4>Детские кроссовки</h4>
 
         <Link to="/profile/adverts/1/edit">
-          <FlatButton label="Редактировать" />
+          <Button caption="Редактировать" />
         </Link>
       </div>
     </li>

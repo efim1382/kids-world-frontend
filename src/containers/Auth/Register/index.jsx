@@ -4,8 +4,7 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { Form, Field, Notification } from 'components';
-import RaisedButton from 'material-ui/RaisedButton';
+import { Form, Field, Notification, Button } from 'components';
 
 import api from '../api';
 
@@ -248,10 +247,10 @@ class Register extends Component {
           />
         </div>
 
-        <RaisedButton
-          primary
+        <Button
           type="submit"
-          label="Зарегистрироваться"
+          appearance="primary"
+          caption="Зарегистрироваться"
           className={styles.buttonSubmit}
         />
       </Form>

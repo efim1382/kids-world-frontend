@@ -5,8 +5,7 @@ import { replace } from 'react-router-redux';
 import { Link } from 'react-router';
 import ClickOutside from 'helpers/click-outside-popup';
 
-import { Icon } from 'components';
-import IconButton from 'material-ui/IconButton';
+import { Icon, Button } from 'components';
 
 import { resetToken } from 'containers/Auth/actions';
 
@@ -113,10 +112,7 @@ class Header extends Component {
         <h1>Kids World</h1>
       </Link>
 
-
-      <IconButton onClick={this.togglePopup}>
-        <Icon name="more_vert" color={'#fff'} />
-      </IconButton>
+      <Button icon="more_vert" onClick={this.togglePopup} />
 
       <Popup
         show={this.state.shown}
