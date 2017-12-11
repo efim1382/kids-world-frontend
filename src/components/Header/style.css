@@ -29,6 +29,9 @@
     flex-shrink: 0;
     margin-left: auto !important;
   }
+  & > button i {
+    --icon-color: #fff;
+  }
 }
 
 .popup {
@@ -87,7 +90,7 @@
     & > * {
       pointer-events: none;
     }
-    & > span {}
+    & > i {}
     & > label {
       margin-left: 16px;
       font-size: 15px;
