@@ -4,9 +4,8 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { Form, Field } from 'components';
+import { Form, Field, Notification } from 'components';
 import RaisedButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
 
 import api from '../api';
 
@@ -257,10 +256,9 @@ class Register extends Component {
         />
       </Form>
 
-      <Snackbar
-        open={this.state.snackbar.showed}
+      <Notification
+        show={this.state.snackbar.showed}
         message={this.state.snackbar.message}
-        autoHideDuration={4000}
         onRequestClose={this.handleSnackbarClose}
       />
     </div>);

@@ -4,9 +4,8 @@ import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { Form, Field } from 'components';
+import { Form, Field, Notification } from 'components';
 import RaisedButton from 'material-ui/RaisedButton';
-import Snackbar from 'material-ui/Snackbar';
 
 import api from '../api';
 import { setToken } from '../actions';
@@ -42,7 +41,7 @@ class Login extends Component {
     const hasErrors = this.isFormHasErrors();
 
     if (hasErrors) {
-      this.showSnackbar('Заполните все поля');
+      this.handleSnackbarShow('Заполните все поля');
       return;
     }
 
@@ -52,7 +51,7 @@ class Login extends Component {
       body: JSON.stringify(data),
     })).then((response) => {
       if (response.status !== 200) {
-        this.showSnackbar(response.message);
+        this.handleSnackbarShow(response.message);
         return;
       }
 
@@ -61,7 +60,7 @@ class Login extends Component {
     });
   };
 
-  showSnackbar = (message) => {
+  handleSnackbarShow = (message) => {
     this.setState({
       snackbar: {
         showed: true,
@@ -146,10 +145,9 @@ class Login extends Component {
         />
       </Form>
 
-      <Snackbar
-        open={this.state.snackbar.showed}
+      <Notification
+        show={this.state.snackbar.showed}
         message={this.state.snackbar.message}
-        autoHideDuration={4000}
         onRequestClose={this.handleSnackbarClose}
       />
     </div>);

@@ -2,6 +2,7 @@ export Header from './Header';
 export Footer from './Footer';
 export Icon from './Icon';
 export Navigation from './Navigation';
+export Notification from './Notification';
 export UserProfile from './UserProfile';
 export Form from './Form/Form';
 export Field from './Form/Field';

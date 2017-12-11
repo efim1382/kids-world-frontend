@@ -1,0 +1,24 @@
+.notification {
+	--height: 40px;
+	position: fixed;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%) translateY(var(--translate));
+	min-width: 200px;
+	height: var(--height);
+	padding-left: 12px;
+	padding-right: 12px;
+	line-height: var(--height);
+	text-align: center;
+	font-size: 15px;
+	border-radius: 2px;
+	background-color: rgba(0, 0, 0, 0.9);
+	color: #fff;
+	transition-property: transform;
+	&:not([data-show]) {
+		--translate: var(--height);
+	}
+	&[data-show] {
+		--translate: 0;
+	}
+}
