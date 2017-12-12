@@ -25,10 +25,15 @@ const Popup = ({ show, isAuthorize, handleLogoutClick }) => <div
     <label>Зарегистрироваться</label>
   </Link>}
 
-  <Link to="/profile">
-    <Icon name="supervisor_account" />
-    <label>Профиль</label>
-  </Link>
+  {isAuthorize && <Link to="/profile/adverts">
+    <Icon name="view_list" />
+    <label>Мои объявления</label>
+  </Link>}
+
+  {isAuthorize && <Link to="/profile/settings">
+    <Icon name="settings" />
+    <label>Настройки</label>
+  </Link>}
 
   {isAuthorize && <button onClick={handleLogoutClick}>
     <Icon name="exit_to_app" />
