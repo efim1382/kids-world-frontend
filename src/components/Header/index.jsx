@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Link } from 'react-router';
-import ClickOutside from 'helpers/click-outside-popup';
 
 import { Icon, Button, Popup } from 'components';
 
@@ -11,41 +10,53 @@ import { resetToken } from 'containers/Auth/actions';
 
 import styles from './style.css';
 
-const UserLinks = ({ show, isAuthorize, handleLogoutClick }) => <Popup
-  className={styles.popup}
-  show={show}
->
-  {!isAuthorize && <Link to="/auth/login">
-    <Icon name="supervisor_account" />
-    <label>Войти</label>
-  </Link>}
+class UserLinks extends Component {
+  static propTypes = {
+    show: PropTypes.bool.isRequired,
+    isAuthorize: PropTypes.bool.isRequired,
+    handleLogoutClick: PropTypes.func.isRequired,
+    handleClosePopup: PropTypes.func.isRequired,
+  };
 
-  {!isAuthorize && <Link to="/auth/register">
-    <Icon name="person_add" />
-    <label>Зарегистрироваться</label>
-  </Link>}
+  render() {
+    const { show, isAuthorize, handleClosePopup, handleLogoutClick } = this.props;
 
-  {isAuthorize && <Link to="/profile/adverts">
-    <Icon name="view_list" />
-    <label>Мои объявления</label>
-  </Link>}
+    return <Popup
+      className={styles.popup}
+      show={show}
+    >
+      {!isAuthorize && <Link to="/auth/login" onClick={handleClosePopup}>
+        <Icon name="supervisor_account" />
+        <label>Войти</label>
+      </Link>}
 
-  {isAuthorize && <Link to="/profile/settings">
-    <Icon name="settings" />
-    <label>Настройки</label>
-  </Link>}
+      {!isAuthorize && <Link to="/auth/register" onClick={handleClosePopup}>
+        <Icon name="person_add" />
+        <label>Зарегистрироваться</label>
+      </Link>}
 
-  {isAuthorize && <button onClick={handleLogoutClick}>
-    <Icon name="exit_to_app" />
-    <label>Выйти</label>
-  </button>}
-</Popup>;
+      {isAuthorize && <Link to="/profile/adverts" onClick={handleClosePopup}>
+        <Icon name="view_list" />
+        <label>Мои объявления</label>
+      </Link>}
 
-UserLinks.propTypes = {
-  show: PropTypes.bool.isRequired,
-  isAuthorize: PropTypes.bool.isRequired,
-  handleLogoutClick: PropTypes.func.isRequired,
-};
+      {isAuthorize && <Link to="/profile/settings" onClick={handleClosePopup}>
+        <Icon name="settings" />
+        <label>Настройки</label>
+      </Link>}
+
+      {isAuthorize && <button
+        onClick={() => {
+          handleClosePopup();
+          handleLogoutClick();
+        }}
+      >
+        <Icon name="exit_to_app" />
+        <label>Выйти</label>
+      </button>}
+    </Popup>;
+  }
+}
 
 class Header extends Component {
   static propTypes = {
@@ -87,8 +98,6 @@ class Header extends Component {
     dispatch(resetToken());
     dispatch(replace('/'));
 
-    this.handleClosePopup();
-
     this.setState({
       isAuthorize: false,
     });
@@ -106,10 +115,11 @@ class Header extends Component {
       <UserLinks
         show={this.state.shown}
         isAuthorize={this.state.isAuthorize}
+        handleClosePopup={this.handleClosePopup}
         handleLogoutClick={this.handleLogoutClick}
       />
     </header>;
   }
 }
 
-export default connect()(ClickOutside(Header));
+export default connect()(Header);
