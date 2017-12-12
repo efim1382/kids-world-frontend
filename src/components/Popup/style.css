@@ -4,11 +4,11 @@
   opacity: var(--opacity);
   pointer-events: var(--pointer-events);
   transition-property: opacity;
-  &:not(:global(._show)) {
+  &:not(:global(._shown)) {
     --opacity: 0;
     --pointer-events: none;
   }
-  &:global(._show) {
+  &:global(._shown) {
     --opacity: 1;
     --pointer-events: auto;
   }

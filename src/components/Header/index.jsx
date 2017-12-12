@@ -10,61 +10,13 @@ import { resetToken } from 'containers/Auth/actions';
 
 import styles from './style.css';
 
-class UserLinks extends Component {
-  static propTypes = {
-    show: PropTypes.bool.isRequired,
-    isAuthorize: PropTypes.bool.isRequired,
-    handleLogoutClick: PropTypes.func.isRequired,
-    handleClosePopup: PropTypes.func.isRequired,
-  };
-
-  render() {
-    const { show, isAuthorize, handleClosePopup, handleLogoutClick } = this.props;
-
-    return <Popup
-      className={styles.popup}
-      show={show}
-    >
-      {!isAuthorize && <Link to="/auth/login" onClick={handleClosePopup}>
-        <Icon name="supervisor_account" />
-        <label>Войти</label>
-      </Link>}
-
-      {!isAuthorize && <Link to="/auth/register" onClick={handleClosePopup}>
-        <Icon name="person_add" />
-        <label>Зарегистрироваться</label>
-      </Link>}
-
-      {isAuthorize && <Link to="/profile/adverts" onClick={handleClosePopup}>
-        <Icon name="view_list" />
-        <label>Мои объявления</label>
-      </Link>}
-
-      {isAuthorize && <Link to="/profile/settings" onClick={handleClosePopup}>
-        <Icon name="settings" />
-        <label>Настройки</label>
-      </Link>}
-
-      {isAuthorize && <button
-        onClick={() => {
-          handleClosePopup();
-          handleLogoutClick();
-        }}
-      >
-        <Icon name="exit_to_app" />
-        <label>Выйти</label>
-      </button>}
-    </Popup>;
-  }
-}
-
 class Header extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
   };
 
   state = {
-    shown: false,
+    isPopupShown: false,
     isAuthorize: false,
   };
 
@@ -80,15 +32,15 @@ class Header extends Component {
     });
   }
 
-  togglePopup = () => {
+  handleTogglePopup = () => {
     this.setState({
-      shown: !this.state.shown,
+      isPopupShown: !this.state.isPopupShown,
     });
   };
 
-  handleClosePopup = () => {
+  handlePopupClose = () => {
     this.setState({
-      shown: false,
+      isPopupShown: false,
     });
   };
 
@@ -110,14 +62,44 @@ class Header extends Component {
         <h1>Kids World</h1>
       </Link>
 
-      <Button icon="more_vert" onClick={this.togglePopup} />
+      <Button icon="more_vert" onClick={this.handleTogglePopup} />
 
-      <UserLinks
-        show={this.state.shown}
-        isAuthorize={this.state.isAuthorize}
-        handleClosePopup={this.handleClosePopup}
-        handleLogoutClick={this.handleLogoutClick}
-      />
+      <Popup
+        parentComponent={this}
+        show={this.state.isPopupShown}
+        handleClose={this.handlePopupClose}
+        className={styles.popup}
+      >
+        {!this.state.isAuthorize && <Link to="/auth/login" onClick={this.handlePopupClose}>
+          <Icon name="supervisor_account" />
+          <label>Войти</label>
+        </Link>}
+
+        {!this.state.isAuthorize && <Link to="/auth/register" onClick={this.handlePopupClose}>
+          <Icon name="person_add" />
+          <label>Зарегистрироваться</label>
+        </Link>}
+
+        {this.state.isAuthorize && <Link to="/profile/adverts" onClick={this.handlePopupClose}>
+          <Icon name="view_list" />
+          <label>Мои объявления</label>
+        </Link>}
+
+        {this.state.isAuthorize && <Link to="/profile/settings" onClick={this.handlePopupClose}>
+          <Icon name="settings" />
+          <label>Настройки</label>
+        </Link>}
+
+        {this.state.isAuthorize && <button
+          onClick={() => {
+            this.handlePopupClose();
+            this.handleLogoutClick();
+          }}
+        >
+          <Icon name="exit_to_app" />
+          <label>Выйти</label>
+        </button>}
+      </Popup>
     </header>;
   }
 }
