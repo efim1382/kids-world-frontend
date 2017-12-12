@@ -5,15 +5,15 @@ import { replace } from 'react-router-redux';
 import { Link } from 'react-router';
 import ClickOutside from 'helpers/click-outside-popup';
 
-import { Icon, Button } from 'components';
+import { Icon, Button, Popup } from 'components';
 
 import { resetToken } from 'containers/Auth/actions';
 
 import styles from './style.css';
 
-const Popup = ({ show, isAuthorize, handleLogoutClick }) => <div
+const UserLinks = ({ show, isAuthorize, handleLogoutClick }) => <Popup
   className={styles.popup}
-  {...show ? { 'data-show': '' } : {}}
+  show={show}
 >
   {!isAuthorize && <Link to="/auth/login">
     <Icon name="supervisor_account" />
@@ -39,9 +39,9 @@ const Popup = ({ show, isAuthorize, handleLogoutClick }) => <div
     <Icon name="exit_to_app" />
     <label>Выйти</label>
   </button>}
-</div>;
+</Popup>;
 
-Popup.propTypes = {
+UserLinks.propTypes = {
   show: PropTypes.bool.isRequired,
   isAuthorize: PropTypes.bool.isRequired,
   handleLogoutClick: PropTypes.func.isRequired,
@@ -54,7 +54,6 @@ class Header extends Component {
 
   state = {
     shown: false,
-    location: window.location.pathname,
     isAuthorize: false,
   };
 
@@ -68,21 +67,6 @@ class Header extends Component {
     this.setState({
       isAuthorize: true,
     });
-  }
-
-  componentWillReceiveProps() {
-    if (this.state.location !== window.location.pathname) {
-      this.setState({
-        shown: false,
-        location: window.location.pathname,
-      });
-    }
-
-    if (this.state.location === window.location.pathname) {
-      this.setState({
-        shown: false,
-      });
-    }
   }
 
   togglePopup = () => {
@@ -119,7 +103,7 @@ class Header extends Component {
 
       <Button icon="more_vert" onClick={this.togglePopup} />
 
-      <Popup
+      <UserLinks
         show={this.state.shown}
         isAuthorize={this.state.isAuthorize}
         handleLogoutClick={this.handleLogoutClick}

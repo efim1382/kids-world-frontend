@@ -34,8 +34,6 @@
 }
 
 .popup {
-  z-index: 2;
-  position: absolute;
   display: flex;
   flex-direction: column;
   top: var(--header-height);
@@ -45,17 +43,6 @@
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 0 0 1px var(--color-divider) inset, 1px 1px 1px 0 rgba(0, 0, 0, 0.1);
-  opacity: var(--opacity);
-  pointer-events: var(--pointer-events);
-  transition-property: opacity;
-  &:not([data-show]) {
-    --opacity: 0;
-    --pointer-events: none;
-  }
-  &[data-show] {
-    --opacity: 1;
-    --pointer-events: auto;
-  }
   &::before {
     --size: 6px;
     content: "";

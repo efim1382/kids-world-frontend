@@ -1,0 +1,15 @@
+.popup {
+	z-index: 999;
+	position: absolute;
+  opacity: var(--opacity);
+  pointer-events: var(--pointer-events);
+  transition-property: opacity;
+  &:not(:global(._show)) {
+    --opacity: 0;
+    --pointer-events: none;
+  }
+  &:global(._show) {
+    --opacity: 1;
+    --pointer-events: auto;
+  }
+}
