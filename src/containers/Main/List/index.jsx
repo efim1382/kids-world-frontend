@@ -17,9 +17,14 @@ import styles from './style.css';
 const filterCategories = advertCategory =>
   categories.filter(category => category.value === advertCategory)[0].name;
 
+const filterImage = (image) => {
+  if (image === '/images/ad-image.jpg') return "url('/images/ad-image.jpg')";
+  return `url(${uploadPath}/${image})`;
+};
+
 const List = ({ adverts }) => <div className={styles.list}>
   {adverts && adverts.map(advert => <div key={advert.id} className={styles.item}>
-    <div className={styles.image} style={{ '--image': `url("${uploadPath}/${advert.mainImage}")` }} />
+    <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
 
     <div className={styles.content}>
       <div className={styles.header}>
