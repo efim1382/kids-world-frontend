@@ -2,25 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
+import { replace } from 'react-router-redux';
+
 import { Form, Field, Select, Files, Button } from 'components';
 
-import api from '../api';
+import { addAdvert } from '../actions';
 
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {
-  const newData = new FormData();
-  newData.append('userId', 1);
-  newData.append('title', data.title);
-  newData.append('image', data.image[0]);
-  newData.append('price', data.price);
-  newData.append('category', data.category);
-  newData.append('description', data.description.split('\n').join('<br />'));
+  dispatch(addAdvert(data)).then((responce) => {
+    if (responce.status !== 200) {
+      return;
+    }
 
-  dispatch(api.actions.addAdvert({}, {
-    body: newData,
-  })).then((response) => {
-    console.log(response);
+    dispatch(replace('/'));
   });
 };
 
