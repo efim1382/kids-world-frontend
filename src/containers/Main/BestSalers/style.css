@@ -1,3 +1,29 @@
 .best-salers {
-  
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  width: 300px;
+  margin-left: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px var(--color-divider) inset;
+  & > .title {
+  	--height: 60px;
+  	overflow: hidden;
+  	height: var(--height);
+  	line-height: var(--height);
+		font-size: 16px;
+		color: var(--color-text);
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		box-shadow: 0 -1px var(--color-divider) inset;
+  }
+  & > .list {
+  	padding-top: 12px;
+  	padding-bottom: 12px;
+  	& > div {
+  		--card-height: 56px;
+  	}
+  }
 }

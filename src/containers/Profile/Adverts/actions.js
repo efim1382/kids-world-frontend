@@ -1,7 +1,6 @@
 import moment from 'moment';
 import api from './api';
 
-// eslint-disable-next-line import/prefer-default-export
 export const addAdvert = data => dispatch => new Promise((resolve, reject) => {
   dispatch(api.actions.createAdvert()).then((responce) => {
     if (responce.status !== 200) {
@@ -34,3 +33,5 @@ export const addAdvert = data => dispatch => new Promise((resolve, reject) => {
     });
   });
 });
+
+export const getAdverts = () => api.actions.getAdverts();

@@ -6,6 +6,8 @@ import { replace } from 'react-router-redux';
 
 import { Form, Field, Select, Files, Button } from 'components';
 
+import categories from 'containers/Profile/Adverts/categories';
+
 import { addAdvert } from '../actions';
 
 import styles from './style.css';
@@ -38,23 +40,7 @@ const Add = ({ send }) => <div className={styles.add}>
     <Select
       label="Категория"
       model=".category"
-
-      items={[
-        {
-          name: 'Одежда',
-          value: 'clothes',
-        },
-
-        {
-          name: 'Обувь',
-          value: 'footwear',
-        },
-
-        {
-          name: 'Детские товары',
-          value: 'goods',
-        },
-      ]}
+      items={categories}
     />
 
     <Field
@@ -63,10 +49,8 @@ const Add = ({ send }) => <div className={styles.add}>
       type="textarea"
     />
 
-    <Files model=".image" label="Выберите изображение" multiple className={styles.files} />
-
+    <Files model=".image" label="Выберите изображение" className={styles.files} />
     <div className={styles.divider} />
-
     <Button appearance="primary" caption="Добавить" className={styles.submit} />
   </Form>
 </div>;
