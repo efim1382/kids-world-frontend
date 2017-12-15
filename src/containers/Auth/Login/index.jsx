@@ -53,7 +53,6 @@ class Login extends Component {
         this.handleSnackbarShow(response.message);
         return;
       }
-
       dispatch(setToken(response.token));
       dispatch(replace('/'));
     });

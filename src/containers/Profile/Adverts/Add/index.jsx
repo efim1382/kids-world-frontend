@@ -8,17 +8,32 @@ import { Form, Field, Select, Files, Button } from 'components';
 
 import categories from 'containers/Profile/Adverts/categories';
 
+import { api as userApi } from 'containers/User';
 import { addAdvert } from '../actions';
 
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {
-  dispatch(addAdvert(data)).then((responce) => {
+  const token = JSON.parse(localStorage.getItem('token')).key;
+
+  dispatch(userApi.actions.currentUser({}, {
+    body: JSON.stringify({
+      token,
+    }),
+  })).then((responce) => {
     if (responce.status !== 200) {
       return;
     }
 
-    dispatch(replace('/'));
+    const userId = responce.user.id;
+
+    dispatch(addAdvert(data, userId)).then((resp) => {
+      if (resp.status !== 200) {
+        return;
+      }
+
+      dispatch(replace('/'));
+    });
   });
 };
 

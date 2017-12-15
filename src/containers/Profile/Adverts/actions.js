@@ -1,7 +1,7 @@
 import moment from 'moment';
 import api from './api';
 
-export const addAdvert = data => dispatch => new Promise((resolve, reject) => {
+export const addAdvert = (data, userId) => dispatch => new Promise((resolve, reject) => {
   dispatch(api.actions.createAdvert()).then((responce) => {
     if (responce.status !== 200) {
       reject(responce);
@@ -13,7 +13,7 @@ export const addAdvert = data => dispatch => new Promise((resolve, reject) => {
 
     const newData = new FormData();
     newData.append('id', advertId);
-    newData.append('userId', 1);
+    newData.append('userId', userId);
     newData.append('title', data.title);
     newData.append('date', date);
     newData.append('image', data.image[0]);
