@@ -16,6 +16,7 @@
 		flex-shrink: 0;
 		padding-left: var(--padding-horizontal);
 		padding-right: var(--padding-horizontal);
+		background-color: #fff;
 	}
 	& > div {
 		flex-grow: 1;
