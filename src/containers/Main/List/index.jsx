@@ -18,7 +18,7 @@ const filterCategories = advertCategory =>
   categories.filter(category => category.value === advertCategory)[0].name;
 
 const filterImage = (image) => {
-  if (image === '/images/ad-image.jpg') return "url('/images/ad-image.jpg')";
+  if (image === '/images/ad-image.jpg') return `url('${image}')`;
   return `url(${uploadPath}/${image})`;
 };
 
@@ -30,7 +30,7 @@ const List = ({ adverts }) => <div className={styles.list}>
       <div className={styles.header}>
         <Card
           image="url('/images/user-image.jpg')"
-          link="#"
+          link={`/user/${advert.idUser}`}
           name="Иван Петров"
           text={advert.date}
         />
