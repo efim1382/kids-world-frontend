@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { LocalForm } from 'react-redux-form';
 
 import Field from './Field';
-// import Select from './Select';
+import Select from './Select';
 
 class Form extends Component {
   static propTypes = {
@@ -19,7 +19,12 @@ class Form extends Component {
 
   buildChildren = children => (
     React.Children.map(children, (child) => {
-      if (!child || child.type.toString() !== Field.toString()) {
+      if (!child
+        || !(
+          child.type.toString() === Field.toString()
+          || child.type.toString() === Select.toString()
+        )
+      ) {
         return child;
       }
 

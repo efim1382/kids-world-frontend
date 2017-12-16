@@ -15,10 +15,11 @@ const FieldComponent = ({
   isValidate,
   className,
   fieldValue,
+  type,
   ...props
 }) => <div className={classNames(styles.fieldContainer, className)}>
   {caption && <span className={styles.caption}>{ caption }</span>}
-  <input {...props} />
+  {type !== 'textarea' ? <input {...props} /> : <textarea {...props} />}
 
   {isValidate && <Errors
     isValid={isValid}
@@ -33,13 +34,14 @@ FieldComponent.propTypes = {
   isValid: PropTypes.bool,
   errorMessage: PropTypes.string,
   fieldValue: PropTypes.string,
+  type: PropTypes.string,
   className: PropTypes.string,
 };
 
 class Field extends Component {
   static propTypes = {
     model: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(['text', 'password', 'email']),
+    type: PropTypes.oneOf(['text', 'password', 'email', 'number', 'textarea']),
     placeholder: PropTypes.string,
     caption: PropTypes.string,
     defaultValue: PropTypes.string,
@@ -131,7 +133,6 @@ class Field extends Component {
           if (!touched) return true;
 
           const valid = store.forms[`${formModel}`][`${fieldModel}`].valid;
-
           return valid;
         },
       }}
