@@ -3,9 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LocalForm } from 'react-redux-form';
 
-import Select from './Select';
-
-import styles from './style.css';
+import Field from './Field';
+// import Select from './Select';
 
 class Form extends Component {
   static propTypes = {
@@ -20,7 +19,7 @@ class Form extends Component {
 
   buildChildren = children => (
     React.Children.map(children, (child) => {
-      if (!child || child.type.toString() !== Select.toString()) {
+      if (!child || child.type.toString() !== Field.toString()) {
         return child;
       }
 
@@ -35,7 +34,6 @@ class Form extends Component {
     const { children, ...props } = this.props;
 
     return <LocalForm
-      className={styles.form}
       getDispatch={formDispatch => this.setState({ formDispatch })}
       {...props}
     >

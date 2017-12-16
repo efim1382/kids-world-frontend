@@ -1,54 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 
-import { Form, Field, Notification, Button } from 'components';
+import { Form, Field, Button } from 'components';
 
 import api from '../api';
+import { setToken } from '../actions';
 
 import styles from './style.css';
 
 class Register extends Component {
-  state = {
-    snackbar: {
-      showed: false,
-      message: '',
-    },
-    errorMessages: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      address: '',
-      password: '',
-      repassword: '',
-    },
-    password: '',
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
   };
 
-  isFormHasErrors = () => {
-    const keys = Object.keys(this.state.errorMessages);
-    let isError = false;
-
-    for (let i = 0; i < keys.length; i++) {
-      if (this.state.errorMessages[keys[i]]) {
-        isError = true;
-      }
-    }
-
-    return isError;
+  state = {
+    password: '',
+    confirmPassword: '',
   };
 
   sendHandler = (data) => {
-    const hasErrors = this.isFormHasErrors();
-
-    if (hasErrors) {
-      this.showSnackbar('Заполните все поля');
-      return;
-    }
-
     const { dispatch } = this.props;
 
     dispatch(api.actions.register({}, {
@@ -58,128 +30,11 @@ class Register extends Component {
       }),
     })).then((response) => {
       if (response.status !== 200) {
-        this.showSnackbar(response.message);
         return;
       }
 
+      dispatch(setToken(response.token));
       dispatch(replace('/'));
-    });
-  };
-
-  showSnackbar = (message) => {
-    this.setState({
-      snackbar: {
-        showed: true,
-        message,
-      },
-    });
-  };
-
-  handleSnackbarClose = () => {
-    this.setState({
-      snackbar: {
-        showed: false,
-        message: '',
-      },
-    });
-  };
-
-  handleFirstNameChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        firstName: (value) ? '' : 'Введите имя',
-      },
-    });
-  };
-
-  handleLastNameChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        lastName: (value) ? '' : 'Введите фамилию',
-      },
-    });
-  };
-
-  handleEmailChange = (event) => {
-    // eslint-disable-next-line no-useless-escape
-    const reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    const value = event.target.value;
-    const isValid = reg.test(value);
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        email: (value && isValid) ? '' : 'Введите правильный Email',
-      },
-    });
-  };
-
-  handlePhoneChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        phone: (value) ? '' : 'Введите телефон',
-      },
-    });
-  };
-
-  handleAddressChange = (event) => {
-    const value = event.target.value;
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        address: (value) ? '' : 'Введите адрес',
-      },
-    });
-  };
-
-  handlePasswordChange = (event) => {
-    const value = event.target.value;
-    let message = '';
-
-    if (!value) {
-      message = 'Введите пароль';
-    }
-
-    if (value && value.length < 6) {
-      message = 'Пароль должен состоять минимум из 6 символов';
-    }
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        password: message,
-      },
-      password: value,
-    });
-  };
-
-  handleRepasswordChange = (event) => {
-    const value = event.target.value;
-    let message = '';
-
-    if (!value) {
-      message = 'Введите пароль';
-    }
-
-    if (value !== this.state.password) {
-      message = 'Пароли не совпадают';
-    }
-
-    this.setState({
-      errorMessages: {
-        ...this.state.errorMessages,
-        repassword: message,
-      },
     });
   };
 
@@ -188,64 +43,67 @@ class Register extends Component {
       <span className={styles.title}>Регистрация</span>
 
       <Form className={styles.form} model="register" onSubmit={this.sendHandler}>
-        <div className={styles.fieldContainer}>
-          <Field
-            label="Имя"
-            model=".firstName"
-            errorText={this.state.errorMessages.firstName}
-            onChange={this.handleFirstNameChange}
-          />
+        <Field
+          caption="Имя"
+          type="text"
+          model=".firstName"
+          isValidate
+          className={styles.fieldFirstName}
+        />
 
-          <Field
-            label="Фамилия"
-            model=".lastName"
-            errorText={this.state.errorMessages.lastName}
-            onChange={this.handleLastNameChange}
-          />
-        </div>
+        <Field
+          caption="Фамилия"
+          type="text"
+          model=".lastName"
+          isValidate
+          className={styles.fieldLastName}
+        />
 
-        <div className={styles.fieldContainer}>
-          <Field
-            label="Email"
-            model=".email"
-            errorText={this.state.errorMessages.email}
-            onChange={this.handleEmailChange}
-          />
+        <Field
+          caption="E-Mail"
+          type="email"
+          model=".email"
+          isValidate
+          errorMessage="Некорректный адрес эл. почты"
+          className={styles.fieldEmail}
+        />
 
-          <Field
-            label="Телефон"
-            model=".phone"
-            errorText={this.state.errorMessages.phone}
-            onChange={this.handlePhoneChange}
-          />
-        </div>
+        <Field
+          caption="Телефон"
+          type="text"
+          model=".phone"
+          isValidate
+          className={styles.fieldPhone}
+        />
 
-        <div className={styles.fieldContainer}>
-          <Field
-            label="Адресс"
-            model=".address"
-            errorText={this.state.errorMessages.address}
-            onChange={this.handleAddressChange}
-          />
-        </div>
+        <Field
+          caption="Адрес"
+          type="text"
+          model=".address"
+          isValidate
+          className={styles.fieldAddress}
+        />
 
-        <div className={styles.fieldContainer}>
-          <Field
-            label="Пароль"
-            model=".password"
-            type="password"
-            errorText={this.state.errorMessages.password}
-            onChange={this.handlePasswordChange}
-          />
+        <Field
+          caption="Пароль"
+          type="password"
+          model=".password"
+          isValidate
+          getValue={password => this.setState({ password })}
+          errorMessage="Пароль должен быть больше 6 символов"
+          className={styles.fieldPassword}
+        />
 
-          <Field
-            label="Повторите пароль"
-            model=".repassword"
-            type="password"
-            errorText={this.state.errorMessages.repassword}
-            onChange={this.handleRepasswordChange}
-          />
-        </div>
+        <Field
+          caption="Повторите пароль"
+          type="password"
+          model=".confirmPassword"
+          isValidate
+          getValue={confirmPassword => this.setState({ confirmPassword })}
+          errorMessage="Пароли не совпадают"
+          validator={() => this.state.password === this.state.confirmPassword}
+          className={styles.fieldConfirmPassword}
+        />
 
         <Button
           type="submit"
@@ -254,20 +112,8 @@ class Register extends Component {
           className={styles.buttonSubmit}
         />
       </Form>
-
-      <Notification
-        show={this.state.snackbar.showed}
-        message={this.state.snackbar.message}
-        onRequestClose={this.handleSnackbarClose}
-      />
     </div>);
   }
 }
 
-Register.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
-
-export default compose(
-  connect(),
-)(Register);
+export default connect()(Register);

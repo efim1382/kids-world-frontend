@@ -5,6 +5,7 @@
   --color-accent: #1e88e5;
   --color-error: #f44336;
   --color-divider: #ebebeb;
+  --color-caption: #666;
 
   /* Custom */
   --layout-padding: 30px;
@@ -17,13 +18,3 @@
   --font-weight-regular: 400;
   --font-weight-bold: 700;
 }
-
-@value colorText: var(--color-text);
-@value colorAccent: var(--color-accent);
-
-@value layoutPadding: var(--layout-padding);
-@value headerHeight: var(--header-height);
-
-@value fontWeightLight: var(--font-weight-light);
-@value fontWeightRegular: var(--font-weight-regular);
-@value fontWeightBold: var(--font-weight-bold);
