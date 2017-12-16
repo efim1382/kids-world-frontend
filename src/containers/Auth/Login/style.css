@@ -18,9 +18,12 @@
 }
 
 .form {
-	padding: 0 var(--horizontal-padding) 30px;
+	padding: 30px var(--horizontal-padding);
+	& > div:nth-of-type(n+2) {
+		margin-top: 8px;
+	}
 }
 
 .button-submit {
-	margin-top: 32px;
+	margin-top: 10px;
 }
