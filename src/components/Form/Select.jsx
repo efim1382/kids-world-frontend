@@ -74,8 +74,8 @@ class Select extends Component {
           >
             {items.map(item => <div
               key={item.value}
-              onClick={() => { this.handleChange(item.name, item.value); }}
               className={styles.selectItem}
+              onClick={() => { this.handleChange(item.name, item.value); }}
             >{ item.name }</div>)}
           </Popup>
         </div>

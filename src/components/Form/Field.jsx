@@ -19,10 +19,10 @@ const FieldComponent = ({
   ...props
 }) => <div className={classNames(styles.fieldContainer, className)}>
   {caption && <span className={styles.caption}>{ caption }</span>}
-  {type !== 'textarea' ? <input {...props} /> : <textarea {...props} />}
+  {type !== 'textarea' ? <input type={type} {...props} /> : <textarea {...props} />}
 
   {isValidate && <Errors
-    isValid={isValid}
+    show={isValid}
     message={errorMessage}
   />}
 </div>;

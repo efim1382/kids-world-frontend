@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import styles from './style.css';
 
-const Errors = ({ message, isValid }) => {
-  const className = isValid ? styles.errors : classNames(styles.errors, styles.showErrors);
+const Errors = ({ message, show }) => {
+  const className = show ? styles.errors : classNames(styles.errors, styles.showErrors);
 
   return <div className={className}>
     <span>{ message }</span>
@@ -14,7 +14,7 @@ const Errors = ({ message, isValid }) => {
 
 Errors.propTypes = {
   message: PropTypes.string.isRequired,
-  isValid: PropTypes.bool.isRequired,
+  show: PropTypes.bool.isRequired,
 };
 
 export default Errors;
