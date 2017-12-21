@@ -22,7 +22,7 @@ class Files extends Component {
   }
 
   handleChange = (event) => {
-    const files = event.target.files;
+    const { files } = event.target;
     const imagesArray = [];
 
     if (!files || !files[0]) {
@@ -47,7 +47,9 @@ class Files extends Component {
   };
 
   render() {
-    const { model, caption, multiple, className } = this.props;
+    const {
+      model, caption, multiple, className,
+    } = this.props;
 
     return <div className={classNames(styles.files, className)}>
       {caption && <label className={styles.caption}>{ caption }</label>}

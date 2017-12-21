@@ -127,10 +127,8 @@ class Field extends Component {
           const store = props.store.getState();
           if (typeof (store.forms[`${formModel}`][`${fieldModel}`]) === 'undefined') return true;
 
-          const touched = store.forms[`${formModel}`][`${fieldModel}`].touched;
+          const { touched, valid } = store.forms[`${formModel}`][`${fieldModel}`];
           if (!touched) return true;
-
-          const valid = store.forms[`${formModel}`][`${fieldModel}`].valid;
           return valid;
         },
       }}

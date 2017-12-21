@@ -73,7 +73,9 @@ class Select extends Component {
               key={item.value}
               className={styles.selectItem}
               onClick={() => { this.handleChange(item.name, item.value); }}
-            >{ item.name }</div>)}
+            >
+              { item.name }
+            </div>)}
           </Popup>
         </div>
       </div>

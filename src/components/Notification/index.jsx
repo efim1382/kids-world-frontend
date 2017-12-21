@@ -26,7 +26,8 @@ class Notification extends Component {
     return <div
       className={styles.notification}
       {...show ? { 'data-show': '' } : {}}
-    >{ message }</div>;
+    >{ message }
+    </div>;
   }
 }
 

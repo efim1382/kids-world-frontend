@@ -4,7 +4,9 @@ import classNames from 'classnames';
 import { Icon } from 'components';
 import styles from './style.css';
 
-const Button = ({ caption, icon, appearance = 'none', className, ...props }) => <button
+const Button = ({
+  caption, icon, appearance = 'none', className, ...props
+}) => <button
   className={classNames(styles.button, className)}
   data-appearance={appearance}
   {...props}

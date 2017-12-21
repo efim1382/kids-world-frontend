@@ -3,7 +3,9 @@ import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import styles from './style.css';
 
-const Card = ({ image, link, name, text }) => <div className={styles.card}>
+const Card = ({
+  image, link, name, text,
+}) => <div className={styles.card}>
   {image && <div className={styles.image} style={{ '--image': 'url("/images/user-image.jpg")' }} />}
 
   <div className={styles.section}>
