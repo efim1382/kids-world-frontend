@@ -4,8 +4,6 @@ import classNames from 'classnames';
 
 import { Header } from 'components';
 
-import { Card } from 'material-ui/Card';
-
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 
@@ -17,9 +15,9 @@ const Auth = ({ children }) => <div className={baseStyles.page}>
   <Header />
 
   <div className={classNames(baseStyles.content, styles.auth)}>
-    <Card>
+    <div className={styles.formWrapper}>
       { children }
-    </Card>
+    </div>
   </div>
 </div>;
 

@@ -5,6 +5,9 @@ export default createApi({
   getAdverts: {
     url: `${apiPath}/adverts`,
   },
+  getAdvert: {
+    url: `${apiPath}/advert/:id`,
+  },
   createAdvert: {
     url: `${apiPath}/adverts/create`,
     options: {

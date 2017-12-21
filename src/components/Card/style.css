@@ -42,7 +42,7 @@
 			}
 		}
 		& > .text {
-			--height: 12px;
+			--height: 14px;
 			overflow: hidden;
 			height: var(--height);
 			margin-top: 6px;

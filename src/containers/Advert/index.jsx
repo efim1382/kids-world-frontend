@@ -1,49 +1,114 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+import { compose, lifecycle } from 'recompose';
+import { uploadPath } from 'configuration';
+
+import advertsApi from 'containers/Profile/Adverts/api';
 
 import { Header, Card } from 'components';
+import categories from 'containers/Profile/Adverts/categories';
 
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 
-const Main = () => <div className={baseStyles.page}>
+const filterCategories = advertCategory =>
+  categories.filter(category => category.value === advertCategory)[0].name;
+
+const filterImage = (image) => {
+  if (image === '/images/ad-image.jpg') return `url('${image}')`;
+  return `url(${uploadPath}/${image})`;
+};
+
+const filterUserPhoto = (image) => {
+  if (image === '/images/user-image.jpg') return `url('${image}')`;
+  return `url(${uploadPath}/${image})`;
+};
+
+const Advert = ({ advert }) => <div className={baseStyles.page}>
   <Header />
 
-  <main className={classNames(baseStyles.content, styles.advert)}>
+  {!_.isEmpty(advert) && <main className={classNames(baseStyles.content, styles.advert)}>
     <div className={styles.advertDetails}>
       <header className={styles.header}>
         <div className={styles.title}>
-          <h2>Детские тапки для мальчика</h2>
-          <span>220 ₽</span>
+          <h2>{ advert.title }</h2>
+          <span>{ advert.price } ₽</span>
         </div>
 
-        <p className={styles.description}>25 мая, 2017, 10 просмотров</p>
+        <p className={styles.description}>{ advert.date }, 10 просмотров</p>
       </header>
 
-      <div className={styles.image} style={{ '--image': 'url("/images/ad-image.jpg")' }} />
+      <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
 
       <article className={styles.article}>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        Reiciendis alias quia, aut, voluptatem quibusdam veniam ullam porro quaerat,
-        enim aliquid, molestias adipisci animi?
-        Odio voluptates dicta molestias maiores modi voluptate.</p>
+        <p>{ filterCategories(advert.category) }</p>
+
+        <p
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: advert.description }}
+        />
       </article>
     </div>
 
     <div className={styles.sidebar}>
       <Card
-        image="url('/images/user-image.jpg')"
-        link="#"
-        name="Иван Петров"
-        text="25 декабря, 2017"
+        image={filterUserPhoto(advert.photo)}
+        link={`/user/${advert.userId}`}
+        name={`${advert.firstName} ${advert.lastName}`}
+        text={`${advert.email}`}
       />
 
       <div className={styles.properties}>
-        <p className={styles.item}><span className={styles.propertyTitle}>Телефон:</span> +7 (909) 40-79-312</p>
-        <p className={styles.item}><span className={styles.propertyTitle}>Адрес:</span> Ростов-на-Дону, Красноармейская, 123</p>
+        <p className={styles.item}>
+          <span className={styles.propertyTitle}>Телефон: </span>
+          { advert.phone }
+        </p>
+
+        <p className={styles.item}>
+          <span className={styles.propertyTitle}>Адрес: </span>
+          { advert.address }
+        </p>
       </div>
     </div>
-  </main>
+  </main>}
 </div>;
 
-export default Main;
+Advert.propTypes = {
+  advert: PropTypes.shape({
+    title: PropTypes.string,
+    date: PropTypes.string,
+    price: PropTypes.number,
+    category: PropTypes.string,
+    description: PropTypes.string,
+    mainImage: PropTypes.string,
+    userId: PropTypes.number,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    address: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+    photo: PropTypes.string,
+  }),
+};
+
+export default compose(
+  connect(
+    state => ({
+      advert: _.get(state, 'adverts.getAdvert.data', {}),
+    }),
+
+    {
+      getAdvert: advertsApi.actions.getAdvert.sync,
+    },
+  ),
+
+  lifecycle({
+    componentWillMount() {
+      const { params: { id }, getAdvert } = this.props;
+      getAdvert({ id });
+    },
+  }),
+)(Advert);
