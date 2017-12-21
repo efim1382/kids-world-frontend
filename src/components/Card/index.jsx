@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
-
 import styles from './style.css';
 
 const Card = ({ image, link, name, text }) => <div className={styles.card}>

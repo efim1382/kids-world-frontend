@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import { Icon } from 'components';
-
 import styles from './style.css';
 
 const Button = ({ caption, icon, appearance = 'none', className, ...props }) => <button

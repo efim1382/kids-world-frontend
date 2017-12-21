@@ -5,11 +5,8 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
 import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';
-
 import advertsApi from 'containers/Profile/Adverts/api';
-
 import { Header, Card } from 'components';
-
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 

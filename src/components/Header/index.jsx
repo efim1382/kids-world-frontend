@@ -3,11 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Link } from 'react-router';
-
 import { Icon, Button, Popup } from 'components';
-
 import { resetToken } from 'containers/Auth/actions';
-
 import styles from './style.css';
 
 class Header extends Component {

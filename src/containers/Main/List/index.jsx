@@ -7,9 +7,7 @@ import { Link } from 'react-router';
 import { uploadPath } from 'configuration';
 import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';
 import { getAdverts } from 'containers/Profile/Adverts/actions';
-
 import { Card } from 'components';
-
 import styles from './style.css';
 
 const List = ({ adverts }) => <div className={styles.list}>

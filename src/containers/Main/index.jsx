@@ -1,11 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-
 import { Header } from 'components';
-
 import List from './List';
 import BestSalers from './BestSalers';
-
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 

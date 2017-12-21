@@ -3,14 +3,10 @@ import PropTypes from 'prop-types';
 import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
-
 import { Form, Field, Select, Files, Button } from 'components';
-
 import categories from 'containers/Profile/Adverts/categories';
-
 import { api as userApi } from 'containers/User';
 import { addAdvert } from '../actions';
-
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {

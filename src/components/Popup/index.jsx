@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactDOM from 'react-dom';
-
 import styles from './style.css';
 
 class Popup extends Component {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { LocalForm } from 'react-redux-form';
-
 import Field from './Field';
 import Select from './Select';
 

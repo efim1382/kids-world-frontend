@@ -1,9 +1,7 @@
 import 'isomorphic-fetch';
-
 import reduxApi from 'redux-api';
 import adapterFetch from 'redux-api/lib/adapters/fetch';
 import { cloneDeep } from 'lodash';
-
 import fetchIntercept from 'fetch-intercept';
 
 fetchIntercept.register({

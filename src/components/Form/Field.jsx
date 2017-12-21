@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import { Control, actions } from 'react-redux-form';
 import Errors from './Errors';
-
 import styles from './style.css';
 
 const FieldComponent = ({

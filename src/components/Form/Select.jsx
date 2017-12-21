@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import { Field, actions } from 'react-redux-form';
-
 import { Icon, Popup } from 'components';
-
 import styles from './style.css';
 
 class Select extends Component {

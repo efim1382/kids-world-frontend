@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-
 import { Header } from 'components';
-
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 

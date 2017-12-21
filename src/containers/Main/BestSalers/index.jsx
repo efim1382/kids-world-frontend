@@ -1,7 +1,5 @@
 import React from 'react';
-
 import { Card } from 'components';
-
 import styles from './style.css';
 
 const BestSalers = () => <div className={styles.bestSalers}>

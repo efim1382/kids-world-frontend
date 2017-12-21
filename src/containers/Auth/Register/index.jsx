@@ -2,12 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
-
 import { Form, Field, Button } from 'components';
-
 import api from '../api';
 import { setToken } from '../actions';
-
 import styles from './style.css';
 
 class Register extends Component {
