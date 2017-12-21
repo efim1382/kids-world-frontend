@@ -26,9 +26,12 @@ const Advert = ({ advert }) => <div className={baseStyles.page}>
 
       <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
 
-      <article className={styles.article}>
-        <p>{ filterCategories(advert.category) }</p>
+      <p className={styles.category}>
+        <span className={styles.nameCategory}>Категория: </span>
+        { filterCategories(advert.category) }
+      </p>
 
+      <article className={styles.article}>
         <p
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{ __html: advert.description }}

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, lifecycle, withProps } from 'recompose';
 import { Link } from 'react-router';
-import { uploadPath } from 'configuration';
 import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';
 import { getAdverts } from 'containers/Profile/Adverts/actions';
 import { Card } from 'components';

@@ -57,6 +57,14 @@
       background-size: cover;
       background-position: center;
     }
+    & > .category {
+      margin-top: 16px;
+      font-size: 15px;
+      color: var(--color-text);
+      & > .name-category {
+        color: var(--color-caption);
+      }
+    }
     & > .article {
       margin-top: 16px;
       & > p {
