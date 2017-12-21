@@ -22,6 +22,11 @@ const filterImage = (image) => {
   return `url(${uploadPath}/${image})`;
 };
 
+const filterUserPhoto = (image) => {
+  if (image === '/images/user-image.jpg') return `url('${image}')`;
+  return `url(${uploadPath}/${image})`;
+};
+
 const List = ({ adverts }) => <div className={styles.list}>
   {adverts && adverts.map(advert => <div key={advert.id} className={styles.item}>
     <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
@@ -29,9 +34,9 @@ const List = ({ adverts }) => <div className={styles.list}>
     <div className={styles.content}>
       <div className={styles.header}>
         <Card
-          image="url('/images/user-image.jpg')"
-          link={`/user/${advert.idUser}`}
-          name="Иван Петров"
+          image={filterUserPhoto(advert.photo)}
+          link={`/user/${advert.userId}`}
+          name={`${advert.firstName} ${advert.lastName}`}
           text={advert.date}
         />
 
@@ -40,8 +45,8 @@ const List = ({ adverts }) => <div className={styles.list}>
 
       <h3>{ advert.title }</h3>
       <p className={styles.category}>{ filterCategories(advert.category) }</p>
-      <p className={styles.address}>Ул. Красноармейская, 132</p>
-      <Link to="#" className={styles.button}>Подробнее</Link>
+      <p className={styles.address}>{ advert.address }</p>
+      <Link to={`/advert/${advert.id}`} className={styles.button}>Подробнее</Link>
     </div>
   </div>)}
 </div>;
@@ -54,6 +59,11 @@ List.propTypes = {
     price: PropTypes.number.isRequired,
     category: PropTypes.string.isRequired,
     mainImage: PropTypes.string.isRequired,
+    userId: PropTypes.number.isRequired,
+    firstName: PropTypes.string.isRequired,
+    lastName: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+    photo: PropTypes.string.isRequired,
   })).isRequired,
 };
 
