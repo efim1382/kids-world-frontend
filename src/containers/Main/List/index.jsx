@@ -5,27 +5,12 @@ import { bindActionCreators } from 'redux';
 import { compose, lifecycle, withProps } from 'recompose';
 import { Link } from 'react-router';
 import { uploadPath } from 'configuration';
-
+import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';
 import { getAdverts } from 'containers/Profile/Adverts/actions';
 
 import { Card } from 'components';
 
-import categories from 'containers/Profile/Adverts/categories';
-
 import styles from './style.css';
-
-const filterCategories = advertCategory =>
-  categories.filter(category => category.value === advertCategory)[0].name;
-
-const filterImage = (image) => {
-  if (image === '/images/ad-image.jpg') return `url('${image}')`;
-  return `url(${uploadPath}/${image})`;
-};
-
-const filterUserPhoto = (image) => {
-  if (image === '/images/user-image.jpg') return `url('${image}')`;
-  return `url(${uploadPath}/${image})`;
-};
 
 const List = ({ adverts }) => <div className={styles.list}>
   {adverts && adverts.map(advert => <div key={advert.id} className={styles.item}>

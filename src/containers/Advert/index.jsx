@@ -1,31 +1,17 @@
 import React from 'react';
+import _ from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import _ from 'lodash';
 import { compose, lifecycle } from 'recompose';
-import { uploadPath } from 'configuration';
+import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';
 
 import advertsApi from 'containers/Profile/Adverts/api';
 
 import { Header, Card } from 'components';
-import categories from 'containers/Profile/Adverts/categories';
 
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
-
-const filterCategories = advertCategory =>
-  categories.filter(category => category.value === advertCategory)[0].name;
-
-const filterImage = (image) => {
-  if (image === '/images/ad-image.jpg') return `url('${image}')`;
-  return `url(${uploadPath}/${image})`;
-};
-
-const filterUserPhoto = (image) => {
-  if (image === '/images/user-image.jpg') return `url('${image}')`;
-  return `url(${uploadPath}/${image})`;
-};
 
 const Advert = ({ advert }) => <div className={baseStyles.page}>
   <Header />
