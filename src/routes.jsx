@@ -10,6 +10,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import Layout from './containers/Layout';
 import Main from './containers/Main';
+import AdvertDetail from './containers/Advert';
 
 import { routes as authRoutes } from './containers/Auth';
 import { routes as profileRoutes } from './containers/Profile';
@@ -17,6 +18,7 @@ import { routes as profileRoutes } from './containers/Profile';
 const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHistory, store)}>
   <Route path="/" component={Layout}>
     <IndexRoute component={Main} />
+    <Route path="advert/:id" component={AdvertDetail} />
     { authRoutes() }
     { profileRoutes() }
   </Route>

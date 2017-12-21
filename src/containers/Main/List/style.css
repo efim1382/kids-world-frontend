@@ -1,6 +1,6 @@
 .list {
   flex-shrink: 0;
-  width: 600px;
+  width: var(--advert-content-width);
   display: flex;
   flex-direction: column;
   & > .item {

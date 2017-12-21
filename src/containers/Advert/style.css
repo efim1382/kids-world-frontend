@@ -1,0 +1,87 @@
+.advert {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--layout-padding);
+  & > .advert-details {
+    flex-shrink: 0;
+    width: var(--advert-content-width);
+    height: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-divider) inset;
+    & > .header {
+      & > .title {
+        display: flex;
+        align-items: center;
+        & > h2 {
+          --height: 22px;
+          flex-grow: 1;
+          overflow: hidden;
+          min-width: 0;
+          height: var(--height);
+          margin-right: auto;
+          line-height: var(--height);
+          font-size: 22px;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          color: var(--color-text);
+        }
+        & > span {
+          --height: 16px;
+          flex-shrink: 0;
+          height: var(--height);
+          margin-left: 16px;
+          line-height: var(--height);
+          font-size: 16px;
+          color: var(--color-caption);
+        }
+      }
+      & > .description {
+        --height: 16px;
+        height: var(--height);
+        margin-top: 8px;
+        line-height: var(--height);
+        font-style: italic;
+        font-size: 13px;
+        color: var(--color-caption);
+      }
+    }
+    & > .image {
+      width: 100%;
+      height: 300px;
+      margin-top: 16px;
+      background-image: var(--image);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    & > .article {
+      margin-top: 16px;
+      & > p {
+        line-height: 1.5;
+        font-size: 15px;
+        color: var(--color-text);
+      }
+    }
+  }
+  & > .sidebar {
+    flex-shrink: 0;
+    width: var(--sidebar-width);
+    height: 100%;
+    margin-left: var(--layout-padding);
+    padding: 20px;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-divider) inset;
+    & > .properties {
+      margin-top: 20px;
+      & > .item {
+        font-size: 15px;
+        color: var(--color-caption);
+        & > .property-title {
+          color: var(--color-text);
+        }
+      }
+    }
+  }
+}
