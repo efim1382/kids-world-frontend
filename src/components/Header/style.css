@@ -82,4 +82,9 @@
       font-size: 15px;
     }
   }
+  & > .divider {
+    height: 1px;
+    margin: 12px 24px;
+    background-color: var(--color-divider);
+  }
 }

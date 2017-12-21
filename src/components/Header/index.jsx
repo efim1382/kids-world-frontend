@@ -77,6 +77,13 @@ class Header extends Component {
           <label>Зарегистрироваться</label>
         </Link>}
 
+        {this.state.isAuthorize && <Link to="/profile/adverts/add" onClick={this.handlePopupClose}>
+          <Icon name="note_add" />
+          <label>Подать объявление</label>
+        </Link>}
+
+        {this.state.isAuthorize && <div className={styles.divider} />}
+
         {this.state.isAuthorize && <Link to="/profile/adverts" onClick={this.handlePopupClose}>
           <Icon name="view_list" />
           <label>Мои объявления</label>
