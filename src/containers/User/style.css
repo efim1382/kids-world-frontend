@@ -1,0 +1,28 @@
+.user {
+	display: flex;
+	flex-direction: column;
+	& > div {
+		flex-grow: 1;
+		min-height: 0;
+	}
+}
+
+.content {
+	--padding-horizontal: 30px;
+	display: flex;
+	flex-direction: column;
+	& > nav {
+		--navigation-height: 54px;
+		flex-shrink: 0;
+		padding-left: var(--padding-horizontal);
+		padding-right: var(--padding-horizontal);
+		background-color: #fff;
+	}
+	& > div {
+		flex-grow: 1;
+		overflow-x: hidden;
+		overflow-y: auto;
+		min-height: 0;
+		padding: var(--padding-horizontal);
+	}
+}

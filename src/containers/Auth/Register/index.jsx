@@ -23,7 +23,7 @@ class Register extends Component {
     dispatch(api.actions.register({}, {
       body: JSON.stringify({
         ...data,
-        photo: 'images/user-image.jpg',
+        photo: '/images/user-image.jpg',
       }),
     })).then((response) => {
       if (response.status !== 200) {

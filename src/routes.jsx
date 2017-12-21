@@ -14,6 +14,7 @@ import AdvertDetail from './containers/Advert';
 
 import { routes as authRoutes } from './containers/Auth';
 import { routes as profileRoutes } from './containers/Profile';
+import { routes as userRoutes } from './containers/User';
 
 const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHistory, store)}>
   <Route path="/" component={Layout}>
@@ -21,6 +22,7 @@ const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHisto
     <Route path="advert/:id" component={AdvertDetail} />
     { authRoutes() }
     { profileRoutes() }
+    { userRoutes() }
   </Route>
 </Router>;
 

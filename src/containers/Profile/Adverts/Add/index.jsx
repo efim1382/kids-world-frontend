@@ -16,12 +16,8 @@ const sendHandler = ({ dispatch }) => (data) => {
     body: JSON.stringify({
       token,
     }),
-  })).then((responce) => {
-    if (responce.status !== 200) {
-      return;
-    }
-
-    const userId = responce.user.id;
+  })).then((user) => {
+    const userId = user.id;
 
     dispatch(addAdvert(data, userId)).then((resp) => {
       if (resp.status !== 200) {

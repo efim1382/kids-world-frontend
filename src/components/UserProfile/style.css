@@ -16,6 +16,7 @@
 				width: 120px;
 				height: 120px;
 				border-radius: 50%;
+				background-image: var(--image);
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: center;
@@ -60,6 +61,7 @@
 					color: var(--color-caption);
 				}
 				& > .property-value {
+					margin-left: 4px;
 					font-size: 15px;
 					text-align: right;
 					color: var(--color-text);

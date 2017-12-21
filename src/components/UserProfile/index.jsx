@@ -1,13 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { filterUserPhoto } from 'helpers/filters';
 import styles from './style.css';
 
-const UserProfile = ({ children, className }) => <div className={styles.profile}>
+const UserProfile = ({
+  name,
+  phone,
+  email,
+  address,
+  photo,
+  children,
+  className,
+}) => <div className={styles.profile}>
   <div className={styles.sidebar}>
     <header className={styles.header}>
-      <div className={styles.userImage} style={{ backgroundImage: 'url(/images/user-image.jpg)' }} />
-      <p className={styles.userName}>Иван Петров</p>
+      <div className={styles.userImage} style={{ '--image': filterUserPhoto(photo) }} />
+      <p className={styles.userName}>{ name }</p>
     </header>
 
     <div className={styles.properties}>
@@ -15,17 +24,17 @@ const UserProfile = ({ children, className }) => <div className={styles.profile}
 
       <div className={styles.property}>
         <label className={styles.propertyName}>Телефон:</label>
-        <label className={styles.propertyValue}>+7 909 40 79 312</label>
+        <label className={styles.propertyValue}>{ phone }</label>
       </div>
 
       <div className={styles.property}>
         <label className={styles.propertyName}>Почта:</label>
-        <label className={styles.propertyValue}>efim1382@gmail.com</label>
+        <label className={styles.propertyValue}>{ email }</label>
       </div>
 
       <div className={styles.property}>
         <label className={styles.propertyName}>Адрес:</label>
-        <label className={styles.propertyValue}>Ростов-на-Дону, пер. Гвардейский, 6</label>
+        <label className={styles.propertyValue}>{ address }</label>
       </div>
     </div>
   </div>
@@ -34,6 +43,11 @@ const UserProfile = ({ children, className }) => <div className={styles.profile}
 </div>;
 
 UserProfile.propTypes = {
+  name: PropTypes.string,
+  phone: PropTypes.string,
+  email: PropTypes.string,
+  address: PropTypes.string,
+  photo: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
 };

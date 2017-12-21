@@ -1,9 +1,11 @@
 import React from 'react';
 import _ from 'lodash';
+import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
+import { replace } from 'react-router-redux';
 
 import {
   Header,
@@ -11,16 +13,18 @@ import {
   Navigation,
 } from 'components';
 
-import { api as userApi } from 'containers/User';
+import api from './api';
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 
 export routes from './routes';
+export api from './api';
+export reducers from './reducers';
 
-const Profile = ({ children, user }) => <div className={baseStyles.page}>
+const User = ({ children, user, params: { id } }) => <div className={baseStyles.page}>
   <Header />
 
-  <div className={classNames(baseStyles.content, styles.profile)}>
+  <div className={classNames(baseStyles.content, styles.user)}>
     {!_.isEmpty(user) && <UserProfile
       name={`${user.firstName} ${user.lastName}`}
       phone={`${user.phone}`}
@@ -33,12 +37,7 @@ const Profile = ({ children, user }) => <div className={baseStyles.page}>
         items={[
           {
             name: 'Объявления',
-            link: '/profile/adverts',
-          },
-
-          {
-            name: 'Настройки',
-            link: '/profile/settings',
+            link: `/user/${id}/adverts`,
           },
         ]}
       />
@@ -48,7 +47,7 @@ const Profile = ({ children, user }) => <div className={baseStyles.page}>
   </div>
 </div>;
 
-Profile.propTypes = {
+User.propTypes = {
   user: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
@@ -56,6 +55,11 @@ Profile.propTypes = {
     email: PropTypes.string,
     address: PropTypes.string,
     photo: PropTypes.string,
+    token: PropTypes.string,
+  }),
+
+  params: PropTypes.shape({
+    id: PropTypes.string,
   }),
 
   children: PropTypes.node,
@@ -64,21 +68,25 @@ Profile.propTypes = {
 export default compose(
   connect(
     state => ({
-      user: _.get(state, 'users.currentUser.data', {}),
+      user: _.get(state, 'users.getUser.data', {}),
     }),
 
-    {
-      currentUser: userApi.actions.currentUser.sync,
-    },
+    dispatch => bindActionCreators({
+      getUser: api.actions.getUser.sync,
+      redirect: replace,
+    }, dispatch),
   ),
 
   lifecycle({
     componentWillMount() {
       const token = JSON.parse(localStorage.getItem('token')).key;
+      const { params: { id }, getUser, redirect } = this.props;
 
-      this.props.currentUser({}, {
-        body: JSON.stringify({ token }),
+      getUser({ id }).then((user) => {
+        if (user.token === token) {
+          redirect('/profile');
+        }
       });
     },
   }),
-)(Profile);
+)(User);
