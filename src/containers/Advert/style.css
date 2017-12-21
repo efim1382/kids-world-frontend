@@ -60,9 +60,9 @@
     & > .category {
       margin-top: 16px;
       font-size: 15px;
-      color: var(--color-text);
+      color: var(--color-caption);
       & > .name-category {
-        color: var(--color-caption);
+        color: var(--color-text);
       }
     }
     & > .article {
@@ -86,9 +86,9 @@
       margin-top: 20px;
       & > .item {
         font-size: 15px;
-        color: var(--color-caption);
+        color: var(--color-text);
         & > .property-title {
-          color: var(--color-text);
+          color: var(--color-caption);
         }
       }
     }

@@ -57,7 +57,7 @@
 				padding-bottom: 4px;
 				& > .property-name {
 					font-size: 15px;
-					color: #666;
+					color: var(--color-caption);
 				}
 				& > .property-value {
 					font-size: 15px;
