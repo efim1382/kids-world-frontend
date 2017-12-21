@@ -43,11 +43,11 @@ const UserProfile = ({
 </div>;
 
 UserProfile.propTypes = {
-  name: PropTypes.string,
-  phone: PropTypes.string,
-  email: PropTypes.string,
-  address: PropTypes.string,
-  photo: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  phone: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
+  photo: PropTypes.string.isRequired,
   className: PropTypes.string,
   children: PropTypes.node,
 };
