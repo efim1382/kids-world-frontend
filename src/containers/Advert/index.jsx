@@ -1,7 +1,7 @@
 import React from 'react';
-import _ from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import _ from 'lodash';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
 import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';

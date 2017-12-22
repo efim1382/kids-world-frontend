@@ -1,26 +1,67 @@
 import React from 'react';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose, lifecycle } from 'recompose';
+import { filterImage } from 'helpers/filters';
+import { api as userApi } from 'containers/User';
+import advertsApi from 'containers/Profile/Adverts/api';
 import { Link } from 'react-router';
 import { Button } from 'components';
 import styles from './style.css';
 
-const List = () => <div className={styles.adverts}>
+const List = ({ adverts }) => <div className={styles.adverts}>
   <Link to="/profile/adverts/add">
     <Button appearance="primary" caption="Подать объявление" />
   </Link>
 
-  <ul className={styles.list}>
-    <li className={styles.advert}>
-      <div className={styles.image} style={{ '--image': 'url("/images/ad-image.jpg")' }} />
+  {adverts.length > 0 && <ul className={styles.list}>
+    {adverts.map(advert => <li key={advert.id} className={styles.advert}>
+      <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
 
       <div className={styles.tooltip}>
-        <h4>Детские кроссовки</h4>
+        <h4>{ advert.title }</h4>
 
-        <Link to="/profile/adverts/1/edit">
+        <Link to={`/profile/adverts/${advert.id}/edit`}>
           <Button caption="Редактировать" />
         </Link>
       </div>
-    </li>
-  </ul>
+    </li>)}
+  </ul>}
 </div>;
 
-export default List;
+List.propTypes = {
+  adverts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    mainImage: PropTypes.string,
+  })),
+};
+
+export default compose(
+  connect(
+    state => ({
+      adverts: _.get(state, 'adverts.getUserAdverts.data.data', []),
+    }),
+
+    {
+      currentUser: userApi.actions.currentUser,
+      getUserAdverts: advertsApi.actions.getUserAdverts.sync,
+    },
+  ),
+
+  lifecycle({
+    componentWillMount() {
+      const token = JSON.parse(localStorage.getItem('token')).key;
+      const { currentUser, getUserAdverts } = this.props;
+
+      currentUser({}, {
+        body: JSON.stringify({
+          token,
+        }),
+      }).then((user) => {
+        getUserAdverts({ id: user.id });
+      });
+    },
+  }),
+)(List);
