@@ -24,7 +24,7 @@ const sendHandler = ({ dispatch }) => (data) => {
         return;
       }
 
-      dispatch(replace('/'));
+      dispatch(replace(`/advert/${resp.advert.id}`));
     });
   });
 };
