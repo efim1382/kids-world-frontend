@@ -35,3 +35,17 @@ export const addAdvert = (data, userId) => dispatch => new Promise((resolve, rej
 });
 
 export const getAdverts = () => api.actions.getAdverts();
+
+export const editAdvertWithImage = (data, id) => (dispatch) => {
+  const newData = new FormData();
+  newData.append('id', id);
+  newData.append('title', data.title);
+  newData.append('image', data.image[0]);
+  newData.append('price', data.price);
+  newData.append('category', data.category);
+  newData.append('description', data.description.split('\n').join('<br />'));
+
+  return dispatch(api.actions.editAdvertWithImage({ id }, {
+    body: newData,
+  }));
+};

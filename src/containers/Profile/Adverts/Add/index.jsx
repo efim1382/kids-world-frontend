@@ -36,14 +36,12 @@ const Add = ({ send }) => <div className={styles.add}>
     <Field
       caption="Заголовок"
       model=".title"
-      isValidate
     />
 
     <Field
       caption="Цена"
       model=".price"
       type="number"
-      isValidate
     />
 
     <Select
@@ -56,7 +54,6 @@ const Add = ({ send }) => <div className={styles.add}>
       caption="Описание"
       model=".description"
       type="textarea"
-      isValidate
     />
 
     <Files caption="Выберите изображение" model=".image" />

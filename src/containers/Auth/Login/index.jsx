@@ -29,14 +29,12 @@ const Login = ({ send }) => <div className={styles.login}>
       caption="E-Mail"
       type="email"
       model=".email"
-      isValidate
     />
 
     <Field
       caption="Пароль"
       type="password"
       model=".password"
-      isValidate
     />
 
     <Button

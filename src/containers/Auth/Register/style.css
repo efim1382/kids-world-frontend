@@ -22,11 +22,16 @@
 	overflow-y: auto;
 	display: grid;
 	grid-column-gap: 10px;
-	grid-row-gap: 6px;
+	grid-row-gap: 16px;
 	grid-template-rows: [first-name-start last-name-start] auto [last-name-end first-name-end email-start phone-start] auto [phone-end email-end address-start] auto [address-end password-start confirm-password-start] auto [confirm-password-end password-end submit-start] auto [submit-end];
 	grid-template-columns: [first-name-start email-start address-start password-start submit-start] 0.5fr [submit-end password-end email-end first-name-end last-name-start phone-start confirm-password-start] 0.5fr [address-end confirm-password-end phone-end last-name-end];
 	max-height: calc(100vh - var(--header-height) - var(--title-height) - (var(--layout-padding) * 2));
 	padding: 20px var(--horizontal-padding) 30px;
+	& > div {
+		&:nth-of-type(n+2) {
+			margin-top: 0;
+		}
+	}
 	& > .field-first-name {
 		grid-area: first-name;
 	}

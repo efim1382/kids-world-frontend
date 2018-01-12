@@ -44,7 +44,6 @@ class Register extends Component {
           caption="Имя"
           type="text"
           model=".firstName"
-          isValidate
           className={styles.fieldFirstName}
         />
 
@@ -52,7 +51,6 @@ class Register extends Component {
           caption="Фамилия"
           type="text"
           model=".lastName"
-          isValidate
           className={styles.fieldLastName}
         />
 
@@ -60,8 +58,6 @@ class Register extends Component {
           caption="E-Mail"
           type="email"
           model=".email"
-          isValidate
-          errorMessage="Некорректный адрес эл. почты"
           className={styles.fieldEmail}
         />
 
@@ -69,7 +65,6 @@ class Register extends Component {
           caption="Телефон"
           type="text"
           model=".phone"
-          isValidate
           className={styles.fieldPhone}
         />
 
@@ -77,7 +72,6 @@ class Register extends Component {
           caption="Адрес"
           type="text"
           model=".address"
-          isValidate
           className={styles.fieldAddress}
         />
 
@@ -85,9 +79,6 @@ class Register extends Component {
           caption="Пароль"
           type="password"
           model=".password"
-          isValidate
-          getValue={password => this.setState({ password })}
-          errorMessage="Пароль должен быть больше 6 символов"
           className={styles.fieldPassword}
         />
 
@@ -95,10 +86,6 @@ class Register extends Component {
           caption="Повторите пароль"
           type="password"
           model=".confirmPassword"
-          isValidate
-          getValue={confirmPassword => this.setState({ confirmPassword })}
-          errorMessage="Пароли не совпадают"
-          validator={() => this.state.password === this.state.confirmPassword}
           className={styles.fieldConfirmPassword}
         />
 

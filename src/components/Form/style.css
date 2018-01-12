@@ -3,6 +3,12 @@
 	flex-direction: column;
 	align-items: flex-start;
 	min-width: 200px;
+	&:nth-of-type(n+2) {
+		margin-top: 12px;
+	}
+	& + .files {
+		margin-top: 12px;
+	}
 	& > .caption {
 		--height: 16px;
 		height: var(--height);
@@ -42,7 +48,6 @@
 		--button-height: 36px;
 		position: relative;
 		width: 100%;
-		padding-bottom: 20px;
 		& > .button {
 			display: flex;
 			align-items: center;
@@ -133,7 +138,6 @@
 		}
 	}
 }
-
 .files {
 	display: flex;
 	flex-direction: column;

@@ -8,6 +8,7 @@ import styles from './style.css';
 class Files extends Component {
   static propTypes = {
     model: PropTypes.string.isRequired,
+    defaultImage: PropTypes.string,
     caption: PropTypes.string,
     multiple: PropTypes.bool,
     className: PropTypes.string,
@@ -48,8 +49,10 @@ class Files extends Component {
 
   render() {
     const {
-      model, caption, multiple, className,
+      model, caption, multiple, className, defaultImage,
     } = this.props;
+
+    const hasUploadedImages = this.state.images.length > 0;
 
     return <div className={classNames(styles.files, className)}>
       {caption && <label className={styles.caption}>{ caption }</label>}
@@ -62,12 +65,17 @@ class Files extends Component {
         {...multiple ? { multiple } : {}}
       />
 
-      {this.state.images.length > 0 && <div className={styles.container}>
+      {(hasUploadedImages || defaultImage) && <div className={styles.container}>
         {this.state.images.map(image => <div
           key={UUID.v4()}
           style={{ '--image': `url(${image.src})` }}
           className={styles.image}
         />)}
+
+        {!hasUploadedImages && defaultImage && <div
+          style={{ '--image': defaultImage }}
+          className={styles.image}
+        />}
       </div>}
     </div>;
   }

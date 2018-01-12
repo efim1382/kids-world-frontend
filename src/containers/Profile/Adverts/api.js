@@ -23,4 +23,16 @@ export default createApi({
       method: 'post',
     },
   },
+  editAdvertWithImage: {
+    url: `${apiPath}/adverts/:id/edit/image`,
+    options: {
+      method: 'post',
+    },
+  },
+  editAdvert: {
+    url: `${apiPath}/adverts/:id/edit`,
+    options: {
+      method: 'post',
+    },
+  },
 });
