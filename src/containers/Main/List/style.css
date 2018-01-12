@@ -10,6 +10,7 @@
     width: 100%;
     height: var(--height);
     border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-divider);
     &:nth-of-type(n+2) {
       margin-top: 30px;
     }
@@ -36,7 +37,6 @@
       background-color: #fff;
       border-top-right-radius: inherit;
       border-bottom-right-radius: inherit;
-      box-shadow: 0 -1px var(--color-divider) inset, 0 1px var(--color-divider) inset,  -1px 0 var(--color-divider) inset;
       & > * {
         flex-shrink: 0;
       }

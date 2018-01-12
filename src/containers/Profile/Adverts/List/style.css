@@ -59,6 +59,27 @@
 					text-overflow: ellipsis;
 					color: #fff;
 				}
+				& > .actions {
+					display: flex;
+					margin-top: 8px;
+					& > button {
+						&:not(:hover) {
+							--color: #fff;
+						}
+						&:hover {
+							--color: var(--color-error);
+						}
+					}
+					& > a > button {
+						margin-left: calc(var(--padding) * -1);
+						&:not(:hover) {
+							--color: #fff;
+						}
+						&:hover {
+							--color: var(--color-accent);
+						}
+					}
+				}
 				& > a {
 					flex-shrink: 0;
 					margin-top: 8px;
