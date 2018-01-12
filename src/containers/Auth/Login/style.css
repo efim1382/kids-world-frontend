@@ -19,11 +19,8 @@
 
 .form {
 	padding: 30px var(--horizontal-padding);
-	& > div:nth-of-type(n+2) {
-		margin-top: 8px;
-	}
 }
 
 .button-submit {
-	margin-top: 10px;
+	margin-top: 12px;
 }

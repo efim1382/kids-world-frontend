@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Control } from 'react-redux-form';
+import { Control, actions } from 'react-redux-form';
 import styles from './style.css';
 
 const FieldComponent = ({
@@ -29,13 +29,32 @@ class Field extends Component {
     placeholder: PropTypes.string,
     caption: PropTypes.string,
     defaultValue: PropTypes.any, // eslint-disable-line react/forbid-prop-types
+    formDispatch: PropTypes.func,
+    formModel: PropTypes.string,
     className: PropTypes.string,
   };
 
   state = {
     value: '',
+    defaultValue: '',
     message: '',
   };
+
+  componentWillReceiveProps(nextProps) {
+    const {
+      formDispatch, formModel, defaultValue, model,
+    } = nextProps;
+
+    if (!defaultValue) {
+      return;
+    }
+
+    this.setState({
+      value: nextProps.defaultValue,
+    });
+
+    formDispatch(actions.change(`${formModel}${model}`, defaultValue));
+  }
 
   render() {
     const {
@@ -44,7 +63,6 @@ class Field extends Component {
       caption,
       placeholder,
       className,
-      defaultValue,
     } = this.props;
 
     return <Control
@@ -54,10 +72,14 @@ class Field extends Component {
       caption={caption}
       placeholder={placeholder}
       className={className}
+      onChange={(event) => {
+        const { value } = event.target;
+        this.setState({ value });
+      }}
 
       controlProps={{
         model,
-        defaultValue,
+        value: this.state.value,
       }}
     />;
   }

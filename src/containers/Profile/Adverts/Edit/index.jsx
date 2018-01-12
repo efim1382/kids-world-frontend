@@ -96,8 +96,8 @@ export default compose(
     }),
 
     {
-      getAdvert: advertsApi.actions.getAdvert.sync,
       send: sendHandler,
+      getAdvert: advertsApi.actions.getAdvert,
     },
   ),
 
