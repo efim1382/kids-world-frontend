@@ -49,7 +49,7 @@ class List extends Component {
           <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
 
           <div className={styles.tooltip}>
-            <h4>{ advert.title }</h4>
+            <Link to={`/advert/${advert.id}`}>{ advert.title }</Link>
 
             <div className={styles.actions}>
               <Link to={`/profile/adverts/${advert.id}/edit`}>

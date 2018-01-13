@@ -48,7 +48,7 @@
 					pointer-events: none;
 					z-index: -1;
 				}
-				& > h4 {
+				& > a {
 					--height: 20px;
 					overflow: hidden;
 					flex-shrink: 0;
