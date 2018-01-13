@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
 import { filterCategories, filterAdvertImage, filterUserPhoto } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
-import { Header, Card } from 'components';
+import { Header, Card, Button } from 'components';
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 
@@ -21,7 +21,10 @@ const Advert = ({ advert }) => <div className={baseStyles.page}>
           <span>{ advert.price } ₽</span>
         </div>
 
-        <p className={styles.description}>{ advert.date }, 10 просмотров</p>
+        <div className={styles.description}>
+          <p>{ advert.date }, 10 просмотров</p>
+          <Button icon="star" />
+        </div>
       </header>
 
       <div className={styles.image} style={{ '--image': filterAdvertImage(advert.mainImage) }} />

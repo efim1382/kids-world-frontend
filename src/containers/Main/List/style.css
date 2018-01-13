@@ -57,6 +57,17 @@
           font-size: 18px;
           color: var(--color-text);
         }
+        & > button {
+          --icon-size: 18px;
+          margin-top: calc(((var(--height) - var(--icon-size)) / 2) * -1);
+          margin-right: calc(((var(--height) - var(--icon-size)) / 2) * -1);
+          &:not(:hover) {
+            --color: #000;
+          }
+          &:hover {
+            --color: var(--color-accent);
+          }
+        }
       }
       & > h3,
       & > .category,

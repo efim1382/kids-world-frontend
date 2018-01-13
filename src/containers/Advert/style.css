@@ -35,23 +35,36 @@
           margin-left: 16px;
           line-height: var(--height);
           font-size: 16px;
-          color: var(--color-caption);
+          color: var(--color-text)
         }
       }
       & > .description {
-        --height: 16px;
-        height: var(--height);
-        margin-top: 8px;
-        line-height: var(--height);
-        font-style: italic;
-        font-size: 13px;
-        color: var(--color-caption);
+        display: flex;
+        align-items: center;
+        & > p {
+          --height: 16px;
+          height: var(--height);
+          line-height: var(--height);
+          font-style: italic;
+          font-size: 13px;
+          color: var(--color-caption);
+        }
+        & > button {
+          margin-left: auto;
+          margin-right: calc(var(--padding) * -1);
+          &:not(:hover) {
+            --color: #000;
+          }
+          &:hover {
+            --color: var(--color-accent);
+          }
+        }
       }
     }
     & > .image {
       width: 100%;
       height: 300px;
-      margin-top: 16px;
+      margin-top: 8px;
       background-image: var(--image);
       background-repeat: no-repeat;
       background-size: cover;

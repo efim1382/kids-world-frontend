@@ -6,7 +6,7 @@ import { compose, lifecycle, withProps } from 'recompose';
 import { Link } from 'react-router';
 import { filterCategories, filterAdvertImage, filterUserPhoto } from 'helpers/filters';
 import { getAdverts } from 'containers/Profile/Adverts/actions';
-import { Card } from 'components';
+import { Card, Button } from 'components';
 import styles from './style.css';
 
 const List = ({ adverts }) => <div className={styles.list}>
@@ -23,6 +23,7 @@ const List = ({ adverts }) => <div className={styles.list}>
         />
 
         <p className={styles.price}>{ advert.price } ₽</p>
+        <Button icon="star" />
       </div>
 
       <h3>{ advert.title }</h3>
