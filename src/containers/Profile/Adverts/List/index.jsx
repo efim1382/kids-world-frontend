@@ -62,8 +62,8 @@ class List extends Component {
                   deleteAdvert({ id: advert.id }).then(() => {
                     getUserAdverts({ id: this.userId });
                   });
-                }
-              } />
+                }}
+              />
             </div>
           </div>
         </li>)}
