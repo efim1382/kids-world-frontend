@@ -38,7 +38,7 @@
 			pointer-events: none;
 			z-index: -1;
 		}
-		& > a {
+		& > .title {
 			--height: 20px;
 			overflow: hidden;
 			flex-shrink: 0;
@@ -51,6 +51,7 @@
 		}
 		& > .actions {
 			display: flex;
+			width: 100%;
 			margin-top: 8px;
 			& > button {
 				--padding: 10px;

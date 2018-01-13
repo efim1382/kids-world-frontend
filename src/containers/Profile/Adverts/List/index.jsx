@@ -51,12 +51,18 @@ class List extends Component {
       {adverts.length > 0 && <div className={styles.list}>
         {adverts.map(advert => <CardAdvert
           key={advert.id}
-          id={advert.id}
           title={advert.title}
           image={filterImage(advert.mainImage)}
           className={styles.advert}
 
           actions={[
+            {
+              icon: 'open_in_new',
+              onClick: () => {
+                pushURL(`/advert/${advert.id}`);
+              },
+            },
+
             {
               icon: 'mode_edit',
               onClick: () => {

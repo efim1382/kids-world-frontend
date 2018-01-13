@@ -17,6 +17,7 @@
 }
 
 .delete-button {
+	margin-left: auto;
 	&:hover {
 		--color: var(--color-error) !important;
 	}

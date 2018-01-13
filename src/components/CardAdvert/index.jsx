@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import UUID from 'node-uuid';
 import classNames from 'classnames';
@@ -7,12 +6,12 @@ import { Button } from 'components';
 import styles from './style.css';
 
 const CardAdvert = ({
-  id, title, image, actions, className,
+  title, image, actions, className,
 }) => <div className={classNames(styles.cardAdvert, className)}>
   <div className={styles.image} style={{ '--image': image }} />
 
   <div className={styles.tooltip}>
-    <Link to={`/advert/${id}`}>{ title }</Link>
+    <h4 className={styles.title}>{ title }</h4>
 
     {actions && <div className={styles.actions}>
       {actions.map(action => <Button
@@ -26,7 +25,6 @@ const CardAdvert = ({
 </div>;
 
 CardAdvert.propTypes = {
-  id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   className: PropTypes.string,
