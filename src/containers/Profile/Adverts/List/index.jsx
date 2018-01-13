@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { filterImage } from 'helpers/filters';
 import { api as userApi } from 'containers/User';
 import advertsApi from 'containers/Profile/Adverts/api';
 import { Link } from 'react-router';
-import { Button } from 'components';
+import { Button, CardAdvert } from 'components';
 import styles from './style.css';
 
 class List extends Component {
@@ -20,6 +21,7 @@ class List extends Component {
     currentUser: PropTypes.func.isRequired,
     getUserAdverts: PropTypes.func.isRequired,
     deleteAdvert: PropTypes.func.isRequired,
+    pushURL: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -37,37 +39,43 @@ class List extends Component {
   }
 
   render() {
-    const { adverts, deleteAdvert, getUserAdverts } = this.props;
+    const {
+      adverts, deleteAdvert, getUserAdverts, pushURL,
+    } = this.props;
 
     return <div className={styles.adverts}>
       <Link to="/profile/adverts/add">
         <Button appearance="primary" caption="Подать объявление" />
       </Link>
 
-      {adverts.length > 0 && <ul className={styles.list}>
-        {adverts.map(advert => <li key={advert.id} className={styles.advert}>
-          <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
+      {adverts.length > 0 && <div className={styles.list}>
+        {adverts.map(advert => <CardAdvert
+          key={advert.id}
+          id={advert.id}
+          title={advert.title}
+          image={filterImage(advert.mainImage)}
+          className={styles.advert}
 
-          <div className={styles.tooltip}>
-            <Link to={`/advert/${advert.id}`}>{ advert.title }</Link>
+          actions={[
+            {
+              icon: 'mode_edit',
+              onClick: () => {
+                pushURL(`/profile/adverts/${advert.id}/edit`);
+              },
+            },
 
-            <div className={styles.actions}>
-              <Link to={`/profile/adverts/${advert.id}/edit`}>
-                <Button icon="mode_edit" />
-              </Link>
-
-              <Button
-                icon="delete"
-                onClick={() => {
-                  deleteAdvert({ id: advert.id }).then(() => {
-                    getUserAdverts({ id: this.userId });
-                  });
-                }}
-              />
-            </div>
-          </div>
-        </li>)}
-      </ul>}
+            {
+              icon: 'delete',
+              className: styles.deleteButton,
+              onClick: () => {
+                deleteAdvert({ id: advert.id }).then(() => {
+                  getUserAdverts({ id: this.userId });
+                });
+              },
+            },
+          ]}
+        />)}
+      </div>}
     </div>;
   }
 }
@@ -81,5 +89,6 @@ export default connect(
     currentUser: userApi.actions.currentUser,
     getUserAdverts: advertsApi.actions.getUserAdverts.sync,
     deleteAdvert: advertsApi.actions.deleteAdvert.sync,
+    pushURL: push,
   },
 )(List);

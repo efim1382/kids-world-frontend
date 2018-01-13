@@ -6,6 +6,7 @@ export Navigation from './Navigation';
 export Notification from './Notification';
 export UserProfile from './UserProfile';
 export Card from './Card';
+export CardAdvert from './CardAdvert';
 export Popup from './Popup';
 
 export Form from './Form/Form';

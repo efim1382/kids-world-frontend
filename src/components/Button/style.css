@@ -7,6 +7,7 @@
 	align-items: center;
 	justify-content: center;
 	min-width: var(--height);
+	width: fit-content;
 	height: var(--height);
 	padding-left: var(--padding);
 	padding-right: var(--padding);
