@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';
+import { filterCategories, filterAdvertImage, filterUserPhoto } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
 import { Header, Card } from 'components';
 import styles from './style.css';
@@ -24,7 +24,7 @@ const Advert = ({ advert }) => <div className={baseStyles.page}>
         <p className={styles.description}>{ advert.date }, 10 просмотров</p>
       </header>
 
-      <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
+      <div className={styles.image} style={{ '--image': filterAdvertImage(advert.mainImage) }} />
 
       <p className={styles.category}>
         <span className={styles.nameCategory}>Категория: </span>

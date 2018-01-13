@@ -3,7 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import { filterImage } from 'helpers/filters';
+import { filterAdvertImage } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
 import { CardAdvert } from 'components';
 import styles from './style.css';
@@ -37,7 +37,7 @@ class Adverts extends Component {
         {adverts.map(advert => <CardAdvert
           key={advert.id}
           title={advert.title}
-          image={filterImage(advert.mainImage)}
+          image={filterAdvertImage(advert.mainImage)}
           className={styles.advert}
 
           actions={[

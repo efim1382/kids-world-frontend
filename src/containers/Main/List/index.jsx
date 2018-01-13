@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, lifecycle, withProps } from 'recompose';
 import { Link } from 'react-router';
-import { filterCategories, filterImage, filterUserPhoto } from 'helpers/filters';
+import { filterCategories, filterAdvertImage, filterUserPhoto } from 'helpers/filters';
 import { getAdverts } from 'containers/Profile/Adverts/actions';
 import { Card } from 'components';
 import styles from './style.css';
 
 const List = ({ adverts }) => <div className={styles.list}>
   {adverts && adverts.map(advert => <div key={advert.id} className={styles.item}>
-    <div className={styles.image} style={{ '--image': filterImage(advert.mainImage) }} />
+    <div className={styles.image} style={{ '--image': filterAdvertImage(advert.mainImage) }} />
 
     <div className={styles.content}>
       <div className={styles.header}>

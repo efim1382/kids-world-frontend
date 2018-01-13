@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Form, Field, Select, Files, Button } from 'components';
 import categories from 'containers/Profile/Adverts/categories';
-import { filterImage } from 'helpers/filters';
+import { filterAdvertImage } from 'helpers/filters';
 import { editAdvertWithImage } from '../actions';
 import advertsApi from '../api';
 import styles from './style.css';
@@ -66,7 +66,7 @@ const Edit = ({ send, advert, params: { id } }) => <div className={styles.edit}>
       defaultValue={advert.description}
     />
 
-    <Files caption="Выберите изображение" model=".image" defaultImage={filterImage(advert.mainImage)} />
+    <Files caption="Выберите изображение" model=".image" defaultImage={filterAdvertImage(advert.mainImage)} />
     <div className={styles.divider} />
     <Button appearance="primary" caption="Изменить" className={styles.submit} />
   </Form>}

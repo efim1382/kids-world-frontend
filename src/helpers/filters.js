@@ -4,7 +4,7 @@ import categories from 'containers/Profile/Adverts/categories';
 export const filterCategories = advertCategory =>
   categories.filter(category => category.value === advertCategory)[0].name;
 
-export const filterImage = (image) => {
+export const filterAdvertImage = (image) => {
   if (image === '/images/ad-image.jpg') return `url('${image}')`;
   return `url(${uploadPath}/${image})`;
 };
