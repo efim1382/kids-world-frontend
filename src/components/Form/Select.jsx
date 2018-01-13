@@ -24,14 +24,14 @@ class Select extends Component {
     isPopupShown: false,
   }
 
-  componentWillMount() {
+  componentWillReceiveProps(nextProps) {
     const {
       defaultValue,
       items,
       model,
       formModel,
       formDispatch, // eslint-disable-line no-unused-vars
-    } = this.props;
+    } = nextProps;
 
     if (!defaultValue) {
       return;
