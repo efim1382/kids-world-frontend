@@ -15,7 +15,8 @@ const sendHandler = ({ dispatch }) => (data) => {
       return;
     }
 
-    localStorage.setItem('token', response.token);
+    localStorage.setItem('token', response.user.token);
+    localStorage.setItem('id', response.user.id);
     dispatch(replace('/'));
   });
 };

@@ -5,27 +5,18 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Form, Field, Select, Files, Button } from 'components';
 import categories from 'containers/Profile/Adverts/categories';
-import { api as userApi } from 'containers/User';
 import { addAdvert } from '../actions';
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {
-  const token = localStorage.getItem('token');
+  const userId = localStorage.getItem('id');
 
-  dispatch(userApi.actions.currentUser({}, {
-    body: JSON.stringify({
-      token,
-    }),
-  })).then((user) => {
-    const userId = user.id;
+  dispatch(addAdvert(data, userId)).then((resp) => {
+    if (resp.status !== 200) {
+      return;
+    }
 
-    dispatch(addAdvert(data, userId)).then((resp) => {
-      if (resp.status !== 200) {
-        return;
-      }
-
-      dispatch(replace(`/advert/${resp.advert.id}`));
-    });
+    dispatch(replace(`/advert/${resp.advert.id}`));
   });
 };
 

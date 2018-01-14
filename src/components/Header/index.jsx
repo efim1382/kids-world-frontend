@@ -44,6 +44,7 @@ class Header extends Component {
     const { dispatch } = this.props;
 
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
     dispatch(replace('/'));
 
     this.setState({

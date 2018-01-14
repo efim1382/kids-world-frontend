@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { filterAdvertImage } from 'helpers/filters';
-import { api as userApi } from 'containers/User';
 import advertsApi from 'containers/Profile/Adverts/api';
 import { Link } from 'react-router';
 import { Button, CardAdvert } from 'components';
@@ -18,24 +17,17 @@ class List extends Component {
       mainImage: PropTypes.string,
     })),
 
-    currentUser: PropTypes.func.isRequired,
     getUserAdverts: PropTypes.func.isRequired,
     deleteAdvert: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
-    const token = localStorage.getItem('token');
-    const { currentUser, getUserAdverts } = this.props;
+    const userId = localStorage.getItem('id');
+    const { getUserAdverts } = this.props;
 
-    currentUser({}, {
-      body: JSON.stringify({
-        token,
-      }),
-    }).then((user) => {
-      getUserAdverts({ id: user.id });
-      this.userId = user.id;
-    });
+    getUserAdverts({ id: userId });
+    this.userId = userId;
   }
 
   render() {
@@ -92,7 +84,6 @@ export default connect(
   }),
 
   {
-    currentUser: userApi.actions.currentUser,
     getUserAdverts: advertsApi.actions.getUserAdverts.sync,
     deleteAdvert: advertsApi.actions.deleteAdvert.sync,
     pushURL: push,
