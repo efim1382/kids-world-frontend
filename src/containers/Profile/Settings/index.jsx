@@ -7,7 +7,7 @@ const Settings = () => <div className={styles.settings}>
 
   <Form model=" " onSubmit={() => {}}>
     <Field
-      caption="Адрес"
+      placeholder="Адрес"
       model=".address"
     />
 
@@ -18,7 +18,7 @@ const Settings = () => <div className={styles.settings}>
 
   <Form model=" " onSubmit={() => {}}>
     <Field
-      caption="Номер телефона"
+      placeholder="Номер телефона"
       model=".phone"
     />
 
@@ -29,7 +29,7 @@ const Settings = () => <div className={styles.settings}>
 
   <Form model=" " onSubmit={() => {}}>
     <Field
-      caption="Эл. почта"
+      placeholder="Эл. почта"
       model=".email"
     />
 
@@ -40,17 +40,17 @@ const Settings = () => <div className={styles.settings}>
 
   <Form model=" " onSubmit={() => {}}>
     <Field
-      caption="Текущий пароль"
+      placeholder="Текущий пароль"
       model=".password"
     />
 
     <Field
-      caption="Новый пароль"
+      placeholder="Новый пароль"
       model=".newPassword"
     />
 
     <Field
-      caption="Повторите новый пароль"
+      placeholder="Повторите новый пароль"
       model=".confirmNewPassword"
     />
 
