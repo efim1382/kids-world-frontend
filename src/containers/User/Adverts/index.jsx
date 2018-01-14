@@ -26,6 +26,7 @@ class Adverts extends Component {
     ]),
 
     getUserAdverts: PropTypes.func.isRequired,
+    setFavoriteAdvert: PropTypes.func.isRequired,
     isAdvertFavorite: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
   };
@@ -66,7 +67,7 @@ class Adverts extends Component {
 
   render() {
     const {
-      adverts, pushURL,
+      adverts, pushURL, userId, setFavoriteAdvert,
     } = this.props;
 
     return <div className={styles.adverts}>
@@ -84,6 +85,7 @@ class Adverts extends Component {
             actions={[
               {
                 icon: 'open_in_new',
+
                 onClick: () => {
                   pushURL(`/advert/${advert.id}`);
                 },
@@ -92,11 +94,20 @@ class Adverts extends Component {
               {
                 icon: 'star',
                 className: isFavorite ? styles.isFavorite : '',
-                onClick: () => {},
+
+                onClick: () => {
+                  setFavoriteAdvert({ id: advert.id }, {
+                    body: JSON.stringify({
+                      userId,
+                    }),
+                  }).then(() => {
+                    this.loadData();
+                  });
+                },
               },
             ]}
           />;
-})}
+        })}
       </div>}
     </div>;
   }
@@ -110,6 +121,7 @@ export default connect(
 
   {
     getUserAdverts: advertsApi.actions.getUserAdverts.sync,
+    setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
     pushURL: push,
   },
