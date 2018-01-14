@@ -1,3 +1,29 @@
 .settings {
-	
+  & > h3,
+  & > .divider,
+  & > form {
+    width: 100%;
+    max-width: 400px;
+  }
+  & > h3 {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-divider);
+    & + form {
+      margin-top: 20px;
+    }
+  }
+  & > form {
+    & + h3 {
+      margin-top: 32px;
+    }
+    & > button {
+      margin-top: 20px;
+    }
+  }
+  & > .divider {
+    height: 1px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: var(--color-divider);
+  }
 }

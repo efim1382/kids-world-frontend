@@ -43,6 +43,16 @@
 			--opacity: 0.8;
 		}
 	}
+	&[data-appearance="danger"] {
+		--color: #fff;
+		--background-color: var(--color-error);
+		&:not(:hover) {
+			--opacity: 1;
+		}
+		&:hover {
+			--opacity: 0.8;
+		}
+	}
 	& > span {
 		--height: 16px;
 		flex-shrink: 0;

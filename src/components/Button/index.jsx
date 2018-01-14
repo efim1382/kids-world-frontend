@@ -16,7 +16,7 @@ const Button = ({
 </button>;
 
 Button.propTypes = {
-  appearance: PropTypes.oneOf(['primary']),
+  appearance: PropTypes.oneOf(['primary', 'danger']),
   caption: PropTypes.string,
   icon: PropTypes.string,
   className: PropTypes.string,
