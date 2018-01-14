@@ -89,6 +89,11 @@ class Header extends Component {
           <label>Мои объявления</label>
         </Link>}
 
+        {this.state.isAuthorize && <Link to="/profile/favorites" onClick={this.handlePopupClose}>
+          <Icon name="star" />
+          <label>Избранные объявления</label>
+        </Link>}
+
         {this.state.isAuthorize && <Link to="/profile/settings" onClick={this.handlePopupClose}>
           <Icon name="settings" />
           <label>Настройки</label>

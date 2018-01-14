@@ -16,7 +16,12 @@ class Favorites extends Component {
       mainImage: PropTypes.string,
     })).isRequired,
 
-    userId: PropTypes.string.isRequired,
+    userId: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+
+    setFavoriteAdvert: PropTypes.func.isRequired,
     getFavoritesAdverts: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
   };
@@ -27,7 +32,9 @@ class Favorites extends Component {
   }
 
   render() {
-    const { adverts, pushURL } = this.props;
+    const {
+      adverts, pushURL, userId, setFavoriteAdvert, getFavoritesAdverts,
+    } = this.props;
 
     return <div className={styles.favorites}>
       {adverts.length > 0 && <div className={styles.list}>
@@ -44,6 +51,21 @@ class Favorites extends Component {
                 pushURL(`/advert/${advert.id}`);
               },
             },
+
+            {
+              icon: 'delete',
+              className: styles.delete,
+
+              onClick: () => {
+                setFavoriteAdvert({ id: advert.id }, {
+                  body: JSON.stringify({
+                    userId,
+                  }),
+                }).then(() => {
+                  getFavoritesAdverts({ userId });
+                });
+              },
+            },
           ]}
         />)}
       </div>}
@@ -58,6 +80,7 @@ export default connect(
   }),
 
   {
+    setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     getFavoritesAdverts: advertsApi.actions.getFavoritesAdverts.sync,
     pushURL: push,
   },
