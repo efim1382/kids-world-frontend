@@ -1,14 +1,20 @@
 import React from 'react';
+import _ from 'lodash';
+import PropTypes from 'prop-types';
+import { compose, lifecycle } from 'recompose';
+import { connect } from 'react-redux';
 import { Form, Field, Button } from 'components';
+import userApi from 'containers/User/api';
 import styles from './style.css';
 
-const Settings = () => <div className={styles.settings}>
+const Settings = ({ user }) => <div className={styles.settings}>
   <h3>Изменить адрес</h3>
 
   <Form model=" " onSubmit={() => {}}>
     <Field
       placeholder="Адрес"
       model=".address"
+      defaultValue={user.address}
     />
 
     <Button appearance="primary" caption="Изменить" />
@@ -20,6 +26,7 @@ const Settings = () => <div className={styles.settings}>
     <Field
       placeholder="Номер телефона"
       model=".phone"
+      defaultValue={user.phone}
     />
 
     <Button appearance="primary" caption="Изменить" />
@@ -31,6 +38,7 @@ const Settings = () => <div className={styles.settings}>
     <Field
       placeholder="Эл. почта"
       model=".email"
+      defaultValue={user.email}
     />
 
     <Button appearance="primary" caption="Изменить" />
@@ -62,4 +70,32 @@ const Settings = () => <div className={styles.settings}>
   <Button appearance="danger" caption="Удалить профиль" />
 </div>;
 
-export default Settings;
+Settings.propTypes = {
+  user: PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    phone: PropTypes.string.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default compose(
+  connect(
+    state => ({
+      user: _.get(state, 'users.currentUser.data', {}),
+    }),
+
+    {
+      currentUser: userApi.actions.currentUser.sync,
+    },
+  ),
+
+  lifecycle({
+    componentWillMount() {
+      const token = localStorage.getItem('token');
+
+      this.props.currentUser({}, {
+        body: JSON.stringify({ token }),
+      });
+    },
+  }),
+)(Settings);
