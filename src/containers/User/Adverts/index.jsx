@@ -20,40 +20,83 @@ class Adverts extends Component {
       id: PropTypes.string,
     }),
 
+    userId: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
+
     getUserAdverts: PropTypes.func.isRequired,
+    isAdvertFavorite: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
   };
 
+  state = {
+    advertsFavorites: [],
+  };
+
   componentWillMount() {
-    const { getUserAdverts, params: { id } } = this.props;
-    getUserAdverts({ id });
+    this.loadData();
+  }
+
+  loadData = () => {
+    const {
+      getUserAdverts, isAdvertFavorite, userId, params: { id },
+    } = this.props;
+
+    const arrayAdverts = [];
+
+    getUserAdverts({ id }).then(() => {
+      this.props.adverts.forEach((advert) => {
+        isAdvertFavorite({
+          id: advert.id,
+          userId,
+        }).then((responce) => {
+          arrayAdverts.push({
+            id: advert.id,
+            isFavorite: responce.data || false,
+          });
+
+          this.setState({
+            advertsFavorites: arrayAdverts,
+          });
+        });
+      });
+    });
   }
 
   render() {
-    const { adverts, pushURL } = this.props;
+    const {
+      adverts, pushURL,
+    } = this.props;
 
     return <div className={styles.adverts}>
       {adverts.length > 0 && <div className={styles.list}>
-        {adverts.map(advert => <CardAdvert
-          key={advert.id}
-          title={advert.title}
-          image={filterAdvertImage(advert.mainImage)}
-          className={styles.advert}
+        {adverts.map((advert) => {
+          const favoriteAdvert = _.find(this.state.advertsFavorites, { id: advert.id });
+          const isFavorite = _.get(favoriteAdvert, 'isFavorite');
 
-          actions={[
-            {
-              icon: 'open_in_new',
-              onClick: () => {
-                pushURL(`/advert/${advert.id}`);
+          return <CardAdvert
+            key={advert.id}
+            title={advert.title}
+            image={filterAdvertImage(advert.mainImage)}
+            className={styles.advert}
+
+            actions={[
+              {
+                icon: 'open_in_new',
+                onClick: () => {
+                  pushURL(`/advert/${advert.id}`);
+                },
               },
-            },
 
-            {
-              icon: 'star',
-              onClick: () => {},
-            },
-          ]}
-        />)}
+              {
+                icon: 'star',
+                className: isFavorite ? styles.isFavorite : '',
+                onClick: () => {},
+              },
+            ]}
+          />;
+})}
       </div>}
     </div>;
   }
@@ -62,10 +105,12 @@ class Adverts extends Component {
 export default connect(
   state => ({
     adverts: _.get(state, 'adverts.getUserAdverts.data.data', []),
+    userId: parseInt(localStorage.getItem('id'), 10) || '',
   }),
 
   {
     getUserAdverts: advertsApi.actions.getUserAdverts.sync,
+    isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
     pushURL: push,
   },
 )(Adverts);

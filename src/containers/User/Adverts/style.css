@@ -12,3 +12,7 @@
     }
   }
 }
+
+.is-favorite {
+  --color: var(--color-accent) !important;
+}
