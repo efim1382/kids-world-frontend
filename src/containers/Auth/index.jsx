@@ -7,7 +7,6 @@ import baseStyles from '../Layout/style.css';
 
 export routes from './routes';
 export api from './api';
-export reducers from './reducers';
 
 const Auth = ({ children }) => <div className={baseStyles.page}>
   <Header />

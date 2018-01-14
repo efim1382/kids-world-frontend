@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Form, Field, Button } from 'components';
 import api from '../api';
-import { setToken } from '../actions';
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {
@@ -16,7 +15,7 @@ const sendHandler = ({ dispatch }) => (data) => {
       return;
     }
 
-    dispatch(setToken(response.token));
+    localStorage.setItem('token', response.token);
     dispatch(replace('/'));
   });
 };

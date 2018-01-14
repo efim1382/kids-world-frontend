@@ -10,7 +10,7 @@ import { addAdvert } from '../actions';
 import styles from './style.css';
 
 const sendHandler = ({ dispatch }) => (data) => {
-  const token = JSON.parse(localStorage.getItem('token')).key;
+  const token = localStorage.getItem('token');
 
   dispatch(userApi.actions.currentUser({}, {
     body: JSON.stringify({

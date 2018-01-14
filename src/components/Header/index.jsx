@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Link } from 'react-router';
 import { Icon, Button, Popup } from 'components';
-import { resetToken } from 'containers/Auth/actions';
 import styles from './style.css';
 
 class Header extends Component {
@@ -18,7 +17,7 @@ class Header extends Component {
   };
 
   componentWillMount() {
-    const token = JSON.parse(localStorage.getItem('token'));
+    const token = localStorage.getItem('token');
 
     if (!token) {
       return;
@@ -44,7 +43,7 @@ class Header extends Component {
   handleLogoutClick = () => {
     const { dispatch } = this.props;
 
-    dispatch(resetToken());
+    localStorage.removeItem('token');
     dispatch(replace('/'));
 
     this.setState({

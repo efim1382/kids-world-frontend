@@ -79,7 +79,7 @@ export default compose(
 
   lifecycle({
     componentWillMount() {
-      const token = JSON.parse(localStorage.getItem('token')).key;
+      const token = localStorage.getItem('token');
       const { params: { id }, getUser, redirect } = this.props;
 
       getUser({ id }).then((user) => {

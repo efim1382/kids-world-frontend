@@ -25,7 +25,7 @@ class List extends Component {
   };
 
   componentWillMount() {
-    const token = JSON.parse(localStorage.getItem('token')).key;
+    const token = localStorage.getItem('token');
     const { currentUser, getUserAdverts } = this.props;
 
     currentUser({}, {

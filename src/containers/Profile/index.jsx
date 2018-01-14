@@ -74,7 +74,7 @@ export default compose(
 
   lifecycle({
     componentWillMount() {
-      const token = JSON.parse(localStorage.getItem('token')).key;
+      const token = localStorage.getItem('token');
 
       this.props.currentUser({}, {
         body: JSON.stringify({ token }),
