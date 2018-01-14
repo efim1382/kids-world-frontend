@@ -10,7 +10,9 @@ import { Header, Card, Button } from 'components';
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 
-const Advert = ({ advert }) => <div className={baseStyles.page}>
+const Advert = ({
+  advert, userId, setFavoriteAdvert, isAdvertFavorite, getAdvert, isFavorite, params: { id },
+}) => <div className={baseStyles.page}>
   <Header />
 
   {!_.isEmpty(advert) && <main className={classNames(baseStyles.content, styles.advert)}>
@@ -23,7 +25,23 @@ const Advert = ({ advert }) => <div className={baseStyles.page}>
 
         <div className={styles.description}>
           <p>{ advert.date }, 10 просмотров</p>
-          <Button icon="star" />
+
+          {userId && advert.userId !== userId && <Button
+            icon="star"
+            {...isFavorite ? { className: styles.isFavorite } : {}}
+
+            onClick={() => {
+              setFavoriteAdvert({ id }, {
+                body: JSON.stringify({
+                  userId,
+                }),
+              }).then(() => {
+                getAdvert({ id }).then(() => {
+                  isAdvertFavorite({ id, userId });
+                });
+              });
+            }}
+          />}
         </div>
       </header>
 
@@ -81,23 +99,46 @@ Advert.propTypes = {
     phone: PropTypes.string,
     photo: PropTypes.string,
   }),
+
+  userId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+
+  setFavoriteAdvert: PropTypes.func.isRequired,
+  isAdvertFavorite: PropTypes.func.isRequired,
+  getAdvert: PropTypes.func.isRequired,
+  isFavorite: PropTypes.bool.isRequired,
+
+  params: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default compose(
   connect(
     state => ({
       advert: _.get(state, 'adverts.getAdvert.data', {}),
+      isFavorite: _.get(state, 'adverts.isAdvertFavorite.data.data', false),
+      userId: parseInt(localStorage.getItem('id'), 10) || '',
     }),
 
     {
       getAdvert: advertsApi.actions.getAdvert.sync,
+      setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
+      isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
     },
   ),
 
   lifecycle({
     componentWillMount() {
-      const { params: { id }, getAdvert } = this.props;
-      getAdvert({ id });
+      const {
+        params: { id }, getAdvert, isAdvertFavorite, userId,
+      } = this.props;
+
+      getAdvert({ id }).then(() => {
+        isAdvertFavorite({ id, userId });
+      });
     },
   }),
 )(Advert);

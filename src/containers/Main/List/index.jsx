@@ -9,7 +9,7 @@ import { getAdverts } from 'containers/Profile/Adverts/actions';
 import { Card, Button } from 'components';
 import styles from './style.css';
 
-const List = ({ adverts }) => <div className={styles.list}>
+const List = ({ adverts, userId }) => <div className={styles.list}>
   {adverts && adverts.map(advert => <div key={advert.id} className={styles.item}>
     <div className={styles.image} style={{ '--image': filterAdvertImage(advert.mainImage) }} />
 
@@ -23,7 +23,11 @@ const List = ({ adverts }) => <div className={styles.list}>
         />
 
         <p className={styles.price}>{ advert.price } ₽</p>
-        <Button icon="star" />
+
+        {userId && userId !== advert.userId && <Button
+          icon="star"
+          onClick={() => {}}
+        />}
       </div>
 
       <h3>{ advert.title }</h3>
@@ -48,11 +52,17 @@ List.propTypes = {
     address: PropTypes.string.isRequired,
     photo: PropTypes.string.isRequired,
   })).isRequired,
+
+  userId: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
 };
 
 export default compose(
   connect(state => ({
     adverts: state.adverts.list,
+    userId: parseInt(localStorage.getItem('id'), 10) || '',
   })),
 
   withProps(({ dispatch }) => bindActionCreators({ getAdverts }, dispatch)),

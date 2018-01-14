@@ -35,6 +35,15 @@ export default createApi({
       method: 'post',
     },
   },
+  setFavoriteAdvert: {
+    url: `${apiPath}/advert/:id/favorite`,
+    options: {
+      method: 'post',
+    },
+  },
+  isAdvertFavorite: {
+    url: `${apiPath}/advert/:id/favorite/user/:userId`,
+  },
   deleteAdvert: {
     url: `${apiPath}/adverts/:id/delete`,
     options: {

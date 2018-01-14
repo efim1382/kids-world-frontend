@@ -41,6 +41,7 @@
       & > .description {
         display: flex;
         align-items: center;
+        height: var(--minimal-button-size);
         & > p {
           --height: 16px;
           height: var(--height);
@@ -52,10 +53,15 @@
         & > button {
           margin-left: auto;
           margin-right: calc(var(--padding) * -1);
-          &:not(:hover) {
-            --color: #000;
+          &:not(.is-favorite) {
+            &:not(:hover) {
+              --color: #000;
+            }
+            &:hover {
+              --color: var(--color-accent);
+            }
           }
-          &:hover {
+          &.is-favorite {
             --color: var(--color-accent);
           }
         }
