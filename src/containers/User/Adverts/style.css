@@ -13,6 +13,11 @@
   }
 }
 
-.is-favorite {
-  --color: var(--color-accent) !important;
+.favorite-button {
+  &:not(.is-favorite) {
+    --color: #fff !important;
+  }
+  &.is-favorite {
+    --color: var(--color-accent) !important;
+  }
 }

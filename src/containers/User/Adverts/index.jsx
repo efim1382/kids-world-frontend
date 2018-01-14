@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import { filterAdvertImage } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
 import { CardAdvert } from 'components';
+import classNames from 'classnames';
 import styles from './style.css';
 
 class Adverts extends Component {
@@ -93,7 +94,7 @@ class Adverts extends Component {
 
               {
                 icon: 'star',
-                className: isFavorite ? styles.isFavorite : '',
+                className: classNames(styles.favoriteButton, isFavorite ? styles.isFavorite : ''),
 
                 onClick: () => {
                   setFavoriteAdvert({ id: advert.id }, {
