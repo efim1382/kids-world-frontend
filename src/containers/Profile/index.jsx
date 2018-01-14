@@ -37,6 +37,11 @@ const Profile = ({ children, user }) => <div className={baseStyles.page}>
           },
 
           {
+            name: 'Избранное',
+            link: '/profile/favorites',
+          },
+
+          {
             name: 'Настройки',
             link: '/profile/settings',
           },

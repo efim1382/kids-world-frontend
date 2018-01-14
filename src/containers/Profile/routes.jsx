@@ -4,6 +4,7 @@ import Profile from './';
 import Adverts from './Adverts/List';
 import AddAdvert from './Adverts/Add';
 import EditAdvert from './Adverts/Edit';
+import Favorites from './Adverts/Favorites';
 import Settings from './Settings';
 
 export default () => <Route path="profile" component={Profile}>
@@ -11,6 +12,7 @@ export default () => <Route path="profile" component={Profile}>
   <Route path="adverts" component={Adverts} />
   <Route path="adverts/add" component={AddAdvert} />
   <Route path="adverts/:id/edit" component={EditAdvert} />
+  <Route path="favorites" component={Favorites} />
 
   <Route path="settings" component={Settings} />
 </Route>;

@@ -44,6 +44,9 @@ export default createApi({
   isAdvertFavorite: {
     url: `${apiPath}/advert/:id/favorite/user/:userId`,
   },
+  getFavoritesAdverts: {
+    url: `${apiPath}/adverts/favorite/user/:userId`,
+  },
   deleteAdvert: {
     url: `${apiPath}/adverts/:id/delete`,
     options: {

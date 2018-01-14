@@ -1,0 +1,14 @@
+.favorites {
+  & > .list {
+    --gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc((var(--gap) * -1) + 30px);
+    margin-left: calc(var(--gap) * -1);
+    & > .advert {
+      flex-shrink: 0;
+      margin-left: var(--gap);
+      margin-top: var(--gap);
+    }
+  }
+}
