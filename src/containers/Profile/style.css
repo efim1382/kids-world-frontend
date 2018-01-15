@@ -26,3 +26,13 @@
 		padding: var(--padding-horizontal);
 	}
 }
+
+.modal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.photo-form {
+	margin-top: 20px;
+}

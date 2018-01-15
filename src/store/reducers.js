@@ -1,10 +1,7 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import {
-  api as authApi,
-} from 'containers/Auth';
-
+import { api as authApi } from 'containers/Auth';
 import { reducers as advertsReducer } from 'containers/Profile/Adverts';
 import { reducers as usersReducer } from 'containers/User';
 

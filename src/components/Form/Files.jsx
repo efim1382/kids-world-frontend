@@ -11,6 +11,8 @@ class Files extends Component {
     defaultImage: PropTypes.string,
     caption: PropTypes.string,
     multiple: PropTypes.bool,
+    withContainer: PropTypes.bool,
+    onChange: PropTypes.func,
     className: PropTypes.string,
   };
 
@@ -24,6 +26,7 @@ class Files extends Component {
 
   handleChange = (event) => {
     const { files } = event.target;
+    const { onChange } = this.props;
     const imagesArray = [];
 
     if (!files || !files[0]) {
@@ -45,11 +48,15 @@ class Files extends Component {
 
       reader.readAsDataURL(file);
     });
+
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   render() {
     const {
-      model, caption, multiple, className, defaultImage,
+      model, caption, multiple, className, defaultImage, withContainer,
     } = this.props;
 
     const hasUploadedImages = this.state.images.length > 0;
@@ -65,7 +72,7 @@ class Files extends Component {
         {...multiple ? { multiple } : {}}
       />
 
-      {(hasUploadedImages || defaultImage) && <div className={styles.container}>
+      {withContainer && (hasUploadedImages || defaultImage) && <div className={styles.container}>
         {this.state.images.map(image => <div
           key={UUID.v4()}
           style={{ '--image': `url(${image.src})` }}

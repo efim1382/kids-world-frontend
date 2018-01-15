@@ -13,6 +13,7 @@
 			height: 250px;
 			box-shadow: 0 -1px var(--color-divider) inset;
 			& > .user-image {
+				position: relative;
 				width: 120px;
 				height: 120px;
 				border-radius: 50%;
@@ -20,6 +21,23 @@
 				background-repeat: no-repeat;
 				background-size: cover;
 				background-position: center;
+				& > .photoButton {
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					border-radius: 50%;
+					color: #fff;
+					&:not(:hover) {
+						--background-color: transparent;
+						--color: transparent;
+					}
+					&:hover {
+						--background-color: rgba(0, 0, 0, 0.2);
+						--color: #fff;
+					}
+				}
 			}
 			& > .user-name {
 				--height: 16px;

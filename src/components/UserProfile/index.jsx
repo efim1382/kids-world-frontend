@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Button } from 'components';
 import { filterUserPhoto } from 'helpers/filters';
 import styles from './style.css';
 
@@ -10,12 +11,20 @@ const UserProfile = ({
   email,
   address,
   photo,
+  editablePhoto,
+  handlePhotoClick,
   children,
   className,
 }) => <div className={styles.profile}>
   <div className={styles.sidebar}>
     <header className={styles.header}>
-      <div className={styles.userImage} style={{ '--image': filterUserPhoto(photo) }} />
+      <div className={styles.userImage} style={{ '--image': filterUserPhoto(photo) }}>
+        {editablePhoto && <Button
+          icon="create"
+          className={styles.photoButton}
+          onClick={handlePhotoClick}
+        />}
+      </div>
       <p className={styles.userName}>{ name }</p>
     </header>
 
@@ -48,6 +57,8 @@ UserProfile.propTypes = {
   email: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,
+  editablePhoto: PropTypes.bool,
+  handlePhotoClick: PropTypes.func,
   className: PropTypes.string,
   children: PropTypes.node,
 };

@@ -14,4 +14,34 @@ export default createApi({
       method: 'post',
     },
   },
+  changeAddress: {
+    url: `${apiPath}/user/address`,
+    options: {
+      method: 'post',
+    },
+  },
+  changePhone: {
+    url: `${apiPath}/user/phone`,
+    options: {
+      method: 'post',
+    },
+  },
+  changeEmail: {
+    url: `${apiPath}/user/email`,
+    options: {
+      method: 'post',
+    },
+  },
+  changePassword: {
+    url: `${apiPath}/user/password`,
+    options: {
+      method: 'post',
+    },
+  },
+  changePhoto: {
+    url: `${apiPath}/user/photo`,
+    options: {
+      method: 'post',
+    },
+  },
 });

@@ -47,7 +47,7 @@ const Add = ({ send }) => <div className={styles.add}>
       type="textarea"
     />
 
-    <Files caption="Выберите изображение" model=".image" />
+    <Files caption="Выберите изображение" model=".image" withContainer />
     <div className={styles.divider} />
     <Button appearance="primary" caption="Добавить" className={styles.submit} />
   </Form>

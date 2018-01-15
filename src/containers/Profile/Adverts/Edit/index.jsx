@@ -66,7 +66,7 @@ const Edit = ({ send, advert, params: { id } }) => <div className={styles.edit}>
       defaultValue={advert.description}
     />
 
-    <Files caption="Выберите изображение" model=".image" defaultImage={filterAdvertImage(advert.mainImage)} />
+    <Files caption="Выберите изображение" model=".image" defaultImage={filterAdvertImage(advert.mainImage)} withContainer />
     <div className={styles.divider} />
     <Button appearance="primary" caption="Изменить" className={styles.submit} />
   </Form>}
