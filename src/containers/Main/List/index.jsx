@@ -3,7 +3,12 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { filterCategories, filterAdvertImage, filterUserPhoto } from 'helpers/filters';
+import {
+  filterCategories,
+  filterAdvertImage,
+  filterUserPhoto,
+  filterMoney,
+} from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
 import { Card, Button } from 'components';
 import styles from './style.css';
@@ -90,8 +95,6 @@ class List extends Component {
                 text={advert.date}
               />
 
-              <p className={styles.price}>{ advert.price } ₽</p>
-
               {userId && userId !== advert.userId && <Button
                 {...isFavorite ? { className: styles.isFavorite } : {}}
                 icon="star"
@@ -106,6 +109,8 @@ class List extends Component {
                   });
                 }}
               />}
+
+              <p className={styles.price}>{ filterMoney(advert.price) } ₽</p>
             </div>
 
             <h3>{ advert.title }</h3>

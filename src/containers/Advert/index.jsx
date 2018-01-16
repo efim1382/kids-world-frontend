@@ -4,7 +4,14 @@ import classNames from 'classnames';
 import _ from 'lodash';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import { filterCategories, filterAdvertImage, filterUserPhoto } from 'helpers/filters';
+
+import {
+  filterCategories,
+  filterAdvertImage,
+  filterUserPhoto,
+  filterMoney,
+} from 'helpers/filters';
+
 import advertsApi from 'containers/Profile/Adverts/api';
 import { Header, Card, Button } from 'components';
 import styles from './style.css';
@@ -20,7 +27,7 @@ const Advert = ({
       <header className={styles.header}>
         <div className={styles.title}>
           <h2>{ advert.title }</h2>
-          <span>{ advert.price } ₽</span>
+          <span>{ filterMoney(advert.price) } ₽</span>
         </div>
 
         <div className={styles.description}>
