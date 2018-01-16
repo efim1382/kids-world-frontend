@@ -82,8 +82,18 @@ export default compose(
   lifecycle({
     componentWillMount() {
       const { params: { id }, getUser } = this.props;
-
       getUser({ id });
+    },
+
+    componentWillReceiveProps(nextProps) {
+      const { params: { id }, getUser } = this.props;
+      const newUserId = nextProps.params.id;
+
+      if (newUserId === id) {
+        return;
+      }
+
+      getUser({ id: newUserId });
     },
   }),
 )(User);

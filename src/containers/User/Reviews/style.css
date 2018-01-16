@@ -50,6 +50,7 @@
         }
       }
     }
+    & > button + .list,
     & > form + .list {
       margin-top: 20px;
     }

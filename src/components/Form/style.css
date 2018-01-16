@@ -41,8 +41,8 @@
 	& > textarea {
 		--height: 120px;
 		height: var(--height);
-		padding-top: 6px;
-		padding-bottom: 6px;
+		padding-top: 10px;
+		padding-bottom: 10px;
 		resize: none;
 	}
 	& > .select {
