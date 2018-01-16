@@ -9,7 +9,14 @@ import userApi from 'containers/User/api';
 import styles from './style.css';
 
 const Settings = ({
-  user, redirect, updateProfile, changeAddress, changePhone, changeEmail, changePassword,
+  user,
+  redirect,
+  updateProfile,
+  changeAddress,
+  changePhone,
+  changeEmail,
+  changePassword,
+  deleteProfile,
 }) => <div className={styles.settings}>
   <h3>Изменить адрес</h3>
 
@@ -127,7 +134,22 @@ const Settings = ({
 
   <div className={styles.divider} />
 
-  <Button appearance="danger" caption="Удалить профиль" />
+  <Button
+    appearance="danger"
+    caption="Удалить профиль"
+
+    onClick={() => {
+      deleteProfile({}, {
+        body: JSON.stringify({
+          id: user.id,
+        }),
+      }).then(() => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
+        redirect('/');
+      });
+    }}
+  />
 </div>;
 
 Settings.propTypes = {
@@ -144,6 +166,7 @@ Settings.propTypes = {
   changePhone: PropTypes.func.isRequired,
   changeEmail: PropTypes.func.isRequired,
   changePassword: PropTypes.func.isRequired,
+  deleteProfile: PropTypes.func.isRequired,
 };
 
 export default compose(connect(
@@ -156,6 +179,7 @@ export default compose(connect(
     changePhone: userApi.actions.changePhone.sync,
     changeEmail: userApi.actions.changeEmail.sync,
     changePassword: userApi.actions.changePassword.sync,
+    deleteProfile: userApi.actions.deleteProfile.sync,
     redirect: replace,
   },
 ))(Settings);

@@ -45,9 +45,13 @@ class Adverts extends Component {
       getUserAdverts, isAdvertFavorite, userId, params: { id },
     } = this.props;
 
-    const arrayAdverts = [];
-
     getUserAdverts({ id }).then(() => {
+      if (!userId) {
+        return;
+      }
+
+      const arrayAdverts = [];
+
       this.props.adverts.forEach((advert) => {
         isAdvertFavorite({
           id: advert.id,
@@ -77,36 +81,39 @@ class Adverts extends Component {
           const favoriteAdvert = _.find(this.state.advertsFavorites, { id: advert.id });
           const isFavorite = _.get(favoriteAdvert, 'isFavorite');
 
+          const advertActions = [
+            {
+              icon: 'open_in_new',
+
+              onClick: () => {
+                pushURL(`/advert/${advert.id}`);
+              },
+            },
+          ];
+
+          if (userId) {
+            advertActions.push({
+              icon: 'star',
+              className: classNames(styles.favoriteButton, isFavorite ? styles.isFavorite : ''),
+
+              onClick: () => {
+                setFavoriteAdvert({ id: advert.id }, {
+                  body: JSON.stringify({
+                    userId,
+                  }),
+                }).then(() => {
+                  this.loadData();
+                });
+              },
+            });
+          }
+
           return <CardAdvert
             key={advert.id}
             title={advert.title}
             image={filterAdvertImage(advert.mainImage)}
             className={styles.advert}
-
-            actions={[
-              {
-                icon: 'open_in_new',
-
-                onClick: () => {
-                  pushURL(`/advert/${advert.id}`);
-                },
-              },
-
-              {
-                icon: 'star',
-                className: classNames(styles.favoriteButton, isFavorite ? styles.isFavorite : ''),
-
-                onClick: () => {
-                  setFavoriteAdvert({ id: advert.id }, {
-                    body: JSON.stringify({
-                      userId,
-                    }),
-                  }).then(() => {
-                    this.loadData();
-                  });
-                },
-              },
-            ]}
+            actions={advertActions}
           />;
         })}
       </div>}

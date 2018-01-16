@@ -48,6 +48,10 @@ class List extends Component {
     const arrayAdverts = [];
 
     getAdverts().then(() => {
+      if (!userId) {
+        return;
+      }
+
       this.props.adverts.forEach((advert) => {
         isAdvertFavorite({
           id: advert.id,

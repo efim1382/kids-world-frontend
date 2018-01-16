@@ -44,4 +44,10 @@ export default createApi({
       method: 'post',
     },
   },
+  deleteProfile: {
+    url: `${apiPath}/user/delete`,
+    options: {
+      method: 'delete',
+    },
+  },
 });
