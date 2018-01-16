@@ -55,7 +55,7 @@ class Reviews extends Component {
     return <div className={styles.reviews}>
       <div className={styles.container}>
         {_.isEmpty(reviews) && <div className={styles.emptyMessage}>
-          Об этом продавце еще никто не оставляли отзывы
+          Об этом продавце еще не оставляли отзывы
         </div>}
 
         {!this.state.formShown && userId && <Button
