@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { filterUserPhoto } from 'helpers/filters';
 import { Card, Form, Field, Button } from 'components';
-import api from '../api';
+import { reviewsApi } from 'store/reviews';
 import styles from './style.css';
 
 class Reviews extends Component {
@@ -148,11 +148,11 @@ class Reviews extends Component {
 export default connect(
   state => ({
     userId: parseInt(localStorage.getItem('id'), 10) || '',
-    reviews: _.get(state, 'users.getUserReviews.data.data', []),
+    reviews: _.get(state, 'reviews.getUserReviews.data.data', []),
   }),
 
   {
-    getUserReviews: api.actions.getUserReviews.sync,
-    createReview: api.actions.createReview.sync,
+    getUserReviews: reviewsApi.actions.getUserReviews.sync,
+    createReview: reviewsApi.actions.createReview.sync,
   },
 )(Reviews);
