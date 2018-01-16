@@ -44,6 +44,15 @@ export default createApi({
       method: 'post',
     },
   },
+  getUserReviews: {
+    url: `${apiPath}/reviews/user/:id`,
+  },
+  createReview: {
+    url: `${apiPath}/reviews/add`,
+    options: {
+      method: 'post',
+    },
+  },
   deleteProfile: {
     url: `${apiPath}/user/delete`,
     options: {

@@ -1,0 +1,66 @@
+.reviews {
+  & > .container {
+    width: 450px;
+    & > form {
+      position: relative;
+      & > .field {
+        & > textarea {
+          --height: 100px;
+          box-shadow: 0 1px var(--color-divider) inset, 1px 0 var(--color-divider) inset, -1px 0 var(--color-divider) inset;
+        }
+      }
+      & > .tooltip {
+        display: flex;
+        align-items: center;
+        height: 42px;
+        padding-left: 8px;
+        padding-right: 4px;
+        background-color: #fff;
+        box-shadow: 0 0 0 1px var(--color-divider) inset;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        & > .like,
+        & > .dislike {
+          --padding: 10px;
+          --icon-size: 18px;
+          &:not(:hover) {
+            --color: #000;
+          }
+        }
+        & > .like {
+          &.active,
+          &:hover {
+            --color: var(--color-accent);
+          }
+        }
+        & > .dislike {
+          &.active,
+          &:hover {
+            --color: #d32f2f;
+          }
+        }
+        & > .send {
+          margin-left: auto;
+          &:not(:hover) {
+            --color: #000;
+          }
+          &:hover {
+            --color: var(--color-accent);
+          }
+        }
+      }
+    }
+    & > .list {
+      margin-top: 20px;
+      & > .card {
+        padding: 12px;
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 0 0 1px var(--color-divider) inset;
+        &:nth-of-type(n+2) {
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}

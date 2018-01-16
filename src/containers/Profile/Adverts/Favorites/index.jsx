@@ -14,7 +14,7 @@ class Favorites extends Component {
       id: PropTypes.number,
       title: PropTypes.string,
       mainImage: PropTypes.string,
-    })).isRequired,
+    })),
 
     userId: PropTypes.oneOfType([
       PropTypes.string,

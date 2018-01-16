@@ -37,6 +37,11 @@ const User = ({ children, user, params: { id } }) => <div className={baseStyles.
             name: 'Объявления',
             link: `/user/${id}/adverts`,
           },
+
+          {
+            name: 'Отзывы',
+            link: `/user/${id}/reviews`,
+          },
         ]}
       />
 
