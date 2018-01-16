@@ -137,6 +137,10 @@ export default compose(
       } = this.props;
 
       getAdvert({ id }).then(() => {
+        if (!userId) {
+          return;
+        }
+
         isAdvertFavorite({ id, userId });
       });
     },
