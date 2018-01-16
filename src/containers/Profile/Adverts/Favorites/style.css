@@ -3,7 +3,7 @@
     --gap: 20px;
     display: flex;
     flex-wrap: wrap;
-    margin-top: calc((var(--gap) * -1) + 30px);
+    margin-top: calc(var(--gap) * -1);
     margin-left: calc(var(--gap) * -1);
     & > .advert {
       flex-shrink: 0;
