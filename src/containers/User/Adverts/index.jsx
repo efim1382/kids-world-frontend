@@ -76,7 +76,7 @@ class Adverts extends Component {
     } = this.props;
 
     return <div className={styles.adverts}>
-      {adverts.length > 0 && <div className={styles.list}>
+      {!_.isEmpty(adverts) && <div className={styles.list}>
         {adverts.map((advert) => {
           const favoriteAdvert = _.find(this.state.advertsFavorites, { id: advert.id });
           const isFavorite = _.get(favoriteAdvert, 'isFavorite');
@@ -116,6 +116,10 @@ class Adverts extends Component {
             actions={advertActions}
           />;
         })}
+      </div>}
+
+      {_.isEmpty(adverts) && <div className={styles.emptyMessage}>
+        Этот пользователь еще не размещал объявлений
       </div>}
     </div>;
   }

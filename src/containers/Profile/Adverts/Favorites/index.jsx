@@ -37,7 +37,7 @@ class Favorites extends Component {
     } = this.props;
 
     return <div className={styles.favorites}>
-      {adverts.length > 0 && <div className={styles.list}>
+      {!_.isEmpty(adverts) && <div className={styles.list}>
         {adverts.map(advert => <CardAdvert
           key={advert.id}
           title={advert.title}
@@ -68,6 +68,10 @@ class Favorites extends Component {
             },
           ]}
         />)}
+      </div>}
+
+      {_.isEmpty(adverts) && <div className={styles.emptyMessage}>
+        У Вас нет ничего в избранных
       </div>}
     </div>;
   }

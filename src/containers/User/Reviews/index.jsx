@@ -127,7 +127,7 @@ class Reviews extends Component {
           </div>
         </Form>}
 
-        {reviews && <div className={styles.list}>
+        {!_.isEmpty(reviews) && <div className={styles.list}>
           {reviews.map(review => <Card
             key={UUID.v4()}
             image={filterUserPhoto(review.photo)}
@@ -138,6 +138,10 @@ class Reviews extends Component {
             className={styles.card}
             multiple
           />)}
+        </div>}
+
+        {_.isEmpty(reviews) && <div className={styles.emptyMessage}>
+          Об этом продавце еще никто не оставляли отзывы
         </div>}
       </div>
     </div>;

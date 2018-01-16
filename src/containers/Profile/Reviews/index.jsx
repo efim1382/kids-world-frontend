@@ -10,7 +10,7 @@ import reviewsApi from 'store/reviews';
 import styles from './style.css';
 
 const Reviews = ({ reviews }) => <div className={styles.reviews}>
-  {reviews && <div className={styles.list}>
+  {!_.isEmpty(reviews) && <div className={styles.list}>
     {reviews.map(review => <Card
       key={UUID.v4()}
       image={filterUserPhoto(review.photo)}
@@ -21,6 +21,10 @@ const Reviews = ({ reviews }) => <div className={styles.reviews}>
       className={styles.card}
       multiple
     />)}
+  </div>}
+
+  {_.isEmpty(reviews) && <div className={styles.emptyMessage}>
+    О Вас еще не оставляли отзывов
   </div>}
 </div>;
 

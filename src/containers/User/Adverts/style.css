@@ -11,6 +11,10 @@
       margin-top: var(--gap);
     }
   }
+  & > .empty-message {
+    font-size: 13px;
+    color: var(--color-caption);
+  }
 }
 
 .favorite-button {

@@ -1,6 +1,17 @@
 .adverts {
-	& > a span {
-		text-transform: none !important;
+	& > .empty-message {
+		font-size: 13px;
+		color: var(--color-caption);
+	}
+	& > .empty-message + a {
+		margin-top: 12px;
+	}
+	& > a {
+		display: block;
+		max-width: fit-content;
+		& > span {
+			text-transform: none !important;
+		}
 	}
 	& > .list {
 		--gap: 20px;

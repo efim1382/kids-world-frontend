@@ -36,11 +36,15 @@ class List extends Component {
     } = this.props;
 
     return <div className={styles.adverts}>
+      {_.isEmpty(adverts) && <div className={styles.emptyMessage}>
+        У Вас нет объявлений
+      </div>}
+
       <Link to="/profile/adverts/add">
         <Button appearance="primary" caption="Подать объявление" />
       </Link>
 
-      {adverts.length > 0 && <div className={styles.list}>
+      {!_.isEmpty(adverts) && <div className={styles.list}>
         {adverts.map(advert => <CardAdvert
           key={advert.id}
           title={advert.title}
