@@ -30,15 +30,20 @@ const getReviewsText = (count) => {
 const BestSalers = ({ users }) => <div className={styles.bestSalers}>
   <h3 className={styles.title}>Лучшие продавцы</h3>
 
-  {users && <div className={styles.list}>
-    {users.map(user => <Card
+  <div className={styles.list}>
+    {!_.isEmpty(users) && users.map(user => <Card
       key={user.id}
       image={filterUserPhoto(user.photo)}
       link={`/user/${user.id}`}
       name={`${user.firstName} ${user.lastName}`}
       text={getReviewsText(user.likes)}
+      className={styles.card}
     />)}
-  </div>}
+
+    {_.isEmpty(users) && <div className={styles.emptyMessage}>
+      На данный момент нет продавцов с положительными отзывами
+    </div>}
+  </div>
 </div>;
 
 BestSalers.propTypes = {

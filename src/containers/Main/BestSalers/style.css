@@ -9,21 +9,26 @@
   border-radius: 2px;
   box-shadow: 0 0 0 1px var(--color-divider) inset;
   & > .title {
-  	--height: 60px;
-  	overflow: hidden;
-  	height: var(--height);
-  	line-height: var(--height);
-		font-size: 16px;
-		color: var(--color-text);
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		box-shadow: 0 -1px var(--color-divider) inset;
+    --height: 60px;
+    overflow: hidden;
+    height: var(--height);
+    line-height: var(--height);
+    font-size: 16px;
+    color: var(--color-text);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    box-shadow: 0 -1px var(--color-divider) inset;
   }
   & > .list {
-  	padding-top: 12px;
-  	padding-bottom: 12px;
-  	& > div {
-  		--card-height: 56px;
-  	}
+    padding-top: 12px;
+    padding-bottom: 12px;
+    & > .card {
+      --card-height: 56px;
+    }
+    & > .empty-message {
+      font-size: 13px;
+      text-align: center;
+      color: var(--color-caption);
+    }
   }
 }
