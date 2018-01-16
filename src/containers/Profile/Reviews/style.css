@@ -1,0 +1,14 @@
+.reviews {
+  & > .list {
+    width: 450px;
+    & > .card {
+      padding: 12px;
+      background-color: #fff;
+      border-radius: 2px;
+      box-shadow: 0 0 0 1px var(--color-divider) inset;
+      &:nth-of-type(n+2) {
+        margin-top: 16px;
+      }
+    }
+  }
+}

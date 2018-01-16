@@ -88,6 +88,11 @@ class Profile extends Component {
               },
 
               {
+                name: 'Отзывы',
+                link: '/profile/reviews',
+              },
+
+              {
                 name: 'Настройки',
                 link: '/profile/settings',
               },

@@ -22,7 +22,6 @@ class Reviews extends Component {
 
     reviews: PropTypes.arrayOf(PropTypes.shape({
       idAuthor: PropTypes.number,
-      idRecipient: PropTypes.number,
       image: PropTypes.string,
       firstName: PropTypes.string,
       lastName: PropTypes.string,
