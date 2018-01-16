@@ -22,7 +22,7 @@ const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHisto
     <Route path="advert/:id" component={AdvertDetail} />
     { authRoutes() }
     { profileRoutes() }
-    { userRoutes() }
+    { userRoutes(store) }
   </Route>
 </Router>;
 

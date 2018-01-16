@@ -1,11 +1,9 @@
 import React from 'react';
 import _ from 'lodash';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { compose, lifecycle } from 'recompose';
-import { replace } from 'react-router-redux';
 
 import {
   Header,
@@ -71,22 +69,16 @@ export default compose(
       user: _.get(state, 'users.getUser.data', {}),
     }),
 
-    dispatch => bindActionCreators({
+    {
       getUser: api.actions.getUser.sync,
-      redirect: replace,
-    }, dispatch),
+    },
   ),
 
   lifecycle({
     componentWillMount() {
-      const token = localStorage.getItem('token');
-      const { params: { id }, getUser, redirect } = this.props;
+      const { params: { id }, getUser } = this.props;
 
-      getUser({ id }).then((user) => {
-        if (user.token === token) {
-          redirect('/profile');
-        }
-      });
+      getUser({ id });
     },
   }),
 )(User);
