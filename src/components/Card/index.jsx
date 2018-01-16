@@ -6,7 +6,7 @@ import styles from './style.css';
 const Card = ({
   image, link, name, text,
 }) => <div className={styles.card}>
-  {image && <div className={styles.image} style={{ '--image': 'url("/images/user-image.jpg")' }} />}
+  {image && <div className={styles.image} style={{ '--image': image }} />}
 
   <div className={styles.section}>
     <Link to={link} className={styles.link}>{ name }</Link>
