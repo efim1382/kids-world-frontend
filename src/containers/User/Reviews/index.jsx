@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { filterUserPhoto } from 'helpers/filters';
 import { Card, Form, Field, Button } from 'components';
-import { reviewsApi } from 'store/reviews';
+import reviewsApi from 'store/reviews';
 import styles from './style.css';
 
 class Reviews extends Component {

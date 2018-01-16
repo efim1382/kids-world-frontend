@@ -1,7 +1,7 @@
 import { apiPath } from 'configuration';
 import { createApi } from 'components/Http';
 
-export const reviewsApi = createApi({
+const reviewsApi = createApi({
   getUserReviews: {
     url: `${apiPath}/reviews/user/:id`,
   },
@@ -12,3 +12,5 @@ export const reviewsApi = createApi({
     },
   },
 });
+
+export default reviewsApi;
