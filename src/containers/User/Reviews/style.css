@@ -1,6 +1,14 @@
 .reviews {
   & > .container {
     width: 450px;
+    & > .empty-message {
+      font-size: 13px;
+      color: var(--color-caption);
+    }
+    & > .empty-message + button,
+    & > .empty-message + form {
+      margin-top: 12px;
+    }
     & > form {
       position: relative;
       & > .field {
@@ -64,10 +72,6 @@
           margin-top: 16px;
         }
       }
-    }
-    & > .empty-message {
-      font-size: 13px;
-      color: var(--color-caption);
     }
   }
 }

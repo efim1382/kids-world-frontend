@@ -54,6 +54,10 @@ class Reviews extends Component {
 
     return <div className={styles.reviews}>
       <div className={styles.container}>
+        {_.isEmpty(reviews) && <div className={styles.emptyMessage}>
+          Об этом продавце еще никто не оставляли отзывы
+        </div>}
+
         {!this.state.formShown && userId && <Button
           caption="Оставить отзыв"
           appearance="primary"
@@ -138,10 +142,6 @@ class Reviews extends Component {
             className={styles.card}
             multiple
           />)}
-        </div>}
-
-        {_.isEmpty(reviews) && <div className={styles.emptyMessage}>
-          Об этом продавце еще никто не оставляли отзывы
         </div>}
       </div>
     </div>;
