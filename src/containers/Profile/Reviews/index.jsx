@@ -14,7 +14,7 @@ const Reviews = ({ reviews }) => <div className={styles.reviews}>
     {reviews.map(review => <Card
       key={UUID.v4()}
       image={filterUserPhoto(review.photo)}
-      link={`/users/${review.idAuthor}`}
+      link={`/user/${review.idAuthor}`}
       name={`${review.firstName} ${review.lastName}`}
       text={review.text}
       emotion={review.emotion}

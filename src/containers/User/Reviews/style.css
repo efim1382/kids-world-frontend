@@ -50,8 +50,10 @@
         }
       }
     }
-    & > .list {
+    & > form + .list {
       margin-top: 20px;
+    }
+    & > .list {
       & > .card {
         padding: 12px;
         background-color: #fff;
