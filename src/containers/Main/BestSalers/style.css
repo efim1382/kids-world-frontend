@@ -26,6 +26,8 @@
       --card-height: 56px;
     }
     & > .empty-message {
+      padding-top: 8px;
+      padding-bottom: 8px;
       font-size: 13px;
       text-align: center;
       color: var(--color-caption);
