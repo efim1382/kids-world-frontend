@@ -34,11 +34,7 @@ class Advert extends Component {
       photo: PropTypes.string,
     }),
 
-    userId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-
+    userId: PropTypes.number,
     setFavoriteAdvert: PropTypes.func.isRequired,
     isAdvertFavorite: PropTypes.func.isRequired,
     getAdvert: PropTypes.func.isRequired,
@@ -150,7 +146,7 @@ export default connect(
   state => ({
     advert: _.get(state, 'adverts.getAdvert.data', {}),
     isFavorite: _.get(state, 'adverts.isAdvertFavorite.data.data', false),
-    userId: parseInt(localStorage.getItem('id'), 10) || '',
+    userId: parseInt(localStorage.getItem('id'), 10) || null,
   }),
 
   {
