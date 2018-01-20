@@ -1,34 +1,57 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { hideNotification } from './actions';
 import styles from './style.css';
+
+export reducers from './reducers';
 
 class Notification extends Component {
   static propTypes = {
-    show: PropTypes.bool,
     message: PropTypes.string,
-    onRequestClose: PropTypes.func,
+    dispatch: PropTypes.func.isRequired,
   };
 
-  componentWillReceiveProps(nextProps) {
-    const { show } = nextProps;
-    const { onRequestClose } = this.props;
+  state = {
+    className: styles.notification,
+  };
 
-    if (show) {
-      setTimeout(() => {
-        onRequestClose();
-      }, 4000);
-    }
+  componentDidMount() {
+    this.showNotification();
+
+    setTimeout(() => {
+      this.setState({
+        className: styles.notification,
+      });
+
+      this.hideNotification();
+    }, 3000);
   }
 
-  render() {
-    const { show, message } = this.props;
+  showNotification = () => {
+    setTimeout(() => {
+      this.setState({
+        className: classNames(styles.notification, styles.isShown),
+      });
+    }, 0);
+  };
 
-    return <div
-      className={styles.notification}
-      {...show ? { 'data-show': '' } : {}}
-    >{ message }
-    </div>;
+  hideNotification = () => {
+    const { dispatch } = this.props;
+
+    setTimeout(() => {
+      dispatch(hideNotification());
+    }, 200);
+  };
+
+  render() {
+    const { message } = this.props;
+    return <div className={this.state.className}>{ message }</div>;
   }
 }
 
-export default Notification;
+export default connect(state => ({
+  message: _.get(state, 'notification.message', ''),
+}))(Notification);

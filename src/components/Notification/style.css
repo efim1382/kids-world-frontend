@@ -15,10 +15,10 @@
 	background-color: rgba(0, 0, 0, 0.7);
 	color: #fff;
 	transition-property: transform;
-	&:not([data-show]) {
+	&:not(.is-shown) {
 		--translate: var(--height);
 	}
-	&[data-show] {
+	&.is-shown {
 		--translate: 0;
 	}
 }

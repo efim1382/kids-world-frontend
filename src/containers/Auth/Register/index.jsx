@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
-import { Form, Field, Button, Notification } from 'components';
+import { Form, Field, Button } from 'components';
+import { showNotification } from 'components/Notification/actions';
 import api from '../api';
 import styles from './style.css';
 
 class Register extends Component {
   static propTypes = {
     dispatch: PropTypes.func.isRequired,
-  };
-
-  state = {
-    notificationShown: false,
-    notificationMessage: '',
   };
 
   sendHandler = (data) => {
@@ -23,24 +19,13 @@ class Register extends Component {
       body: JSON.stringify(data),
     })).then((response) => {
       if (response.status !== 200) {
-        this.setState({
-          notificationShown: true,
-          notificationMessage: response.message,
-        });
-
+        dispatch(showNotification(response.message));
         return;
       }
 
       localStorage.setItem('id', response.user.id);
       localStorage.setItem('token', response.user.token);
       dispatch(replace('/'));
-    });
-  };
-
-  hideNotification = () => {
-    this.setState({
-      notificationShown: false,
-      notificationMessage: '',
     });
   };
 
@@ -105,12 +90,6 @@ class Register extends Component {
           className={styles.buttonSubmit}
         />
       </Form>
-
-      <Notification
-        show={this.state.notificationShown}
-        message={this.state.notificationMessage}
-        onRequestClose={this.hideNotification}
-      />
     </div>);
   }
 }
