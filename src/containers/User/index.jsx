@@ -52,6 +52,7 @@ const User = ({ children, user, params: { id } }) => <div className={baseStyles.
 
 User.propTypes = {
   user: PropTypes.shape({
+    id: PropTypes.number,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     phone: PropTypes.string,
@@ -71,7 +72,7 @@ User.propTypes = {
 export default compose(
   connect(
     state => ({
-      user: _.get(state, 'users.getUser.data', {}),
+      user: _.get(state, 'users.getUser.data.user', {}),
     }),
 
     {
