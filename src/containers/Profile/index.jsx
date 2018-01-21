@@ -3,7 +3,6 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
-import { compose } from 'recompose';
 
 import {
   Header,
@@ -23,6 +22,7 @@ export routes from './routes';
 class Profile extends Component {
   static propTypes = {
     user: PropTypes.shape({
+      id: PropTypes.number,
       firstName: PropTypes.string,
       lastName: PropTypes.string,
       phone: PropTypes.string,
@@ -44,10 +44,38 @@ class Profile extends Component {
     this.loadData();
   }
 
-  onPhotoClick = () => {
+  showModal = () => {
     this.setState({
       modalShown: true,
     });
+  };
+
+  closeModal = () => {
+    this.setState({
+      modalShown: false,
+    });
+  };
+
+  handleSubmit = (data) => {
+    const { changePhoto, user } = this.props;
+
+    const body = new FormData();
+    body.append('id', user.id);
+    body.append('photo', data.photo[0]);
+
+    this.closeModal();
+
+    changePhoto({}, { body }).then(() => {
+      this.loadData();
+    });
+  };
+
+  handleFilesChange = () => {
+    // Не успевает почему то попадать данные формы в data
+    // Поэтому ставим setTimeout на 0
+    setTimeout(() => {
+      this.uploadForm.submit();
+    }, 0);
   };
 
   loadData = () => {
@@ -73,7 +101,7 @@ class Profile extends Component {
           photo={`${user.photo}`}
           className={styles.content}
           editablePhoto
-          handlePhotoClick={this.onPhotoClick}
+          handlePhotoClick={this.showModal}
         >
           <Navigation
             items={[
@@ -108,46 +136,20 @@ class Profile extends Component {
           show={this.state.modalShown}
           title="Загрузка новой фотографии"
           className={styles.modal}
-
-          hancleClose={() => {
-            this.setState({
-              modalShown: false,
-            });
-          }}
+          hancleClose={this.closeModal}
         >
           <p>Загрузите свою настоящую фотографию.</p>
           <p>Вы можете загрузить фотографию только в форматах JPG, GIF или PNG.</p>
 
           <Form
-            model=" "
+            model="changePhoto"
             getRef={(node) => { this.uploadForm = node; }}
             className={styles.photoForm}
-            onSubmit={(data) => {
-              const newData = new FormData();
-              newData.append('id', user.id);
-              newData.append('photo', data.photo[0]);
-
-              this.setState({
-                modalShown: false,
-              });
-
-              // eslint-disable-next-line no-underscore-dangle
-              changePhoto({}, {
-                body: newData,
-              }).then(() => {
-                this.loadData();
-              });
-            }
-          }>
+            onSubmit={this.handleSubmit}
+          >
             <Files
               model=".photo"
-              onChange={() => {
-                // Не успевает почему то попадать данные формы в data
-                // Поэтому ставим setTimeout на 0
-                setTimeout(() => {
-                  this.uploadForm.submit();
-                }, 0);
-              }}
+              onChange={this.handleFilesChange}
             />
           </Form>
         </Modal>
@@ -156,13 +158,13 @@ class Profile extends Component {
   }
 }
 
-export default compose(connect(
+export default connect(
   state => ({
-    user: _.get(state, 'users.currentUser.data', {}),
+    user: _.get(state, 'users.currentUser.data.user', {}),
   }),
 
   {
     currentUser: userApi.actions.currentUser.sync,
     changePhoto: userApi.actions.changePhoto.sync,
   },
-))(Profile);
+)(Profile);
