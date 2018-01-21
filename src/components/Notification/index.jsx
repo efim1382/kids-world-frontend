@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
-import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { hideNotification } from './actions';
@@ -11,47 +10,34 @@ export reducers from './reducers';
 class Notification extends Component {
   static propTypes = {
     message: PropTypes.string,
+    show: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired,
   };
 
-  state = {
-    className: styles.notification,
-  };
-
-  componentDidMount() {
-    this.showNotification();
-
-    setTimeout(() => {
-      this.setState({
-        className: styles.notification,
-      });
-
-      this.hideNotification();
-    }, 3000);
-  }
-
-  showNotification = () => {
-    setTimeout(() => {
-      this.setState({
-        className: classNames(styles.notification, styles.isShown),
-      });
-    }, 0);
-  };
-
-  hideNotification = () => {
+  componentWillReceiveProps(nextProps) {
     const { dispatch } = this.props;
+    const { show } = nextProps;
+
+    if (!show) {
+      return;
+    }
 
     setTimeout(() => {
       dispatch(hideNotification());
-    }, 200);
-  };
+    }, 3000);
+  }
 
   render() {
-    const { message } = this.props;
-    return <div className={this.state.className}>{ message }</div>;
+    const { show, message } = this.props;
+
+    return <div
+      className={styles.notification}
+      {...show ? { 'data-show': '' } : {}}
+    >{ message }</div>;
   }
 }
 
 export default connect(state => ({
+  show: _.get(state, 'notification.isShown', false),
   message: _.get(state, 'notification.message', ''),
 }))(Notification);

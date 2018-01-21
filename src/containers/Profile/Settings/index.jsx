@@ -164,7 +164,12 @@ const Settings = ({
         body: JSON.stringify({
           id: user.id,
         }),
-      }).then(() => {
+      }).then((responce) => {
+        if (responce.status !== 200) {
+          showMessage(responce.message);
+          return;
+        }
+
         localStorage.removeItem('token');
         localStorage.removeItem('id');
         redirect('/');
