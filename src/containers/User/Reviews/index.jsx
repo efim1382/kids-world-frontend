@@ -46,10 +46,54 @@ class Reviews extends Component {
     getUserReviews({ id });
   };
 
-  render() {
+  openReviewForm = () => {
+    this.setState({
+      formShown: true,
+    });
+  };
+
+  closeReviewForm = () => {
+    this.setState({
+      formShown: false,
+      emotion: null,
+    });
+  };
+
+  handleSubmitReview = (data) => {
     const {
-      reviews, createReview, params: { id }, userId, showMessage,
+      createReview, params: { id }, userId, showMessage,
     } = this.props;
+
+    if (!data.review) {
+      showMessage('Укажите текст отзыва');
+      return;
+    }
+
+    if (!this.state.emotion) {
+      showMessage('Укажите оценку отзыва');
+      return;
+    }
+
+    createReview({}, {
+      body: JSON.stringify({
+        idAuthor: userId,
+        idRecipient: id,
+        emotion: this.state.emotion,
+        text: data.review,
+      }),
+    }).then((responce) => {
+      if (responce.status !== 200) {
+        showMessage(responce.message);
+        return;
+      }
+
+      this.loadData();
+      this.closeReviewForm();
+    });
+  };
+
+  render() {
+    const { reviews, userId } = this.props;
 
     return <div className={styles.reviews}>
       <div className={styles.container}>
@@ -60,50 +104,14 @@ class Reviews extends Component {
         {!this.state.formShown && userId && <Button
           caption="Оставить отзыв"
           appearance="primary"
-
-          onClick={() => {
-            this.setState({
-              formShown: true,
-            });
-          }}
+          onClick={this.openReviewForm}
         />}
 
         {this.state.formShown && userId && <Form
           model="createReview"
-          onSubmit={(data) => {
-            if (!data.review) {
-              showMessage('Укажите текст отзыва');
-              return;
-            }
-
-            if (!this.state.emotion) {
-              showMessage('Укажите оценку отзыва');
-              return;
-            }
-
-            createReview({}, {
-              body: JSON.stringify({
-                idAuthor: userId,
-                idRecipient: id,
-                emotion: this.state.emotion,
-                text: data.review,
-              }),
-            }).then((responce) => {
-              if (responce.status !== 200) {
-                showMessage(responce.message);
-                return;
-              }
-
-              this.loadData();
-
-              this.setState({
-                formShown: false,
-                emotion: null,
-              });
-            });
-          }}
+          onSubmit={this.handleSubmitReview}
         >
-          <Field caption="" model=".review" type="textarea" className={styles.field} />
+          <Field model=".review" type="textarea" className={styles.field} />
 
           <div className={styles.tooltip}>
             <Button
