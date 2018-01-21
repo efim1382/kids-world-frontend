@@ -31,7 +31,7 @@ const Settings = ({
         }),
       }).then((responce) => {
         if (responce.status !== 200) {
-          showMessage('Ошибка при изменении адреса');
+          showMessage(responce.message);
           return;
         }
 
@@ -61,7 +61,7 @@ const Settings = ({
         }),
       }).then((responce) => {
         if (responce.status !== 200) {
-          showMessage('Ошибка при изменении телефона');
+          showMessage(responce.message);
           return;
         }
 
@@ -91,7 +91,7 @@ const Settings = ({
         }),
       }).then((responce) => {
         if (responce.status !== 200) {
-          showMessage('Ошибка при изменении почты');
+          showMessage(responce.message);
           return;
         }
 
@@ -121,7 +121,12 @@ const Settings = ({
           newPassword: data.newPassword,
           confirmNewPassword: data.confirmNewPassword,
         }),
-      }).then(() => {
+      }).then((responce) => {
+        if (responce.status !== 200) {
+          showMessage(responce.message);
+          return;
+        }
+
         updateProfile();
         redirect('/profile');
       });
