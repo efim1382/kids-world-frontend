@@ -5,39 +5,46 @@ import { compose, lifecycle } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Form, Field, Select, Files, Button } from 'components';
+import { showNotification } from 'components/Notification/actions';
 import categories from 'containers/Profile/Adverts/categories';
 import { filterAdvertImage } from 'helpers/filters';
-import { editAdvertWithImage } from '../actions';
 import advertsApi from '../api';
 import styles from './style.css';
 
-const sendCallback = (dispatch, id) => {
-  dispatch(replace(`/advert/${id}`));
-};
-
-const sendHandler = (data, id) => (dispatch) => {
-  if (_.has(data, 'image')) {
-    dispatch(editAdvertWithImage(data, id)).then(() => {
-      sendCallback(dispatch, id);
-    });
-  }
-
-  dispatch(advertsApi.actions.editAdvert({ id }, {
-    body: JSON.stringify(data),
-  })).then(() => {
-    sendCallback(dispatch, id);
-  });
-};
-
-const Edit = ({ send, advert, params: { id } }) => <div className={styles.edit}>
+const Edit = ({
+  advert,
+  editAdvert,
+  showMessage,
+  redirect,
+  params: { id },
+}) => <div className={styles.edit}>
   <h3>Редактирование объявления</h3>
 
   {!_.isEmpty(advert) && <Form
     model="editAdvert"
+
     onSubmit={(data) => {
-      send(data, id);
-    }
-  }
+      const body = new FormData();
+      body.append('title', data.title);
+      body.append('price', data.price);
+      body.append('category', data.category);
+      body.append('description', data.description.split('\n').join('<br />'));
+
+      if (!_.isEmpty(data.image)) {
+        body.append('image', data.image[0]);
+      }
+
+      editAdvert({ id }, {
+        body,
+      }).then((responce) => {
+        if (responce.status !== 200) {
+          showMessage(responce.message);
+          return;
+        }
+
+        redirect(`/advert/${id}`);
+      });
+    }}
   >
     <Field
       caption="Заголовок"
@@ -73,8 +80,6 @@ const Edit = ({ send, advert, params: { id } }) => <div className={styles.edit}>
 </div>;
 
 Edit.propTypes = {
-  send: PropTypes.func.isRequired,
-
   params: PropTypes.shape({
     id: PropTypes.string,
   }),
@@ -87,17 +92,25 @@ Edit.propTypes = {
     description: PropTypes.string,
     mainImage: PropTypes.string,
   }),
+
+  // eslint-disable-next-line react/no-unused-prop-types
+  getAdvert: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
+  showMessage: PropTypes.func.isRequired,
+  editAdvert: PropTypes.func.isRequired,
 };
 
 export default compose(
   connect(
     state => ({
-      advert: _.get(state, 'adverts.getAdvert.data', {}),
+      advert: _.get(state, 'adverts.getAdvert.data.advert', {}),
     }),
 
     {
-      send: sendHandler,
+      editAdvert: advertsApi.actions.editAdvert.sync,
       getAdvert: advertsApi.actions.getAdvert,
+      redirect: replace,
+      showMessage: showNotification,
     },
   ),
 

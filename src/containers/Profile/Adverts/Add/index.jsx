@@ -1,29 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { compose, withHandlers } from 'recompose';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Form, Field, Select, Files, Button } from 'components';
+import moment from 'moment';
+import { showNotification } from 'components/Notification/actions';
 import categories from 'containers/Profile/Adverts/categories';
-import { addAdvert } from '../actions';
+import advertApi from 'containers/Profile/Adverts/api';
 import styles from './style.css';
 
-const sendHandler = ({ dispatch }) => (data) => {
-  const userId = localStorage.getItem('id');
-
-  dispatch(addAdvert(data, userId)).then((resp) => {
-    if (resp.status !== 200) {
-      return;
-    }
-
-    dispatch(replace(`/advert/${resp.advert.id}`));
-  });
-};
-
-const Add = ({ send }) => <div className={styles.add}>
+const Add = ({
+  userId, addAdvert, showMessage, redirect,
+}) => <div className={styles.add}>
   <h3>Добавление объявления</h3>
 
-  <Form model="addAdvert" onSubmit={send}>
+  <Form
+    model="addAdvert"
+
+    onSubmit={(data) => {
+      const body = new FormData();
+      body.append('title', data.title);
+      body.append('price', data.price);
+      body.append('category', data.category);
+      body.append('date', moment().locale('ru').format('DD MMMM, YYYY'));
+      body.append('description', data.description.split('\n').join('<br />'));
+      body.append('image', data.image[0]);
+      body.append('userId', userId);
+
+      addAdvert({}, {
+        body,
+      }).then((responce) => {
+        if (responce.status !== 200) {
+          showMessage(responce.message);
+          return;
+        }
+
+        redirect(`/advert/${responce.advert.id}`);
+      });
+    }}
+  >
     <Field
       caption="Заголовок"
       model=".title"
@@ -54,13 +69,20 @@ const Add = ({ send }) => <div className={styles.add}>
 </div>;
 
 Add.propTypes = {
-  send: PropTypes.func.isRequired,
+  userId: PropTypes.number.isRequired,
+  addAdvert: PropTypes.func.isRequired,
+  showMessage: PropTypes.func.isRequired,
+  redirect: PropTypes.func.isRequired,
 };
 
-export default compose(
-  connect(),
-
-  withHandlers({
-    send: sendHandler,
+export default connect(
+  () => ({
+    userId: parseInt(localStorage.getItem('id'), 10) || null,
   }),
+
+  {
+    addAdvert: advertApi.actions.addAdvert.sync,
+    showMessage: showNotification,
+    redirect: replace,
+  },
 )(Add);
