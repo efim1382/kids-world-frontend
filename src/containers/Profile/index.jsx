@@ -87,7 +87,7 @@ class Profile extends Component {
   };
 
   render() {
-    const { children, user, changePhoto } = this.props;
+    const { children, user } = this.props;
 
     return <div className={baseStyles.page}>
       <Header />
