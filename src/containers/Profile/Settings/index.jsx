@@ -2,15 +2,16 @@ import React from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { replace } from 'react-router-redux';
-import { compose } from 'recompose';
 import { connect } from 'react-redux';
 import { Form, Field, Button } from 'components';
+import { showNotification } from 'components/Notification/actions';
 import userApi from 'containers/User/api';
 import styles from './style.css';
 
 const Settings = ({
   user,
   redirect,
+  showMessage,
   updateProfile,
   changeAddress,
   changePhone,
@@ -28,7 +29,12 @@ const Settings = ({
           id: user.id,
           address: data.address,
         }),
-      }).then(() => {
+      }).then((responce) => {
+        if (responce.status !== 200) {
+          showMessage('Ошибка при изменении адреса');
+          return;
+        }
+
         updateProfile();
         redirect('/profile');
       });
@@ -53,7 +59,12 @@ const Settings = ({
           id: user.id,
           phone: data.phone,
         }),
-      }).then(() => {
+      }).then((responce) => {
+        if (responce.status !== 200) {
+          showMessage('Ошибка при изменении телефона');
+          return;
+        }
+
         updateProfile();
         redirect('/profile');
       });
@@ -78,7 +89,12 @@ const Settings = ({
           id: user.id,
           email: data.email,
         }),
-      }).then(() => {
+      }).then((responce) => {
+        if (responce.status !== 200) {
+          showMessage('Ошибка при изменении почты');
+          return;
+        }
+
         updateProfile();
         redirect('/profile');
       });
@@ -161,6 +177,7 @@ Settings.propTypes = {
   }).isRequired,
 
   redirect: PropTypes.func.isRequired,
+  showMessage: PropTypes.func.isRequired,
   updateProfile: PropTypes.func.isRequired,
   changeAddress: PropTypes.func.isRequired,
   changePhone: PropTypes.func.isRequired,
@@ -169,9 +186,9 @@ Settings.propTypes = {
   deleteProfile: PropTypes.func.isRequired,
 };
 
-export default compose(connect(
+export default connect(
   state => ({
-    user: _.get(state, 'users.currentUser.data', {}),
+    user: _.get(state, 'users.currentUser.data.user', {}),
   }),
 
   {
@@ -181,5 +198,6 @@ export default compose(connect(
     changePassword: userApi.actions.changePassword.sync,
     deleteProfile: userApi.actions.deleteProfile.sync,
     redirect: replace,
+    showMessage: showNotification,
   },
-))(Settings);
+)(Settings);
