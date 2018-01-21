@@ -14,6 +14,7 @@ import {
 } from 'components';
 
 import { api as userApi } from 'containers/User';
+import { showNotification } from 'components/Notification/actions';
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 
@@ -31,6 +32,7 @@ class Profile extends Component {
       photo: PropTypes.string,
     }),
 
+    showMessage: PropTypes.func.isRequired,
     currentUser: PropTypes.func.isRequired,
     changePhoto: PropTypes.func.isRequired,
     children: PropTypes.node,
@@ -57,7 +59,7 @@ class Profile extends Component {
   };
 
   handleSubmit = (data) => {
-    const { changePhoto, user } = this.props;
+    const { changePhoto, user, showMessage } = this.props;
 
     const body = new FormData();
     body.append('id', user.id);
@@ -65,7 +67,12 @@ class Profile extends Component {
 
     this.closeModal();
 
-    changePhoto({}, { body }).then(() => {
+    changePhoto({}, { body }).then((responce) => {
+      if (responce.status !== 200) {
+        showMessage(responce.message);
+        return;
+      }
+
       this.loadData();
     });
   };
@@ -166,5 +173,6 @@ export default connect(
   {
     currentUser: userApi.actions.currentUser.sync,
     changePhoto: userApi.actions.changePhoto.sync,
+    showMessage: showNotification,
   },
 )(Profile);
