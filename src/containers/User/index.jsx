@@ -17,7 +17,6 @@ import baseStyles from '../Layout/style.css';
 
 export routes from './routes';
 export api from './api';
-export reducers from './reducers';
 
 const User = ({ children, user, params: { id } }) => <div className={baseStyles.page}>
   <Header />

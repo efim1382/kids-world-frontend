@@ -9,7 +9,7 @@ import {
   filterUserPhoto,
 } from 'helpers/filters';
 
-import usersApi from 'containers/User/api';
+import userApi from 'containers/User/api';
 import styles from './style.css';
 
 const getReviewsText = (count) => {
@@ -59,18 +59,17 @@ BestSalers.propTypes = {
 export default compose(
   connect(
     state => ({
-      users: _.get(state, 'users.getBestSalers.data.data', []),
+      users: _.get(state, 'users.getBestSalers.data.users', []),
     }),
 
     {
-      getBestSalers: usersApi.actions.getBestSalers.sync,
+      getBestSalers: userApi.actions.getBestSalers.sync,
     },
   ),
 
   lifecycle({
     componentWillMount() {
-      const { getBestSalers } = this.props;
-      getBestSalers();
+      this.props.getBestSalers();
     },
   }),
 )(BestSalers);
