@@ -52,7 +52,7 @@ export default compose(
   connect(
     state => ({
       userId: parseInt(localStorage.getItem('id'), 10) || '',
-      reviews: _.get(state, 'reviews.getUserReviews.data.data', []),
+      reviews: _.get(state, 'reviews.getUserReviews.data.reviews', []),
     }),
 
     {

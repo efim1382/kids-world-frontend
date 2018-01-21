@@ -5,16 +5,14 @@ import UUID from 'node-uuid';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { filterUserPhoto } from 'helpers/filters';
+import { showNotification } from 'components/Notification/actions';
 import { Card, Form, Field, Button } from 'components';
 import reviewsApi from 'store/reviews';
 import styles from './style.css';
 
 class Reviews extends Component {
   static propTypes = {
-    userId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
+    userId: PropTypes.number,
 
     params: PropTypes.shape({
       id: PropTypes.string,
@@ -29,6 +27,7 @@ class Reviews extends Component {
       emotion: PropTypes.string,
     })),
 
+    showMessage: PropTypes.func.isRequired,
     getUserReviews: PropTypes.func.isRequired,
     createReview: PropTypes.func.isRequired,
   };
@@ -49,7 +48,7 @@ class Reviews extends Component {
 
   render() {
     const {
-      reviews, createReview, params: { id }, userId,
+      reviews, createReview, params: { id }, userId, showMessage,
     } = this.props;
 
     return <div className={styles.reviews}>
@@ -72,26 +71,38 @@ class Reviews extends Component {
         {this.state.formShown && userId && <Form
           model="createReview"
           onSubmit={(data) => {
-          if (!data.review || !this.state.emotion) {
-            return;
-          }
+            if (!data.review) {
+              showMessage('Укажите текст отзыва');
+              return;
+            }
 
-          createReview({}, {
-            body: JSON.stringify({
-              idAuthor: userId,
-              idRecipient: id,
-              emotion: this.state.emotion,
-              text: data.review,
-            }),
-          }).then(() => {
-            this.loadData();
+            if (!this.state.emotion) {
+              showMessage('Укажите оценку отзыва');
+              return;
+            }
 
-            this.setState({
-              formShown: false,
-              emotion: null,
+            createReview({}, {
+              body: JSON.stringify({
+                idAuthor: userId,
+                idRecipient: id,
+                emotion: this.state.emotion,
+                text: data.review,
+              }),
+            }).then((responce) => {
+              if (responce.status !== 200) {
+                showMessage(responce.message);
+                return;
+              }
+
+              this.loadData();
+
+              this.setState({
+                formShown: false,
+                emotion: null,
+              });
             });
-          });
-        }}>
+          }}
+        >
           <Field caption="" model=".review" type="textarea" className={styles.field} />
 
           <div className={styles.tooltip}>
@@ -150,12 +161,13 @@ class Reviews extends Component {
 
 export default connect(
   state => ({
-    userId: parseInt(localStorage.getItem('id'), 10) || '',
-    reviews: _.get(state, 'reviews.getUserReviews.data.data', []),
+    userId: parseInt(localStorage.getItem('id'), 10) || null,
+    reviews: _.get(state, 'reviews.getUserReviews.data.reviews', []),
   }),
 
   {
     getUserReviews: reviewsApi.actions.getUserReviews.sync,
     createReview: reviewsApi.actions.createReview.sync,
+    showMessage: showNotification,
   },
 )(Reviews);
