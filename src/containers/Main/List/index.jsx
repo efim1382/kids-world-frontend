@@ -126,7 +126,7 @@ class List extends Component {
 
 export default connect(
   state => ({
-    adverts: _.get(state, 'adverts.list', []),
+    adverts: _.get(state, 'adverts.getAdverts.data.adverts', []),
     userId: parseInt(localStorage.getItem('id'), 10) || '',
   }),
 

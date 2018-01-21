@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
 import { api as authApi } from 'containers/Auth';
-import { reducers as advertsReducer } from 'containers/Profile/Adverts';
+import advertApi from 'containers/Profile/Adverts/api';
 import userApi from 'containers/User/api';
 import { reducers as notificationReducer } from 'components/Notification';
 import reviewsApi from './reviews';
@@ -14,7 +14,9 @@ export const makeRootReducer = asyncReducers => combineReducers({
   users: combineReducers({
     ...userApi.reducers,
   }),
-  adverts: advertsReducer,
+  adverts: combineReducers({
+    ...advertApi.reducers,
+  }),
   notification: notificationReducer,
   reviews: combineReducers({
     ...reviewsApi.reducers,
