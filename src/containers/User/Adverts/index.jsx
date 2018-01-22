@@ -59,7 +59,7 @@ class Adverts extends Component {
         }).then((responce) => {
           arrayAdverts.push({
             id: advert.id,
-            isFavorite: responce.data || false,
+            isFavorite: responce.isFavorite || false,
           });
 
           this.setState({

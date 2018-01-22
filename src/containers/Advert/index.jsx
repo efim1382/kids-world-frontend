@@ -145,7 +145,7 @@ class Advert extends Component {
 export default connect(
   state => ({
     advert: _.get(state, 'adverts.getAdvert.data.advert', {}),
-    isFavorite: _.get(state, 'adverts.isAdvertFavorite.data.data', false),
+    isFavorite: _.get(state, 'adverts.isAdvertFavorite.data.isFavorite', false),
     userId: parseInt(localStorage.getItem('id'), 10) || null,
   }),
 
