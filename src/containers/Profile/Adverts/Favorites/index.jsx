@@ -79,7 +79,7 @@ class Favorites extends Component {
 
 export default connect(
   state => ({
-    adverts: _.get(state, 'adverts.getFavoritesAdverts.data.data', []),
+    adverts: _.get(state, 'adverts.getFavoritesAdverts.data.adverts', []),
     userId: parseInt(localStorage.getItem('id'), 10) || '',
   }),
 

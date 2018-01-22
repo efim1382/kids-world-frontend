@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { filterAdvertImage } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
+import { showNotification } from 'components/Notification/actions';
 import { Link } from 'react-router';
 import { Button, CardAdvert } from 'components';
 import styles from './style.css';
@@ -19,6 +20,7 @@ class List extends Component {
 
     getUserAdverts: PropTypes.func.isRequired,
     deleteAdvert: PropTypes.func.isRequired,
+    showMessage: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
   };
 
@@ -32,7 +34,7 @@ class List extends Component {
 
   render() {
     const {
-      adverts, deleteAdvert, getUserAdverts, pushURL,
+      adverts, deleteAdvert, getUserAdverts, pushURL, showMessage,
     } = this.props;
 
     return <div className={styles.adverts}>
@@ -70,7 +72,12 @@ class List extends Component {
               icon: 'delete',
               className: styles.deleteButton,
               onClick: () => {
-                deleteAdvert({ id: advert.id }).then(() => {
+                deleteAdvert({ id: advert.id }).then((responce) => {
+                  if (responce.status !== 200) {
+                    showMessage(responce.message);
+                    return;
+                  }
+
                   getUserAdverts({ id: this.userId });
                 });
               },
@@ -90,6 +97,7 @@ export default connect(
   {
     getUserAdverts: advertsApi.actions.getUserAdverts.sync,
     deleteAdvert: advertsApi.actions.deleteAdvert.sync,
+    showMessage: showNotification,
     pushURL: push,
   },
 )(List);
