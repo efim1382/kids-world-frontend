@@ -84,7 +84,7 @@ class List extends Component {
 
 export default connect(
   state => ({
-    adverts: _.get(state, 'adverts.getUserAdverts.data.data', []),
+    adverts: _.get(state, 'adverts.getUserAdverts.data.adverts', []),
   }),
 
   {
