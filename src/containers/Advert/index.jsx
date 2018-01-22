@@ -12,6 +12,7 @@ import {
 } from 'helpers/filters';
 
 import { api as advertsApi } from 'containers/Profile/Adverts';
+import { showNotification } from 'components/Notification/actions';
 import { Header, Card, Button } from 'components';
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
@@ -38,6 +39,7 @@ class Advert extends Component {
     setFavoriteAdvert: PropTypes.func.isRequired,
     isAdvertFavorite: PropTypes.func.isRequired,
     getAdvert: PropTypes.func.isRequired,
+    showMessage: PropTypes.func.isRequired,
     isFavorite: PropTypes.bool.isRequired,
 
     params: PropTypes.shape({
@@ -50,13 +52,18 @@ class Advert extends Component {
   }
 
   setAdvertFavorite = () => {
-    const { setFavoriteAdvert, params: { id }, userId } = this.props;
+    const {
+      showMessage, setFavoriteAdvert, params: { id }, userId,
+    } = this.props;
 
     setFavoriteAdvert({ id }, {
-      body: JSON.stringify({
-        userId,
-      }),
-    }).then(() => {
+      body: JSON.stringify({ userId }),
+    }).then((responce) => {
+      if (responce.status !== 200) {
+        showMessage(responce.message);
+        return;
+      }
+
       this.loadData();
     });
   };
@@ -153,5 +160,6 @@ export default connect(
     getAdvert: advertsApi.actions.getAdvert.sync,
     setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
+    showMessage: showNotification,
   },
 )(Advert);

@@ -21,11 +21,7 @@ class Adverts extends Component {
       id: PropTypes.string,
     }),
 
-    userId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-
+    userId: PropTypes.number,
     getUserAdverts: PropTypes.func.isRequired,
     setFavoriteAdvert: PropTypes.func.isRequired,
     isAdvertFavorite: PropTypes.func.isRequired,
@@ -128,7 +124,7 @@ class Adverts extends Component {
 export default connect(
   state => ({
     adverts: _.get(state, 'adverts.getUserAdverts.data.adverts', []),
-    userId: parseInt(localStorage.getItem('id'), 10) || '',
+    userId: parseInt(localStorage.getItem('id'), 10) || null,
   }),
 
   {

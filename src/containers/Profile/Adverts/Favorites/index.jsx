@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { filterAdvertImage } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
+import { showNotification } from 'components/Notification/actions';
 import { CardAdvert } from 'components';
 import styles from './style.css';
 
@@ -23,6 +24,7 @@ class Favorites extends Component {
 
     setFavoriteAdvert: PropTypes.func.isRequired,
     getFavoritesAdverts: PropTypes.func.isRequired,
+    showMessage: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
   };
 
@@ -33,7 +35,7 @@ class Favorites extends Component {
 
   render() {
     const {
-      adverts, pushURL, userId, setFavoriteAdvert, getFavoritesAdverts,
+      adverts, pushURL, userId, setFavoriteAdvert, getFavoritesAdverts, showMessage,
     } = this.props;
 
     return <div className={styles.favorites}>
@@ -58,10 +60,13 @@ class Favorites extends Component {
 
               onClick: () => {
                 setFavoriteAdvert({ id: advert.id }, {
-                  body: JSON.stringify({
-                    userId,
-                  }),
-                }).then(() => {
+                  body: JSON.stringify({ userId }),
+                }).then((responce) => {
+                  if (responce.status !== 200) {
+                    showMessage(responce.message);
+                    return;
+                  }
+
                   getFavoritesAdverts({ userId });
                 });
               },
@@ -86,6 +91,7 @@ export default connect(
   {
     setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     getFavoritesAdverts: advertsApi.actions.getFavoritesAdverts.sync,
+    showMessage: showNotification,
     pushURL: push,
   },
 )(Favorites);
