@@ -11,14 +11,17 @@
   background-color: rgba(0, 0, 0, 0.2);
   opacity: var(--opacity);
   pointer-events: var(--pointer-events);
-  transition-property: opacity;
+  transform: translateY(var(--transform));
+  transition-property: opacity, transform;
   &:not([data-show]) {
     --opacity: 0;
     --pointer-events: none;
+    --transform: 10px;
   }
   &[data-show] {
     --opacity: 1;
     --pointer-events: auto;
+    --transform: 0;
   }
   & > .modal {
     width: 700px;
