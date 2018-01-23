@@ -58,7 +58,7 @@
 					}
 				}
 				&:global(._selected) {
-					--background-color: #f3f3f3;
+					--background-color: var(--color-background-hover);
 				}
 				& > .image {
 					--size: 44px;

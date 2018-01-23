@@ -168,7 +168,9 @@ class Profile extends Component {
           </Modal>
         </UserProfile>}
 
-        {window.location.pathname.includes('/profile/chat') && <ChatLayout className={styles.content}>
+        {window.location.pathname.includes('/profile/chat') && <ChatLayout
+          className={classNames(styles.content, styles.chat)}
+        >
           <Navigation items={navigationItems} />
 
           {

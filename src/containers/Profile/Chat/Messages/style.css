@@ -1,0 +1,150 @@
+.messages {
+  display: flex;
+  background-color: #fff;
+  & > .list {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    & > .scroll {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 0;
+      overflow-x: hidden;
+      overflow-y: auto;
+      & > .container {
+        flex-grow: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        max-width: 960px;
+        width: 100%;
+        padding: 20px;
+        & > .message {
+          --min-height: 30px;
+          --margin: 12px;
+          flex-shrink: 0;
+          display: flex;
+          &[data-author="you"] {
+            justify-content: flex-end;
+            & > .image {
+              margin-left: var(--margin);
+            }
+            & > .text {
+              margin-left: calc(var(--min-height) + var(--margin));
+            }
+          }
+          &[data-author="user"] {
+            & > .image {
+            }
+            & > .text {
+              margin-left: var(--margin);
+              margin-right: calc(var(--min-height) + var(--margin));
+            }
+          }
+          &[data-author="you"] + .message[data-author="you"] {
+            margin-top: 4px;
+            & > .text {
+              margin-right: calc(var(--min-height) + var(--margin));
+            }
+          }
+          &[data-author="user"] + .message[data-author="user"] {
+            margin-top: 4px;
+            & > .text {
+              margin-left: calc(var(--min-height) + var(--margin));
+            }
+          }
+          &[data-author="you"] + .message[data-author="user"],
+          &[data-author="user"] + .message[data-author="you"] {
+            margin-top: 20px;
+          }
+          & > .image {
+            --size: var(--min-height);
+            flex-shrink: 0;
+            width: var(--size);
+            height: var(--size);
+            background-image: var(--image);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+          }
+          & > .text {
+            min-height: var(--min-height);
+            padding-top: 4px;
+            padding-bottom: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
+            font-size: 15px;
+            color: var(--color-text);
+            border-radius: 4px;
+            background-color: var(--color-background-hover);
+          }
+        }
+      }
+    }
+    & > .field-container {
+      --field-height: 50px;
+      flex-shrink: 0;
+      display: flex;
+      width: 100%;
+      height: var(--field-height);
+      box-shadow: 0 1px var(--color-divider) inset;
+      & > input {
+        flex-grow: 1;
+        min-width: 0;
+        height: var(--field-height);
+        padding-left: 12px;
+        line-height: var(--field-height);
+        font-size: 15px;
+        border: 0;
+        background-color: transparent;
+        color: var(--color-text);
+      }
+      & > .submit {
+        --height: var(--field-height);
+        flex-shrink: 0;
+        box-shadow: 1px 0 var(--color-divider) inset;
+        &:not(:hover) {
+          --color: #000;
+        }
+        &:hover {
+          --color: var(--color-accent);
+        }
+      }
+    }
+  }
+  & > .panel {
+    flex-shrink: 0;
+    width: var(--sidebar-width);
+    box-shadow: 1px 0 var(--color-divider) inset;
+    & > .header {
+      padding: 20px;
+      box-shadow: 0 -1px var(--color-divider) inset;
+      & > .card + .property {
+        margin-top: 20px;
+      }
+      & > .property + .property {
+        margin-top: 8px;
+      }
+      & > .property {
+        display: flex;
+        & > .icon {
+          --icon_size: 18px;
+          --icon-color: #000;
+        }
+        & > .value {
+          line-height: 1.25;
+          margin-left: 12px;
+          margin-top: 2px;
+          font-size: 13px;
+          color: var(--color-caption);
+        }
+      }
+    }
+  }
+}

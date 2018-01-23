@@ -8,14 +8,23 @@
 }
 
 .content {
-	--padding-horizontal: 30px;
 	display: flex;
 	flex-direction: column;
+	&:not(.chat) {
+		& > div {
+			padding: var(--layout-padding);
+		}
+	}
+	&.chat {
+		& > div {
+			padding: 0;
+		}
+	}
 	& > nav {
 		--navigation-height: 54px;
 		flex-shrink: 0;
-		padding-left: var(--padding-horizontal);
-		padding-right: var(--padding-horizontal);
+		padding-left: var(--layout-padding);
+		padding-right: var(--layout-padding);
 		background-color: #fff;
 	}
 	& > div {
@@ -23,7 +32,7 @@
 		overflow-x: hidden;
 		overflow-y: auto;
 		min-height: 0;
-		padding: var(--padding-horizontal);
+		padding: var(--layout-padding);
 	}
 }
 
