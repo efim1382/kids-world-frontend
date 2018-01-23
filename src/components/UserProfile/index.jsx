@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Button } from 'components';
+import { Button, Icon } from 'components';
 import { filterUserPhoto } from 'helpers/filters';
 import styles from './style.css';
 
@@ -32,17 +32,17 @@ const UserProfile = ({
       <h3>Контакты</h3>
 
       <div className={styles.property}>
-        <label className={styles.propertyName}>Телефон:</label>
+        <Icon name="phone" className={styles.icon} />
         <label className={styles.propertyValue}>{ phone }</label>
       </div>
 
       <div className={styles.property}>
-        <label className={styles.propertyName}>Почта:</label>
+        <Icon name="email" className={styles.icon} />
         <label className={styles.propertyValue}>{ email }</label>
       </div>
 
       <div className={styles.property}>
-        <label className={styles.propertyName}>Адрес:</label>
+        <Icon name="home" className={styles.icon} />
         <label className={styles.propertyValue}>{ address }</label>
       </div>
     </div>

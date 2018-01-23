@@ -59,7 +59,7 @@
 				display: block;
 				height: var(--height);
 				line-height: var(--height);
-				font-size: 14px;
+				font-size: 13px;
 				color: #444;
 				font-weight: var(--font-weight-bold);
 				text-transform: uppercase;
@@ -71,18 +71,16 @@
 			& > .property {
 				flex-shrink: 0;
 				display: flex;
-				justify-content: space-between;
 				padding-top: 4px;
 				padding-bottom: 4px;
-				& > .property-name {
-					font-size: 15px;
-					color: var(--color-caption);
+				& > .icon {
+					--icon_size: 20px;
+					--icon-color: var(--color-text);
 				}
 				& > .property-value {
-					margin-left: 4px;
-					font-size: 15px;
-					text-align: right;
-					color: var(--color-text);
+					margin-left: 12px;
+					font-size: 14px;
+					color: var(--color-caption);
 				}
 			}
 		}
