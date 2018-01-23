@@ -32,21 +32,6 @@
         font-size: 13px;
         color: var(--color-caption);
       }
-      & > .info-button {
-        margin-left: auto;
-        margin-right: calc((var(--padding) + 4px) * -1);
-        &:not(:global(._active)) {
-          &:not(:hover) {
-            --color: #000;
-          }
-          &:hover {
-            --color: var(--color-accent);
-          }
-        }
-        &:global(._active) {
-          --color: var(--color-accent);
-        }
-      }
     }
     & > .scroll {
       overflow-x: hidden;
@@ -159,45 +144,20 @@
     }
   }
   & > .panel {
-    --width: 350px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    width: var(--width);
-    margin-right: var(--transform);
+    width: 350px;
     box-shadow: 1px 0 var(--color-divider) inset;
-    transition-property: margin-right;
-    &:not(:global(._shown)) {
-      --transform: calc(var(--width) * -1);
-    }
-    &:global(._shown) {
-      --transform: 0;
-    }
     & > .header {
       flex-shrink: 0;
       padding: 20px;
       box-shadow: 0 -1px var(--color-divider) inset;
-      & > .section {
-        display: flex;
-        align-items: center;
-        & > .card {
-          flex-grow: 1;
-          min-width: 0;
-        }
-        & > .close-button {
-          --icon-size: 20px;
-          flex-shrink: 0;
-          margin-left: auto;
-          margin-right: calc(var(--padding) * -1);
-          &:not(:hover) {
-            --color: var(--color-caption);
-          }
-          &:hover {
-            --color: #000;
-          }
-        }
+      & > .card {
+        flex-grow: 1;
+        min-width: 0;
       }
-      & > .section + .property {
+      & > .card + .property {
         margin-top: 20px;
       }
       & > .property + .property {

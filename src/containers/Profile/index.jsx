@@ -104,6 +104,11 @@ class Profile extends Component {
       },
 
       {
+        name: 'Сообщения',
+        link: '/profile/chat',
+      },
+
+      {
         name: 'Избранное',
         link: '/profile/favorites',
       },
@@ -111,11 +116,6 @@ class Profile extends Component {
       {
         name: 'Отзывы',
         link: '/profile/reviews',
-      },
-
-      {
-        name: 'Сообщения',
-        link: '/profile/chat',
       },
 
       {

@@ -18,10 +18,6 @@ class Messages extends Component {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  state = {
-    isPanelShown: false,
-  };
-
   componentDidMount() {
     setTimeout(() => {
       this.scrollMessagesToBottom();
@@ -40,18 +36,6 @@ class Messages extends Component {
     }
   }
 
-  togglePanel = () => {
-    this.setState({
-      isPanelShown: !this.state.isPanelShown,
-    });
-  };
-
-  closePanel = () => {
-    this.setState({
-      isPanelShown: false,
-    });
-  };
-
   scrollMessagesToBottom = () => {
     this.scrollContainer.scrollTop = this.scrollContainer.scrollHeight;
   };
@@ -62,15 +46,6 @@ class Messages extends Component {
         <div className={styles.info}>
           <h4 className={styles.name}>Роман Ефимов</h4>
           <span className={styles.time}>был в сети вчера в 22:00</span>
-
-          <Button
-            icon="info"
-            onClick={this.togglePanel}
-
-            className={
-              this.state.isPanelShown ? classNames(styles.infoButton, '_active') : styles.infoButton
-            }
-          />
         </div>
 
         <div className={styles.scroll} ref={(container) => { this.scrollContainer = container; }}>
@@ -121,23 +96,15 @@ class Messages extends Component {
         </div>
       </div>
 
-      <div
-        className={
-          this.state.isPanelShown ? classNames(styles.panel, '_shown') : styles.panel
-        }
-      >
+      <div className={styles.panel}>
         <header className={styles.header}>
-          <div className={styles.section}>
-            <Card
-              image={filterUserPhoto('/images/user-image.jpg')}
-              link="/user/1"
-              name="Роман Ефимов"
-              text="efim1382@gmail.com"
-              className={styles.card}
-            />
-
-            <Button icon="close" className={styles.closeButton} onClick={this.closePanel} />
-          </div>
+          <Card
+            image={filterUserPhoto('/images/user-image.jpg')}
+            link="/user/1"
+            name="Роман Ефимов"
+            text="efim1382@gmail.com"
+            className={styles.card}
+          />
 
           <div className={styles.property}>
             <Icon name="phone" className={styles.icon} />
