@@ -29,18 +29,11 @@ class List extends Component {
       photo: PropTypes.string.isRequired,
     })).isRequired,
 
-    userId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number,
-    ]),
-
+    userId: PropTypes.number,
     isAdvertFavorite: PropTypes.func.isRequired,
     setFavoriteAdvert: PropTypes.func.isRequired,
     getAdverts: PropTypes.func.isRequired,
-  };
-
-  state = {
-    advertsFavorites: [],
+    getAdvertsLogged: PropTypes.func.isRequired,
   };
 
   componentWillMount() {
@@ -48,90 +41,72 @@ class List extends Component {
   }
 
   loadData = () => {
-    const { getAdverts, isAdvertFavorite, userId } = this.props;
+    const { getAdverts, getAdvertsLogged, userId } = this.props;
 
-    const arrayAdverts = [];
+    if (!userId) {
+      getAdverts();
+      return;
+    }
 
-    getAdverts().then(() => {
-      if (!userId) {
-        return;
-      }
+    getAdvertsLogged({}, {
+      body: JSON.stringify({ id: userId }),
+    });
+  };
 
-      this.props.adverts.forEach((advert) => {
-        isAdvertFavorite({
-          id: advert.id,
-          userId,
-        }).then((responce) => {
-          arrayAdverts.push({
-            id: advert.id,
-            isFavorite: responce.isFavorite || false,
-          });
+  toggleAdvertFavorite = (idAdvert) => {
+    const { userId, setFavoriteAdvert } = this.props;
 
-          this.setState({
-            advertsFavorites: arrayAdverts,
-          });
-        });
-      });
+    setFavoriteAdvert({ id: idAdvert }, {
+      body: JSON.stringify({ userId }),
+    }).then(() => {
+      this.loadData();
     });
   };
 
   render() {
-    const { adverts, userId, setFavoriteAdvert } = this.props;
+    const { adverts, userId } = this.props;
 
     return <div className={styles.list}>
-      {adverts && adverts.map((advert) => {
-        const favoriteAdvert = _.find(this.state.advertsFavorites, { id: advert.id });
-        const isFavorite = _.get(favoriteAdvert, 'isFavorite');
+      {adverts && adverts.map(advert => <div key={advert.id} className={styles.item}>
+        <div className={styles.image} style={{ '--image': filterAdvertImage(advert.mainImage) }} />
 
-        return <div key={advert.id} className={styles.item}>
-          <div className={styles.image} style={{ '--image': filterAdvertImage(advert.mainImage) }} />
+        <div className={styles.content}>
+          <div className={styles.header}>
+            <Card
+              image={filterUserPhoto(advert.photo)}
+              link={`/user/${advert.userId}`}
+              name={`${advert.firstName} ${advert.lastName}`}
+              text={advert.date}
+            />
 
-          <div className={styles.content}>
-            <div className={styles.header}>
-              <Card
-                image={filterUserPhoto(advert.photo)}
-                link={`/user/${advert.userId}`}
-                name={`${advert.firstName} ${advert.lastName}`}
-                text={advert.date}
-              />
+            {userId && advert.userId !== userId && <Button
+              icon="star"
+              onClick={() => { this.toggleAdvertFavorite(advert.id); }}
+              {...advert.isFavorite ? { className: styles.isFavorite } : {}}
+            />}
 
-              {userId && userId !== advert.userId && <Button
-                {...isFavorite ? { className: styles.isFavorite } : {}}
-                icon="star"
-
-                onClick={() => {
-                  setFavoriteAdvert({ id: advert.id }, {
-                    body: JSON.stringify({
-                      userId,
-                    }),
-                  }).then(() => {
-                    this.loadData();
-                  });
-                }}
-              />}
-
-              <p className={styles.price}>{ filterMoney(advert.price) } ₽</p>
-            </div>
-
-            <h3>{ advert.title }</h3>
-            <p className={styles.category}>{ filterCategories(advert.category) }</p>
-            <p className={styles.address}>{ advert.address }</p>
-            <Link to={`/advert/${advert.id}`} className={styles.button}>Подробнее</Link>
+            <p className={styles.price}>{ filterMoney(advert.price) } ₽</p>
           </div>
-        </div>;
-      })}
+
+          <h3>{ advert.title }</h3>
+          <p className={styles.category}>{ filterCategories(advert.category) }</p>
+          <p className={styles.address}>{ advert.address }</p>
+          <Link to={`/advert/${advert.id}`} className={styles.button}>Подробнее</Link>
+        </div>
+      </div>)}
     </div>;
   }
 }
 
 export default connect(
   state => ({
-    adverts: _.get(state, 'adverts.getAdverts.data.adverts', []),
-    userId: parseInt(localStorage.getItem('id'), 10) || '',
+    adverts: _.get(state, 'adverts.list', []),
+    userId: parseInt(localStorage.getItem('id'), 10) || null,
   }),
 
   {
     getAdverts: advertsApi.actions.getAdverts.sync,
+    getAdvertsLogged: advertsApi.actions.getAdvertsLogged.sync,
     setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
   },

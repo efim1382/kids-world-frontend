@@ -5,6 +5,12 @@ export default createApi({
   getAdverts: {
     url: `${apiPath}/adverts`,
   },
+  getAdvertsLogged: {
+    url: `${apiPath}/adverts/logged`,
+    options: {
+      method: 'post',
+    },
+  },
   getUserAdverts: {
     url: `${apiPath}/adverts/user/:id`,
   },
