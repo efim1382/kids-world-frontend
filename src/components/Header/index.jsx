@@ -94,10 +94,17 @@ class Header extends Component {
           <label>Избранные объявления</label>
         </Link>}
 
+        {this.state.isAuthorize && <Link to="/profile/chat" onClick={this.handlePopupClose}>
+          <Icon name="chat" />
+          <label>Сообщения</label>
+        </Link>}
+
         {this.state.isAuthorize && <Link to="/profile/settings" onClick={this.handlePopupClose}>
           <Icon name="settings" />
           <label>Настройки</label>
         </Link>}
+
+        {this.state.isAuthorize && <div className={styles.divider} />}
 
         {this.state.isAuthorize && <button
           onClick={() => {
