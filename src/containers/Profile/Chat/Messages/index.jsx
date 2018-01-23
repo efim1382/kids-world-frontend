@@ -13,6 +13,10 @@ class Messages extends Component {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
   handleDocumentKeyDown = (event) => {
     const { dispatch } = this.props;
 

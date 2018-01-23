@@ -113,6 +113,7 @@ const ChatLayout = ({ children, className }) => <div className={styles.chatLayou
 
     <div className={styles.list}>
       {items.map(item => <Link
+        key={item.id}
         to={`/profile/chat/${item.id}`}
 
         className={
