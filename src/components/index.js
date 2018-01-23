@@ -5,6 +5,7 @@ export Button from './Button';
 export Navigation from './Navigation';
 export Notification from './Notification';
 export UserProfile from './UserProfile';
+export ChatLayout from './ChatLayout';
 export Card from './Card';
 export CardAdvert from './CardAdvert';
 export Popup from './Popup';

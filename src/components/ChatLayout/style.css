@@ -1,0 +1,111 @@
+.chat-layout {
+	display: flex;
+	& > .sidebar {
+		flex-shrink: 0;
+		display: flex;
+		flex-direction: column;
+		width: var(--sidebar-width);
+		background-color: #fff;
+		box-shadow: -1px 0 var(--color-divider) inset;
+		& > .search {
+			--height: 54px;
+			flex-shrink: 0;
+			display: flex;
+			align-items: center;
+			height: var(--height);
+			padding-left: 16px;
+			box-shadow: 0 -1px var(--color-divider) inset;
+		}
+		& > .search > .icon {
+			--icon_size: 24px;
+			--icon-color: var(--color-caption);
+		}
+		& > .search > .field {
+			flex-grow: 1;
+			min-width: 0;
+			height: var(--height);
+			line-height: var(--height);
+			margin-left: 12px;
+			padding: 0 12px 0 0;
+			background-color: transparent;
+			border: 0;
+			font-size: 15px;
+			color: var(--color-text);
+			&::placeholder {
+				color: var(--color-caption);
+			}
+		}
+		& > .list {
+			flex-grow: 1;
+			min-height: 0;
+			overflow-x: hidden;
+			overflow-y: auto;
+			& > .item {
+				--padding: 20px;
+				display: flex;
+				align-items: center;
+				width: calc(100% - 1px);
+				height: 66px;
+				padding-left: var(--padding);
+				background-color: var(--background-color);
+				transition-property: background-color;
+				&:not(:global(._selected)) {
+					&:not(:hover) {
+						--background-color: transparent;
+					}
+					&:hover {
+						--background-color: #f7fafd;
+					}
+				}
+				&:global(._selected) {
+					--background-color: #f3f3f3;
+				}
+				& > .image {
+					--size: 44px;
+					flex-shrink: 0;
+					width: var(--size);
+					height: var(--size);
+					border-radius: 50%;
+					background-image: var(--image);
+					background-repeat: no-repeat;
+					background-size: cover;
+					background-position: center;
+				}
+				& > .section {
+					flex-grow: 1;
+					min-width: 0;
+					max-width: -webkit-fill-available;
+					margin-left: 20px;
+					padding-right: var(--padding);
+				}
+				& > .section > .title {
+					overflow: hidden;
+					height: 16px;
+					line-height: 16px;
+					font-size: 15px;
+					color: var(--color-text);
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					transition-property: color;
+				}
+				& > .section > .text {
+					overflow: hidden;
+					height: 14px;
+					margin-top: 8px;
+					line-height: 14px;
+					font-size: 13px;
+					color: var(--color-caption);
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					transition-property: color;
+				}
+			}
+		}
+	}
+	& > .content {
+		flex-grow: 1;
+		min-width: 0;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+}

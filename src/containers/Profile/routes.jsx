@@ -6,6 +6,8 @@ import AddAdvert from './Adverts/Add';
 import EditAdvert from './Adverts/Edit';
 import Favorites from './Adverts/Favorites';
 import Reviews from './Reviews';
+import Chat from './Chat/Index';
+import Messages from './Chat/Messages';
 import Settings from './Settings';
 
 export default () => <Route path="profile" component={Profile}>
@@ -15,5 +17,7 @@ export default () => <Route path="profile" component={Profile}>
   <Route path="adverts/:id/edit" component={EditAdvert} />
   <Route path="favorites" component={Favorites} />
   <Route path="reviews" component={Reviews} />
+  <Route path="chat" component={Chat} />
+  <Route path="chat/:id" component={Messages} />
   <Route path="settings" component={Settings} />
 </Route>;

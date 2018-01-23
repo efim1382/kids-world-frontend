@@ -11,6 +11,7 @@ import {
   UserProfile,
   Navigation,
   Modal,
+  ChatLayout,
 } from 'components';
 
 import { api as userApi } from 'containers/User';
@@ -96,11 +97,38 @@ class Profile extends Component {
   render() {
     const { children, user } = this.props;
 
+    const navigationItems = [
+      {
+        name: 'Объявления',
+        link: '/profile/adverts',
+      },
+
+      {
+        name: 'Избранное',
+        link: '/profile/favorites',
+      },
+
+      {
+        name: 'Отзывы',
+        link: '/profile/reviews',
+      },
+
+      {
+        name: 'Сообщения',
+        link: '/profile/chat',
+      },
+
+      {
+        name: 'Настройки',
+        link: '/profile/settings',
+      },
+    ];
+
     return <div className={baseStyles.page}>
       <Header />
 
       <div className={classNames(baseStyles.content, styles.profile)}>
-        {!_.isEmpty(user) && <UserProfile
+        {!_.isEmpty(user) && !window.location.pathname.includes('/profile/chat') && <UserProfile
           name={`${user.firstName} ${user.lastName}`}
           phone={`${user.phone}`}
           email={`${user.email}`}
@@ -110,56 +138,43 @@ class Profile extends Component {
           editablePhoto
           handlePhotoClick={this.showModal}
         >
-          <Navigation
-            items={[
-              {
-                name: 'Объявления',
-                link: '/profile/adverts',
-              },
+          <Navigation items={navigationItems} />
 
-              {
-                name: 'Избранное',
-                link: '/profile/favorites',
-              },
-
-              {
-                name: 'Отзывы',
-                link: '/profile/reviews',
-              },
-
-              {
-                name: 'Настройки',
-                link: '/profile/settings',
-              },
-            ]}
-          />
           {
             // Переделать только для Settings
             React.cloneElement(children, { user, updateProfile: this.loadData })
           }
+
+          <Modal
+            show={this.state.modalShown}
+            title="Загрузка новой фотографии"
+            className={styles.modal}
+            hancleClose={this.closeModal}
+          >
+            <p>Загрузите свою настоящую фотографию.</p>
+            <p>Вы можете загрузить фотографию только в форматах JPG, GIF или PNG.</p>
+
+            <Form
+              model="changePhoto"
+              getRef={(node) => { this.uploadForm = node; }}
+              className={styles.photoForm}
+              onSubmit={this.handleSubmit}
+            >
+              <Files
+                model=".photo"
+                onChange={this.handleFilesChange}
+              />
+            </Form>
+          </Modal>
         </UserProfile>}
 
-        <Modal
-          show={this.state.modalShown}
-          title="Загрузка новой фотографии"
-          className={styles.modal}
-          hancleClose={this.closeModal}
-        >
-          <p>Загрузите свою настоящую фотографию.</p>
-          <p>Вы можете загрузить фотографию только в форматах JPG, GIF или PNG.</p>
+        {window.location.pathname.includes('/profile/chat') && <ChatLayout className={styles.content}>
+          <Navigation items={navigationItems} />
 
-          <Form
-            model="changePhoto"
-            getRef={(node) => { this.uploadForm = node; }}
-            className={styles.photoForm}
-            onSubmit={this.handleSubmit}
-          >
-            <Files
-              model=".photo"
-              onChange={this.handleFilesChange}
-            />
-          </Form>
-        </Modal>
+          {
+            React.cloneElement(children, { user })
+          }
+        </ChatLayout>}
       </div>
     </div>;
   }
