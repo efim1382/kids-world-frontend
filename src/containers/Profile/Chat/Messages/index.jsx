@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Card, Icon, Button } from 'components';
-import { filterUserPhoto } from 'helpers/filters';
+import { filterUserPhoto, filterAdvertImage } from 'helpers/filters';
 import classNames from 'classnames';
 import styles from './style.css';
 
@@ -148,6 +149,74 @@ class Messages extends Component {
             <span className={styles.value}>Ростов-на-Дону, Красноармейская, 23</span>
           </div>
         </header>
+
+        <div className={styles.userActivity}>
+          <div className={styles.section}>
+            <h3 className={styles.title}>Отзывы о пользователе</h3>
+
+            <Card
+              image={filterUserPhoto('/images/user-image.jpg')}
+              link="/user/1"
+              name="Роман Ефимов"
+              text="Хороший продавец, ни разу не обманул. Отлично. Прекрасно"
+              multiple
+              className={styles.review}
+            />
+
+            <Card
+              image={filterUserPhoto('/images/user-image.jpg')}
+              link="/user/1"
+              name="Роман Ефимов"
+              text="Хороший продавец, ни разу не обманул. Отлично. Прекрасно"
+              multiple
+              className={styles.review}
+            />
+
+            <Card
+              image={filterUserPhoto('/images/user-image.jpg')}
+              link="/user/1"
+              name="Роман Ефимов"
+              text="Хороший продавец, ни разу не обманул. Отлично. Прекрасно"
+              multiple
+              className={styles.review}
+            />
+
+            <Link to="/user/1/reviews" className={styles.showAll}>Посмотреть все</Link>
+          </div>
+
+          <div className={styles.section}>
+            <h3 className={styles.title}>Объявления пользователя</h3>
+
+            <Card
+              image={filterAdvertImage('/images/ad-image.jpg')}
+              link="/advert/1"
+              name="Детские кроссовки"
+              text="Хорошие, новые, красивые"
+              multiple
+              className={styles.review}
+            />
+
+            <Card
+              image={filterAdvertImage('/images/ad-image.jpg')}
+              link="/advert/1"
+              name="Детские кроссовки"
+              text="Хорошие, новые, красивые"
+              multiple
+              className={styles.review}
+            />
+
+            <Card
+              image={filterAdvertImage('/images/ad-image.jpg')}
+              link="/advert/1"
+              name="Детские кроссовки"
+              text="Хорошие, новые, красивые"
+              multiple
+              className={styles.review}
+            />
+
+            <Link to="/user/1/adverts" className={styles.showAll}>Посмотреть все</Link>
+          </div>
+        </div>
       </div>
     </div>;
   }
