@@ -10,6 +10,7 @@ import {
   filterMoney,
 } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
+import { showNotification } from 'components/Notification/actions';
 import { Card, Button } from 'components';
 import styles from './style.css';
 
@@ -33,6 +34,7 @@ class List extends Component {
     isAdvertFavorite: PropTypes.func.isRequired,
     setFavoriteAdvert: PropTypes.func.isRequired,
     getAdverts: PropTypes.func.isRequired,
+    showMessage: PropTypes.func.isRequired,
     getAdvertsLogged: PropTypes.func.isRequired,
   };
 
@@ -54,11 +56,16 @@ class List extends Component {
   };
 
   toggleAdvertFavorite = (idAdvert) => {
-    const { userId, setFavoriteAdvert } = this.props;
+    const { userId, setFavoriteAdvert, showMessage } = this.props;
 
     setFavoriteAdvert({ id: idAdvert }, {
       body: JSON.stringify({ userId }),
-    }).then(() => {
+    }).then((responce) => {
+      if (responce.status !== 200) {
+        showMessage(responce.message);
+        return;
+      }
+
       this.loadData();
     });
   };
@@ -109,6 +116,7 @@ export default connect(
     getAdvertsLogged: advertsApi.actions.getAdvertsLogged.sync,
     setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
+    showMessage: showNotification,
   },
 )(List);
 
