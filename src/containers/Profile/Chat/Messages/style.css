@@ -7,83 +7,123 @@
     flex-direction: column;
     align-items: center;
     min-width: 0;
+    & > .info {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 50px;
+      padding-left: var(--layout-padding);
+      padding-right: var(--layout-padding);
+      box-shadow: 0 -1px var(--color-divider) inset;
+      & > .name {
+        --height: 18px;
+        height: var(--height);
+        line-height: var(--height);
+        font-size: 14px;
+        font-weight: var(--font-weight-bold);
+        color: var(--color-text);
+      }
+      & > .time {
+        --height: 18px;
+        height: var(--height);
+        margin-left: 8px;
+        line-height: var(--height);
+        font-size: 13px;
+        color: var(--color-caption);
+      }
+      & > .info-button {
+        margin-left: auto;
+        margin-right: calc((var(--padding) + 4px) * -1);
+        &:not(:global(._active)) {
+          &:not(:hover) {
+            --color: #000;
+          }
+          &:hover {
+            --color: var(--color-accent);
+          }
+        }
+        &:global(._active) {
+          --color: var(--color-accent);
+        }
+      }
+    }
     & > .scroll {
+      overflow-x: hidden;
+      overflow-y: auto;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
-      align-items: center;
       min-height: 0;
-      overflow-x: hidden;
-      overflow-y: auto;
-      & > .container {
-        flex-grow: 1;
-        min-height: 0;
+      width: 100%;
+      padding: 20px;
+      & > .message {
+        --min-height: 30px;
+        --margin: 12px;
+        flex-shrink: 0;
         display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        max-width: 960px;
         width: 100%;
-        padding: 20px;
-        & > .message {
-          --min-height: 30px;
-          --margin: 12px;
-          flex-shrink: 0;
-          display: flex;
-          &[data-author="you"] {
-            justify-content: flex-end;
-            & > .image {
-              margin-left: var(--margin);
-            }
-            & > .text {
-              margin-left: calc(var(--min-height) + var(--margin));
-            }
-          }
-          &[data-author="user"] {
-            & > .image {
-            }
-            & > .text {
-              margin-left: var(--margin);
-              margin-right: calc(var(--min-height) + var(--margin));
-            }
-          }
-          &[data-author="you"] + .message[data-author="you"] {
-            margin-top: 4px;
-            & > .text {
-              margin-right: calc(var(--min-height) + var(--margin));
-            }
-          }
-          &[data-author="user"] + .message[data-author="user"] {
-            margin-top: 4px;
-            & > .text {
-              margin-left: calc(var(--min-height) + var(--margin));
-            }
-          }
-          &[data-author="you"] + .message[data-author="user"],
-          &[data-author="user"] + .message[data-author="you"] {
-            margin-top: 20px;
-          }
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 1100px;
+        &:nth-of-type(1) {
+          margin-top: auto;
+        }
+        &[data-author="you"] {
+          justify-content: flex-end;
           & > .image {
-            --size: var(--min-height);
-            flex-shrink: 0;
-            width: var(--size);
-            height: var(--size);
-            background-image: var(--image);
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            border-radius: 4px;
+            margin-left: var(--margin);
           }
           & > .text {
-            min-height: var(--min-height);
-            padding-top: 4px;
-            padding-bottom: 4px;
-            padding-left: 8px;
-            padding-right: 8px;
-            font-size: 15px;
-            color: var(--color-text);
-            border-radius: 4px;
-            background-color: var(--color-background-hover);
+            margin-left: calc(var(--min-height) + var(--margin));
           }
+        }
+        &[data-author="user"] {
+          & > .image {
+          }
+          & > .text {
+            margin-left: var(--margin);
+            margin-right: calc(var(--min-height) + var(--margin));
+          }
+        }
+        &[data-author="you"] + .message[data-author="you"] {
+          margin-top: 4px;
+          & > .text {
+            margin-right: calc(var(--min-height) + var(--margin));
+          }
+        }
+        &[data-author="user"] + .message[data-author="user"] {
+          margin-top: 4px;
+          & > .text {
+            margin-left: calc(var(--min-height) + var(--margin));
+          }
+        }
+        &[data-author="you"] + .message[data-author="user"],
+        &[data-author="user"] + .message[data-author="you"] {
+          margin-top: 20px;
+        }
+        & > .image {
+          --size: var(--min-height);
+          flex-shrink: 0;
+          width: var(--size);
+          height: var(--size);
+          background-image: var(--image);
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          border-radius: 4px;
+        }
+        & > .text {
+          min-height: var(--min-height);
+          line-height: 1.5;
+          padding-top: 4px;
+          padding-bottom: 4px;
+          padding-left: 8px;
+          padding-right: 8px;
+          font-size: 14px;
+          color: var(--color-text);
+          border-radius: 4px;
+          background-color: var(--color-background-hover);
         }
       }
     }
@@ -119,13 +159,42 @@
     }
   }
   & > .panel {
+    --width: 350px;
     flex-shrink: 0;
-    width: var(--sidebar-width);
+    width: var(--width);
+    margin-right: var(--transform);
     box-shadow: 1px 0 var(--color-divider) inset;
+    transition-property: margin-right;
+    &:not(:global(._shown)) {
+      --transform: calc(var(--width) * -1);
+    }
+    &:global(._shown) {
+      --transform: 0;
+    }
     & > .header {
       padding: 20px;
       box-shadow: 0 -1px var(--color-divider) inset;
-      & > .card + .property {
+      & > .section {
+        display: flex;
+        align-items: center;
+        & > .card {
+          flex-grow: 1;
+          min-width: 0;
+        }
+        & > .close-button {
+          --icon-size: 20px;
+          flex-shrink: 0;
+          margin-left: auto;
+          margin-right: calc(var(--padding) * -1);
+          &:not(:hover) {
+            --color: var(--color-caption);
+          }
+          &:hover {
+            --color: #000;
+          }
+        }
+      }
+      & > .section + .property {
         margin-top: 20px;
       }
       & > .property + .property {

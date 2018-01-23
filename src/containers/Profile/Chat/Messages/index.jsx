@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Card, Icon, Button } from 'components';
 import { filterUserPhoto } from 'helpers/filters';
+import classNames from 'classnames';
 import styles from './style.css';
 
 class Messages extends Component {
@@ -14,6 +15,16 @@ class Messages extends Component {
   constructor(props) {
     super(props);
     document.addEventListener('keydown', this.handleDocumentKeyDown);
+  }
+
+  state = {
+    isPanelShown: false,
+  };
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.scrollMessagesToBottom();
+    }, 0);
   }
 
   componentWillUnmount() {
@@ -28,39 +39,78 @@ class Messages extends Component {
     }
   }
 
+  togglePanel = () => {
+    this.setState({
+      isPanelShown: !this.state.isPanelShown,
+    });
+  };
+
+  closePanel = () => {
+    this.setState({
+      isPanelShown: false,
+    });
+  };
+
+  scrollMessagesToBottom = () => {
+    this.scrollContainer.scrollTop = this.scrollContainer.scrollHeight;
+  };
+
   render() {
     return <div className={styles.messages}>
       <div className={styles.list}>
-        <div className={styles.scroll}>
-          <div className={styles.container}>
-            <div className={styles.message} data-author="you">
-              <div className={styles.text}>Здравствуйте! Можно купить у вас еще детские кроссовки?</div>
-              <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
+        <div className={styles.info}>
+          <h4 className={styles.name}>Роман Ефимов</h4>
+          <span className={styles.time}>был в сети вчера в 22:00</span>
+
+          <Button
+            icon="info"
+            onClick={this.togglePanel}
+
+            className={
+              this.state.isPanelShown ? classNames(styles.infoButton, '_active') : styles.infoButton
+            }
+          />
+        </div>
+
+        <div className={styles.scroll} ref={(container) => { this.scrollContainer = container; }}>
+          <div className={styles.message} data-author="you">
+            <div className={styles.text}>
+              Здравствуйте!
+              Можно купить у вас еще детские кроссовки?
             </div>
 
-            <div className={styles.message} data-author="you">
-              <div className={styles.text}>Здравствуйте! Можно купить у вас еще детские кроссовки?</div>
-            </div>
+            <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
+          </div>
 
-            <div className={styles.message} data-author="user">
-              <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
-              <div className={styles.text}>Да, можно</div>
+          <div className={styles.message} data-author="you">
+            <div className={styles.text}>
+              Здравствуйте!
+              Можно купить у вас еще детские кроссовки?
             </div>
+          </div>
 
-            <div className={styles.message} data-author="you">
-              <div className={styles.text}>
-                Здравствуйте! Можно купить у вас еще детские кроссовки?
-                Можно купить у вас еще детские кроссовки?
-                Можно купить у вас еще детские кроссовки?
-                Можно купить у вас еще детские кроссовки?
-              </div>
-              <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
-            </div>
+          <div className={styles.message} data-author="user">
+            <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
+            <div className={styles.text}>Да, можно</div>
+          </div>
 
-            <div className={styles.message} data-author="user">
-              <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
-              <div className={styles.text}>Да, можно</div>
+          <div className={styles.message} data-author="user">
+            <div className={styles.text}>Да, можно</div>
+          </div>
+
+          <div className={styles.message} data-author="you">
+            <div className={styles.text}>
+              Здравствуйте! Можно купить у вас еще детские кроссовки?
+              Можно купить у вас еще детские кроссовки?
+              Можно купить у вас еще детские кроссовки?
+              Можно купить у вас еще детские кроссовки?
             </div>
+            <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
+          </div>
+
+          <div className={styles.message} data-author="user">
+            <div className={styles.image} style={{ '--image': filterUserPhoto('/images/user-image.jpg') }} />
+            <div className={styles.text}>Да, можно</div>
           </div>
         </div>
 
@@ -70,15 +120,23 @@ class Messages extends Component {
         </div>
       </div>
 
-      <div className={styles.panel}>
+      <div
+        className={
+          this.state.isPanelShown ? classNames(styles.panel, '_shown') : styles.panel
+        }
+      >
         <header className={styles.header}>
-          <Card
-            image={filterUserPhoto('/images/user-image.jpg')}
-            link="/user/1"
-            name="Роман Ефимов"
-            text="efim1382@gmail.com"
-            className={styles.card}
-          />
+          <div className={styles.section}>
+            <Card
+              image={filterUserPhoto('/images/user-image.jpg')}
+              link="/user/1"
+              name="Роман Ефимов"
+              text="efim1382@gmail.com"
+              className={styles.card}
+            />
+
+            <Button icon="close" className={styles.closeButton} onClick={this.closePanel} />
+          </div>
 
           <div className={styles.property}>
             <Icon name="phone" className={styles.icon} />
