@@ -21,7 +21,7 @@ const Routes = ({ store }) => <Router history={syncHistoryWithStore(browserHisto
     <IndexRoute component={Main} />
     <Route path="advert/:id" component={AdvertDetail} />
     { authRoutes() }
-    { profileRoutes() }
+    { profileRoutes(store) }
     { userRoutes(store) }
   </Route>
 </Router>;
