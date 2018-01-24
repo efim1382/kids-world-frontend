@@ -90,6 +90,7 @@
           border-radius: 4px;
         }
         & > .text {
+          max-width: 500px;
           min-height: var(--min-height);
           line-height: 1.5;
           padding-top: 4px;
