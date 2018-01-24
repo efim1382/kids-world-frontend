@@ -58,7 +58,7 @@
 		flex-shrink: 0;
 		height: var(--height);
 		line-height: var(--height);
-		font-size: 15px;
+		font-size: 14px;
 		color: var(--color);
 		transition-property: color;
 	}

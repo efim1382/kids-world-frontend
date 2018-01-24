@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Card, Icon, Button } from 'components';
 import { filterUserPhoto, filterAdvertImage } from 'helpers/filters';
-import classNames from 'classnames';
 import styles from './style.css';
 
 class Messages extends Component {
@@ -13,12 +12,9 @@ class Messages extends Component {
     dispatch: PropTypes.func.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-    document.addEventListener('keydown', this.handleDocumentKeyDown);
-  }
-
   componentDidMount() {
+    document.addEventListener('keydown', this.handleDocumentKeyDown);
+
     setTimeout(() => {
       this.scrollMessagesToBottom();
     }, 0);
@@ -44,8 +40,7 @@ class Messages extends Component {
     return <div className={styles.messages}>
       <div className={styles.list}>
         <div className={styles.info}>
-          <h4 className={styles.name}>Роман Ефимов</h4>
-          <span className={styles.time}>был в сети вчера в 22:00</span>
+          <span className={styles.time}>Был в сети вчера в 22:00</span>
         </div>
 
         <div className={styles.scroll} ref={(container) => { this.scrollContainer = container; }}>

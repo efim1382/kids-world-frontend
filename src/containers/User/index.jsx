@@ -23,11 +23,12 @@ const User = ({ children, user, params: { id } }) => <div className={baseStyles.
 
   <div className={classNames(baseStyles.content, styles.user)}>
     {!_.isEmpty(user) && <UserProfile
+      id={user.id}
       name={`${user.firstName} ${user.lastName}`}
-      phone={`${user.phone}`}
-      email={`${user.email}`}
-      address={`${user.address}`}
-      photo={`${user.photo}`}
+      phone={user.phone}
+      email={user.email}
+      address={user.address}
+      photo={user.photo}
       className={styles.content}
     >
       <Navigation

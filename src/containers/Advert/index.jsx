@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import {
   filterCategories,
@@ -13,7 +14,7 @@ import {
 
 import { api as advertsApi } from 'containers/Profile/Adverts';
 import { showNotification } from 'components/Notification/actions';
-import { Header, Card, Button } from 'components';
+import { Header, Card, Button, Icon } from 'components';
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
 
@@ -40,6 +41,7 @@ class Advert extends Component {
     isAdvertFavorite: PropTypes.func.isRequired,
     getAdvert: PropTypes.func.isRequired,
     showMessage: PropTypes.func.isRequired,
+    pushUrl: PropTypes.func.isRequired,
     isFavorite: PropTypes.bool.isRequired,
 
     params: PropTypes.shape({
@@ -84,7 +86,7 @@ class Advert extends Component {
 
   render() {
     const {
-      advert, userId, isFavorite,
+      advert, userId, isFavorite, pushUrl,
     } = this.props;
 
     return <div className={baseStyles.page}>
@@ -133,16 +135,26 @@ class Advert extends Component {
           />
 
           <div className={styles.properties}>
-            <p className={styles.item}>
-              <span className={styles.propertyTitle}>Телефон: </span>
-              { advert.phone }
-            </p>
+            <div className={styles.item}>
+              <Icon name="phone" className={styles.icon} />
+              <span className={styles.text}>{ advert.phone }</span>
+            </div>
 
-            <p className={styles.item}>
-              <span className={styles.propertyTitle}>Адрес: </span>
-              { advert.address }
-            </p>
+            <div className={styles.item}>
+              <Icon name="home" className={styles.icon} />
+              <span className={styles.text}>{ advert.address }</span>
+            </div>
           </div>
+
+          {userId && advert.userId !== userId && <Button
+            caption="Написать продавцу"
+            appearance="primary"
+            className={styles.whiteUser}
+
+            onClick={() => {
+              pushUrl(`/profile/chat/${advert.userId}`);
+            }}
+          />}
         </div>
       </main>}
     </div>;
@@ -161,5 +173,6 @@ export default connect(
     setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
     showMessage: showNotification,
+    pushUrl: push,
   },
 )(Advert);

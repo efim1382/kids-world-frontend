@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 import { Button, Icon } from 'components';
 import { filterUserPhoto } from 'helpers/filters';
 import styles from './style.css';
 
 const UserProfile = ({
+  id,
   name,
   phone,
   email,
@@ -15,6 +18,7 @@ const UserProfile = ({
   handlePhotoClick,
   children,
   className,
+  dispatch,
 }) => <div className={styles.profile}>
   <div className={styles.sidebar}>
     <header className={styles.header}>
@@ -46,12 +50,23 @@ const UserProfile = ({
         <label className={styles.propertyValue}>{ address }</label>
       </div>
     </div>
+
+    {id && <Button
+      caption="Написать пользователю"
+      appearance="primary"
+      className={styles.button}
+
+      onClick={() => {
+        dispatch(push(`/profile/chat/${id}`));
+      }}
+    />}
   </div>
 
   <div className={classNames(styles.content, className)}>{ children }</div>
 </div>;
 
 UserProfile.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
@@ -59,8 +74,9 @@ UserProfile.propTypes = {
   photo: PropTypes.string.isRequired,
   editablePhoto: PropTypes.bool,
   handlePhotoClick: PropTypes.func,
+  dispatch: PropTypes.func,
   className: PropTypes.string,
   children: PropTypes.node,
 };
 
-export default UserProfile;
+export default connect()(UserProfile);

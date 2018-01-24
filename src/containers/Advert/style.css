@@ -99,12 +99,23 @@
     & > .properties {
       margin-top: 20px;
       & > .item {
-        font-size: 15px;
-        color: var(--color-text);
-        & > .property-title {
-          color: var(--color-caption);
+        display: flex;
+        &:nth-of-type(n+2) {
+          margin-top: 8px;
+        }
+        & > .icon {
+          --icon_size: 20px;
+          --icon-color: var(--color-text);
+        }
+        & > .text {
+          margin-left: 12px;
+          font-size: 14px;
+          color: var(--color-text);
         }
       }
+    }
+    & > .white-user {
+      margin-top: 16px;
     }
   }
 }
