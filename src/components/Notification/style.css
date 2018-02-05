@@ -19,6 +19,6 @@
 		--translate: var(--height);
 	}
 	&[data-show] {
-		--translate: 0;
+		--translate: -16px;
 	}
 }
