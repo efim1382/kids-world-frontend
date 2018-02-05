@@ -88,7 +88,7 @@ class Messages extends Component {
         props.showMessage(responce.message);
       }
 
-      this.loadMessages();
+      this.loadMessages(this.props.params.id);
     });
   }
 
