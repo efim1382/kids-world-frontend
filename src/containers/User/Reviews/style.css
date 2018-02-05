@@ -15,10 +15,6 @@
       font-size: 15px;
       color: var(--color-caption);
     }
-    & > .empty-message + button,
-    & > .empty-message + form {
-      margin-top: 12px;
-    }
     & > form {
       position: relative;
       & > .field {
