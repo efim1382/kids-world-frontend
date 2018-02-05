@@ -56,8 +56,10 @@
         }
         &[data-author="user"] {
           & > .image {
+            order: 1;
           }
           & > .text {
+            order: 2;
             margin-left: var(--margin);
             margin-right: calc(var(--min-height) + var(--margin));
           }
@@ -227,6 +229,14 @@
           &:hover {
             --color: var(--color-accent-hover);
           }
+        }
+        & > .section-empty-message {
+          --height: 40px;
+          height: var(--height);
+          line-height: var(--height);
+          text-align: center;
+          font-size: 13px;
+          color: var(--color-caption);
         }
       }
     }

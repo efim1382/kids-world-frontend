@@ -118,6 +118,8 @@
     "redux-thunk": "^2.2.0",
     "rimraf": "^2.5.4",
     "shortid": "^2.2.8",
+    "socket.io-client": "^2.0.4",
+    "socket.io-react": "^1.2.0",
     "stylelint-order": "^0.8.0",
     "webpack-hot-middleware": "^2.21.0",
     "whatwg-fetch": "^2.0.3",
