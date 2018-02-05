@@ -229,7 +229,7 @@ class Messages extends Component {
         <header className={styles.header}>
           <Card
             image={filterUserPhoto(user.photo)}
-            link={`user/${user.id}`}
+            link={`/user/${user.id}`}
             name={`${user.firstName} ${user.lastName}`}
             text={user.email}
             className={styles.card}
@@ -262,7 +262,7 @@ class Messages extends Component {
             />)}
 
             {reviews.length >= 3 && <Link
-              to="/user/1/reviews"
+              to={`/user/${reviews.idAuthor}/reviews`}
               className={styles.showAll}
             >Посмотреть все</Link>}
 
@@ -284,7 +284,7 @@ class Messages extends Component {
             />)}
 
             {adverts.length >= 3 && <Link
-              to="/user/1/adverts"
+              to={`/user/${advert.userId}/adverts`}
               className={styles.showAll}
             >Посмотреть все</Link>}
 
