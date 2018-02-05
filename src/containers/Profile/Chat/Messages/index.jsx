@@ -200,24 +200,26 @@ class Messages extends Component {
           <span className={styles.time}>Был(а) в сети вчера в 22:00</span>
         </div>
 
-        {!_.isEmpty(messages) && !_.isEmpty(currentUser) && !_.isEmpty(user) && <div
+        <div
           className={styles.scroll}
           ref={(container) => { this.scrollContainer = container; }}
         >
-          {messages.map((message, index) => <div
-            key={message.id}
-            className={styles.message}
-            data-author={message.author}
+          {!_.isEmpty(messages) &&
+           !_.isEmpty(currentUser) &&
+           !_.isEmpty(user) && messages.map((message, index) => <div
+             key={message.id}
+             className={styles.message}
+             data-author={message.author}
           >
-            <div className={styles.text}>{ message.message }</div>
+             <div className={styles.text}>{ message.message }</div>
 
-            {((index > 0 &&
+             {((index > 0 &&
                messages[index].author !== messages[index - 1].author) || (index === 0)) && <div
                  className={styles.image}
                  style={{ '--image': this.filterMessagesUserPhoto(message.author) }}
             />}
-          </div>)}
-        </div>}
+           </div>)}
+        </div>
 
         <div className={styles.fieldContainer}>
           <input type="text" placeholder="Введите Ваше сообщение" ref={(input) => { this.input = input; }} />
@@ -262,7 +264,7 @@ class Messages extends Component {
             />)}
 
             {reviews.length >= 3 && <Link
-              to={`/user/${reviews.idAuthor}/reviews`}
+              to={`/user/${user.id}/reviews`}
               className={styles.showAll}
             >Посмотреть все</Link>}
 
@@ -284,7 +286,7 @@ class Messages extends Component {
             />)}
 
             {adverts.length >= 3 && <Link
-              to={`/user/${advert.userId}/adverts`}
+              to={`/user/${user.id}/adverts`}
               className={styles.showAll}
             >Посмотреть все</Link>}
 
