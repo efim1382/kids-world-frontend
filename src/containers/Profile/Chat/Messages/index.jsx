@@ -100,12 +100,18 @@ class Messages extends Component {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.params.id !== this.props.params.id) {
+      this.loadFullData(nextProps.params.id);
+    }
+  }
+
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  loadMessages = () => {
-    const { getMessages, params: { id }, userId } = this.props;
+  loadMessages = (id) => {
+    const { getMessages, userId } = this.props;
 
     if (!id || !userId) {
       return;
@@ -121,9 +127,9 @@ class Messages extends Component {
     });
   };
 
-  loadData = () => {
+  loadData = (id) => {
     const {
-      getUser, getCurrentUser, getUserAdverts, getUserReviews, params: { id },
+      getUser, getCurrentUser, getUserAdverts, getUserReviews,
     } = this.props;
     const token = localStorage.getItem('token');
 
@@ -138,6 +144,11 @@ class Messages extends Component {
     getCurrentUser({}, {
       body: JSON.stringify({ token }),
     });
+  };
+
+  loadFullData = (id = this.props.params.id) => {
+    this.loadData(id);
+    this.loadMessages(id);
   };
 
   sendMessage = () => {
@@ -156,11 +167,6 @@ class Messages extends Component {
 
     this.props.socket.emit('message', data);
     this.input.value = '';
-  };
-
-  loadFullData = () => {
-    this.loadData();
-    this.loadMessages();
   };
 
   handleDocumentKeyDown = (event) => {
@@ -228,7 +234,7 @@ class Messages extends Component {
       </div>
 
       <div className={styles.panel}>
-        <header className={styles.header}>
+        {!_.isEmpty(user) && <header className={styles.header}>
           <Card
             image={filterUserPhoto(user.photo)}
             link={`/user/${user.id}`}
@@ -246,7 +252,7 @@ class Messages extends Component {
             <Icon name="home" className={styles.icon} />
             <span className={styles.value}>{ user.address }</span>
           </div>
-        </header>
+        </header>}
 
         <div className={styles.userActivity}>
           <div className={styles.section}>
