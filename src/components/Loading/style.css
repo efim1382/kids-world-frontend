@@ -1,0 +1,31 @@
+.loading {
+  --size: 40px;
+  --color: var(--color-accent);
+  z-index: 99;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  opacity: var(--opacity);
+  pointer-events: var(--pointer-events);
+  background-color: #fff;
+  transition-property: opacity;
+  &:not(:global(._is-shown)) {
+    --opacity: 0;
+    --pointer-events: none;
+  }
+  &:global(._is-shown) {
+    --opacity: 1;
+    --pointer-events: auto;
+  }
+  & > svg {
+    width: var(--size);
+    height: var(--size);
+    margin: auto;
+    & > path {
+      fill: var(--color);
+    }
+  }
+}

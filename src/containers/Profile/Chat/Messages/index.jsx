@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { socketConnect } from 'socket.io-react';
 import { push } from 'react-router-redux';
 import { showNotification } from 'components/Notification/actions';
-import { Card, Icon, Button } from 'components';
+import { Card, Icon, Button, Loading } from 'components';
 import { filterUserPhoto, filterAdvertImage } from 'helpers/filters';
 import userApi from 'containers/User/api';
 import reviewsApi from 'store/reviews';
@@ -96,8 +96,16 @@ class Messages extends Component {
     });
   }
 
+  state = {
+    isMessagesLoaded: false,
+  };
+
   componentWillMount() {
-    this.loadFullData();
+    this.loadData();
+
+    this.loadMessages().then(() => {
+      this.hideMessageLoading();
+    });
   }
 
   componentDidMount() {
@@ -106,7 +114,12 @@ class Messages extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.id !== this.props.params.id) {
-      this.loadFullData(nextProps.params.id);
+      this.showMessageLoading();
+      this.loadData(nextProps.params.id);
+
+      this.loadMessages(nextProps.params.id).then(() => {
+        this.hideMessageLoading();
+      });
     }
   }
 
@@ -114,7 +127,17 @@ class Messages extends Component {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
 
-  loadMessages = (id) => {
+  showMessageLoading = () => {
+    this.setState({ isMessagesLoaded: false });
+  };
+
+  hideMessageLoading = () => {
+    setTimeout(() => {
+      this.setState({ isMessagesLoaded: true });
+    }, 300);
+  };
+
+  loadMessages = (id = this.props.params.id) => {
     const { getMessages, userId } = this.props;
 
     if (!id || !userId) {
@@ -133,7 +156,7 @@ class Messages extends Component {
     });
   };
 
-  loadData = (id) => {
+  loadData = (id = this.props.params.id) => {
     const {
       getUser, getUserAdverts, getUserReviews,
     } = this.props;
@@ -145,11 +168,6 @@ class Messages extends Component {
     getUser({ id });
     getUserReviews({ id });
     getUserAdverts({ id });
-  };
-
-  loadFullData = (id = this.props.params.id) => {
-    this.loadData(id);
-    this.loadMessages(id);
   };
 
   sendMessage = () => {
@@ -232,6 +250,8 @@ class Messages extends Component {
           <input type="text" placeholder="Введите Ваше сообщение" ref={(input) => { this.input = input; }} />
           <Button icon="send" className={styles.submit} onClick={this.sendMessage} />
         </div>
+
+        <Loading show={!this.state.isMessagesLoaded} />
       </div>
 
       <div className={styles.panel}>
