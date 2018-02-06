@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { socketConnect } from 'socket.io-react';
 import { push } from 'react-router-redux';
 import { showNotification } from 'components/Notification/actions';
-import { Card, Icon, Button, Loading } from 'components';
+import { Card, Icon, Button } from 'components';
 import { filterUserPhoto, filterAdvertImage } from 'helpers/filters';
 import userApi from 'containers/User/api';
 import reviewsApi from 'store/reviews';
@@ -96,16 +96,10 @@ class Messages extends Component {
     });
   }
 
-  state = {
-    isMessagesLoaded: false,
-  };
-
   componentWillMount() {
     this.loadData();
 
-    this.loadMessages().then(() => {
-      this.hideMessageLoading();
-    });
+    this.loadMessages();
   }
 
   componentDidMount() {
@@ -114,28 +108,14 @@ class Messages extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.params.id !== this.props.params.id) {
-      this.showMessageLoading();
       this.loadData(nextProps.params.id);
-
-      this.loadMessages(nextProps.params.id).then(() => {
-        this.hideMessageLoading();
-      });
+      this.loadMessages(nextProps.params.id);
     }
   }
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleDocumentKeyDown);
   }
-
-  showMessageLoading = () => {
-    this.setState({ isMessagesLoaded: false });
-  };
-
-  hideMessageLoading = () => {
-    setTimeout(() => {
-      this.setState({ isMessagesLoaded: true });
-    }, 300);
-  };
 
   loadMessages = (id = this.props.params.id) => {
     const { getMessages, userId } = this.props;
@@ -250,8 +230,6 @@ class Messages extends Component {
           <input type="text" placeholder="Введите Ваше сообщение" ref={(input) => { this.input = input; }} />
           <Button icon="send" className={styles.submit} onClick={this.sendMessage} />
         </div>
-
-        <Loading show={!this.state.isMessagesLoaded} />
       </div>
 
       <div className={styles.panel}>
