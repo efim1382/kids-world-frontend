@@ -1,13 +1,9 @@
 import React from 'react';
-import _ from 'lodash';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { compose, lifecycle } from 'recompose';
 import PropTypes from 'prop-types';
 import { Icon } from 'components';
 import { filterUserPhoto } from 'helpers/filters';
 import classNames from 'classnames';
-import chatApi from 'containers/Profile/Chat/api';
 import styles from './style.css';
 
 const ChatLayout = ({ children, chats, className }) => <div className={styles.chatLayout}>
@@ -54,25 +50,4 @@ ChatLayout.propTypes = {
   })),
 };
 
-export default compose(
-  connect(
-    state => ({
-      chats: _.get(state, 'chat.getChats.data.chats', []),
-      userId: parseInt(localStorage.getItem('id'), 10) || null,
-    }),
-
-    {
-      getChats: chatApi.actions.getChats.sync,
-    },
-  ),
-
-  lifecycle({
-    componentWillMount() {
-      const { userId } = this.props;
-
-      this.props.getChats({}, {
-        body: JSON.stringify({ id: userId }),
-      });
-    },
-  }),
-)(ChatLayout);
+export default ChatLayout;

@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -15,6 +16,7 @@ import {
 } from 'components';
 
 import { api as userApi } from 'containers/User';
+import chatApi from 'containers/Profile/Chat/api';
 import { showNotification } from 'components/Notification/actions';
 import styles from './style.css';
 import baseStyles from '../Layout/style.css';
@@ -33,8 +35,18 @@ class Profile extends Component {
       photo: PropTypes.string,
     }),
 
+    chats: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      message: PropTypes.string,
+      photo: PropTypes.string,
+    })),
+
+    userId: PropTypes.number,
     showMessage: PropTypes.func.isRequired,
     currentUser: PropTypes.func.isRequired,
+    getChats: PropTypes.func.isRequired,
     changePhoto: PropTypes.func.isRequired,
     children: PropTypes.node,
   };
@@ -44,7 +56,11 @@ class Profile extends Component {
   };
 
   componentWillMount() {
-    this.loadData();
+    if (window.location.pathname.includes('/profile/chat')) {
+      this.updateChats();
+    }
+
+    this.updateProfileData();
   }
 
   showModal = () => {
@@ -74,7 +90,7 @@ class Profile extends Component {
         return;
       }
 
-      this.loadData();
+      this.updateProfileData();
     });
   };
 
@@ -86,7 +102,7 @@ class Profile extends Component {
     }, 0);
   };
 
-  loadData = () => {
+  updateProfileData = () => {
     const token = localStorage.getItem('token');
 
     this.props.currentUser({}, {
@@ -94,8 +110,16 @@ class Profile extends Component {
     });
   };
 
+  updateChats = () => {
+    const { userId } = this.props;
+
+    this.props.getChats({}, {
+      body: JSON.stringify({ id: userId }),
+    });
+  };
+
   render() {
-    const { children, user } = this.props;
+    const { children, user, chats } = this.props;
 
     const navigationItems = [
       {
@@ -130,10 +154,10 @@ class Profile extends Component {
       <div className={classNames(baseStyles.content, styles.profile)}>
         {!_.isEmpty(user) && !window.location.pathname.includes('/profile/chat') && <UserProfile
           name={`${user.firstName} ${user.lastName}`}
-          phone={`${user.phone}`}
-          email={`${user.email}`}
-          address={`${user.address}`}
-          photo={`${user.photo}`}
+          phone={user.phone}
+          email={user.email}
+          address={user.address}
+          photo={user.photo}
           className={styles.content}
           editablePhoto
           handlePhotoClick={this.showModal}
@@ -142,7 +166,7 @@ class Profile extends Component {
 
           {
             // Переделать только для Settings
-            React.cloneElement(children, { user, updateProfile: this.loadData })
+            React.cloneElement(children, { user, updateProfile: this.updateProfileData })
           }
 
           <Modal
@@ -168,13 +192,14 @@ class Profile extends Component {
           </Modal>
         </UserProfile>}
 
-        {window.location.pathname.includes('/profile/chat') && <ChatLayout
+        {window.location.pathname.includes('/profile/chat') && !_.isEmpty(chats) && !_.isEmpty(user) && <ChatLayout
           className={classNames(styles.content, styles.chat)}
+          chats={chats}
         >
           <Navigation items={navigationItems} />
 
           {
-            React.cloneElement(children, { user })
+            React.cloneElement(children, { user, updateChats: this.updateChats })
           }
         </ChatLayout>}
       </div>
@@ -185,11 +210,14 @@ class Profile extends Component {
 export default connect(
   state => ({
     user: _.get(state, 'users.currentUser.data.user', {}),
+    chats: _.get(state, 'chat.getChats.data.chats', []),
+    userId: parseInt(localStorage.getItem('id'), 10) || null,
   }),
 
   {
     currentUser: userApi.actions.currentUser.sync,
     changePhoto: userApi.actions.changePhoto.sync,
+    getChats: chatApi.actions.getChats.sync,
     showMessage: showNotification,
   },
 )(Profile);

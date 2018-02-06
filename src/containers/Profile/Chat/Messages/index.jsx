@@ -71,6 +71,7 @@ class Messages extends Component {
       emotion: PropTypes.string,
     })),
 
+    updateChats: PropTypes.func,
     showMessage: PropTypes.func,
     getMessages: PropTypes.func,
     getUser: PropTypes.func,
@@ -88,7 +89,11 @@ class Messages extends Component {
         props.showMessage(responce.message);
       }
 
-      this.loadMessages(this.props.params.id);
+      this.loadMessages(this.props.params.id).then((responceMessages) => {
+        if (responceMessages.status === 200 && responceMessages.messages.length === 1) {
+          this.props.updateChats();
+        }
+      });
     });
   }
 
@@ -117,13 +122,15 @@ class Messages extends Component {
       return;
     }
 
-    getMessages({}, {
+    // eslint-disable-next-line consistent-return
+    return getMessages({}, {
       body: JSON.stringify({
         idUserFrom: userId,
         idUserTo: id,
       }),
-    }).then(() => {
+    }).then((responce) => {
       this.scrollMessagesToBottom();
+      return responce;
     });
   };
 
