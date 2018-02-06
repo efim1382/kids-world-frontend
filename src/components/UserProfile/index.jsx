@@ -66,7 +66,11 @@ const UserProfile = ({
 </div>;
 
 UserProfile.propTypes = {
-  id: PropTypes.string,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

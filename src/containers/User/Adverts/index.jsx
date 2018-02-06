@@ -24,12 +24,7 @@ class Adverts extends Component {
     userId: PropTypes.number,
     getUserAdverts: PropTypes.func.isRequired,
     setFavoriteAdvert: PropTypes.func.isRequired,
-    isAdvertFavorite: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
-  };
-
-  state = {
-    advertsFavorites: [],
   };
 
   componentWillMount() {
@@ -38,32 +33,18 @@ class Adverts extends Component {
 
   loadData = () => {
     const {
-      getUserAdverts, isAdvertFavorite, userId, params: { id },
+      getUserAdverts, userId, params: { id },
     } = this.props;
 
-    getUserAdverts({ id }).then(() => {
-      if (!userId) {
-        return;
-      }
+    let data = {};
 
-      const arrayAdverts = [];
+    if (userId) {
+      data = {
+        body: JSON.stringify({ userId }),
+      };
+    }
 
-      this.props.adverts.forEach((advert) => {
-        isAdvertFavorite({
-          id: advert.id,
-          userId,
-        }).then((responce) => {
-          arrayAdverts.push({
-            id: advert.id,
-            isFavorite: responce.isFavorite || false,
-          });
-
-          this.setState({
-            advertsFavorites: arrayAdverts,
-          });
-        });
-      });
-    });
+    getUserAdverts({ id }, { ...data });
   }
 
   render() {
@@ -73,11 +54,13 @@ class Adverts extends Component {
 
     return <div className={styles.adverts}>
       {!_.isEmpty(adverts) && <div className={styles.list}>
-        {adverts.map((advert) => {
-          const favoriteAdvert = _.find(this.state.advertsFavorites, { id: advert.id });
-          const isFavorite = _.get(favoriteAdvert, 'isFavorite');
+        {adverts.map(advert => <CardAdvert
+          key={advert.id}
+          title={advert.title}
+          image={filterAdvertImage(advert.mainImage)}
+          className={styles.advert}
 
-          const advertActions = [
+          actions={[
             {
               icon: 'open_in_new',
 
@@ -85,33 +68,21 @@ class Adverts extends Component {
                 pushURL(`/advert/${advert.id}`);
               },
             },
-          ];
 
-          if (userId) {
-            advertActions.push({
+            {
               icon: 'star',
-              className: classNames(styles.favoriteButton, isFavorite ? styles.isFavorite : ''),
+              className: classNames(styles.favoriteButton, { '_is-favorite': advert.isFavorite }),
 
               onClick: () => {
                 setFavoriteAdvert({ id: advert.id }, {
-                  body: JSON.stringify({
-                    userId,
-                  }),
+                  body: JSON.stringify({ userId }),
                 }).then(() => {
                   this.loadData();
                 });
               },
-            });
-          }
-
-          return <CardAdvert
-            key={advert.id}
-            title={advert.title}
-            image={filterAdvertImage(advert.mainImage)}
-            className={styles.advert}
-            actions={advertActions}
-          />;
-        })}
+            },
+          ]}
+        />)}
       </div>}
 
       {_.isEmpty(adverts) && <div className={styles.emptyMessage}>
@@ -130,7 +101,6 @@ export default connect(
   {
     getUserAdverts: advertsApi.actions.getUserAdverts.sync,
     setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
-    isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
     pushURL: push,
   },
 )(Adverts);

@@ -13,6 +13,9 @@ export default createApi({
   },
   getUserAdverts: {
     url: `${apiPath}/adverts/user/:id`,
+    options: {
+      method: 'post',
+    },
   },
   getAdvert: {
     url: `${apiPath}/advert/:id`,

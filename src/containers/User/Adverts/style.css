@@ -28,10 +28,10 @@
 }
 
 .favorite-button {
-  &:not(.is-favorite) {
+  &:not(:global(._is-favorite)) {
     --color: #fff !important;
   }
-  &.is-favorite {
+  &:global(._is-favorite) {
     --color: var(--color-accent) !important;
   }
 }
