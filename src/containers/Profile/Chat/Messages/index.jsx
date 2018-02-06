@@ -75,7 +75,6 @@ class Messages extends Component {
     showMessage: PropTypes.func,
     getMessages: PropTypes.func,
     getUser: PropTypes.func,
-    getCurrentUser: PropTypes.func,
     getUserAdverts: PropTypes.func,
     getUserReviews: PropTypes.func,
     pushUrl: PropTypes.func,
@@ -136,21 +135,16 @@ class Messages extends Component {
 
   loadData = (id) => {
     const {
-      getUser, getCurrentUser, getUserAdverts, getUserReviews,
+      getUser, getUserAdverts, getUserReviews,
     } = this.props;
-    const token = localStorage.getItem('token');
 
-    if (!id || !token) {
+    if (!id) {
       return;
     }
 
     getUser({ id });
     getUserReviews({ id });
     getUserAdverts({ id });
-
-    getCurrentUser({}, {
-      body: JSON.stringify({ token }),
-    });
   };
 
   loadFullData = (id = this.props.params.id) => {
@@ -327,7 +321,6 @@ export default socketConnect(connect(
     showMessage: showNotification,
     getMessages: chatApi.actions.getMessages.sync,
     getUser: userApi.actions.getUser.sync,
-    getCurrentUser: userApi.actions.currentUser.sync,
     getUserAdverts: advertsApi.actions.getUserAdverts.sync,
     getUserReviews: reviewsApi.actions.getUserReviews.sync,
     pushUrl: push,

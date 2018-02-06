@@ -199,7 +199,7 @@ class Profile extends Component {
           <Navigation items={navigationItems} />
 
           {
-            React.cloneElement(children, { user, updateChats: this.updateChats })
+            React.cloneElement(children, { currentUser: user, updateChats: this.updateChats })
           }
         </ChatLayout>}
       </div>
