@@ -88,17 +88,14 @@ class Messages extends Component {
         props.showMessage(responce.message);
       }
 
-      this.loadMessages(this.props.params.id).then((responceMessages) => {
-        if (responceMessages.status === 200 && responceMessages.messages.length === 1) {
-          this.props.updateChats();
-        }
+      this.loadMessages(this.props.params.id).then(() => {
+        this.props.updateChats();
       });
     });
   }
 
   componentWillMount() {
     this.loadData();
-
     this.loadMessages();
   }
 
