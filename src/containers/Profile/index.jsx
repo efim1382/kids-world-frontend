@@ -56,10 +56,7 @@ class Profile extends Component {
   };
 
   componentWillMount() {
-    if (window.location.pathname.includes('/profile/chat')) {
-      this.updateChats();
-    }
-
+    this.updateChats();
     this.updateProfileData();
   }
 
