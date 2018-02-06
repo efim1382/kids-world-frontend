@@ -24,7 +24,7 @@ const UserProfile = ({
     <header className={styles.header}>
       <div className={styles.userImage} style={{ '--image': filterUserPhoto(photo) }}>
         {editablePhoto && <Button
-          icon="create"
+          icon="photo_camera"
           className={styles.photoButton}
           onClick={handlePhotoClick}
         />}
@@ -66,7 +66,7 @@ const UserProfile = ({
 </div>;
 
 UserProfile.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
