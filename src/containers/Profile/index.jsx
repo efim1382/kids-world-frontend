@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
@@ -46,7 +45,6 @@ class Profile extends Component {
     userId: PropTypes.number,
     showMessage: PropTypes.func.isRequired,
     currentUser: PropTypes.func.isRequired,
-    getChats: PropTypes.func.isRequired,
     changePhoto: PropTypes.func.isRequired,
     children: PropTypes.node,
   };
@@ -108,11 +106,8 @@ class Profile extends Component {
   };
 
   updateChats = () => {
-    const { userId } = this.props;
-
-    this.props.getChats({}, {
-      body: JSON.stringify({ id: userId }),
-    });
+    const { userId, getUserChats } = this.props;
+    getUserChats({ id: userId });
   };
 
   render() {
@@ -189,16 +184,22 @@ class Profile extends Component {
           </Modal>
         </UserProfile>}
 
-        {window.location.pathname.includes('/profile/chat') && !_.isEmpty(chats) && !_.isEmpty(user) && <ChatLayout
-          className={classNames(styles.content, styles.chat)}
-          chats={chats}
+        {window.location.pathname.includes('/profile/chat') &&
+         !_.isEmpty(chats) &&
+         !_.isEmpty(user) && <ChatLayout
+           className={classNames(styles.content, styles.chat)}
+           chats={chats}
         >
-          <Navigation items={navigationItems} />
+           <Navigation items={navigationItems} />
 
-          {
-            React.cloneElement(children, { currentUser: user, updateChats: this.updateChats })
+           {
+            // Переделать только для Messages
+            React.cloneElement(children, {
+              currentUser: user,
+              updateChats: this.updateChats,
+            })
           }
-        </ChatLayout>}
+         </ChatLayout>}
       </div>
     </div>;
   }
@@ -207,14 +208,14 @@ class Profile extends Component {
 export default connect(
   state => ({
     user: _.get(state, 'users.currentUser.data.user', {}),
-    chats: _.get(state, 'chat.getChats.data.chats', []),
     userId: parseInt(localStorage.getItem('id'), 10) || null,
+    chats: _.get(state, 'chat.getUserChats.data.chats', []),
   }),
 
   {
     currentUser: userApi.actions.currentUser.sync,
     changePhoto: userApi.actions.changePhoto.sync,
-    getChats: chatApi.actions.getChats.sync,
+    getUserChats: chatApi.actions.getUserChats.sync,
     showMessage: showNotification,
   },
 )(Profile);

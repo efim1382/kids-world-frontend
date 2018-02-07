@@ -15,11 +15,11 @@ const ChatLayout = ({ children, chats, className }) => <div className={styles.ch
 
     <div className={styles.list}>
       {chats.map(chat => <Link
-        key={chat.id}
-        to={`/profile/chat/${chat.id}`}
+        key={chat.idChat}
+        to={`/profile/chat/${chat.idChat}`}
 
         className={
-          (window.location.pathname.includes(`/profile/chat/${chat.id}`))
+          (window.location.pathname.includes(`/profile/chat/${chat.idChat}`))
           ? classNames(styles.item, '_selected')
           : styles.item
         }
@@ -28,7 +28,7 @@ const ChatLayout = ({ children, chats, className }) => <div className={styles.ch
 
         <div className={styles.section}>
           <h4 className={styles.title}>{ chat.firstName } {chat.lastName}</h4>
-          <p className={styles.text}>{ chat.message }</p>
+          {chat.lastMessage && <p className={styles.text}>{ chat.lastMessage }</p>}
         </div>
       </Link>)}
     </div>
@@ -42,7 +42,7 @@ ChatLayout.propTypes = {
   className: PropTypes.string,
 
   chats: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number,
+    idChat: PropTypes.number,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     message: PropTypes.string,

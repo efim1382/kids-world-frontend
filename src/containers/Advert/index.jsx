@@ -152,7 +152,7 @@ class Advert extends Component {
             className={styles.whiteUser}
 
             onClick={() => {
-              pushUrl(`/profile/chat/${advert.userId}`);
+              // pushUrl(`/profile/chat/${advert.userId}`);
             }}
           />}
         </div>

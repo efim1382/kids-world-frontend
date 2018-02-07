@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Button, Icon } from 'components';
 import { filterUserPhoto } from 'helpers/filters';
+import { showNotification } from 'components/Notification/actions';
+import chatApi from 'containers/Profile/Chat/api';
 import styles from './style.css';
 
 const UserProfile = ({
@@ -18,7 +20,10 @@ const UserProfile = ({
   handlePhotoClick,
   children,
   className,
-  dispatch,
+  showMessage,
+  pushUrl,
+  createChat,
+  userId,
 }) => <div className={styles.profile}>
   <div className={styles.sidebar}>
     <header className={styles.header}>
@@ -51,13 +56,25 @@ const UserProfile = ({
       </div>
     </div>
 
-    {id && <Button
+    {id && userId && <Button
       caption="Написать пользователю"
       appearance="primary"
       className={styles.button}
 
       onClick={() => {
-        dispatch(push(`/profile/chat/${id}`));
+        createChat({}, {
+          body: JSON.stringify({
+            idAuthor: userId,
+            idRecipient: id,
+          }),
+        }).then((responce) => {
+          if (responce.status !== 200) {
+            showMessage(responce.message);
+            return;
+          }
+
+          pushUrl(`/profile/chat/${responce.chat.id}`);
+        });
       }}
     />}
   </div>
@@ -83,4 +100,14 @@ UserProfile.propTypes = {
   children: PropTypes.node,
 };
 
-export default connect()(UserProfile);
+export default connect(
+  () => ({
+    userId: parseInt(localStorage.getItem('id'), 10) || null,
+  }),
+
+  {
+    createChat: chatApi.actions.createChat.sync,
+    pushUrl: push,
+    showMessage: showNotification,
+  },
+)(UserProfile);
