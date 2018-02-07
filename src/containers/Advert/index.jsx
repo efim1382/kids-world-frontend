@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import _ from 'lodash';
 import { connect } from 'react-redux';
+import chatApi from 'containers/Profile/Chat/api';
 import { push } from 'react-router-redux';
 
 import {
@@ -41,6 +42,7 @@ class Advert extends Component {
     isAdvertFavorite: PropTypes.func.isRequired,
     getAdvert: PropTypes.func.isRequired,
     showMessage: PropTypes.func.isRequired,
+    createChat: PropTypes.func.isRequired,
     pushUrl: PropTypes.func.isRequired,
     isFavorite: PropTypes.bool.isRequired,
 
@@ -86,7 +88,7 @@ class Advert extends Component {
 
   render() {
     const {
-      advert, userId, isFavorite, pushUrl,
+      advert, userId, isFavorite, pushUrl, showMessage, createChat,
     } = this.props;
 
     return <div className={baseStyles.page}>
@@ -152,7 +154,19 @@ class Advert extends Component {
             className={styles.whiteUser}
 
             onClick={() => {
-              // pushUrl(`/profile/chat/${advert.userId}`);
+              createChat({}, {
+                body: JSON.stringify({
+                  idAuthor: userId,
+                  idRecipient: advert.userId,
+                }),
+              }).then((responce) => {
+                if (responce.status !== 200) {
+                  showMessage(responce.message);
+                  return;
+                }
+
+                pushUrl(`/profile/chat/${responce.chat.id}`);
+              });
             }}
           />}
         </div>
@@ -172,7 +186,8 @@ export default connect(
     getAdvert: advertsApi.actions.getAdvert.sync,
     setFavoriteAdvert: advertsApi.actions.setFavoriteAdvert.sync,
     isAdvertFavorite: advertsApi.actions.isAdvertFavorite.sync,
-    showMessage: showNotification,
+    createChat: chatApi.actions.createChat.sync,
     pushUrl: push,
+    showMessage: showNotification,
   },
 )(Advert);

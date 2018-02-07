@@ -44,6 +44,7 @@ class Profile extends Component {
 
     userId: PropTypes.number,
     showMessage: PropTypes.func.isRequired,
+    getUserChats: PropTypes.func.isRequired,
     currentUser: PropTypes.func.isRequired,
     changePhoto: PropTypes.func.isRequired,
     children: PropTypes.node,

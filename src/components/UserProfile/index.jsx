@@ -88,6 +88,7 @@ UserProfile.propTypes = {
     PropTypes.number,
   ]),
 
+  userId: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
@@ -95,7 +96,9 @@ UserProfile.propTypes = {
   photo: PropTypes.string.isRequired,
   editablePhoto: PropTypes.bool,
   handlePhotoClick: PropTypes.func,
-  dispatch: PropTypes.func,
+  showMessage: PropTypes.func.isRequired,
+  pushUrl: PropTypes.func.isRequired,
+  createChat: PropTypes.func.isRequired,
   className: PropTypes.string,
   children: PropTypes.node,
 };
