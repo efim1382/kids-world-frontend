@@ -76,6 +76,10 @@ class Messages extends Component {
     getChatUser: PropTypes.func.isRequired,
   };
 
+  state = {
+    isSubmitDisabled: true,
+  };
+
   componentWillMount() {
     this.updateUserData();
     this.updateMessages();
@@ -113,7 +117,7 @@ class Messages extends Component {
       pushUrl('/profile/chat');
     }
 
-    if (event.keyCode === 13 && this.input === document.activeElement) {
+    if (event.keyCode === 13 && !event.shiftKey && !this.state.isSubmitDisabled) {
       this.sendMessage();
     }
   }
@@ -172,6 +176,20 @@ class Messages extends Component {
     return filterUserPhoto(idUser === userId ? currentUser.photo : chatUser.photo);
   };
 
+  filterText = text => text.split(' ').join('').split('\n').join('');
+
+  handleKeyUpInput = (event) => {
+    const value = this.filterText(event.target.value);
+
+    if (this.state.isSubmitDisabled && value) {
+      this.setState({ isSubmitDisabled: false });
+    }
+
+    if (!this.state.isSubmitDisabled && !value) {
+      this.setState({ isSubmitDisabled: true });
+    }
+  };
+
   render() {
     const {
       messages, currentUser, chatUser, userId, reviews, adverts,
@@ -214,9 +232,15 @@ class Messages extends Component {
             type="text"
             placeholder="Введите Ваше сообщение"
             ref={(input) => { this.input = input; }}
+            onKeyUp={this.handleKeyUpInput}
           />
 
-          <Button icon="send" className={styles.submit} onClick={this.sendMessage} />
+          <Button
+            icon="send"
+            className={styles.submit}
+            onClick={this.sendMessage}
+            {...this.state.isSubmitDisabled ? { disabled: 'true' } : {}}
+          />
         </div>
       </div>
 

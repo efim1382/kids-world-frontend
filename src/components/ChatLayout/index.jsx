@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'lodash';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { Icon } from 'components';
@@ -14,7 +15,7 @@ const ChatLayout = ({ children, chats, className }) => <div className={styles.ch
     </div>
 
     <div className={styles.list}>
-      {chats.map(chat => <Link
+      {!_.isEmpty(chats) && chats.map(chat => <Link
         key={chat.idChat}
         to={`/profile/chat/${chat.idChat}`}
 
@@ -31,6 +32,8 @@ const ChatLayout = ({ children, chats, className }) => <div className={styles.ch
           {chat.lastMessage && <p className={styles.text}>{ chat.lastMessage }</p>}
         </div>
       </Link>)}
+
+      {_.isEmpty(chats) && <p className={styles.emptyMessage}>У вас еще нет чатов</p>}
     </div>
   </div>
 

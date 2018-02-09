@@ -103,6 +103,16 @@
 					transition-property: color;
 				}
 			}
+			& > .empty-message {
+				--height: 100px;
+				height: var(--height);
+				padding-left: 16px;
+				padding-right: 16px;
+				line-height: var(--height);
+				font-size: 15px;
+				text-align: center;
+				color: var(--color-caption);
+			}
 		}
 	}
 	& > .content {

@@ -203,22 +203,20 @@ class Profile extends Component {
           </Modal>
         </UserProfile>}
 
-        {window.location.pathname.includes('/profile/chat') &&
-         !_.isEmpty(chats) &&
-         !_.isEmpty(user) && <ChatLayout
-           className={classNames(styles.content, styles.chat)}
-           chats={chats}
+        {window.location.pathname.includes('/profile/chat') && !_.isEmpty(user) && <ChatLayout
+          className={classNames(styles.content, styles.chat)}
+          chats={chats}
         >
-           <Navigation items={navigationItems} />
+          <Navigation items={navigationItems} />
 
-           {
-            // Переделать только для Messages
-            React.cloneElement(children, {
-              currentUser: user,
-              updateChats: this.updateChats,
-            })
+          {
+           // Переделать только для Messages
+           React.cloneElement(children, {
+             currentUser: user,
+             updateChats: this.updateChats,
+           })
           }
-         </ChatLayout>}
+        </ChatLayout>}
       </div>
     </div>;
   }
