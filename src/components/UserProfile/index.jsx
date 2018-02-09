@@ -88,7 +88,7 @@ UserProfile.propTypes = {
     PropTypes.number,
   ]),
 
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.number,
   name: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,

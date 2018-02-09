@@ -47,10 +47,39 @@ class Adverts extends Component {
     getUserAdverts({ id }, { ...data });
   }
 
+  filterAdvertActions = (advert) => {
+    const { pushURL, setFavoriteAdvert, userId } = this.props;
+
+    const actionsArray = [{
+      icon: 'open_in_new',
+
+      onClick: () => {
+        pushURL(`/advert/${advert.id}`);
+      },
+    }];
+
+    if (!userId) {
+      return actionsArray;
+    }
+
+    actionsArray.push({
+      icon: 'star',
+      className: classNames(styles.favoriteButton, { '_is-favorite': advert.isFavorite }),
+
+      onClick: () => {
+        setFavoriteAdvert({ id: advert.id }, {
+          body: JSON.stringify({ userId }),
+        }).then(() => {
+          this.loadData();
+        });
+      },
+    });
+
+    return actionsArray;
+  };
+
   render() {
-    const {
-      adverts, pushURL, userId, setFavoriteAdvert,
-    } = this.props;
+    const { adverts } = this.props;
 
     return <div className={styles.adverts}>
       {!_.isEmpty(adverts) && <div className={styles.list}>
@@ -59,29 +88,7 @@ class Adverts extends Component {
           title={advert.title}
           image={filterAdvertImage(advert.mainImage)}
           className={styles.advert}
-
-          actions={[
-            {
-              icon: 'open_in_new',
-
-              onClick: () => {
-                pushURL(`/advert/${advert.id}`);
-              },
-            },
-
-            {
-              icon: 'star',
-              className: classNames(styles.favoriteButton, { '_is-favorite': advert.isFavorite }),
-
-              onClick: () => {
-                setFavoriteAdvert({ id: advert.id }, {
-                  body: JSON.stringify({ userId }),
-                }).then(() => {
-                  this.loadData();
-                });
-              },
-            },
-          ]}
+          actions={this.filterAdvertActions(advert)}
         />)}
       </div>}
 
