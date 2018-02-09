@@ -3,6 +3,7 @@ import _ from 'lodash';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
+import { socketConnect } from 'socket.io-react';
 
 import {
   Header,
@@ -42,6 +43,10 @@ class Profile extends Component {
       photo: PropTypes.string,
     })),
 
+    socket: PropTypes.shape({
+      on: PropTypes.func,
+    }).isRequired,
+
     userId: PropTypes.number,
     showMessage: PropTypes.func.isRequired,
     getUserChats: PropTypes.func.isRequired,
@@ -57,6 +62,19 @@ class Profile extends Component {
   componentWillMount() {
     this.updateChats();
     this.updateProfileData();
+  }
+
+  componentDidMount() {
+    const { socket, showMessage } = this.props;
+
+    socket.on('message', (responce) => {
+      if (responce.status !== 200) {
+        showMessage(responce.message);
+        return;
+      }
+
+      this.updateChats();
+    });
   }
 
   showModal = () => {
@@ -206,7 +224,7 @@ class Profile extends Component {
   }
 }
 
-export default connect(
+export default socketConnect(connect(
   state => ({
     user: _.get(state, 'users.currentUser.data.user', {}),
     userId: parseInt(localStorage.getItem('id'), 10) || null,
@@ -219,4 +237,4 @@ export default connect(
     getUserChats: chatApi.actions.getUserChats.sync,
     showMessage: showNotification,
   },
-)(Profile);
+)(Profile));

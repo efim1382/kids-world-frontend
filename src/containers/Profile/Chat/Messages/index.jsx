@@ -68,7 +68,6 @@ class Messages extends Component {
       emit: PropTypes.func,
     }).isRequired,
 
-    updateChats: PropTypes.func.isRequired,
     showMessage: PropTypes.func.isRequired,
     pushUrl: PropTypes.func.isRequired,
     getChatMessages: PropTypes.func.isRequired,
@@ -83,8 +82,8 @@ class Messages extends Component {
   }
 
   componentDidMount() {
+    const { showMessage, socket } = this.props;
     document.addEventListener('keydown', this.handleDocumentKeyDown);
-    const { showMessage, updateChats, socket } = this.props;
 
     socket.on('message', (responce) => {
       if (responce.status !== 200) {
@@ -92,7 +91,6 @@ class Messages extends Component {
         return;
       }
 
-      updateChats();
       this.updateMessages();
     });
   }
@@ -158,6 +156,10 @@ class Messages extends Component {
   };
 
   scrollMessagesToBottom = () => {
+    if (!this.scrollContainer) {
+      return;
+    }
+
     const { scrollHeight, clientHeight } = this.scrollContainer;
 
     if (scrollHeight > clientHeight) {
