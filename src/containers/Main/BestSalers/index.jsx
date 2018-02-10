@@ -35,7 +35,7 @@ const BestSalers = ({ users }) => <div className={styles.bestSalers}>
       key={user.id}
       image={filterUserPhoto(user.photo)}
       link={`/user/${user.id}`}
-      name={`${user.firstName} ${user.lastName}`}
+      name={user.name}
       text={getReviewsText(user.likes)}
       className={styles.card}
     />)}
@@ -49,8 +49,7 @@ const BestSalers = ({ users }) => <div className={styles.bestSalers}>
 BestSalers.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number,
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    name: PropTypes.string,
     photo: PropTypes.string,
     likes: PropTypes.number,
   })),

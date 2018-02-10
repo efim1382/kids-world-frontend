@@ -28,7 +28,7 @@ const ChatLayout = ({ children, chats, className }) => <div className={styles.ch
         <div className={styles.image} style={{ '--image': filterUserPhoto(chat.photo) }} />
 
         <div className={styles.section}>
-          <h4 className={styles.title}>{ chat.firstName } {chat.lastName}</h4>
+          <h4 className={styles.title}>{ chat.name }</h4>
           {chat.lastMessage && <p className={styles.text}>{ chat.lastMessage }</p>}
         </div>
       </Link>)}
@@ -46,8 +46,7 @@ ChatLayout.propTypes = {
 
   chats: PropTypes.arrayOf(PropTypes.shape({
     idChat: PropTypes.number,
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    name: PropTypes.string,
     message: PropTypes.string,
     photo: PropTypes.string,
   })),

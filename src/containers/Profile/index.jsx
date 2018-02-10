@@ -27,8 +27,7 @@ class Profile extends Component {
   static propTypes = {
     user: PropTypes.shape({
       id: PropTypes.number,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
+      name: PropTypes.string,
       phone: PropTypes.string,
       email: PropTypes.string,
       address: PropTypes.string,
@@ -37,8 +36,7 @@ class Profile extends Component {
 
     chats: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.number,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
+      name: PropTypes.string,
       message: PropTypes.string,
       photo: PropTypes.string,
     })),
@@ -164,7 +162,7 @@ class Profile extends Component {
 
       <div className={classNames(baseStyles.content, styles.profile)}>
         {!_.isEmpty(user) && !window.location.pathname.includes('/profile/chat') && <UserProfile
-          name={`${user.firstName} ${user.lastName}`}
+          name={user.name}
           phone={user.phone}
           email={user.email}
           address={user.address}

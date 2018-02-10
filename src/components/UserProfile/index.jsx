@@ -40,10 +40,10 @@ const UserProfile = ({
     <div className={styles.properties}>
       <h3>Контакты</h3>
 
-      <div className={styles.property}>
+      {phone && <div className={styles.property}>
         <Icon name="phone" className={styles.icon} />
         <label className={styles.propertyValue}>{ phone }</label>
-      </div>
+      </div>}
 
       <div className={styles.property}>
         <Icon name="email" className={styles.icon} />
@@ -90,7 +90,7 @@ UserProfile.propTypes = {
 
   userId: PropTypes.number,
   name: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
+  phone: PropTypes.string,
   email: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   photo: PropTypes.string.isRequired,

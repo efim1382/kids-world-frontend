@@ -12,9 +12,7 @@ const Auth = ({ children }) => <div className={baseStyles.page}>
   <Header />
 
   <div className={classNames(baseStyles.content, styles.auth)}>
-    <div className={styles.formWrapper}>
-      { children }
-    </div>
+    { children }
   </div>
 </div>;
 

@@ -1,10 +1,7 @@
 .auth {
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.form-wrapper {
-  background-color: #fff;
-  box-shadow: 0 0 0 1px var(--color-divider) inset;
+  flex-direction: column;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #f4f4f4;
 }

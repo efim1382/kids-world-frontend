@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
-import { Form, Field, Button } from 'components';
+import { Form, Field, Files, Button, Modal } from 'components';
 import { showNotification } from 'components/Notification/actions';
 import api from '../api';
 import styles from './style.css';
@@ -12,12 +12,42 @@ class Register extends Component {
     dispatch: PropTypes.func.isRequired,
   };
 
+  state = {
+    isModalShown: false,
+  };
+
+  closeModal = () => {
+    this.setState({ isModalShown: false });
+  };
+
+  openModal = () => {
+    this.setState({ isModalShown: true });
+  };
+
   sendHandler = (data) => {
     const { dispatch } = this.props;
 
-    dispatch(api.actions.register({}, {
-      body: JSON.stringify(data),
-    })).then((response) => {
+    if (
+      !data.name ||
+      !data.email ||
+      !data.address ||
+      !data.password
+    ) {
+      dispatch(showNotification('Заполните все поля'));
+      return;
+    }
+
+    const body = new FormData();
+    body.append('name', data.name);
+    body.append('email', data.email);
+    body.append('address', data.address);
+    body.append('password', data.password);
+
+    if (data.photo) {
+      body.append('photo', data.photo[0]);
+    }
+
+    dispatch(api.actions.register({}, { body })).then((response) => {
       if (response.status !== 200) {
         dispatch(showNotification(response.message));
         return;
@@ -25,69 +55,77 @@ class Register extends Component {
 
       localStorage.setItem('id', response.user.id);
       localStorage.setItem('token', response.user.token);
-      dispatch(replace('/'));
+      dispatch(replace('/profile'));
     });
   };
 
   render() {
     return (<div className={styles.register}>
-      <span className={styles.title}>Регистрация</span>
+      <h3 className={styles.title}>Добро пожаловать!</h3>
+
+      <p className={styles.subcaption}>
+        Зарегистрируйтесь, чтобы размещать объявления, хранить избранное и прочее
+      </p>
 
       <Form className={styles.form} model="register" onSubmit={this.sendHandler}>
+        <div className={styles.image}>
+          <Button
+            icon="photo_camera"
+            type="button"
+            className={styles.addPhotoButton}
+            onClick={this.openModal}
+          />
+        </div>
+
         <Field
-          caption="Имя"
+          caption="Полное имя"
           type="text"
-          model=".firstName"
-          className={styles.fieldFirstName}
+          model=".name"
+          className={styles.field}
         />
 
         <Field
-          caption="Фамилия"
-          type="text"
-          model=".lastName"
-          className={styles.fieldLastName}
-        />
-
-        <Field
-          caption="E-Mail"
+          caption="Эл. почта"
           type="email"
           model=".email"
-          className={styles.fieldEmail}
+          className={styles.field}
         />
 
         <Field
-          caption="Телефон"
-          type="text"
-          model=".phone"
-          className={styles.fieldPhone}
-        />
-
-        <Field
-          caption="Адрес"
-          type="text"
-          model=".address"
-          className={styles.fieldAddress}
-        />
-
-        <Field
-          caption="Пароль"
+          caption="Придумайте пароль"
           type="password"
           model=".password"
-          className={styles.fieldPassword}
+          className={styles.field}
         />
 
         <Field
-          caption="Повторите пароль"
-          type="password"
-          model=".confirmPassword"
-          className={styles.fieldConfirmPassword}
+          caption="Ваш адрес"
+          type="text"
+          model=".address"
+          className={styles.field}
         />
+
+        <Modal
+          show={this.state.isModalShown}
+          title="Загрузка фотографии"
+          className={styles.modal}
+          handleClose={this.closeModal}
+        >
+          <p>Загрузите свою настоящую фотографию.</p>
+          <p>Вы можете загрузить фотографию только в форматах JPG, GIF или PNG.</p>
+
+          <Files
+            model=".photo"
+            onChange={this.closeModal}
+            className={styles.files}
+          />
+        </Modal>
 
         <Button
           type="submit"
           appearance="primary"
           caption="Зарегистрироваться"
-          className={styles.buttonSubmit}
+          className={styles.submit}
         />
       </Form>
     </div>);

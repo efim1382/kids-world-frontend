@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { replace } from 'react-router-redux';
 import { Form, Field, Button } from 'components';
@@ -31,28 +32,39 @@ class Login extends Component {
 
   render() {
     return <div className={styles.login}>
-      <span className={styles.title}>Авторизация</span>
+      <div className={styles.box}>
+        <div className={styles.logo} />
 
-      <Form className={styles.form} model="login" onSubmit={this.sendHandler}>
-        <Field
-          caption="E-Mail"
-          type="email"
-          model=".email"
-        />
+        <h3 className={styles.title}>Вход в аккаунт</h3>
+        <p className={styles.subcaption}>Продайте все что хотите</p>
 
-        <Field
-          caption="Пароль"
-          type="password"
-          model=".password"
-        />
+        <Form className={styles.form} model="login" onSubmit={this.sendHandler}>
+          <Field
+            caption="E-Mail"
+            type="email"
+            model=".email"
+            className={styles.field}
+          />
 
-        <Button
-          type="submit"
-          appearance="primary"
-          caption="Войти"
-          className={styles.buttonSubmit}
-        />
-      </Form>
+          <Field
+            caption="Пароль"
+            type="password"
+            model=".password"
+            className={styles.field}
+          />
+
+          <Button
+            type="submit"
+            appearance="primary"
+            caption="Войти"
+            className={styles.submit}
+          />
+        </Form>
+      </div>
+
+      <p className={styles.registerText}>Еще нет аккаунта?
+        <Link to="/auth/register">Зарегистрируйтесь</Link>
+      </p>
     </div>;
   }
 }

@@ -24,7 +24,7 @@ const User = ({ children, user, params: { id } }) => <div className={baseStyles.
   <div className={classNames(baseStyles.content, styles.user)}>
     {!_.isEmpty(user) && <UserProfile
       id={user.id}
-      name={`${user.firstName} ${user.lastName}`}
+      name={user.name}
       phone={user.phone}
       email={user.email}
       address={user.address}
@@ -53,8 +53,7 @@ const User = ({ children, user, params: { id } }) => <div className={baseStyles.
 User.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number,
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    name: PropTypes.string,
     phone: PropTypes.string,
     email: PropTypes.string,
     address: PropTypes.string,

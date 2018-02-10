@@ -29,8 +29,7 @@ class Advert extends Component {
       description: PropTypes.string,
       mainImage: PropTypes.string,
       userId: PropTypes.number,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
+      name: PropTypes.string,
       address: PropTypes.string,
       email: PropTypes.string,
       phone: PropTypes.string,
@@ -132,15 +131,15 @@ class Advert extends Component {
           <Card
             image={filterUserPhoto(advert.photo)}
             link={`/user/${advert.userId}`}
-            name={`${advert.firstName} ${advert.lastName}`}
-            text={`${advert.email}`}
+            name={advert.name}
+            text={advert.email}
           />
 
           <div className={styles.properties}>
-            <div className={styles.item}>
+            {advert.phone && <div className={styles.item}>
               <Icon name="phone" className={styles.icon} />
               <span className={styles.text}>{ advert.phone }</span>
-            </div>
+            </div>}
 
             <div className={styles.item}>
               <Icon name="home" className={styles.icon} />

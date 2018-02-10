@@ -36,8 +36,7 @@ class Messages extends Component {
 
     chatUser: PropTypes.shape({
       id: PropTypes.number,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
+      name: PropTypes.string,
       phone: PropTypes.string,
       email: PropTypes.string,
       address: PropTypes.string,
@@ -46,8 +45,7 @@ class Messages extends Component {
 
     currentUser: PropTypes.shape({
       id: PropTypes.number,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
+      name: PropTypes.string,
       phone: PropTypes.string,
       email: PropTypes.string,
       address: PropTypes.string,
@@ -57,8 +55,7 @@ class Messages extends Component {
     reviews: PropTypes.arrayOf(PropTypes.shape({
       idAuthor: PropTypes.number,
       image: PropTypes.string,
-      firstName: PropTypes.string,
-      lastName: PropTypes.string,
+      name: PropTypes.string,
       text: PropTypes.string,
       emotion: PropTypes.string,
     })),
@@ -249,15 +246,15 @@ class Messages extends Component {
           <Card
             image={filterUserPhoto(chatUser.photo)}
             link={`/user/${chatUser.id}`}
-            name={`${chatUser.firstName} ${chatUser.lastName}`}
+            name={chatUser.name}
             text={chatUser.email}
             className={styles.card}
           />
 
-          <div className={styles.property}>
+          {chatUser.phone && <div className={styles.property}>
             <Icon name="phone" className={styles.icon} />
             <span className={styles.value}>{ chatUser.phone }</span>
-          </div>
+          </div>}
 
           <div className={styles.property}>
             <Icon name="home" className={styles.icon} />
@@ -273,7 +270,7 @@ class Messages extends Component {
               key={review.id}
               image={filterUserPhoto(review.photo)}
               link={`/user/${review.idAuthor}`}
-              name={`${review.firstName} ${review.lastName}`}
+              name={review.name}
               text={review.text}
               emotion={review.emotion}
               multiple

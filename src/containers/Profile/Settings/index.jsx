@@ -194,7 +194,7 @@ Settings.propTypes = {
   user: PropTypes.shape({
     id: PropTypes.number.isRequired,
     address: PropTypes.string.isRequired,
-    phone: PropTypes.string.isRequired,
+    phone: PropTypes.string,
     email: PropTypes.string.isRequired,
   }).isRequired,
 

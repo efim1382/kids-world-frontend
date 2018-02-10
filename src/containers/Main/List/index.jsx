@@ -24,8 +24,7 @@ class List extends Component {
       category: PropTypes.string.isRequired,
       mainImage: PropTypes.string.isRequired,
       userId: PropTypes.number.isRequired,
-      firstName: PropTypes.string.isRequired,
-      lastName: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
       address: PropTypes.string.isRequired,
       photo: PropTypes.string.isRequired,
     })).isRequired,
@@ -82,7 +81,7 @@ class List extends Component {
             <Card
               image={filterUserPhoto(advert.photo)}
               link={`/user/${advert.userId}`}
-              name={`${advert.firstName} ${advert.lastName}`}
+              name={advert.name}
               text={advert.date}
             />
 

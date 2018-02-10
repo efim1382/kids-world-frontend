@@ -1,26 +1,83 @@
 .login {
-	--horizontal-padding: 24px;
-	width: 300px;
-}
-
-.title {
-	--height: 60px;
-	display: block;
-	height: var(--height);
-	line-height: var(--height);
-	padding-left: var(--horizontal-padding);
-	padding-right: var(--horizontal-padding);
-	background-color: var(--color-accent);
-	color: #fff;
-	font-size: 20px;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-}
-
-.form {
-	padding: 30px var(--horizontal-padding);
-}
-
-.button-submit {
-	margin-top: 12px;
+  flex-shrink: 0;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  & > .box {
+    display: block;
+    padding: var(--layout-padding) var(--layout-padding) 50px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 0 1px var(--color-divider), 0px 3px 3px rgba(0, 0, 0, 0.136549);
+    & > .logo {
+      --size: 50px;
+      display: block;
+      width: var(--size);
+      height: var(--size);
+      margin-left: -9px;
+      background-image: url('/logo.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+    & > .title {
+      --height: 20px;
+      height: var(--height);
+      margin-top: 30px;
+      line-height: var(--height);
+      font-size: 20px;
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text);
+    }
+    & > .subcaption {
+      --height: 14px;
+      height: var(--height);
+      margin-top: 8px;
+      line-height: var(--height);
+      font-size: 13px;
+      color: var(--color-caption);
+    }
+    & > .form {
+      margin-top: 30px;
+      & > .field {
+        &:nth-of-type(n+2) {
+          margin-top: 20px;
+        }
+        & > span {
+          font-size: 13px;
+        }
+        & > input {
+          --height: 40px;
+        }
+      }
+      & > .submit {
+        --height: 40px;
+        width: 100%;
+        margin-top: 20px;
+        & > span {
+          text-transform: uppercase;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  & > .register-text {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 15px;
+    color: var(--color-text);
+    & > a {
+      margin-left: 8px;
+      text-decoration: none;
+      color: var(--color);
+      transition-property: color;
+      &:not(:hover) {
+        --color: var(--color-accent);
+      }
+      &:hover {
+        --color: var(--color-accent-hover);
+      }
+    }
+  }
 }

@@ -10,7 +10,7 @@ const Modal = ({
   <div className={classNames(styles.modal, wrapperClass)}>
     <header className={styles.header}>
       {title && <p className={styles.title}>{ title }</p>}
-      <Button icon="close" onClick={handleClose} />
+      <Button icon="close" onClick={handleClose} type="button" />
     </header>
 
     {children && <div className={classNames(styles.content, className)}>{ children }</div>}

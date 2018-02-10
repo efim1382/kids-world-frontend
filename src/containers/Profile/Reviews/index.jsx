@@ -15,7 +15,7 @@ const Reviews = ({ reviews }) => <div className={styles.reviews}>
       key={UUID.v4()}
       image={filterUserPhoto(review.photo)}
       link={`/user/${review.idAuthor}`}
-      name={`${review.firstName} ${review.lastName}`}
+      name={review.name}
       text={review.text}
       emotion={review.emotion}
       className={styles.card}
@@ -32,8 +32,7 @@ Reviews.propTypes = {
   reviews: PropTypes.arrayOf(PropTypes.shape({
     idAuthor: PropTypes.number,
     image: PropTypes.string,
-    firstName: PropTypes.string,
-    lastName: PropTypes.string,
+    name: PropTypes.string,
     text: PropTypes.string,
     emotion: PropTypes.string,
   })),
