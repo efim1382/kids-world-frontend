@@ -7,11 +7,13 @@ import { filterUserPhoto } from 'helpers/filters';
 import classNames from 'classnames';
 import styles from './style.css';
 
-const ChatLayout = ({ children, chats, className }) => <div className={styles.chatLayout}>
+const ChatLayout = ({
+  children, chats, className, onFilterChange,
+}) => <div className={styles.chatLayout}>
   <div className={styles.sidebar}>
     <div className={styles.search}>
       <Icon name="search" className={styles.icon} />
-      <input className={styles.field} type="text" placeholder="Поиск" />
+      <input className={styles.field} type="text" placeholder="Поиск" onKeyUp={onFilterChange} />
     </div>
 
     <div className={styles.list}>
@@ -43,6 +45,7 @@ const ChatLayout = ({ children, chats, className }) => <div className={styles.ch
 ChatLayout.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
+  onFilterChange: PropTypes.func,
 
   chats: PropTypes.arrayOf(PropTypes.shape({
     idChat: PropTypes.number,

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { socketConnect } from 'socket.io-react';
+import { filterChats } from 'containers/Profile/Chat/actions';
 
 import {
   Header,
@@ -50,6 +51,7 @@ class Profile extends Component {
     getUserChats: PropTypes.func.isRequired,
     currentUser: PropTypes.func.isRequired,
     changePhoto: PropTypes.func.isRequired,
+    chatsFilter: PropTypes.func.isRequired,
     children: PropTypes.node,
   };
 
@@ -128,7 +130,9 @@ class Profile extends Component {
   };
 
   render() {
-    const { children, user, chats } = this.props;
+    const {
+      children, user, chats, chatsFilter,
+    } = this.props;
 
     const navigationItems = [
       {
@@ -204,15 +208,19 @@ class Profile extends Component {
         {window.location.pathname.includes('/profile/chat') && !_.isEmpty(user) && <ChatLayout
           className={classNames(styles.content, styles.chat)}
           chats={chats}
+
+          onFilterChange={(event) => {
+            chatsFilter(event.target.value);
+          }}
         >
           <Navigation items={navigationItems} />
 
           {
-           // Переделать только для Messages
-           React.cloneElement(children, {
-             currentUser: user,
-             updateChats: this.updateChats,
-           })
+            // Переделать только для Messages
+            React.cloneElement(children, {
+              currentUser: user,
+              updateChats: this.updateChats,
+            })
           }
         </ChatLayout>}
       </div>
@@ -224,7 +232,7 @@ export default socketConnect(connect(
   state => ({
     user: _.get(state, 'users.currentUser.data.user', {}),
     userId: parseInt(localStorage.getItem('id'), 10) || null,
-    chats: _.get(state, 'chat.getUserChats.data.chats', []),
+    chats: _.get(state, 'chat.list.filtered', []),
   }),
 
   {
@@ -232,5 +240,6 @@ export default socketConnect(connect(
     changePhoto: userApi.actions.changePhoto.sync,
     getUserChats: chatApi.actions.getUserChats.sync,
     showMessage: showNotification,
+    chatsFilter: filterChats,
   },
 )(Profile));
