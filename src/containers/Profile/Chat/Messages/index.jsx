@@ -117,7 +117,7 @@ class Messages extends Component {
       pushUrl('/profile/chat');
     }
 
-    if (event.keyCode === 13 && !event.shiftKey && !this.state.isSubmitDisabled) {
+    if (event.keyCode === 13 && !this.state.isSubmitDisabled) {
       this.sendMessage();
     }
   }
@@ -176,7 +176,7 @@ class Messages extends Component {
     return filterUserPhoto(idUser === userId ? currentUser.photo : chatUser.photo);
   };
 
-  filterText = text => text.split(' ').join('').split('\n').join('');
+  filterText = text => text.split(' ').join('');
 
   handleKeyUpInput = (event) => {
     const value = this.filterText(event.target.value);

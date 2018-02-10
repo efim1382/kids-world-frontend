@@ -6,6 +6,7 @@ import { push } from 'react-router-redux';
 import { filterAdvertImage } from 'helpers/filters';
 import advertsApi from 'containers/Profile/Adverts/api';
 import { showNotification } from 'components/Notification/actions';
+import { showConfirmModal, hideConfirmModal } from 'components/ConfirmModal/actions';
 import { Link } from 'react-router';
 import { Button, CardAdvert } from 'components';
 import styles from './style.css';
@@ -21,6 +22,8 @@ class List extends Component {
     getUserAdverts: PropTypes.func.isRequired,
     deleteAdvert: PropTypes.func.isRequired,
     showMessage: PropTypes.func.isRequired,
+    showConfirm: PropTypes.func.isRequired,
+    hideConfirm: PropTypes.func.isRequired,
     pushURL: PropTypes.func.isRequired,
   };
 
@@ -34,7 +37,7 @@ class List extends Component {
 
   render() {
     const {
-      adverts, deleteAdvert, getUserAdverts, pushURL, showMessage,
+      adverts, deleteAdvert, getUserAdverts, pushURL, showMessage, showConfirm, hideConfirm,
     } = this.props;
 
     return <div className={styles.adverts}>
@@ -72,13 +75,22 @@ class List extends Component {
               icon: 'delete',
               className: styles.deleteButton,
               onClick: () => {
-                deleteAdvert({ id: advert.id }).then((responce) => {
-                  if (responce.status !== 200) {
-                    showMessage(responce.message);
-                    return;
-                  }
+                showConfirm({
+                  question: 'Удалить объявление?',
 
-                  getUserAdverts({ id: this.userId });
+                  handleApprove: () => {
+                    deleteAdvert({ id: advert.id }).then((responce) => {
+                      hideConfirm();
+
+                      if (responce.status !== 200) {
+                        showMessage(responce.message);
+                        return;
+                      }
+
+                      showMessage('Объявление успешно удалено');
+                      getUserAdverts({ id: this.userId });
+                    });
+                  },
                 });
               },
             },
@@ -99,5 +111,7 @@ export default connect(
     deleteAdvert: advertsApi.actions.deleteAdvert.sync,
     showMessage: showNotification,
     pushURL: push,
+    showConfirm: showConfirmModal,
+    hideConfirm: hideConfirmModal,
   },
 )(List);
