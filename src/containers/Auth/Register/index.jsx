@@ -14,14 +14,21 @@ class Register extends Component {
 
   state = {
     isModalShown: false,
+    photo: '/images/user-image.jpg',
   };
 
   closeModal = () => {
-    this.setState({ isModalShown: false });
+    this.setState({
+      ...this.state,
+      isModalShown: false,
+    });
   };
 
   openModal = () => {
-    this.setState({ isModalShown: true });
+    this.setState({
+      ...this.state,
+      isModalShown: true,
+    });
   };
 
   sendHandler = (data) => {
@@ -59,6 +66,22 @@ class Register extends Component {
     });
   };
 
+  handleImageChange = (event) => {
+    this.closeModal();
+
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      this.setState({
+        ...this.state,
+        photo: reader.result,
+      });
+    };
+
+    reader.readAsDataURL(file);
+  };
+
   render() {
     return (<div className={styles.register}>
       <h3 className={styles.title}>Добро пожаловать!</h3>
@@ -68,7 +91,7 @@ class Register extends Component {
       </p>
 
       <Form className={styles.form} model="register" onSubmit={this.sendHandler}>
-        <div className={styles.image}>
+        <div className={styles.image} style={{ '--image': `url(${this.state.photo})` }}>
           <Button
             icon="photo_camera"
             type="button"
@@ -116,7 +139,7 @@ class Register extends Component {
 
           <Files
             model=".photo"
-            onChange={this.closeModal}
+            onChange={this.handleImageChange}
             className={styles.files}
           />
         </Modal>
