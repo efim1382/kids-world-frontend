@@ -5,6 +5,7 @@ import { replace } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { Form, Field, Button } from 'components';
 import { showNotification } from 'components/Notification/actions';
+import { showConfirmModal, hideConfirmModal } from 'components/ConfirmModal/actions';
 import userApi from 'containers/User/api';
 import styles from './style.css';
 
@@ -18,6 +19,8 @@ const Settings = ({
   changeEmail,
   changePassword,
   deleteProfile,
+  showConfirm,
+  hideConfirm,
 }) => <div className={styles.settings}>
   <h3>Изменить адрес</h3>
 
@@ -160,19 +163,28 @@ const Settings = ({
     caption="Удалить профиль"
 
     onClick={() => {
-      deleteProfile({}, {
-        body: JSON.stringify({
-          id: user.id,
-        }),
-      }).then((responce) => {
-        if (responce.status !== 200) {
-          showMessage(responce.message);
-          return;
-        }
+      showConfirm({
+        question: 'Удалить профиль?',
 
-        localStorage.removeItem('token');
-        localStorage.removeItem('id');
-        redirect('/');
+        handleApprove: () => {
+          deleteProfile({}, {
+            body: JSON.stringify({
+              id: user.id,
+            }),
+          }).then((responce) => {
+            hideConfirm();
+
+            if (responce.status !== 200) {
+              showMessage(responce.message);
+              return;
+            }
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('id');
+            showMessage('Профиль успешно удален');
+            redirect('/');
+          });
+        },
       });
     }}
   />
@@ -188,6 +200,8 @@ Settings.propTypes = {
 
   redirect: PropTypes.func.isRequired,
   showMessage: PropTypes.func.isRequired,
+  showConfirm: PropTypes.func.isRequired,
+  hideConfirm: PropTypes.func.isRequired,
   updateProfile: PropTypes.func.isRequired,
   changeAddress: PropTypes.func.isRequired,
   changePhone: PropTypes.func.isRequired,
@@ -209,5 +223,7 @@ export default connect(
     deleteProfile: userApi.actions.deleteProfile.sync,
     redirect: replace,
     showMessage: showNotification,
+    showConfirm: showConfirmModal,
+    hideConfirm: hideConfirmModal,
   },
 )(Settings);

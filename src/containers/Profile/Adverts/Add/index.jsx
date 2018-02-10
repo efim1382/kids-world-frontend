@@ -38,6 +38,18 @@ class Add extends Component {
       userId, addAdvert, showMessage, pushUrl,
     } = this.props;
 
+    if (
+      !data.title ||
+      !data.price ||
+      !data.category ||
+      !data.description ||
+      !data.image ||
+      !userId
+    ) {
+      showMessage('Заполните все поля');
+      return;
+    }
+
     const body = new FormData();
     body.append('title', data.title);
     body.append('price', data.price);
@@ -47,9 +59,7 @@ class Add extends Component {
     body.append('image', data.image[0]);
     body.append('userId', userId);
 
-    addAdvert({}, {
-      body,
-    }).then((responce) => {
+    addAdvert({}, { body }).then((responce) => {
       if (responce.status !== 200) {
         showMessage(responce.message);
         return;

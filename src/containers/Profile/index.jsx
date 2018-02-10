@@ -184,7 +184,7 @@ class Profile extends Component {
             show={this.state.modalShown}
             title="Загрузка новой фотографии"
             className={styles.modal}
-            hancleClose={this.closeModal}
+            handleClose={this.closeModal}
           >
             <p>Загрузите свою настоящую фотографию.</p>
             <p>Вы можете загрузить фотографию только в форматах JPG, GIF или PNG.</p>

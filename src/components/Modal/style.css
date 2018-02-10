@@ -13,18 +13,19 @@
   pointer-events: var(--pointer-events);
   transform: translateY(var(--transform));
   transition-property: opacity, transform;
-  &:not([data-show]) {
+  &:not(:global(._is-shown)) {
     --opacity: 0;
     --pointer-events: none;
     --transform: 10px;
   }
-  &[data-show] {
+  &:global(._is-shown) {
     --opacity: 1;
     --pointer-events: auto;
     --transform: 0;
   }
   & > .modal {
-    width: 700px;
+    --width: 700px;
+    width: var(--width);
     background-color: #fff;
     border-radius: 2px;
     & > .header {

@@ -58,6 +58,16 @@ class Edit extends Component {
       editAdvert, showMessage, pushUrl, params: { id },
     } = this.props;
 
+    if (
+      !data.title ||
+      !data.price ||
+      !data.category ||
+      !data.description
+    ) {
+      showMessage('Заполните все поля');
+      return;
+    }
+
     const body = new FormData();
     body.append('title', data.title);
     body.append('price', data.price);

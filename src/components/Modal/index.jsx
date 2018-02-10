@@ -5,15 +5,12 @@ import classNames from 'classnames';
 import styles from './style.css';
 
 const Modal = ({
-  show, title, hancleClose, children, className,
-}) => <div
-  className={styles.wrapperModal}
-  {...show ? { 'data-show': true } : {}}
->
-  <div className={styles.modal}>
+  show, title, handleClose, children, className, wrapperClass,
+}) => <div className={classNames(styles.wrapperModal, { '_is-shown': show })}>
+  <div className={classNames(styles.modal, wrapperClass)}>
     <header className={styles.header}>
       {title && <p className={styles.title}>{ title }</p>}
-      <Button icon="close" onClick={hancleClose} />
+      <Button icon="close" onClick={handleClose} />
     </header>
 
     {children && <div className={classNames(styles.content, className)}>{ children }</div>}
@@ -22,10 +19,11 @@ const Modal = ({
 
 Modal.propTypes = {
   title: PropTypes.string,
-  show: PropTypes.bool.isRequired,
-  hancleClose: PropTypes.func.isRequired,
+  show: PropTypes.bool,
+  handleClose: PropTypes.func.isRequired,
   children: PropTypes.node,
   className: PropTypes.string,
+  wrapperClass: PropTypes.string,
 };
 
 export default Modal;

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import classNames from 'classnames';
+import { Portal } from 'react-portal';
 import { hideNotification } from './actions';
 import styles from './style.css';
 
@@ -30,10 +32,9 @@ class Notification extends Component {
   render() {
     const { show, message } = this.props;
 
-    return <div
-      className={styles.notification}
-      {...show ? { 'data-show': '' } : {}}
-    >{ message }</div>;
+    return <Portal>
+      <div className={classNames(styles.notification, { '_is-shown': show })}>{ message }</div>
+    </Portal>;
   }
 }
 

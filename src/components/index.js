@@ -10,6 +10,7 @@ export Card from './Card';
 export CardAdvert from './CardAdvert';
 export Popup from './Popup';
 export Modal from './Modal';
+export ConfirmModal from './ConfirmModal';
 export Loading from './Loading';
 
 export Form from './Form/Form';

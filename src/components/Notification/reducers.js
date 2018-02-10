@@ -15,8 +15,8 @@ const notificationReducer = (state = initialState, action) => {
 
   if (action.type === HIDE_NOTIFICATION) {
     return {
+      ...state,
       isShown: false,
-      message: '',
     };
   }
 

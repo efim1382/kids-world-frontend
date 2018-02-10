@@ -1,5 +1,5 @@
 import React from 'react';
-import { Notification } from 'components';
+import { Notification, ConfirmModal } from 'components';
 import PropTypes from 'prop-types';
 import './style.css';
 
@@ -10,6 +10,7 @@ const Layout = ({ children }) => (
     { children }
 
     <Notification />
+    <ConfirmModal />
   </div>
 );
 

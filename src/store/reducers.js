@@ -6,6 +6,7 @@ import { reducers as advertReducers } from 'containers/Profile/Adverts';
 import userApi from 'containers/User/api';
 import chatApi from 'containers/Profile/Chat/api';
 import { reducers as notificationReducer } from 'components/Notification';
+import { reducers as confirmModalReducer } from 'components/ConfirmModal';
 import reviewsApi from './reviews';
 
 export const makeRootReducer = asyncReducers => combineReducers({
@@ -17,6 +18,7 @@ export const makeRootReducer = asyncReducers => combineReducers({
   }),
   adverts: advertReducers,
   notification: notificationReducer,
+  confirmModal: confirmModalReducer,
   reviews: combineReducers({
     ...reviewsApi.reducers,
   }),
