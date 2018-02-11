@@ -48,6 +48,7 @@
         }
         & > input {
           --height: 40px;
+          -webkit-background-clip: text;
         }
       }
       & > .submit {
