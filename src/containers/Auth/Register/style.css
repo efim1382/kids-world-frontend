@@ -68,7 +68,6 @@
       & > input {
         --height: 40px;
         margin-top: 4px;
-        -webkit-background-clip: text;
       }
     }
     & > .field + .field {
