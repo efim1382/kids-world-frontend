@@ -11,8 +11,8 @@ debug('Creating default configuration.');
 const config = {
   env: process.env.NODE_ENV || 'development',
   isDemo: process.env.IS_DEMO || false,
-  uploadPath: process.env.UPLOAD_PATH || 'http://localhost:8000/upload',
-  apiPath: process.env.API_PATH || 'http://localhost:8000/api/v1',
+  uploadPath: process.env.UPLOAD_PATH || 'http://localhost:8001/upload',
+  apiPath: process.env.API_PATH || 'http://localhost:8001/api/v1',
 
   // ----------------------------------
   // Project Structure
