@@ -35,11 +35,6 @@ button {
   background-color: transparent;
 }
 
-input,
-textarea {
-  -webkit-background-clip: text;
-}
-
 a:focus,
 input:focus,
 textarea:focus,
