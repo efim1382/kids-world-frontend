@@ -70,4 +70,7 @@
 	&[data-icon="close"] {
 		--data: url("/icons/close.svg");
 	}
+	&[data-icon="search"] {
+		--data: url("/icons/search.svg");
+	}
 }

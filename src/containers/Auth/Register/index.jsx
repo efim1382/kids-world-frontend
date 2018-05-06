@@ -93,7 +93,7 @@ class Register extends Component {
       <Form className={styles.form} model="register" onSubmit={this.sendHandler}>
         <div className={styles.image} style={{ '--image': `url(${this.state.photo})` }}>
           <Button
-            icon="photo_camera"
+            icon="camera"
             type="button"
             className={styles.addPhotoButton}
             onClick={this.openModal}
