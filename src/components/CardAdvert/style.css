@@ -55,6 +55,7 @@
 			margin-top: 8px;
 			& > button {
 				--padding: 10px;
+				--icon-size: 16px;
 				margin-bottom: calc(((var(--height) - var(--icon-size)) / 2) * -1);
 				&:nth-of-type(1) {
 					margin-left: calc(var(--padding) * -1);

@@ -29,7 +29,7 @@ const UserProfile = ({
     <header className={styles.header}>
       <div className={styles.userImage} style={{ '--image': filterUserPhoto(photo) }}>
         {editablePhoto && <Button
-          icon="photo_camera"
+          icon="camera"
           className={styles.photoButton}
           onClick={handlePhotoClick}
         />}
@@ -41,17 +41,17 @@ const UserProfile = ({
       <h3>Контакты</h3>
 
       {phone && <div className={styles.property}>
-        <Icon name="phone" className={styles.icon} />
+        <Icon name="phone" />
         <label className={styles.propertyValue}>{ phone }</label>
       </div>}
 
       <div className={styles.property}>
-        <Icon name="email" className={styles.icon} />
+        <Icon name="email" />
         <label className={styles.propertyValue}>{ email }</label>
       </div>
 
       <div className={styles.property}>
-        <Icon name="home" className={styles.icon} />
+        <Icon name="location" />
         <label className={styles.propertyValue}>{ address }</label>
       </div>
     </div>

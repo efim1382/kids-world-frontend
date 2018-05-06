@@ -51,7 +51,7 @@ class Adverts extends Component {
     const { pushURL, setFavoriteAdvert, userId } = this.props;
 
     const actionsArray = [{
-      icon: 'open_in_new',
+      icon: 'open-in-new',
 
       onClick: () => {
         pushURL(`/advert/${advert.id}`);
@@ -63,7 +63,7 @@ class Adverts extends Component {
     }
 
     actionsArray.push({
-      icon: 'star',
+      icon: 'favorite',
       className: classNames(styles.favoriteButton, { '_is-favorite': advert.isFavorite }),
 
       onClick: () => {

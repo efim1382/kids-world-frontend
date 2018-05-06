@@ -4,9 +4,8 @@ import classNames from 'classnames';
 import styles from './style.css';
 
 const Icon = ({
-  name,
-  className,
-}) => <i className={classNames('material-icons', styles.icon, className)}>{ name }</i>;
+  name, className,
+}) => <i className={classNames(styles.icon, className)} data-icon={name} />;
 
 Icon.propTypes = {
   name: PropTypes.string.isRequired,

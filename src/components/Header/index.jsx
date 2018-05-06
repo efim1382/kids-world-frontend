@@ -59,7 +59,7 @@ class Header extends Component {
         <h1>Kids World</h1>
       </Link>
 
-      <Button icon="more_vert" onClick={this.handleTogglePopup} />
+      <Button icon="dots" onClick={this.handleTogglePopup} />
 
       <Popup
         parentComponent={this}
@@ -68,29 +68,29 @@ class Header extends Component {
         className={styles.popup}
       >
         {!this.state.isAuthorize && <Link to="/auth/login" onClick={this.handlePopupClose}>
-          <Icon name="supervisor_account" />
+          <Icon name="login" />
           <label>Войти</label>
         </Link>}
 
         {!this.state.isAuthorize && <Link to="/auth/register" onClick={this.handlePopupClose}>
-          <Icon name="person_add" />
+          <Icon name="register" />
           <label>Зарегистрироваться</label>
         </Link>}
 
         {this.state.isAuthorize && <Link to="/profile/adverts/add" onClick={this.handlePopupClose}>
-          <Icon name="note_add" />
+          <Icon name="add-advert" />
           <label>Подать объявление</label>
         </Link>}
 
         {this.state.isAuthorize && <div className={styles.divider} />}
 
         {this.state.isAuthorize && <Link to="/profile/adverts" onClick={this.handlePopupClose}>
-          <Icon name="view_list" />
+          <Icon name="advert" />
           <label>Мои объявления</label>
         </Link>}
 
         {this.state.isAuthorize && <Link to="/profile/favorites" onClick={this.handlePopupClose}>
-          <Icon name="star" />
+          <Icon name="favorite" />
           <label>Избранные объявления</label>
         </Link>}
 
@@ -112,7 +112,7 @@ class Header extends Component {
             this.handleLogoutClick();
           }}
         >
-          <Icon name="exit_to_app" />
+          <Icon name="logout" />
           <label>Выйти</label>
         </button>}
       </Popup>

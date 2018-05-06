@@ -105,7 +105,7 @@ class Advert extends Component {
               <p>{ advert.date }, 10 просмотров</p>
 
               {userId && advert.userId !== userId && <Button
-                icon="star"
+                icon="favorite"
                 onClick={this.setAdvertFavorite}
                 {...isFavorite ? { className: styles.isFavorite } : {}}
               />}
@@ -137,12 +137,12 @@ class Advert extends Component {
 
           <div className={styles.properties}>
             {advert.phone && <div className={styles.item}>
-              <Icon name="phone" className={styles.icon} />
+              <Icon name="phone" />
               <span className={styles.text}>{ advert.phone }</span>
             </div>}
 
             <div className={styles.item}>
-              <Icon name="home" className={styles.icon} />
+              <Icon name="location" />
               <span className={styles.text}>{ advert.address }</span>
             </div>
           </div>

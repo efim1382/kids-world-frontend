@@ -58,14 +58,14 @@ class List extends Component {
 
           actions={[
             {
-              icon: 'open_in_new',
+              icon: 'open-in-new',
               onClick: () => {
                 pushURL(`/advert/${advert.id}`);
               },
             },
 
             {
-              icon: 'mode_edit',
+              icon: 'edit',
               onClick: () => {
                 pushURL(`/profile/adverts/${advert.id}/edit`);
               },

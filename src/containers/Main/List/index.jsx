@@ -86,7 +86,7 @@ class List extends Component {
             />
 
             {userId && advert.userId !== userId && <Button
-              icon="star"
+              icon="favorite"
               onClick={() => { this.toggleAdvertFavorite(advert.id); }}
               {...advert.isFavorite ? { className: styles.isFavorite } : {}}
             />}

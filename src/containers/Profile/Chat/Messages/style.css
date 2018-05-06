@@ -130,6 +130,7 @@
         resize: none;
       }
       & > .submit {
+        --icon-size: 20px;
         --height: var(--field-height);
         flex-shrink: 0;
         pointer-events: var(--pointer-events);
@@ -174,9 +175,10 @@
       }
       & > .property {
         display: flex;
-        & > .icon {
-          --icon_size: 18px;
+        & > i {
+          --icon-size: 12px;
           --icon-color: #000;
+          margin-top: 3px;
         }
         & > .value {
           line-height: 1.25;

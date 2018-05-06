@@ -253,12 +253,12 @@ class Messages extends Component {
           />
 
           {chatUser.phone && <div className={styles.property}>
-            <Icon name="phone" className={styles.icon} />
+            <Icon name="phone" />
             <span className={styles.value}>{ chatUser.phone }</span>
           </div>}
 
           <div className={styles.property}>
-            <Icon name="home" className={styles.icon} />
+            <Icon name="location" />
             <span className={styles.value}>{ chatUser.address }</span>
           </div>
         </header>}

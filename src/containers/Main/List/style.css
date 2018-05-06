@@ -59,7 +59,7 @@
             --color: #000;
           }
           &.is-favorite {
-            --color: var(--color-accent)
+            --color: var(--color-accent);
           }
         }
         & > .price {

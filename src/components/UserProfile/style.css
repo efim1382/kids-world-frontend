@@ -74,9 +74,10 @@
 				display: flex;
 				padding-top: 4px;
 				padding-bottom: 4px;
-				& > .icon {
-					--icon_size: 20px;
+				& > i {
+					--icon-size: 14px;
 					--icon-color: var(--color-text);
+					margin-top: 3px;
 				}
 				& > .property-value {
 					margin-left: 12px;

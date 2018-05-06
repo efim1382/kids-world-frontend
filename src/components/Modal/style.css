@@ -47,6 +47,7 @@
         text-overflow: ellipsis;
       }
       & > button {
+        --icon-size: 14px;
         --height: var(--header-height);
         width: var(--height);
         margin-left: auto;

@@ -1,6 +1,73 @@
 .icon {
-	--icon_size: 24px;
-	font-size: var(--icon_size);
-	color: var(--icon-color);
-	transition-property: color;
+	display: block;
+	width: var(--icon-size);
+	height: var(--icon-size);
+	background-color: var(--icon-color);
+	-webkit-mask-image: var(--data);
+	-webkit-mask-size: var(--icon-size) var(--icon-size);
+	-webkit-mask-position: center;
+	-webkit-mask-repeat: no-repeat;
+	transition-property: background-color;
+	pointer-events: none;
+	contain: strict;
+	&[data-icon="favorite"] {
+		--data: url("/icons/favorite.svg");
+	}
+	&[data-icon="dots"] {
+		--data: url("/icons/dots.svg");
+	}
+	&[data-icon="add-advert"] {
+		--data: url("/icons/add-advert.svg");
+	}
+	&[data-icon="advert"] {
+		--data: url("/icons/advert.svg");
+	}
+	&[data-icon="register"] {
+		--data: url("/icons/register.svg");
+	}
+	&[data-icon="login"] {
+		--data: url("/icons/login.svg");
+	}
+	&[data-icon="logout"] {
+		--data: url("/icons/logout.svg");
+	}
+	&[data-icon="email"] {
+		--data: url("/icons/email.svg");
+	}
+	&[data-icon="settings"] {
+		--data: url("/icons/settings.svg");
+	}
+	&[data-icon="phone"] {
+		--data: url("/icons/phone.svg");
+	}
+	&[data-icon="location"] {
+		--data: url("/icons/location.svg");
+	}
+	&[data-icon="chat"] {
+		--data: url("/icons/chat.svg");
+	}
+	&[data-icon="camera"] {
+		--data: url("/icons/camera.svg");
+	}
+	&[data-icon="open-in-new"] {
+		--data: url("/icons/open-in-new.svg");
+	}
+	&[data-icon="edit"] {
+		--data: url("/icons/edit.svg");
+	}
+	&[data-icon="delete"] {
+		--data: url("/icons/delete.svg");
+	}
+	&[data-icon="send"] {
+		--data: url("/icons/send.svg");
+	}
+	&[data-icon="like"] {
+		--data: url("/icons/like.svg");
+	}
+	&[data-icon="dislike"] {
+		--data: url("/icons/dislike.svg");
+	}
+	&[data-icon="close"] {
+		--data: url("/icons/close.svg");
+	}
 }

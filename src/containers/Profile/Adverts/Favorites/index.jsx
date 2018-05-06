@@ -48,7 +48,7 @@ class Favorites extends Component {
 
           actions={[
             {
-              icon: 'open_in_new',
+              icon: 'open-in-new',
               onClick: () => {
                 pushURL(`/advert/${advert.id}`);
               },

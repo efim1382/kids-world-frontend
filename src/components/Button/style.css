@@ -1,7 +1,6 @@
 .button {
 	--padding: 12px;
 	--height: var(--minimal-button-size);
-	--icon-size: 20px;
 	position: relative;
 	display: flex;
 	align-items: center;
@@ -63,7 +62,6 @@
 		transition-property: color;
 	}
 	& > i {
-		--icon_size: var(--icon-size);
 		--icon-color: var(--color);
 		flex-shrink: 0;
 	}

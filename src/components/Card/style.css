@@ -63,7 +63,7 @@
 				}
 			}
 			& > i {
-				--icon_size: var(--height);
+				--icon-size: var(--height);
 				flex-shrink: 0;
 				margin-left: auto;
 				&.like {

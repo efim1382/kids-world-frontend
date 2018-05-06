@@ -51,6 +51,7 @@
           color: var(--color-caption);
         }
         & > button {
+          --icon-size: 18px;
           margin-left: auto;
           margin-right: calc(var(--padding) * -1);
           &:not(.is-favorite) {
@@ -103,9 +104,10 @@
         &:nth-of-type(n+2) {
           margin-top: 8px;
         }
-        & > .icon {
-          --icon_size: 20px;
+        & > i {
+          --icon-size: 14px;
           --icon-color: var(--color-text);
+          margin-top: 3px;
         }
         & > .text {
           margin-left: 12px;

@@ -14,8 +14,8 @@ const Card = ({
     <header>
       <Link to={link} className={styles.link}>{ name }</Link>
 
-      {emotion && emotion === 'like' && <Icon name="thumb_up" className={styles.like} />}
-      {emotion && emotion === 'dislike' && <Icon name="thumb_down" className={styles.dislike} />}
+      {emotion && emotion === 'like' && <Icon name="like" className={styles.like} />}
+      {emotion && emotion === 'dislike' && <Icon name="dislike" className={styles.dislike} />}
     </header>
 
     <p className={styles.text}>{ text }</p>
