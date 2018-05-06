@@ -53,6 +53,7 @@ class Messages extends Component {
     }),
 
     reviews: PropTypes.arrayOf(PropTypes.shape({
+      id: PropTypes.number,
       idAuthor: PropTypes.number,
       image: PropTypes.string,
       name: PropTypes.string,
