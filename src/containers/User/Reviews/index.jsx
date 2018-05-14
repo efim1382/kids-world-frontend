@@ -115,7 +115,7 @@ class Reviews extends Component {
           <div className={styles.tooltip}>
             <Button
               type="button"
-              icon="thumb_up"
+              icon="like"
 
               className={
                 classNames(styles.like, this.state.emotion === 'like' ? styles.active : '')
@@ -131,7 +131,7 @@ class Reviews extends Component {
 
             <Button
               type="button"
-              icon="thumb_down"
+              icon="dislike"
 
               className={
                 classNames(styles.dislike, this.state.emotion === 'dislike' ? styles.active : '')
